@@ -487,3 +487,60 @@ main p {
 .v-table tr:hover td {
 	background: var(--color-paper-2);
 }
+
+/* Smooth micro-interactions & entrance animations */
+@keyframes fadeInSlideUp {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+main > section,
+main > div,
+.well,
+.passport,
+.calculator-root {
+	animation: fadeInSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Staggered slight delay for cards and wells */
+.well, .passport {
+	transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+	            border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+	            box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.well:hover {
+	border-color: var(--color-rule-2);
+}
+
+/* Smooth button physics */
+.btn {
+	transition: background-color 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+	            border-color 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+	            color 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+	            transform 0.12s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn:active {
+	transform: scale(0.98);
+}
+
+/* Accessible reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+	main > section,
+	main > div,
+	.well,
+	.passport,
+	.calculator-root {
+		animation: none !important;
+	}
+	.btn {
+		transition: none !important;
+	}
+}

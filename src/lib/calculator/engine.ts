@@ -1,6 +1,6 @@
 /**
  * High-performance, energy-efficient O(1) CNC Machining Cost Estimation Engine.
- * Formulated from empirical Kaliningrad B2B industrial market benchmarks.
+ * Formulated from empirical Kaliningrad industrial market benchmarks.
  */
 
 import {
@@ -125,12 +125,16 @@ export function calculateCncQuote(input: CalculationInput): CalculationResult {
 	const discountTier = getBatchDiscountTier(quantity);
 	const batchDiscountPercent = Math.round(discountTier.discount * 100);
 
-	// Unit machining cost = T_cycle * R_op * K_mat * K_tol * D_batch
+	// Complexity multiplier (in percent: e.g. +0%, +25%, +50%)
+	const complexityMultiplier = 1 + (complexity.percent / 100);
+
+	// Unit machining cost = T_cycle * R_op * K_mat * K_tol * K_comp * D_batch
 	const unitMachiningCost = Math.round(
 		cycleTimeHours *
 			operation.ratePerHour *
 			material.machinabilityK *
 			tolerance.multiplier *
+			complexityMultiplier *
 			discountTier.multiplier
 	);
 	const totalMachiningCost = unitMachiningCost * quantity;

@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { base } from '$lib/paths';
-	import CostCalculator from '#lib/components/CostCalculator.svelte';
-	import WorkpieceInspectionScan from '#lib/components/WorkpieceInspectionScan.svelte';
 	import { siteConfig } from '#lib/config/site';
 	import { createFaqSchema, serializeSchema } from '#lib/seo/schema';
+	import CostCalculator from '#lib/components/CostCalculator.svelte';
+	import WorkpieceInspectionScan from '#lib/components/WorkpieceInspectionScan.svelte';
 
 	const faqs = [
 		{
-			question: 'Какой минимальный объем заказа в цехе MetalProm39?',
+			question: 'Каков минимальный порог запуска заказа?',
 			answer:
-				'Базовый порог запуска заказа для юридических лиц составляет 5 000 рублей с учетом НДС 20%. Это обусловлено постоянными издержками на разработку управляющей программы (УП), привязку инструмента, наладку станка и входной/выходной контроль ОТК. Серийные скидки начинаются от 5 штук (10%) и достигают 40% на партиях от 100 штук.'
+				'Базовый порог запуска заказа составляет 5 000 рублей с учетом НДС 22%. Мы работаем как с юридическими лицами и ИП, так и с физическими лицами. Серийные скидки начинаются от 5 штук (10%) и достигают 40% на партиях от 100 штук.'
 		},
 		{
 			question: 'Работаете ли вы с давальческим сырьем заказчика?',
@@ -19,17 +19,17 @@
 		{
 			question: 'В каких форматах принимается конструкторская документация?',
 			answer:
-				'Мы принимаем 3D-модели в форматах STEP (.step, .stp), Parasolid (.x_t), IGES (.igs), а также плоские чертежи с указанием допусков, шероховатости и посадок в форматах PDF, DXF и DWG.'
+				'Мы принимаем 3D-модели в форматах STEP (.step, .stp), Parasolid (.x_t), IGES (.igs), а также чертежи с указанием допусков, шероховатости и посадок в форматах PDF, DXF и DWG через Яндекс.Форму.'
 		},
 		{
 			question: 'Как осуществляется контроль качества и проверка допусков?',
 			answer:
-				'Каждая партия проходит входной контроль металла, контроль первой детали (First Article Inspection) и финишную приемку инженером ОТК с использованием цифровых микрометров и профилометров Mitutoyo (Япония). К отгрузке прилагается паспорт качества изделия с фактическими размерами.'
+				'Каждая партия проходит входной контроль металла, контроль первой детали (First Article Inspection) и финишную приемку инженером ОТК с использованием калиброванных цифровых микрометров и нутромеров. Предельный квалитет — IT7.'
 		},
 		{
-			question: 'Работаете ли вы по безналичному расчету с НДС 20% и ЭДО?',
+			question: 'Работаете ли вы по безналичному расчету с НДС 22% и с физлицами?',
 			answer:
-				'Да. Мы работаем исключительно в легальном B2B-поле по безналичному расчету с выделением НДС 20%. Документооборот осуществляется через системы ЭДО Диадок и СБИС, либо на бумажных носителях с синей печатью.'
+				'Да. Мы работаем по безналичному расчету с выделением НДС 22% для организаций и ИП (системы ЭДО Диадок и СБИС, либо на бумажных носителях), а также принимаем оплату от частных заказчиков.'
 		}
 	];
 
@@ -37,10 +37,10 @@
 </script>
 
 <svelte:head>
-	<title>Высокоточная металлообработка с ЧПУ в Калининграде | {siteConfig.brandName}</title>
+	<title>Металлообработка с ЧПУ в Калининграде: токарные и фрезерные работы | {siteConfig.brandName}</title>
 	<meta
 		name="description"
-		content="Прецизионная токарная и фрезерная обработка с ЧПУ в Калининграде. Допуски до IT6-IT7, серии от 5 до 1000 шт. за 5-7 дней. НДС 20%, контроль ОТК Mitutoyo. Расчет онлайн."
+		content="Металлообработка с ЧПУ в Калининграде. Токарные и фрезерные работы, допуски до IT7, срок партий до 2 недель. Расчет с НДС 22%, контроль ОТК. Онлайн-калькулятор."
 	/>
 	{@html serializeSchema(faqSchema)}
 </svelte:head>
@@ -57,32 +57,34 @@
 					</div>
 
 					<h1 class="text-3xl text-[var(--color-ink)] sm:text-4xl lg:text-5xl">
-						Прецизионная металлообработка с ЧПУ в Калининграде
+						Металлообработка с ЧПУ в Калининграде
 					</h1>
 
 					<p class="lead mt-6 max-w-2xl">
-						Серийное изготовление токарных и 4-осевых фрезерных деталей по чертежам заказчика.
-						Квалитеты точности до IT6, инструментальный контроль ОТК Mitutoyo, расчет с НДС 20%.
+						Изготовление серийных и единичных деталей на станках с ЧПУ. Квалитеты точности до IT7, контроль ОТК, расчет с НДС 22%.
 					</p>
 
 					<div class="mt-8 flex flex-wrap items-center gap-3">
 						<a href="#calculator-section" class="btn">Инженерный калькулятор онлайн</a>
-						<a href="mailto:{siteConfig.contactEmail}" class="btn btn--line">Отправить чертежи</a>
+						<a
+							href={siteConfig.yandexFormUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="btn btn--line"
+						>
+							Отправить чертеж через форму
+						</a>
 					</div>
 
-					<!-- 4-item horizontal hairline readout line with corner ticks -->
+					<!-- 3-item horizontal hairline readout line with corner ticks -->
 					<dl class="readout ticks" aria-label="Параметры производства">
 						<div>
-							<dt>Станочный парк</dt>
-							<dd class="num">4<span class="u">&thinsp;центра</span></dd>
+							<dt>Точность (IT)</dt>
+							<dd class="num">IT7<span class="u">&thinsp;(Ra 1.25)</span></dd>
 						</div>
 						<div>
-							<dt>Точность</dt>
-							<dd class="num">IT6<span class="u">&thinsp;(Ra 0.4)</span></dd>
-						</div>
-						<div>
-							<dt>Сроки партии</dt>
-							<dd class="num">5&ndash;7<span class="u">&thinsp;дней</span></dd>
+							<dt>Сроки партий</dt>
+							<dd class="num">до 2<span class="u">&thinsp;недель</span></dd>
 						</div>
 						<div>
 							<dt>Порог запуска</dt>
@@ -108,36 +110,28 @@
 						<dl class="passport__list">
 							<div class="passport__row">
 								<dt>Токарная обработка</dt>
-								<dd class="num whitespace-nowrap">⌀320 × 750<span class="u">&thinsp;мм</span></dd>
+								<dd class="num whitespace-nowrap">⌀200 × 750<span class="u">&thinsp;мм</span></dd>
 							</div>
 							<div class="passport__row">
 								<dt>Фрезерная (3 оси)</dt>
 								<dd class="num whitespace-nowrap">800 × 500 × 500<span class="u">&thinsp;мм</span></dd>
 							</div>
 							<div class="passport__row">
-								<dt>Поворотный стол (4-я ось)</dt>
-								<dd class="num whitespace-nowrap">⌀200<span class="u">&thinsp;мм</span> (0.001°)</dd>
-							</div>
-							<div class="passport__row">
 								<dt>Предельный квалитет</dt>
-								<dd class="num whitespace-nowrap">IT6 <span class="u">(до&nbsp;±0.008&nbsp;мм)</span></dd>
+								<dd class="num whitespace-nowrap">IT7</dd>
 							</div>
 							<div class="passport__row">
 								<dt>Шероховатость поверхности</dt>
-								<dd class="num whitespace-nowrap">Ra&nbsp;0.4&nbsp;–&nbsp;1.6<span class="u">&thinsp;мкм</span></dd>
-							</div>
-							<div class="passport__row">
-								<dt>Инструментальный контроль</dt>
-								<dd class="whitespace-nowrap">Mitutoyo (ОТК&nbsp;100%)</dd>
+								<dd class="num whitespace-nowrap">Ra&nbsp;1.25&nbsp;–&nbsp;2.5<span class="u">&thinsp;мкм</span></dd>
 							</div>
 							<div class="passport__row">
 								<dt>Базовый порог заказа</dt>
-								<dd class="num whitespace-nowrap">5&thinsp;000<span class="u">&thinsp;₽</span> <span class="u text-[11px]">(НДС&nbsp;20%)</span></dd>
+								<dd class="num whitespace-nowrap">5&thinsp;000<span class="u">&thinsp;₽</span> <span class="u text-[11px]">(НДС&nbsp;22%)</span></dd>
 							</div>
 						</dl>
 
 						<div class="passport__foot">
-							Партии от 5 до 1 000 шт. Доставка по Калининграду и области
+							Партии от 1 шт. Срок до 2 недель. Доставка по всей области
 						</div>
 					</aside>
 				</div>
@@ -145,7 +139,7 @@
 		</div>
 	</section>
 
-	<!-- Production Divisions Grid -->
+	<!-- Production Divisions Grid (2 Specialized Divisions) -->
 	<section
 		class="border-b border-[var(--color-rule)] bg-[var(--color-paper)] py-16 sm:py-24"
 		aria-labelledby="divisions-heading"
@@ -162,7 +156,7 @@
 			</div>
 
 			<div
-				class="mt-12 grid grid-cols-1 gap-0 border-t border-[var(--color-rule)] md:grid-cols-3 md:divide-x md:divide-[var(--color-rule)]"
+				class="mt-12 grid grid-cols-1 gap-0 border-t border-[var(--color-rule)] md:grid-cols-2 md:divide-x md:divide-[var(--color-rule)]"
 			>
 				<!-- Division 1: Turning -->
 				<div class="flex flex-col justify-between py-8 pr-0 md:pr-8">
@@ -177,7 +171,7 @@
 							<div class="flex justify-between">
 								<dt class="text-[var(--color-muted)]">Макс. диаметр над станиной:</dt>
 								<dd class="num font-normal text-[var(--color-ink)]">
-									⌀320<span class="u">&thinsp;мм</span>
+									⌀200<span class="u">&thinsp;мм</span>
 								</dd>
 							</div>
 							<div class="flex justify-between">
@@ -189,7 +183,7 @@
 							<div class="flex justify-between">
 								<dt class="text-[var(--color-muted)]">Точность размеров:</dt>
 								<dd class="num font-normal text-[var(--color-ink)]">
-									IT7–IT8<span class="u">&thinsp;(до ±0.012 мм)</span>
+									IT7<span class="u">&thinsp;(до ±0.012 мм)</span>
 								</dd>
 							</div>
 							<div class="flex justify-between">
@@ -210,14 +204,13 @@
 					</div>
 				</div>
 
-				<!-- Division 2: Milling -->
-				<div class="flex flex-col justify-between py-8 md:px-8">
+				<!-- Division 2: Milling (3-axis) -->
+				<div class="flex flex-col justify-between py-8 md:pl-8">
 					<div>
 						<div class="text-xs text-[var(--color-muted)]">Участок 02</div>
-						<h3 class="mt-1 text-lg text-[var(--color-ink)]">Фрезерные работы ЧПУ (3 и 4 оси)</h3>
+						<h3 class="mt-1 text-lg text-[var(--color-ink)]">Фрезерные работы ЧПУ (3 оси)</h3>
 						<p class="mt-3 text-xs leading-relaxed text-[var(--color-ink-2)]">
-							Прецизионная обработка корпусных деталей, приборных панелей, плит и сложных
-							пространственных поверхностей с непрерывным 4D-позиционированием.
+							Обработка корпусных деталей, приборных панелей, плит, пазов и карманов на вертикально-фрезерных обрабатывающих центрах.
 						</p>
 						<dl class="mt-6 space-y-2 border-t border-[var(--color-rule)] pt-4 text-xs">
 							<div class="flex justify-between">
@@ -227,15 +220,15 @@
 								</dd>
 							</div>
 							<div class="flex justify-between">
-								<dt class="text-[var(--color-muted)]">Координатно-поворотный стол:</dt>
+								<dt class="text-[var(--color-muted)]">Точность позиционирования:</dt>
 								<dd class="num font-normal text-[var(--color-ink)]">
-									⌀200<span class="u">&thinsp;мм (0.001°)</span>
+									IT7<span class="u">&thinsp;(±0.010 мм)</span>
 								</dd>
 							</div>
 							<div class="flex justify-between">
-								<dt class="text-[var(--color-muted)]">Позиционирование:</dt>
+								<dt class="text-[var(--color-muted)]">Шероховатость поверхности:</dt>
 								<dd class="num font-normal text-[var(--color-ink)]">
-									±0.005<span class="u">&thinsp;мм</span>
+									Ra 1.25 – 2.5<span class="u">&thinsp;мкм</span>
 								</dd>
 							</div>
 							<div class="flex justify-between">
@@ -252,50 +245,6 @@
 							class="text-xs text-[var(--color-ink-2)] hover:text-[var(--color-accent)]"
 						>
 							Параметры фрезерного участка &rarr;
-						</a>
-					</div>
-				</div>
-
-				<!-- Division 3: Gear-cutting & Grinding -->
-				<div class="flex flex-col justify-between py-8 pl-0 md:pl-8">
-					<div>
-						<div class="text-xs text-[var(--color-muted)]">Участок 03</div>
-						<h3 class="mt-1 text-lg text-[var(--color-ink)]">Зуборезка и шлифование</h3>
-						<p class="mt-3 text-xs leading-relaxed text-[var(--color-ink-2)]">
-							Финишная доводка зубчатых передач и прецизионное плоское и круглое шлифование для
-							достижения посадочных допусков шестого квалитета.
-						</p>
-						<dl class="mt-6 space-y-2 border-t border-[var(--color-rule)] pt-4 text-xs">
-							<div class="flex justify-between">
-								<dt class="text-[var(--color-muted)]">Нарезание зубьев шестерен:</dt>
-								<dd class="num font-normal text-[var(--color-ink)]">
-									до ⌀500<span class="u">&thinsp;мм (m1.0–m8.0)</span>
-								</dd>
-							</div>
-							<div class="flex justify-between">
-								<dt class="text-[var(--color-muted)]">Круглое шлифование в центрах:</dt>
-								<dd class="num font-normal text-[var(--color-ink)]">
-									⌀200 × 800<span class="u">&thinsp;мм</span>
-								</dd>
-							</div>
-							<div class="flex justify-between">
-								<dt class="text-[var(--color-muted)]">Финишная шероховатость:</dt>
-								<dd class="num font-normal text-[var(--color-ink)]">
-									Ra 0.2–0.4<span class="u">&thinsp;мкм (IT6)</span>
-								</dd>
-							</div>
-							<div class="flex justify-between">
-								<dt class="text-[var(--color-muted)]">Термообработка (кооперация):</dt>
-								<dd class="num font-normal text-[var(--color-ink)]">ТВЧ, объемная закалка</dd>
-							</div>
-						</dl>
-					</div>
-					<div class="mt-6">
-						<a
-							href="{base}/zuboreznye-i-shlifovalnye-raboty/"
-							class="text-xs text-[var(--color-ink-2)] hover:text-[var(--color-accent)]"
-						>
-							Параметры зуборезного участка &rarr;
 						</a>
 					</div>
 				</div>
@@ -317,44 +266,38 @@
 		</div>
 	</section>
 
-	<!-- Regional Industrial Clusters Coverage (Structured with whitespace & hairlines) -->
+	<!-- Delivery Across Entire Region -->
 	<section
 		class="border-b border-[var(--color-rule)] bg-[var(--color-paper)] py-16 sm:py-24"
-		aria-labelledby="regional-presence-heading"
+		aria-labelledby="regional-delivery-heading"
 	>
 		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-			<h2 id="regional-presence-heading" class="text-2xl text-[var(--color-ink)] sm:text-3xl">
-				Географический охват и логистика по Калининградской области
+			<h2 id="regional-delivery-heading" class="text-2xl text-[var(--color-ink)] sm:text-3xl">
+				Доставка по всей Калининградской области
 			</h2>
 			<p class="lead mt-3 max-w-3xl text-sm leading-relaxed">
-				Цех расположен в пригороде Калининграда с оперативным выездом на Окружную дорогу для
-				доставки деталей ключевым региональным заказчикам
+				Оперативная доставка готовых партий деталей собственным транспортом и курьерскими службами
+				по Калининграду и в любой населенный пункт области.
 			</p>
 			<div
-				class="mt-10 grid grid-cols-1 gap-6 border-t border-[var(--color-rule)] pt-6 text-xs sm:grid-cols-2 lg:grid-cols-4"
+				class="mt-10 grid grid-cols-1 gap-6 border-t border-[var(--color-rule)] pt-6 text-xs sm:grid-cols-3"
 			>
-				<div class="border-b border-[var(--color-rule)] pb-4 lg:border-b-0">
-					<div class="font-normal text-[var(--color-ink)]">г. Калининград</div>
+				<div class="border-b border-[var(--color-rule)] pb-4 sm:border-b-0">
+					<div class="font-normal text-[var(--color-ink)]">Калининград и пригороды</div>
 					<div class="mt-1 text-[var(--color-muted)]">
-						Машиностроение, приборостроение, гидравлика, остовы
+						Доставка до дверей предприятий, мастерских и частных заказчиков
 					</div>
 				</div>
-				<div class="border-b border-[var(--color-rule)] pb-4 lg:border-b-0">
-					<div class="font-normal text-[var(--color-ink)]">г. Светлый</div>
+				<div class="border-b border-[var(--color-rule)] pb-4 sm:border-b-0">
+					<div class="font-normal text-[var(--color-ink)]">Все города и районы области</div>
 					<div class="mt-1 text-[var(--color-muted)]">
-						Судоремонт, гребные валы, втулки, забортная арматура
-					</div>
-				</div>
-				<div class="border-b border-[var(--color-rule)] pb-4 lg:border-b-0">
-					<div class="font-normal text-[var(--color-ink)]">г. Балтийск</div>
-					<div class="mt-1 text-[var(--color-muted)]">
-						Портовая инфраструктура, шпильки, ремонтные муфты
+						Регулярные рейсы по городам и индустриальным зонам региона
 					</div>
 				</div>
 				<div class="pb-4">
-					<div class="font-normal text-[var(--color-ink)]">Гурьевский район</div>
+					<div class="font-normal text-[var(--color-ink)]">Самовывоз со склада цеха</div>
 					<div class="mt-1 text-[var(--color-muted)]">
-						Агропромышленный комплекс, спецтехника, пальцы, шестерни
+						Удобный подъезд для грузового и легкового автотранспорта
 					</div>
 				</div>
 			</div>
@@ -386,28 +329,29 @@
 		</div>
 	</section>
 
-	<!-- Contact CTA Anchor Target (Passive Contact, 152-FZ compliant) -->
-	<section id="order-form" class="bg-[var(--color-paper)] py-16 text-center sm:py-24">
-		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-			<div class="border-t border-[var(--color-rule)] pt-12 pb-6">
-				<h2 class="text-2xl text-[var(--color-ink)] sm:text-3xl">
-					Готовы рассчитать точную смету по вашей конструкторской документации?
-				</h2>
-				<p class="lead mx-auto mt-4 max-w-2xl text-sm">
-					Направьте чертежи (PDF, DXF, DWG) или 3D-модели (STEP, IGES) на электронную почту главного
-					технолога
-				</p>
-				<div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-					<a href="mailto:{siteConfig.contactEmail}" class="btn btn--line">
-						{siteConfig.contactEmail}
-					</a>
-					<a href="tel:{siteConfig.contactPhone}" class="btn btn--line num">
-						{siteConfig.contactPhone}
-					</a>
-				</div>
-				<p class="mt-6 text-xs text-[var(--color-muted)]">
-					Конфиденциальность гарантируется (NDA по запросу). Безналичный расчет с НДС 20%
-				</p>
+	<!-- Conversion CTA Bar -->
+	<section class="bg-[var(--color-paper-2)] py-16 text-center sm:py-20" aria-label="Форма заказа">
+		<div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+			<h2 class="text-2xl text-[var(--color-ink)] sm:text-3xl">
+				Рассчитайте стоимость партии или отправьте чертежи
+			</h2>
+			<p class="lead mx-auto mt-4 max-w-2xl text-xs sm:text-sm">
+				Воспользуйтесь интерактивным калькулятором для оценки себестоимости или отправьте чертежи
+				напрямую инженеру-технологу через форму. Ответ с расчетом в течение рабочего дня.
+			</p>
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+				<a href="#calculator-section" class="btn">Открыть калькулятор ЧПУ</a>
+				<a
+					href={siteConfig.yandexFormUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="btn btn--line"
+				>
+					Заполнить Яндекс.Форму
+				</a>
+			</div>
+			<div class="mt-6 text-[11px] text-[var(--color-muted)]">
+				Конфиденциальность гарантируется (NDA по запросу). Безналичный расчет с НДС 22% / работа с физлицами
 			</div>
 		</div>
 	</section>

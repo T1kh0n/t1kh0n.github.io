@@ -10,7 +10,7 @@ const coreRoutes = [
 	{ path: `${BASE}/kalkulyator-stoimosti-chpu/`, titlePart: 'калькулятор' },
 	{ path: `${BASE}/portfolio/`, titlePart: 'Портфолио' },
 	{ path: `${BASE}/kontrol-kachestva-i-oborudovanie/`, titlePart: 'Контроль качества' },
-	{ path: `${BASE}/kontakty/`, titlePart: 'Контакты' },
+	{ path: `${BASE}/kontakty/`, titlePart: 'Прием заявок' },
 	{ path: `${BASE}/stati/`, titlePart: 'база знаний' },
 	{ path: `${BASE}/stati/vybor-stali-dlya-chpu-obrabotki/`, titlePart: 'Выбор сталей' },
 	{ path: `${BASE}/stati/kvalitety-tochnosti-i-sherohovatost-gost/`, titlePart: 'Квалитеты точности' },

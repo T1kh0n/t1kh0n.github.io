@@ -1,13 +1,13 @@
 /**
- * Empirical B2B CNC Pricing Configuration for Kaliningrad Oblast.
- * Grounded in empirical market research (../market_summary_and_recommendations.md, ../competitors_flat.csv).
+ * Empirical CNC Pricing Configuration for Kaliningrad Oblast.
+ * Reflects regional metal supply, machining hour rates, and batch volume economics.
  */
 
 export interface OperationRate {
 	id: string;
 	nameRu: string;
 	shortNameRu: string;
-	ratePerHour: number;
+	ratePerHour: number; // RUB per machine standard hour
 	defaultCycleTimeHours: number;
 }
 
@@ -15,6 +15,7 @@ export interface SetupComplexity {
 	id: string;
 	nameRu: string;
 	descriptionRu: string;
+	percent: number; // Percentage surcharge (0%, 25%, 50%)
 	fee: number;
 }
 
@@ -59,7 +60,7 @@ export interface UrgencyConfig {
 	multiplier: number;
 }
 
-export const MINIMUM_ORDER_VALUE = 5000; // Strictly 5,000 RUB for legal entities
+export const MINIMUM_ORDER_VALUE = 5000; // 5,000 RUB base order threshold (с НДС 22%)
 export const SAWING_ALLOWANCE_FACTOR = 1.15; // 15% allowance for sawing, kerf, and facing cuts
 
 export const OPERATIONS: Record<string, OperationRate> = {
@@ -77,13 +78,6 @@ export const OPERATIONS: Record<string, OperationRate> = {
 		ratePerHour: 3000,
 		defaultCycleTimeHours: 0.35 // 21 min default cycle
 	},
-	milling_4axis: {
-		id: 'milling_4axis',
-		nameRu: 'Фрезерная обработка 4-осевая / 3D фасонная',
-		shortNameRu: 'Фрезерная 4-оси / 3D',
-		ratePerHour: 3500,
-		defaultCycleTimeHours: 0.5 // 30 min default cycle
-	},
 	engineering: {
 		id: 'engineering',
 		nameRu: 'CAD/CAM программирование и реверс-инжиниринг',
@@ -98,21 +92,24 @@ export const OPERATIONS_LIST: OperationRate[] = Object.values(OPERATIONS);
 export const SETUP_COMPLEXITIES: Record<string, SetupComplexity> = {
 	simple: {
 		id: 'simple',
-		nameRu: 'Простая геометрия',
-		descriptionRu: '1–2 установа, стандартный инструмент, цилиндрические или плоские контуры',
+		nameRu: 'Базовая сложность (+0%)',
+		descriptionRu: '1–2 установа, стандартный инструмент, круглые или плоские контуры',
+		percent: 0,
 		fee: 3000
 	},
 	medium: {
 		id: 'medium',
-		nameRu: 'Средняя сложность',
-		descriptionRu: '2–3 установа, фасонный инструмент, ступенчатые переходы, резьбы, пазы',
-		fee: 4000
+		nameRu: 'Средняя сложность (+25%)',
+		descriptionRu: '2–3 установа, фасонный инструмент, резьбы, пазы, лыски',
+		percent: 25,
+		fee: 3750
 	},
 	complex: {
 		id: 'complex',
-		nameRu: 'Высокая сложность',
-		descriptionRu: 'Многоосевая обработка, тонкостенные элементы, специальные приспособления',
-		fee: 5000
+		nameRu: 'Высокая сложность (+50%)',
+		descriptionRu: 'Сложные фасонные контуры, карманы, тонкостенные элементы',
+		percent: 50,
+		fee: 4500
 	}
 };
 
@@ -199,43 +196,28 @@ export const TOLERANCES: Record<string, ToleranceConfig> = {
 		id: 'elevated',
 		nameRu: 'Повышенная (IT8–IT9)',
 		toleranceGrade: 'IT8–IT9',
-		roughnessRa: 'Ra 1.6',
+		roughnessRa: 'Ra 1.6–2.5',
 		multiplier: 1.25,
 		includesGrinding: false
 	},
 	high_precision_grinding: {
 		id: 'high_precision_grinding',
-		nameRu: 'Высокоточная со шлифовкой (IT6–IT7)',
-		toleranceGrade: 'IT6–IT7',
-		roughnessRa: 'Ra 0.4–0.8',
+		nameRu: 'Высокоточная (IT7)',
+		toleranceGrade: 'IT7',
+		roughnessRa: 'Ra 1.25',
 		multiplier: 1.5,
-		includesGrinding: true
+		includesGrinding: false
 	}
 };
 
 export const TOLERANCES_LIST: ToleranceConfig[] = Object.values(TOLERANCES);
 
 export const COOPERATIVE_OPERATIONS: Record<string, CooperativeOpConfig> = {
-	heat_treatment: {
-		id: 'heat_treatment',
-		nameRu: 'Термообработка / Закалка ТВЧ',
-		descriptionRu: 'Объемная закалка, нормализация или ТВЧ-закалка поверхностного слоя',
-		pricePerPiece: 350,
-		minBatchCharge: 2500
-	},
 	gear_cutting: {
 		id: 'gear_cutting',
 		nameRu: 'Зубонарезка / Нарезка шлицев',
-		descriptionRu: 'Нарезка прямозубых/косозубых шестерен, шлицевых валов и шпоночных пазов',
+		descriptionRu: 'Нарезка прямозубых и косозубых шестерен, шлицевых валов и шпоночных пазов',
 		pricePerPiece: 600,
-		minBatchCharge: 0
-	},
-	galvanic_coating: {
-		id: 'galvanic_coating',
-		nameRu: 'Гальваника / Анодирование / Воронение',
-		descriptionRu:
-			'Защитные и декоративные покрытия: цинкование, черное оксидирование, анодирование D16T',
-		pricePerPiece: 200,
 		minBatchCharge: 0
 	}
 };
@@ -255,12 +237,12 @@ export const URGENCIES: Record<string, UrgencyConfig> = {
 	standard: {
 		id: 'standard',
 		nameRu: 'Стандартный срок',
-		leadTimeRu: '5–7 рабочих дней',
+		leadTimeRu: 'до 2 недель',
 		multiplier: 1.0
 	},
 	express: {
 		id: 'express',
-		nameRu: 'Срочный аварийный заказ',
+		nameRu: 'Срочный заказ',
 		leadTimeRu: '48–72 часа (+50%)',
 		multiplier: 1.5
 	}

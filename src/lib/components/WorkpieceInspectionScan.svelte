@@ -13,8 +13,7 @@
 	let showStock = $state(true);
 	let showBody = $state(true);
 	let showTolerances = $state(true);
-	let showProbePoints = $state(true);
-
+	
 	// DOM bindings
 	let containerEl: HTMLDivElement | null = $state(null);
 	let canvasEl: HTMLCanvasElement | null = $state(null);
@@ -247,7 +246,7 @@
 		}
 
 		// ==========================================
-		// LAYER 4: CMM Probe Points (Mitutoyo verified)
+		// LAYER 4: CMM Probe Points
 		// ==========================================
 		// Journal 1 multi-plane circular verification tracks
 		for (const tr of [-100, -90, -80]) {
@@ -468,7 +467,7 @@
 			calloutB = {
 				x: Math.round(bScreenX),
 				y: Math.round(bScreenY),
-				visible: (showTolerances || showProbePoints) && bZ2 > -25,
+				visible: showTolerances && bZ2 > -25,
 				flip: bScreenX > width * 0.52
 			};
 
@@ -480,7 +479,6 @@
 				if (pt.layer === 1 && !showStock) continue;
 				if (pt.layer === 2 && !showBody) continue;
 				if (pt.layer === 3 && !showTolerances) continue;
-				if (pt.layer === 4 && !showProbePoints) continue;
 
 				// Rotation around X axis
 				const py = pt.y * cosRot - pt.z * sinRot;
@@ -544,7 +542,7 @@
 			}
 
 			// Render CMM laser sweep line in 3D projection
-			if (!prefersReducedMotion && (showBody || showTolerances || showProbePoints)) {
+			if (!prefersReducedMotion && (showBody || showTolerances)) {
 				const sweepZ = 0;
 				const sweepY0 = -65;
 				const sweepY1 = 65;
@@ -713,8 +711,7 @@
 					Контроль геометрии и слои обработки
 				</h2>
 				<p class="lead mt-3 text-sm leading-relaxed text-[var(--color-ink-2)] sm:text-base">
-					Инструментальная верификация допусков партии по контрольным точкам КИМ и профилометрам
-					Mitutoyo.
+					Инструментальная верификация допусков партии по контрольным точкам КИМ и профилометрам.
 				</p>
 
 				<!-- Switchboard Ledger -->
@@ -723,7 +720,7 @@
 					<li class="switch">
 						<div class="switch__name">
 							<b>Контур заготовки</b>
-							<span>Цилиндрический прокат Ø120×250</span>
+							<span>Круглый прокат Ø120×250</span>
 						</div>
 						<div class="switch__n num">1.2<span class="u">&thinsp;k</span></div>
 						<button
@@ -760,8 +757,8 @@
 					<!-- Layer 3: Precision Tolerance Zones (IT6/IT7) -->
 					<li class="switch">
 						<div class="switch__name">
-							<b>Посадочные пояски IT6 / IT7</b>
-							<span>Прецизионные шейки Ra 0.38</span>
+							<b>Посадочные пояски IT7</b>
+							<span>Прецизионные шейки Ra 1,25</span>
 						</div>
 						<div class="switch__n num">0.8<span class="u">&thinsp;k</span></div>
 						<button
@@ -776,26 +773,7 @@
 						</button>
 					</li>
 
-					<!-- Layer 4: CMM Probe Points (Chromatic Lime Signal) -->
-					<li class="switch switch--found">
-						<div class="switch__name">
-							<b>Точки зондирования ОТК</b>
-							<span>Лабораторные замеры КИМ Mitutoyo</span>
-						</div>
-						<div class="switch__n num text-[var(--color-accent)]">
-							0.4<span class="u">&thinsp;k</span>
-						</div>
-						<button
-							type="button"
-							role="switch"
-							aria-checked={showProbePoints}
-							aria-label="Переключить контрольные точки ОТК"
-							class="switch__btn"
-							onclick={() => (showProbePoints = !showProbePoints)}
-						>
-							<span class="switch__track {showProbePoints ? 'is-active' : ''}"></span>
-						</button>
-					</li>
+					
 				</ul>
 			</div>
 
@@ -835,7 +813,7 @@
 							<div class="callout__leader"></div>
 							<div class="callout__note">
 								<span>Посадочная шейка под подшипник:</span>
-								<b><span class="num">45.000<span class="u">&thinsp;±0.005 мм</span></span></b>
+								<b><span class="num">45.000<span class="u">&thinsp;±0.012 мм [IT7]</span></span></b>
 							</div>
 						</div>
 
@@ -850,8 +828,8 @@
 							<div class="callout__dot"></div>
 							<div class="callout__leader"></div>
 							<div class="callout__note">
-								<span>Шероховатость шлифования:</span>
-								<b><span class="num">0.38<span class="u">&thinsp;Ra мкм [IT6]</span></span></b>
+								<span>Шероховатость шейки:</span>
+								<b><span class="num">1.25<span class="u">&thinsp;Ra мкм [IT7]</span></span></b>
 							</div>
 						</div>
 					</div>
@@ -992,14 +970,7 @@
 		background: var(--color-paper);
 	}
 
-	/* Lime signal switch for CMM found/live probe points */
-	.switch--found .switch__track.is-active {
-		background: var(--color-accent);
-	}
-
-	.switch--found .switch__track.is-active::after {
-		background: var(--color-accent-ink);
-	}
+	
 
 	/* Vantage Measurement Callout Leaders & Plaques */
 	.callout,
@@ -1106,7 +1077,7 @@
 		font-weight: 400;
 	}
 
-	/* Found / Mitutoyo Signal Accent */
+	/* Found / Probe Signal Accent */
 	.callout--found .callout__dot {
 		background: var(--color-accent);
 	}

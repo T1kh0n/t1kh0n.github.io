@@ -8,7 +8,7 @@
 	const cases = [
 		{
 			title: 'Вал гребной промежуточный с фланцем',
-			clientSector: 'Судостроение и судоремонт (г. Светлый)',
+			clientSector: 'Промышленное машиностроение (Калининград)',
 			material: 'Сталь 40Х с объемной термообработкой',
 			dimensions: 'Длина 620 мм, диаметр шейки ⌀85 мм, фланец ⌀160 мм',
 			tolerances: 'Квалитет IT7 по шейкам подшипников (допуск ±0.015 мм)',
@@ -17,7 +17,7 @@
 			operations: [
 				'Черновое и чистовое точение на токарном станке с ЧПУ',
 				'Фрезерование двух шпоночных пазов по ГОСТ 23360-78',
-				'Круглое шлифование шеек под сальниковые уплотнения (Ra 0.4 мкм)',
+				'Чистовое точение посадочных шеек (Ra 1.25 мкм, IT7)',
 				'Контроль радиального биения в центрах (не более 0.008 мм)'
 			],
 			description:
@@ -68,8 +68,8 @@
 			operations: [
 				'Токарная проточка заготовки венца под нарезку',
 				'Зубофрезерование червячной модульной фрезой',
-				'Закалка ТВЧ рабочей поверхности зубьев (52–56 HRC)',
-				'Круглое шлифование посадочного отверстия под подшипник'
+				'Нарезка эвольвентного профиля зуба по ГОСТ',
+				'Чистовая расточка отверстия под подшипник (IT7)'
 			],
 			description:
 				'Срочное импортозамещение изношенного узла редуктора в период уборочной кампании. Изготовление произведено по предоставленному образцу (реверс-инжиниринг).'
@@ -176,7 +176,7 @@
 					href="{base}/zuboreznye-i-shlifovalnye-raboty/"
 					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
 				>
-					<span class="block font-normal text-[var(--color-ink)]">Зуборезка и шлифовка</span>
+					<span class="block font-normal text-[var(--color-ink)]">Зуборезные работы</span>
 					<span class="mt-1 block text-[var(--color-muted)]">Шестерни, шлицы, чистовая доводка</span
 					>
 				</a>
@@ -196,9 +196,7 @@
 				<a href="{base}/kalkulyator-stoimosti-chpu/" class="btn btn--sm">
 					Рассчитать в онлайн-калькуляторе
 				</a>
-				<a href="mailto:{siteConfig.contactEmail}" class="btn btn--sm btn--line">
-					Отправить чертежи на {siteConfig.contactEmail}
-				</a>
+				<a href={siteConfig.yandexFormUrl} target="_blank" rel="noopener noreferrer" class="btn btn--sm btn--line"><span>Отправить чертеж через Яндекс.Форму</span></a>
 			</div>
 		</section>
 	</div>

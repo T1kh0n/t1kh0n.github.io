@@ -9,7 +9,7 @@
 	const serviceSchema = createServiceSchema({
 		name: 'Фрезерные работы с ЧПУ в Калининграде',
 		description:
-			'Высокоточная 3-осевая и 4-осевая фрезерная обработка корпусов, плит и кронштейнов на центрах с ЧПУ. Поворотный стол, поле 800х500х500 мм, точность ±0.005 мм.',
+			'Высокоточная 3-осевая фрезерная обработка корпусов, плит и кронштейнов на центрах с ЧПУ. Поворотный стол, поле 800х500х500 мм, точность ±0.010 мм (IT7).',
 		serviceType: 'Фрезерная обработка металлов с ЧПУ',
 		path: '/frezernye-raboty-chpu/',
 		offers: {
@@ -22,11 +22,11 @@
 
 <svelte:head>
 	<title
-		>Фрезерные работы с ЧПУ в Калининграде: 3D и 4-осевая обработка | {siteConfig.brandName}</title
+		>Фрезерные работы с ЧПУ в Калининграде: 3-осевая обработка | {siteConfig.brandName}</title
 	>
 	<meta
 		name="description"
-		content="Прецизионная фрезерная обработка на 3- и 4-осевых станках ЧПУ в Калининграде. Зона 800×500×500 мм, точность до ±0.005 мм. Изготовление корпусов и плит за 5-7 дней."
+		content="Фрезерная обработка с ЧПУ на 3-осевых станках ЧПУ в Калининграде. Зона 800×500×500 мм, точность до ±0.010 мм (IT7). Изготовление корпусов и плит до 2 недель."
 	/>
 	{@html serializeSchema(serviceSchema)}
 </svelte:head>
@@ -44,8 +44,8 @@
 					Фрезерные работы с ЧПУ в Калининграде
 				</h1>
 				<p class="lead mt-4 text-sm leading-relaxed sm:text-base">
-					Высокоточная 3D и 4-осевая обработка корпусов, плит и кронштейнов на центрах ЧПУ. Серийные
-					партии от 5 шт., поле 800×500×500 мм, точность до ±0.005 мм.
+					Высокоточная 3-осевая обработка корпусов, плит и кронштейнов на центрах ЧПУ. Серийные
+					партии от 5 шт., поле 800×500×500 мм, точность до ±0.010 мм (IT7).
 				</p>
 			</div>
 			<div class="well text-xs text-[var(--color-ink-2)] lg:col-span-5">
@@ -66,7 +66,7 @@
 					<div>
 						Позиционирование:
 						<strong class="num block font-normal text-[var(--color-ink)]"
-							>±0.005<span class="u">&thinsp;мм</span></strong
+							>±0.010<span class="u">&thinsp;мм (IT7)</span></strong
 						>
 					</div>
 					<div>
@@ -129,7 +129,7 @@
 							</tr>
 							<tr>
 								<td class="font-normal text-[var(--color-ink)]">Точность позиционирования</td>
-								<td class="num text-[var(--color-ink)]">±0.005<span class="u">&thinsp;мм</span></td>
+								<td class="num text-[var(--color-ink)]">±0.010<span class="u">&thinsp;мм (IT7)</span></td>
 								<td class="text-[var(--color-muted)]">Оптические линейки Renishaw по 3 осям</td>
 							</tr>
 							<tr>
@@ -238,7 +238,7 @@
 					href="{base}/zuboreznye-i-shlifovalnye-raboty/"
 					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
 				>
-					<span class="block font-normal text-[var(--color-ink)]">Плоское шлифование</span>
+					<span class="block font-normal text-[var(--color-ink)]">Зуборезные работы</span>
 					<span class="mt-1 block text-[var(--color-muted)]"
 						>Финишная доводка плоскостей до Ra 0.4 мкм</span
 					>
@@ -268,9 +268,7 @@
 				<a href="{base}/kalkulyator-stoimosti-chpu/" class="btn btn--sm">
 					Перейти в онлайн-калькулятор
 				</a>
-				<a href="mailto:{siteConfig.contactEmail}" class="btn btn--sm btn--line">
-					Отправить 3D-модели на {siteConfig.contactEmail}
-				</a>
+				<a href={siteConfig.yandexFormUrl} target="_blank" rel="noopener noreferrer" class="btn btn--sm btn--line"><span>Отправить чертеж через Яндекс.Форму</span></a>
 			</div>
 		</section>
 	</div>

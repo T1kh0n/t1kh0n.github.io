@@ -10,7 +10,7 @@ import {
 	getBatchDiscountTier
 } from './pricing-config';
 
-describe('CNC Cost Calculator Engine (Empirical B2B Pricing)', () => {
+describe('CNC Cost Calculator Engine (Empirical Pricing)', () => {
 	it('enforces strictly 5,000 RUB Minimum Order Value (MOV) on small single-piece orders', () => {
 		const result = calculateCncQuote({
 			operationId: 'lathe_turning',
@@ -34,7 +34,7 @@ describe('CNC Cost Calculator Engine (Empirical B2B Pricing)', () => {
 
 	it('computes correct turning hourly rate (2,500 RUB/hr) and setup amortization', () => {
 		// Batch of 10 pcs, turning default 0.25h (15 min) per piece
-		// Machining unit: 0.25h * 2500 RUB/hr * 1.0 (Steel 45) * 1.0 (Standard tol) * 0.9 (10% batch discount) = 562.5 -> rounded 563 RUB
+		// Machining unit: 0.25h * 2500 RUB/hr * 1.0 (Steel 45) * 1.0 (Standard tol) * 1.0 (Complexity 0%) * 0.9 (10% batch discount) = 562.5 -> rounded 563 RUB
 		const result = calculateCncQuote({
 			operationId: 'lathe_turning',
 			batchQuantity: 10,
@@ -57,11 +57,11 @@ describe('CNC Cost Calculator Engine (Empirical B2B Pricing)', () => {
 		expect(result.isMinimumOrderApplied).toBe(false);
 	});
 
-	it('computes 3-axis and 4-axis milling rates (3,000 and 3,500 RUB/hr)', () => {
-		const res3Axis = calculateCncQuote({
+	it('computes 3-axis milling rate and complexity percentage surcharge', () => {
+		const resBase = calculateCncQuote({
 			operationId: 'milling_3axis',
 			batchQuantity: 20,
-			complexityId: 'simple',
+			complexityId: 'simple', // +0%
 			materialId: 'steel_45',
 			isCustomerMaterial: true,
 			blankLengthMm: 100,
@@ -72,13 +72,13 @@ describe('CNC Cost Calculator Engine (Empirical B2B Pricing)', () => {
 			customCycleTimeMinutes: 60 // 1 hour exactly
 		});
 
-		// 1 hour * 3000 RUB/hr * 1.0 * 1.0 * 0.8 (20% discount for 20 pcs) = 2400 RUB
-		expect(res3Axis.unitMachiningCost).toBe(2400);
+		// 1 hour * 3000 RUB/hr * 1.0 * 1.0 * 1.0 * 0.8 (20% discount for 20 pcs) = 2400 RUB
+		expect(resBase.unitMachiningCost).toBe(2400);
 
-		const res4Axis = calculateCncQuote({
-			operationId: 'milling_4axis',
+		const resMedium = calculateCncQuote({
+			operationId: 'milling_3axis',
 			batchQuantity: 20,
-			complexityId: 'simple',
+			complexityId: 'medium', // +25%
 			materialId: 'steel_45',
 			isCustomerMaterial: true,
 			blankLengthMm: 100,
@@ -89,8 +89,8 @@ describe('CNC Cost Calculator Engine (Empirical B2B Pricing)', () => {
 			customCycleTimeMinutes: 60 // 1 hour exactly
 		});
 
-		// 1 hour * 3500 RUB/hr * 1.0 * 1.0 * 0.8 (20% discount) = 2800 RUB
-		expect(res4Axis.unitMachiningCost).toBe(2800);
+		// 2400 * 1.25 = 3000 RUB
+		expect(resMedium.unitMachiningCost).toBe(3000);
 	});
 
 	it('sets raw material cost to zero when isCustomerMaterial is true', () => {
@@ -127,7 +127,7 @@ describe('CNC Cost Calculator Engine (Empirical B2B Pricing)', () => {
 		expect(supplierMat.totalMaterialCost).toBe(supplierMat.unitMaterialCost * 10);
 	});
 
-	it('applies high-precision grinding tolerance multiplier (+50%)', () => {
+	it('applies high-precision tolerance multiplier (+50%)', () => {
 		const standardTol = calculateCncQuote({
 			operationId: 'lathe_turning',
 			batchQuantity: 10,
@@ -142,7 +142,7 @@ describe('CNC Cost Calculator Engine (Empirical B2B Pricing)', () => {
 			customCycleTimeMinutes: 30
 		});
 
-		const grindingTol = calculateCncQuote({
+		const precisionTol = calculateCncQuote({
 			operationId: 'lathe_turning',
 			batchQuantity: 10,
 			complexityId: 'simple',
@@ -156,31 +156,11 @@ describe('CNC Cost Calculator Engine (Empirical B2B Pricing)', () => {
 			customCycleTimeMinutes: 30
 		});
 
-		expect(grindingTol.unitMachiningCost).toBe(Math.round(standardTol.unitMachiningCost * 1.5));
+		expect(precisionTol.unitMachiningCost).toBe(Math.round(standardTol.unitMachiningCost * 1.5));
 	});
 
-	it('enforces heat treatment minimum batch charge of 2,500 RUB', () => {
-		// 2 pieces with heat treatment: 2 * 350 = 700 RUB < min 2500 RUB
-		const resultSmall = calculateCncQuote({
-			operationId: 'lathe_turning',
-			batchQuantity: 2,
-			complexityId: 'simple',
-			materialId: 'alloy_steel_40kh',
-			isCustomerMaterial: true,
-			blankLengthMm: 100,
-			blankWidthMm: 50,
-			blankHeightMm: 50,
-			toleranceId: 'standard',
-			cooperativeOpIds: ['heat_treatment'],
-			urgencyId: 'standard'
-		});
-
-		const htBreakdown = resultSmall.cooperativeBreakdown.find((c) => c.id === 'heat_treatment');
-		expect(htBreakdown?.cost).toBe(2500);
-		expect(htBreakdown?.appliedMinCharge).toBe(true);
-
-		// 10 pieces with heat treatment: 10 * 350 = 3500 RUB > min 2500 RUB
-		const resultLarge = calculateCncQuote({
+	it('computes gear cutting cooperative operation correctly', () => {
+		const result = calculateCncQuote({
 			operationId: 'lathe_turning',
 			batchQuantity: 10,
 			complexityId: 'simple',
@@ -190,15 +170,12 @@ describe('CNC Cost Calculator Engine (Empirical B2B Pricing)', () => {
 			blankWidthMm: 50,
 			blankHeightMm: 50,
 			toleranceId: 'standard',
-			cooperativeOpIds: ['heat_treatment'],
+			cooperativeOpIds: ['gear_cutting'],
 			urgencyId: 'standard'
 		});
 
-		const htLargeBreakdown = resultLarge.cooperativeBreakdown.find(
-			(c) => c.id === 'heat_treatment'
-		);
-		expect(htLargeBreakdown?.cost).toBe(3500);
-		expect(htLargeBreakdown?.appliedMinCharge).toBe(false);
+		const gearBreakdown = result.cooperativeBreakdown.find((c) => c.id === 'gear_cutting');
+		expect(gearBreakdown?.cost).toBe(6000); // 10 * 600
 	});
 
 	it('applies express urgency multiplier (+50% surcharge)', () => {

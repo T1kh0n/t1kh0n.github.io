@@ -24,9 +24,9 @@
 					>
 				</div>
 				<p class="text-xs leading-relaxed text-[var(--color-muted)]">
-					Специализированный производственный участок механической обработки с ЧПУ в Калининградской
-					области. Изготовление серийных деталей по чертежам заказчика для судостроения,
-					агропромышленного комплекса и приборостроения.
+					Специализированный участок механической обработки с ЧПУ в Калининградской
+					области. Изготовление серийных и единичных деталей по чертежам заказчика для
+					машиностроения, приборостроения и промышленного оборудования. Доставка готовых изделий по всей Калининградской области.
 				</p>
 				<div
 					class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-3 text-xs"
@@ -48,7 +48,7 @@
 							href="{base}/tokarnye-raboty-chpu/"
 							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
-							Токарные работы с ЧПУ (до ⌀320 мм)
+							Токарные работы с ЧПУ (до ⌀200 мм)
 						</a>
 					</li>
 					<li>
@@ -56,7 +56,7 @@
 							href="{base}/frezernye-raboty-chpu/"
 							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
-							Фрезерная ЧПУ обработка (3 и 4 оси)
+							Фрезерная ЧПУ обработка (3 оси)
 						</a>
 					</li>
 					<li>
@@ -64,7 +64,7 @@
 							href="{base}/zuboreznye-i-shlifovalnye-raboty/"
 							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
-							Зубонарезные и шлифовальные работы
+							Зубонарезные работы
 						</a>
 					</li>
 					<li>
@@ -87,7 +87,7 @@
 							href="{base}/kontrol-kachestva-i-oborudovanie/"
 							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
-							Лаборатория ОТК и станочный парк
+							Контроль ОТК и станочный парк
 						</a>
 					</li>
 					<li>
@@ -119,7 +119,7 @@
 							href="{base}/stati/kvalitety-tochnosti-i-sherohovatost-gost/"
 							class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 						>
-							Таблицы допусков IT6–IT12 и Ra
+							Таблицы допусков IT7–IT12 и Ra
 						</a>
 					</li>
 					<li>
@@ -127,35 +127,30 @@
 							href="{base}/stati/optimizaciya-stoimosti-detaley-chpu/"
 							class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 						>
-							7 правил снижения цены ЧПУ (DFM)
+							Правила снижения цены ЧПУ (DFM)
 						</a>
 					</li>
 				</ul>
 			</div>
 
-			<!-- Col 4: Contacts & B2B Legal Details -->
+			<!-- Col 4: Lead Generation & Order Intake -->
 			<div>
-				<h3 class="text-xs font-normal text-[var(--color-ink)]">Контакты и реквизиты</h3>
-				<div class="mt-4 space-y-2 text-xs">
-					<div class="text-[var(--color-ink-2)]">{siteConfig.addressLocality}</div>
-					<div class="text-[var(--color-muted)]">{siteConfig.addressStreet}</div>
-					<div class="pt-2 font-mono">
-						<a
-							href="tel:{siteConfig.contactPhone}"
-							class="block text-[var(--color-ink-2)] hover:text-[var(--color-ink)]"
-						>
-							{siteConfig.contactPhone}
-						</a>
-						<a
-							href="mailto:{siteConfig.contactEmail}"
-							class="block text-[var(--color-muted)] hover:text-[var(--color-ink)]"
-						>
-							{siteConfig.contactEmail}
-						</a>
-					</div>
+				<h3 class="text-xs font-normal text-[var(--color-ink)]">Прием заказов и чертежей</h3>
+				<div class="mt-4 space-y-3 text-xs">
+					<p class="leading-relaxed text-[var(--color-muted)]">
+						Прием чертежей, 3D-моделей (STEP, IGES) и ТЗ через форму. Работаем с юридическими лицами, ИП и физлицами по всей Калининградской области.
+					</p>
+					<a
+						href={siteConfig.yandexFormUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="btn btn--sm btn--wide"
+					>
+						<span>Заявка в Яндекс.Форме</span>
+					</a>
 					<div class="border-t border-[var(--color-rule)] pt-3 text-xs text-[var(--color-muted)]">
-						<div>Безналичный расчет с НДС 20% / УСН</div>
-						<div>ЭДО: Диадок / СБИС (по запросу)</div>
+						<div>Безналичный расчет с НДС 22% / УСН</div>
+						<div>Оплата для физических лиц</div>
 					</div>
 				</div>
 			</div>
@@ -165,11 +160,10 @@
 		<div
 			class="mt-10 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-4 text-xs leading-relaxed text-[var(--color-muted)]"
 		>
-			<strong class="font-normal text-[var(--color-ink-2)]">Правовое уведомление (152-ФЗ и 149-ФЗ):</strong>
-			Веб-сайт {siteConfig.brandName} не осуществляет сбор, хранение, систематизацию или передачу персональных
-			данных физических лиц и не является оператором персональных данных Роскомнадзора. Все расчеты калькулятора
-			носят характер предварительной технической оценки. Взаимодействие с заказчиками осуществляется исключительно
-			в формате B2B через прямые корпоративные контакты и обмен чертежами по электронной почте.
+			<strong class="font-normal text-[var(--color-ink-2)]">Правовое уведомление (152-ФЗ):</strong>
+			Веб-сайт {siteConfig.brandName} не осуществляет сбор или хранение персональных данных на сервере сайта.
+			Все расчеты калькулятора носят характер предварительной технической оценки. Прием чертежей и заявок
+			от предприятий и граждан осуществляется через защищенную Яндекс.Форму.
 		</div>
 
 		<!-- Bottom Copyright Bar -->
@@ -178,7 +172,7 @@
 		>
 			<div>
 				© {currentYear}
-				{siteConfig.brandName}. Прецизионная металлообработка с ЧПУ в Калининграде.
+				{siteConfig.brandName}. Металлообработка с ЧПУ в Калининграде. Доставка по всей области.
 			</div>
 			<div class="mt-3 flex items-center gap-6 text-xs sm:mt-0">
 				<a

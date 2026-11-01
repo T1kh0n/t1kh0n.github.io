@@ -8,7 +8,7 @@ describe('Site Configuration & Dynamic Environment Resolution', () => {
 		expect(config.siteHost).toBe('metalprom39.com');
 		expect(config.brandName).toBe('МеталлПром39');
 		expect(config.brandLegalName).toBe('ИП МеталлПром39');
-		expect(config.contactPhone).toBe('+7 (4012) 00-00-00');
+		expect(config.contactPhone).toBe('');
 		expect(config.addressLocality).toBe('Калининград');
 		expect(config.addressRegion).toBe('Калининградская область');
 		expect(config.geoLatitude).toBe(54.7104);

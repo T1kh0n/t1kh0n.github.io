@@ -10,6 +10,7 @@ export interface SiteConfig {
 	brandLegalName: string;
 	contactPhone: string;
 	contactEmail: string;
+	yandexFormUrl: string;
 	addressLocality: string;
 	addressRegion: string;
 	addressStreet: string;
@@ -35,15 +36,16 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
 	siteHost: 'metalprom39.com',
 	brandName: 'МеталлПром39',
 	brandLegalName: 'ИП МеталлПром39',
-	contactPhone: '+7 (4012) 00-00-00',
-	contactEmail: 'order@metalprom39.com',
+	contactPhone: '',
+	contactEmail: '',
+	yandexFormUrl: 'https://forms.yandex.ru/u/metalprom39/',
 	addressLocality: 'Калининград',
 	addressRegion: 'Калининградская область',
-	addressStreet: 'ул. Промышленная, 1',
+	addressStreet: '',
 	postalCode: '236000',
 	geoLatitude: 54.7104,
 	geoLongitude: 20.4522,
-	openingHours: 'Mo-Fr 08:00-18:00',
+	openingHours: 'Пн-Пт 08:00-18:00',
 	gaMeasurementId: '',
 	ymCounterId: '',
 	yandexVerification: '',
@@ -83,6 +85,7 @@ export function resolveSiteConfig(
 	const brandLegalName = getVal('PUBLIC_BRAND_LEGAL_NAME', DEFAULT_SITE_CONFIG.brandLegalName);
 	const contactPhone = getVal('PUBLIC_CONTACT_PHONE', DEFAULT_SITE_CONFIG.contactPhone);
 	const contactEmail = getVal('PUBLIC_CONTACT_EMAIL', DEFAULT_SITE_CONFIG.contactEmail);
+	const yandexFormUrl = getVal('PUBLIC_YANDEX_FORM_URL', DEFAULT_SITE_CONFIG.yandexFormUrl);
 	const addressLocality = getVal('PUBLIC_ADDRESS_LOCALITY', DEFAULT_SITE_CONFIG.addressLocality);
 	const addressRegion = getVal('PUBLIC_ADDRESS_REGION', DEFAULT_SITE_CONFIG.addressRegion);
 	const addressStreet = getVal('PUBLIC_ADDRESS_STREET', DEFAULT_SITE_CONFIG.addressStreet);
@@ -106,6 +109,7 @@ export function resolveSiteConfig(
 		brandLegalName,
 		contactPhone,
 		contactEmail,
+		yandexFormUrl,
 		addressLocality,
 		addressRegion,
 		addressStreet,

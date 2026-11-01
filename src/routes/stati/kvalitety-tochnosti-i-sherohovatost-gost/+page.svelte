@@ -14,11 +14,11 @@
 
 <svelte:head>
 	<title
-		>Квалитеты точности IT6–IT12 и шероховатость Ra по ГОСТ: таблица допусков | {siteConfig.brandName}</title
+		>Квалитеты точности IT7–IT12 и шероховатость Ra по ГОСТ: таблица допусков | {siteConfig.brandName}</title
 	>
 	<meta
 		name="description"
-		content="Таблица допусков по квалитетам IT6, IT7, IT8, IT9, IT11 по ГОСТ 25346. Взаимосвязь шероховатости поверхности Ra и точности, когда требуется шлифование валов."
+		content="Таблица допусков по квалитетам IT7, IT8, IT9, IT11 по ГОСТ 25346. Взаимосвязь шероховатости поверхности Ra и точности, когда требуется шлифование валов."
 	/>
 </svelte:head>
 
@@ -38,11 +38,11 @@
 					<span>8 мин чтения</span>
 				</div>
 				<h1 class="mt-4 text-2xl text-[var(--color-ink)] sm:text-3xl lg:text-4xl">
-					Квалитеты точности IT6–IT12 и шероховатость Ra
+					Квалитеты точности IT7–IT12 и шероховатость Ra
 				</h1>
 				<p class="lead mt-4 max-w-2xl text-sm leading-relaxed sm:text-base">
 					Руководство по допускам ГОСТ 25346-2015. Анализ классов шероховатости Ra и причин, почему
-					завышение требований до IT6 увеличивает себестоимость партии в 2–3 раза.
+					завышение требований до жестких квалитетов увеличивает себестоимость партии в 2–3 раза.
 				</p>
 			</header>
 
@@ -57,7 +57,7 @@
 						>
 							<li>
 								<strong class="font-normal text-[var(--color-ink)]"
-									>IT6 – IT7 (допуск 9–16 мкм для ⌀30–50 мм):</strong
+									>IT7 (допуск 9–16 мкм для ⌀30–50 мм):</strong
 								> Шейки под прецизионные подшипники качения, плунжеры, золотники. Требует шлифования (Ra
 								0.4–0.8 мкм).
 							</li>
@@ -88,7 +88,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td class="font-normal text-[var(--color-ink)]">IT6 (Прецизионный)</td>
+									<td class="font-normal text-[var(--color-ink)]">IT7 (Высокоточный)</td>
 									<td class="num text-[var(--color-ink)]"
 										>16<span class="u">&thinsp;мкм (±0.008 мм)</span></td
 									>
@@ -181,7 +181,7 @@
 							<p class="mt-2 max-w-2xl">
 								В нашем цехе соответствие квалитетам проверяется в термостатированном помещении
 								(+20°C ±1°C) приборами <strong class="font-normal text-[var(--color-ink)]"
-									>Mitutoyo (Япония)</strong
+									>цифрового поверенного инструмента</strong
 								>: цифровыми микрометрами с дискретностью 1 мкм и контактным профилометром Surftest
 								SJ-210. Данные измерений вносятся в паспорт изделия.
 							</p>
@@ -206,13 +206,13 @@
 								href="{base}/kontrol-kachestva-i-oborudovanie/"
 								class="text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:underline"
 							>
-								Лаборатория ОТК и приборы Mitutoyo &rarr;
+								Лаборатория ОТК и инструмент лаборатории ОТК &rarr;
 							</a>
 							<a
-								href="{base}/zuboreznye-i-shlifovalnye-raboty/"
+								href="{base}/tokarnye-raboty-chpu/"
 								class="text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:underline"
 							>
-								Круглое шлифование до IT6 &rarr;
+								Параметры токарных работ &rarr;
 							</a>
 							<a
 								href="{base}/kalkulyator-stoimosti-chpu/"

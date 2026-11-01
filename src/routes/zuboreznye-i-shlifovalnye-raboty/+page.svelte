@@ -5,14 +5,14 @@
 	import { createServiceSchema, serializeSchema } from '#lib/seo/schema';
 
 	const breadcrumbs = [
-		{ name: 'Зуборезка и шлифовка', path: '/zuboreznye-i-shlifovalnye-raboty/' }
+		{ name: 'Зуборезные работы', path: '/zuboreznye-i-shlifovalnye-raboty/' }
 	];
 
 	const serviceSchema = createServiceSchema({
-		name: 'Зуборезные и шлифовальные работы в Калининграде',
+		name: 'Зуборезные работы ЧПУ в Калининграде',
 		description:
-			'Нарезание прямозубых и косозубых шестерен m1-m8, нарезка шлицев. Круглое шлифование до ⌀200х800 мм, плоское шлифование плит, закалка ТВЧ до 55 HRC.',
-		serviceType: 'Зуборезные и шлифовальные работы по металлу',
+			'Нарезание прямозубых и косозубых шестерен m1-m8, нарезка шлицев. Нарезание шестерен, прямозубых и косозубых зубчатых колес, нарезка шлицев по ГОСТ.',
+		serviceType: 'Зуборезные работы ЧПУ по металлу',
 		path: '/zuboreznye-i-shlifovalnye-raboty/',
 		offers: {
 			price: 3200,
@@ -24,11 +24,11 @@
 
 <svelte:head>
 	<title
-		>Зуборезные и шлифовальные работы в Калининграде: шестерни и валы | {siteConfig.brandName}</title
+		>Зуборезные работы ЧПУ в Калининграде: шестерни и валы | {siteConfig.brandName}</title
 	>
 	<meta
 		name="description"
-		content="Нарезка шестерен m1–m8, шлицевых соединений, шлифование валов до Ra 0.4 мкм и термообработка ТВЧ в Калининграде. Закалка 55 HRC, точность ГОСТ 1643-81."
+		content="Нарезка шестерен m1–m8, шлицевых соединений, нарезка шлицевых валов в Калининграде. Доставка по всей области. Закалка 55 HRC, точность ГОСТ 1643-81."
 	/>
 	{@html serializeSchema(serviceSchema)}
 </svelte:head>
@@ -43,12 +43,12 @@
 		>
 			<div class="lg:col-span-7">
 				<h1 class="text-3xl text-[var(--color-ink)] sm:text-4xl">
-					Зуборезные работы и прецизионная шлифовка
+					Зуборезные работы с ЧПУ
 				</h1>
 				<p class="lead mt-4 text-sm leading-relaxed sm:text-base">
-					Нарезка шестерен m1–m8, шлицевых валов и чистовое шлифование до
+					Нарезка шестерен m1–m8, шлицевых валов деталей передач
 					<span class="num text-[var(--color-ink)]">Ra 0.4<span class="u">&thinsp;мкм</span></span>.
-					Закалка ТВЧ до 55 HRC, допуски по ГОСТ 1643-81, партии от 5 штук.
+					допуски по ГОСТ 1643-81, партии от 5 штук.
 				</p>
 			</div>
 			<div class="well text-xs text-[var(--color-ink-2)] lg:col-span-5">
@@ -232,7 +232,7 @@
 				>
 					<span class="block font-normal text-[var(--color-ink)]">Метрология и ОТК</span>
 					<span class="mt-1 block text-[var(--color-muted)]"
-						>Контроль биения и шага зубьев приборами Mitutoyo</span
+						>Контроль биения и шага зубьев калиброванным измерительным инструментом</span
 					>
 				</a>
 				<a
@@ -255,13 +255,11 @@
 			</h2>
 			<p class="lead mx-auto mt-2 max-w-2xl text-xs sm:text-sm">
 				Принимаем чертежи и образцы изношенных деталей для реверс-инжиниринга. Минимальный заказ —
-				5&thinsp;000&thinsp;₽ с НДС.
+				5&thinsp;000&thinsp;₽ с НДС 22%.
 			</p>
 			<div class="mt-6 flex flex-wrap items-center justify-center gap-3">
 				<a href="{base}/kalkulyator-stoimosti-chpu/" class="btn btn--sm"> Расчет стоимости онлайн </a>
-				<a href="mailto:{siteConfig.contactEmail}" class="btn btn--sm btn--line">
-					Отправить эскиз на {siteConfig.contactEmail}
-				</a>
+				<a href={siteConfig.yandexFormUrl} target="_blank" rel="noopener noreferrer" class="btn btn--sm btn--line"><span>Отправить чертеж через Яндекс.Форму</span></a>
 			</div>
 		</section>
 	</div>

@@ -11,8 +11,7 @@
 		{ name: 'Калькулятор', href: `${base}/kalkulyator-stoimosti-chpu/` },
 		{ name: 'Портфолио', href: `${base}/portfolio/` },
 		{ name: 'ОТК и станки', href: `${base}/kontrol-kachestva-i-oborudovanie/` },
-		{ name: 'Статьи', href: `${base}/stati/` },
-		{ name: 'Контакты', href: `${base}/kontakty/` }
+		{ name: 'Статьи', href: `${base}/stati/` }
 	];
 </script>
 
@@ -36,7 +35,7 @@
 					<span class="text-xs text-[var(--color-muted)]">ЧПУ</span>
 				</div>
 				<div class="hidden text-[10px] font-light text-[var(--color-muted)] sm:block">
-					Прецизионная металлообработка
+					Металлообработка с ЧПУ
 				</div>
 			</div>
 		</a>
@@ -94,18 +93,13 @@
 					</a>
 				{/each}
 				<div class="mt-4 pt-2">
-					<div class="text-xs text-[var(--color-muted)]">Прямой контакт с цехом:</div>
 					<a
-						href="tel:{siteConfig.contactPhone}"
-						class="num mt-1 block text-sm text-[var(--color-ink)] hover:text-white"
+						href={siteConfig.yandexFormUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="btn btn--wide text-xs"
 					>
-						{siteConfig.contactPhone}
-					</a>
-					<a
-						href="mailto:{siteConfig.contactEmail}"
-						class="mt-0.5 block text-xs text-[var(--color-muted)] hover:text-white"
-					>
-						{siteConfig.contactEmail}
+						<span>Заявка в Яндекс.Форме</span>
 					</a>
 				</div>
 			</nav>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { siteConfig } from '#lib/config/site';
 	import {
 		OPERATIONS,
 		OPERATIONS_LIST,
@@ -47,7 +48,7 @@
 	let blankWidthMm = $state(50);
 	let blankHeightMm = $state(50);
 
-	let toleranceId = $state('it8_it9_normal');
+	let toleranceId = $state('elevated');
 	let cooperativeOpIds = $state<string[]>([]);
 	let urgencyId = $state('standard');
 	let engineeringHours = $state(0);
@@ -149,51 +150,72 @@
 	}
 
 	function downloadQuoteEstimate() {
-		const estimateData = {
-			documentType: 'MetalProm39 CNC Commercial Estimate',
-			createdAt: new Date().toISOString(),
-			quoteParameters: {
-				operation: OPERATIONS[operationId]?.nameRu,
-				ratePerHour: OPERATIONS[operationId]?.ratePerHour,
-				batchQuantity,
-				complexity: SETUP_COMPLEXITIES[complexityId]?.nameRu,
-				material: MATERIALS[materialId]?.nameRu,
-				isCustomerMaterial,
-				dimensionsMm: {
-					length: blankLengthMm,
-					width: blankWidthMm,
-					height: blankHeightMm
-				},
-				tolerance: TOLERANCES[toleranceId]?.nameRu,
-				roughnessRa: TOLERANCES[toleranceId]?.roughnessRa,
-				cooperativeOperations: cooperativeOpIds.map((id) => COOPERATIVE_OPERATIONS[id]?.nameRu),
-				urgency: URGENCIES[urgencyId]?.nameRu
-			},
-			calculatedCost: {
-				totalMaterialCostRub: quote.totalMaterialCost,
-				totalMachiningCostRub: quote.totalMachiningCost,
-				totalSetupCostRub: quote.totalSetupCost,
-				totalCooperativeCostRub: quote.totalCooperativeCost,
-				urgencySurchargeRub: quote.urgencySurcharge,
-				batchDiscountPercent: quote.batchDiscountPercent,
-				isMinimumOrderApplied: quote.isMinimumOrderApplied,
-				finalTotalRub: quote.finalTotal,
-				finalUnitPriceRub: quote.finalUnitPrice
-			},
-			plantNotice: {
-				validityDays: 14,
-				vatIncludedPercent: 20,
-				terms: 'Безналичный расчет с НДС 20% по договору поставки'
-			}
-		};
+		const now = new Date();
+		const dateStr = now.toLocaleDateString('ru-RU');
+		const vatAmount = Math.round((quote.finalTotal * 22) / 122);
 
-		const blob = new Blob([JSON.stringify(estimateData, null, 2)], {
-			type: 'application/json'
-		});
+		const lines = [
+			'======================================================================',
+			'                  МЕТАЛЛПРОМ39 · МЕТАЛЛООБРАБОТКА ЧПУ                  ',
+			'               РАСЧЕТ СТОИМОСТИ И КОММЕРЧЕСКАЯ СМЕТА                 ',
+			'======================================================================',
+			`Дата формирования:    ${dateStr}`,
+			`Статус:               Предварительный инженерный расчет`,
+			`Срок действия сметы:  14 календарных дней`,
+			'----------------------------------------------------------------------',
+			'1. ПАРАМЕТРЫ ДЕТАЛИ И МАТЕРИАЛА:',
+			'----------------------------------------------------------------------',
+			`· Вид обработки:      ${quote.selectedOperationName}`,
+			`· Материал:           ${quote.selectedMaterialName}`,
+			`· Давальческий металл:${isCustomerMaterial ? ' Да (металл заказчика)' : ' Нет (сертифицированный металл цеха)'}`,
+			`· Габариты заготовки: ${blankLengthMm} × ${blankWidthMm} × ${blankHeightMm} мм`,
+			`· Расчетная масса:    ${quote.blankMassKg} кг/шт (объем ${quote.blankVolumeCm3} см³)`,
+			`· Требуемый квалитет: ${quote.selectedToleranceName}`,
+			`· Категория сложности:${SETUP_COMPLEXITIES[complexityId]?.nameRu}`,
+			`· Срок изготовления:  ${URGENCIES[urgencyId]?.nameRu} (${URGENCIES[urgencyId]?.leadTimeRu})`,
+			'----------------------------------------------------------------------',
+			'2. СТОИМОСТЬ И ОБЪЕМ ПАРТИИ:',
+			'----------------------------------------------------------------------',
+			`· Объем партии:       ${batchQuantity} шт.`,
+			`· Серийная скидка:    ${quote.batchDiscountPercent > 0 ? `-${quote.batchDiscountPercent}%` : '0% (базовый тариф)'}`,
+			`· Стоимость заготовок:${quote.totalMaterialCost.toLocaleString('ru-RU')} ₽`,
+			`· Механообработка:    ${quote.totalMachiningCost.toLocaleString('ru-RU')} ₽`,
+			`· Наладка, УП, оснастка: ${(quote.totalSetupCost + quote.totalEngineeringCost).toLocaleString('ru-RU')} ₽`
+		];
+
+		if (quote.totalCooperativeCost > 0) {
+			lines.push(`· Доп. операции:      ${quote.totalCooperativeCost.toLocaleString('ru-RU')} ₽`);
+		}
+		if (quote.urgencySurcharge > 0) {
+			lines.push(`· Срочность заказа:   +${quote.urgencySurcharge.toLocaleString('ru-RU')} ₽`);
+		}
+
+		lines.push(
+			'----------------------------------------------------------------------',
+			`ИТОГО ЗА ПАРТИЮ:      ${quote.finalTotal.toLocaleString('ru-RU')} ₽ (включая НДС 22%)`,
+			`В ТОМ ЧИСЛЕ НДС 22%:  ${vatAmount.toLocaleString('ru-RU')} ₽`,
+			`ЦЕНА ЗА 1 ШТУКУ:      ${quote.finalUnitPrice.toLocaleString('ru-RU')} ₽ (включая НДС 22%)`,
+			'======================================================================',
+			'3. ПРОИЗВОДСТВЕННЫЕ УСЛОВИЯ И ГАРАНТИИ:',
+			'----------------------------------------------------------------------',
+			'1. Оплата: безналичный расчет с выделением НДС 22% (для юридических лиц',
+			'   и ИП), а также безналичный расчет для физических лиц.',
+			'2. Контроль качества: 100% межоперационный и финишный контроль ОТК',
+			'   калиброванным цифровым инструментом (точность до IT7, Ra 1.25 мкм).',
+			'3. Металлопрокат: только сертифицированный прокат по ГОСТ.',
+			'4. Доставка: по всей Калининградской области собственным транспортом',
+			'   или курьерскими службами.',
+			'5. Подать заявку и прикрепить чертежи вы можете через Яндекс.Форму:',
+			`   ${siteConfig.yandexFormUrl}`,
+			'======================================================================'
+		);
+
+		const textContent = lines.join('\n');
+		const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
 		const url = URL.createObjectURL(blob);
 		const a = document.createElement('a');
 		a.href = url;
-		a.download = `MetalProm39-CNC-Estimate-${Date.now()}.json`;
+		a.download = `MetalProm39-Smeta-${Date.now()}.txt`;
 		document.body.appendChild(a);
 		a.click();
 		document.body.removeChild(a);
@@ -201,37 +223,35 @@
 	}
 </script>
 
-<div
-	class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper)] p-6 text-[var(--color-ink)] md:p-8"
->
+<div class="calculator-root">
 	{#if showTitle}
-		<div class="mb-8 border-b border-[var(--color-rule)] pb-6">
-			<h2 class="text-2xl text-[var(--color-ink)] md:text-3xl">
-				Инженерный калькулятор механической обработки с ЧПУ
+		<div class="mb-8 border-b border-[var(--color-rule)] pb-4">
+			<h2 class="text-xl text-[var(--color-ink)] sm:text-2xl">
+				Инженерный калькулятор стоимости ЧПУ
 			</h2>
-			<p class="lead mt-2 text-sm md:text-base">
-				Мгновенный расчет себестоимости по нормо-часам и рыночным ценам сырья в Калининградской
-				области. Базовый порог заказа для юридических лиц — 5&thinsp;000&thinsp;₽.
+			<p class="mt-1 text-xs text-[var(--color-muted)] sm:text-sm">
+				Мгновенный расчет себестоимости партии деталей с учетом времени цикла, материала и
+				серийной скидки. Доставка по всей Калининградской области. Базовый порог заказа — 5&thinsp;000&thinsp;₽ с НДС 22%.
 			</p>
 		</div>
 	{/if}
 
 	<div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
-		<!-- Left / Configuration Column -->
+		<!-- Left / Interactive Controls Column -->
 		<div class="space-y-6 lg:col-span-7">
 			<!-- 1. Operation Selection -->
 			<div>
 				<label
 					for="calc-operation"
-					class="mb-2 block text-xs font-normal tracking-wide text-[var(--color-muted)]"
+					class="mb-2 block text-xs font-normal text-[var(--color-muted)]"
 				>
-					1. Вид технологической операции:
+					1. Вид механической обработки:
 				</label>
-				<div class="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+				<div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
 					{#each OPERATIONS_LIST as op}
 						<button
 							type="button"
-							class="flex flex-col rounded-[var(--radius-card)] border p-3.5 text-left transition-all {operationId ===
+							class="flex flex-col justify-between rounded-[var(--radius-card)] border p-3.5 text-left transition-all {operationId ===
 							op.id
 								? 'border-[var(--color-accent)] bg-[var(--color-paper-2)] text-[var(--color-ink)]'
 								: 'border-[var(--color-rule)] bg-[var(--color-paper)] text-[var(--color-ink-2)] hover:border-[var(--color-rule-2)]'}"
@@ -257,7 +277,7 @@
 			<div>
 				<div class="mb-2 flex items-center justify-between">
 					<label for="batch-qty-slider" class="text-xs font-normal text-[var(--color-muted)]">
-						2. Размер партии (шт.):
+						2. Количество деталей (шт.):
 					</label>
 					<div class="flex items-center gap-2">
 						{#if quote.batchDiscountPercent > 0}
@@ -270,7 +290,7 @@
 							min="1"
 							max="5000"
 							bind:value={batchQuantity}
-							class="num w-20 rounded-[var(--radius-card)] border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] px-2.5 py-1 text-right text-sm text-[var(--color-ink)] focus:border-[var(--color-focus)] focus:outline-none"
+							class="num w-24 rounded-[var(--radius-card)] border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] px-2.5 py-1 text-right text-sm text-[var(--color-ink)] focus:border-[var(--color-focus)] focus:outline-none"
 						/>
 					</div>
 				</div>
@@ -282,12 +302,43 @@
 					bind:value={batchQuantity}
 					class="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-[var(--color-paper-2)] accent-[var(--color-accent)]"
 				/>
-				<div class="mt-1 flex justify-between text-[11px] text-[var(--color-muted)]">
-					<span class="num">1<span class="u">&thinsp;шт</span> (0%)</span>
-					<span class="num">5<span class="u">&thinsp;шт</span> (-10%)</span>
-					<span class="num">20<span class="u">&thinsp;шт</span> (-20%)</span>
-					<span class="num">50<span class="u">&thinsp;шт</span> (-30%)</span>
-					<span class="num">100+<span class="u">&thinsp;шт</span> (-40%)</span>
+				<!-- Discount Tier Badges -->
+				<div class="mt-2 grid grid-cols-5 gap-1 text-center text-[10px]">
+					<div
+						class="rounded border px-1 py-1 transition-colors {batchQuantity >= 1 && batchQuantity <= 4
+							? 'border-[var(--color-accent)] bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-medium'
+							: 'border-[var(--color-rule)] text-[var(--color-muted)]'}"
+					>
+						1–4 шт.<br /><span class="opacity-80">0%</span>
+					</div>
+					<div
+						class="rounded border px-1 py-1 transition-colors {batchQuantity >= 5 && batchQuantity <= 19
+							? 'border-[var(--color-accent)] bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-medium'
+							: 'border-[var(--color-rule)] text-[var(--color-muted)]'}"
+					>
+						5–19 шт.<br /><span class="opacity-80">-10%</span>
+					</div>
+					<div
+						class="rounded border px-1 py-1 transition-colors {batchQuantity >= 20 && batchQuantity <= 49
+							? 'border-[var(--color-accent)] bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-medium'
+							: 'border-[var(--color-rule)] text-[var(--color-muted)]'}"
+					>
+						20–49 шт.<br /><span class="opacity-80">-20%</span>
+					</div>
+					<div
+						class="rounded border px-1 py-1 transition-colors {batchQuantity >= 50 && batchQuantity <= 99
+							? 'border-[var(--color-accent)] bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-medium'
+							: 'border-[var(--color-rule)] text-[var(--color-muted)]'}"
+					>
+						50–99 шт.<br /><span class="opacity-80">-30%</span>
+					</div>
+					<div
+						class="rounded border px-1 py-1 transition-colors {batchQuantity >= 100
+							? 'border-[var(--color-accent)] bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-medium'
+							: 'border-[var(--color-rule)] text-[var(--color-muted)]'}"
+					>
+						100+ шт.<br /><span class="opacity-80">-40%</span>
+					</div>
 				</div>
 			</div>
 
@@ -297,7 +348,7 @@
 					for="calc-complexity"
 					class="mb-2 block text-xs font-normal text-[var(--color-muted)]"
 				>
-					3. Сложность наладки и оснастки:
+					3. Сложность детали (наценка в процентах):
 				</label>
 				<div class="grid grid-cols-1 gap-2 sm:grid-cols-3">
 					{#each SETUP_COMPLEXITIES_LIST as comp}
@@ -309,9 +360,9 @@
 								: 'border-[var(--color-rule)] bg-[var(--color-paper)] text-[var(--color-ink-2)] hover:border-[var(--color-rule-2)]'}"
 							onclick={() => (complexityId = comp.id)}
 						>
-							<div class="text-xs font-normal text-[var(--color-ink)]">{comp.nameRu}</div>
-							<div class="num mt-1 text-xs text-[var(--color-muted)]">
-								+{comp.fee.toLocaleString('ru-RU')}<span class="u">&thinsp;₽</span>
+							<div class="flex items-center justify-between text-xs font-normal text-[var(--color-ink)]">
+								<span>{comp.nameRu}</span>
+								<span class="rounded bg-[var(--color-accent)]/15 px-1.5 py-0.5 font-mono text-[10px] text-[var(--color-accent)]">+{comp.percent}%</span>
 							</div>
 							<div class="mt-1 line-clamp-2 text-[11px] text-[var(--color-muted)]">
 								{comp.descriptionRu}
@@ -321,21 +372,19 @@
 				</div>
 			</div>
 
-			<!-- 4. Material Selection & Own Material Toggle -->
+			<!-- 4. Material Selection -->
 			<div>
 				<div class="mb-2 flex items-center justify-between">
 					<label for="material-select" class="text-xs font-normal text-[var(--color-muted)]">
-						4. Материал заготовки:
+						4. Марка металла / материала:
 					</label>
-					<label
-						class="flex cursor-pointer items-center gap-2 text-xs font-normal text-[var(--color-ink-2)]"
-					>
+					<label class="flex cursor-pointer items-center gap-1.5 text-xs text-[var(--color-muted)]">
 						<input
 							type="checkbox"
 							bind:checked={isCustomerMaterial}
-							class="h-4 w-4 rounded-sm border-[var(--color-rule-2)] bg-[var(--color-paper-2)] accent-[var(--color-accent)]"
+							class="rounded-sm border-[var(--color-rule-2)] bg-[var(--color-paper)] accent-[var(--color-accent)]"
 						/>
-						<span>Материал заказчика (давальческий)</span>
+						<span>Металл заказчика (0 ₽)</span>
 					</label>
 				</div>
 				<select
@@ -359,14 +408,14 @@
 					<span class="text-xs font-normal text-[var(--color-muted)]">
 						5. Размеры заготовки (мм):
 					</span>
-					<!-- CAD Upload button -->
+					<!-- CAD Upload button (No STL) -->
 					<label
 						class="btn btn--sm btn--line inline-flex cursor-pointer items-center gap-1.5 text-xs"
 					>
-						<span>{isParsingCad ? 'Анализ CAD...' : 'Загрузить STL / STEP'}</span>
+						<span>{isParsingCad ? 'Анализ CAD...' : 'Загрузить STEP / CAD'}</span>
 						<input
 							type="file"
-							accept=".stl,.step,.stp"
+							accept=".stl,.step,.stp,.iges,.igs,.pdf,.dwg,.dxf"
 							data-testid="cad-file-input"
 							class="hidden"
 							onchange={handleFileUpload}
@@ -430,7 +479,7 @@
 								Сетка:
 								<strong class="num block font-normal text-[var(--color-ink)]">
 									{parsedCadInfo.triangleCount.toLocaleString('ru-RU')}<span class="u"
-										>&thinsp;тр.</span
+										>&thinsp;треуг.</span
 									>
 								</strong>
 							</div>
@@ -439,9 +488,7 @@
 							<div class="mt-2 border-t border-[var(--color-rule)] pt-2 text-[var(--color-muted)]">
 								<span>Распознано тело вращения: </span>
 								<strong class="num font-normal text-[var(--color-ink)]">
-									⌀{parsedCadInfo.suggestedDiameterMm} × L{parsedCadInfo.suggestedLengthMm}<span
-										class="u">&thinsp;мм</span
-									>
+									⌀{parsedCadInfo.suggestedDiameterMm?.toFixed(1)} × {parsedCadInfo.suggestedLengthMm?.toFixed(1)} мм
 								</strong>
 							</div>
 						{/if}
@@ -507,7 +554,7 @@
 				</div>
 			</div>
 
-			<!-- 6. Tolerance & Grinding -->
+			<!-- 6. Tolerance Grade (IT7–IT12, No IT6, No Grinding) -->
 			<div>
 				<label
 					for="tolerance-select"
@@ -527,47 +574,42 @@
 						>
 							<div class="text-xs font-normal text-[var(--color-ink)]">{tol.nameRu}</div>
 							<div class="num mt-1 text-xs text-[var(--color-muted)]">{tol.roughnessRa}</div>
-							{#if tol.includesGrinding}
-								<div
-									class="mt-1 inline-block rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] px-1.5 py-0.5 text-[10px] text-[var(--color-ink)]"
-								>
-									+Шлифовка
-								</div>
-							{/if}
 						</button>
 					{/each}
 				</div>
 			</div>
 
-			<!-- 7. Cooperative Operations -->
-			<div>
-				<span class="mb-2 block text-xs font-normal text-[var(--color-muted)]">
-					7. Дополнительные кооперационные операции:
-				</span>
-				<div class="space-y-2">
-					{#each COOPERATIVE_OPERATIONS_LIST as coop}
-						<label
-							class="flex cursor-pointer items-start gap-3 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-3 transition-colors hover:border-[var(--color-rule-2)]"
-						>
-							<input
-								type="checkbox"
-								checked={cooperativeOpIds.includes(coop.id)}
-								onchange={() => toggleCooperativeOp(coop.id)}
-								class="mt-0.5 h-4 w-4 rounded-sm border-[var(--color-rule-2)] bg-[var(--color-paper)] accent-[var(--color-accent)]"
-							/>
-							<div class="flex-1">
-								<div class="flex items-center justify-between">
-									<span class="text-xs font-normal text-[var(--color-ink)]">{coop.nameRu}</span>
-									<span class="num text-xs text-[var(--color-muted)]"
-										>+{coop.pricePerPiece}<span class="u">&thinsp;₽/шт</span></span
-									>
+			<!-- 7. Cooperative Operations (No heat treatment, No galvanics) -->
+			{#if COOPERATIVE_OPERATIONS_LIST.length > 0}
+				<div>
+					<span class="mb-2 block text-xs font-normal text-[var(--color-muted)]">
+						7. Дополнительные операции:
+					</span>
+					<div class="space-y-2">
+						{#each COOPERATIVE_OPERATIONS_LIST as coop}
+							<label
+								class="flex cursor-pointer items-start gap-3 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-3 transition-colors hover:border-[var(--color-rule-2)]"
+							>
+								<input
+									type="checkbox"
+									checked={cooperativeOpIds.includes(coop.id)}
+									onchange={() => toggleCooperativeOp(coop.id)}
+									class="mt-0.5 h-4 w-4 rounded-sm border-[var(--color-rule-2)] bg-[var(--color-paper)] accent-[var(--color-accent)]"
+								/>
+								<div class="flex-1">
+									<div class="flex items-center justify-between">
+										<span class="text-xs font-normal text-[var(--color-ink)]">{coop.nameRu}</span>
+										<span class="num text-xs text-[var(--color-muted)]"
+											>+{coop.pricePerPiece}<span class="u">&thinsp;₽/шт</span></span
+										>
+									</div>
+									<p class="mt-0.5 text-[11px] text-[var(--color-muted)]">{coop.descriptionRu}</p>
 								</div>
-								<p class="mt-0.5 text-[11px] text-[var(--color-muted)]">{coop.descriptionRu}</p>
-							</div>
-						</label>
-					{/each}
+							</label>
+						{/each}
+					</div>
 				</div>
-			</div>
+			{/if}
 
 			<!-- 8. Urgency -->
 			<div>
@@ -635,7 +677,7 @@
 					>
 						<div class="flex items-center gap-2 font-normal text-[var(--color-ink)]">
 							<span class="live-dot"></span>
-							<span>Минимальный заказ для юрлиц — 5&thinsp;000&thinsp;₽</span>
+							<span>Минимальный заказ — 5&thinsp;000&thinsp;₽ (с НДС 22%)</span>
 						</div>
 						<p class="mt-1 text-[var(--color-muted)]">
 							Включает переналадку станка ЧПУ, написание управляющей программы и инструментальный
@@ -694,7 +736,7 @@
 					</div>
 					{#if quote.totalCooperativeCost > 0}
 						<div class="flex justify-between text-[var(--color-muted)]">
-							<span>Кооперация (термо/зуб/покрытие):</span>
+							<span>Дополнительные операции:</span>
 							<span class="num text-[var(--color-ink)]">
 								{quote.totalCooperativeCost.toLocaleString('ru-RU')} ₽
 							</span>
@@ -710,26 +752,31 @@
 					{/if}
 				</div>
 
-				<!-- Action Buttons -->
+				<!-- Action Buttons (Yandex Form + TXT Estimate) -->
 				<div class="mt-6 space-y-2">
-					<a href="#order-form" class="btn btn--wide">
-						<span>Отправить чертеж на расчет</span>
+					<a
+						href={siteConfig.yandexFormUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="btn btn--wide"
+					>
+						<span>Отправить чертеж через Яндекс.Форму</span>
 					</a>
 					<button type="button" class="btn btn--wide btn--line" onclick={downloadQuoteEstimate}>
-						<span>Скачать смету (JSON)</span>
+						<span>Скачать смету (.TXT)</span>
 					</button>
 				</div>
 
-				<!-- B2B Trust Guarantee Callout -->
+				<!-- Trust Guarantee Callout -->
 				<div
 					class="mt-5 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper)] p-3 text-[11px] text-[var(--color-muted)]"
 				>
 					<div class="font-normal text-[var(--color-ink)]">Гарантии цеха MetalProm39:</div>
 					<ul class="mt-1 list-inside list-disc space-y-1 text-[var(--color-muted)]">
-						<li>Безналичный расчет с НДС 20% / УСН</li>
-						<li>Паспорт качества ОТК (поверка Mitutoyo)</li>
-						<li>Сертификаты на металлопрокат по ГОСТ</li>
-						<li>Бесплатный DFM-аудит 3D-моделей</li>
+						<li>Безналичный расчет с НДС 22% (юр. лица, ИП) и для физ. лиц</li>
+						<li>100% контроль ОТК калиброванным инструментом (до IT7)</li>
+						<li>Сертификаты на заводской металлопрокат по ГОСТ</li>
+						<li>Доставка по всей Калининградской области</li>
 					</ul>
 				</div>
 			</div>

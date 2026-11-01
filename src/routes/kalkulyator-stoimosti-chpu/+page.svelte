@@ -10,7 +10,7 @@
 	<title>Инженерный калькулятор стоимости ЧПУ онлайн | {siteConfig.brandName}</title>
 	<meta
 		name="description"
-		content="Мгновенный расчет себестоимости токарной и фрезерной ЧПУ обработки в Калининграде. Загрузка 3D-моделей STL/STEP, выбор сталей и цветмета, расчет партий от 5 шт. НДС 20%."
+		content="Мгновенный расчет себестоимости токарной и фрезерной ЧПУ обработки в Калининграде. Загрузка 3D-моделей STEP/CAD, выбор сталей и цветмета, расчет партий от 1 шт. НДС 22%."
 	/>
 </svelte:head>
 
@@ -23,7 +23,7 @@
 				Инженерный калькулятор стоимости ЧПУ
 			</h1>
 			<p class="lead mt-4 max-w-2xl text-sm leading-relaxed sm:text-base">
-				Расчет себестоимости токарных и фрезерных деталей по нормо-часам. Загружайте 3D-модели STL и
+				Расчет себестоимости токарных и фрезерных деталей по нормо-часам. Загружайте 3D-модели STEP и
 				STEP для мгновенной оценки стоимости партии.
 			</p>
 		</header>
@@ -89,7 +89,7 @@
 						2. Порог минимального заказа (5 000 ₽) и скидки
 					</h3>
 					<p class="max-w-2xl">
-						Базовый порог заказа для юридических лиц зафиксирован на уровне
+						Базовый порог заказа зафиксирован на уровне
 						<span class="num font-normal text-[var(--color-ink)]"
 							>5&thinsp;000<span class="u">&thinsp;₽</span></span
 						>. Это обусловлено издержками на запуск даже одной детали:
@@ -102,7 +102,7 @@
 					</ul>
 					<p class="text-[11px] text-[var(--color-muted)]">
 						При увеличении размера партии постоянные затраты на наладку распределяются на все
-						изделия: скидки от 10% (от 5 шт.) до 40% (от 100 шт.).
+						изделия: скидки от 10% (от 1 шт.) до 40% (от 100 шт.).
 					</p>
 				</div>
 			</div>
@@ -133,9 +133,7 @@
 				почту:
 			</p>
 			<div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-				<a href="mailto:{siteConfig.contactEmail}" class="btn btn--sm btn--line">
-					{siteConfig.contactEmail}
-				</a>
+				<a href={siteConfig.yandexFormUrl} target="_blank" rel="noopener noreferrer" class="btn btn--sm btn--line"><span>Отправить чертеж через Яндекс.Форму</span></a>
 				<a href="tel:{siteConfig.contactPhone}" class="btn btn--sm btn--line num">
 					{siteConfig.contactPhone}
 				</a>

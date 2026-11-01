@@ -9,7 +9,7 @@
 	const serviceSchema = createServiceSchema({
 		name: 'Токарные работы с ЧПУ в Калининграде',
 		description:
-			'Прецизионная токарная обработка деталей вращения на станках с ЧПУ по чертежам заказчика. Диаметр до 320 мм, длина до 750 мм, допуски IT7-IT8, партии от 5 шт.',
+			'Токарная обработка деталей вращения на станках с ЧПУ по чертежам заказчика. Диаметр до 200 мм, длина до 750 мм, допуски IT7, партии от 5 шт.',
 		serviceType: 'Токарная обработка металлов с ЧПУ',
 		path: '/tokarnye-raboty-chpu/',
 		offers: {
@@ -26,7 +26,7 @@
 	>
 	<meta
 		name="description"
-		content="Высокоточная токарная обработка на станках ЧПУ в Калининграде. Диаметр до ⌀320 мм, длина до 750 мм, партии от 5 шт. за 5-7 дней. Контроль ОТК, НДС 20%."
+		content="Высокоточная токарная обработка на станках ЧПУ в Калининграде. Диаметр до ⌀200 мм, длина до 750 мм, партии от 5 шт. до 2 недель. Контроль ОТК, НДС 22%."
 	/>
 	{@html serializeSchema(serviceSchema)}
 </svelte:head>
@@ -48,7 +48,7 @@
 					квалитеты <span class="num text-[var(--color-ink)]">IT7–IT8</span>, ставка от
 					<span class="num text-[var(--color-ink)]"
 						>2&thinsp;500<span class="u">&thinsp;₽/ч</span></span
-					> с НДС 20%.
+					> с НДС 22%.
 				</p>
 			</div>
 			<div class="well text-xs text-[var(--color-ink-2)] lg:col-span-5">
@@ -57,7 +57,7 @@
 					<div>
 						Макс. диаметр:
 						<strong class="num block font-normal text-[var(--color-ink)]"
-							>⌀ 320<span class="u">&thinsp;мм</span></strong
+							>⌀ 200<span class="u">&thinsp;мм</span></strong
 						>
 					</div>
 					<div>
@@ -108,7 +108,7 @@
 								<td class="font-normal text-[var(--color-ink)]">
 									Максимальный диаметр над станиной
 								</td>
-								<td class="num text-[var(--color-ink)]">320<span class="u">&thinsp;мм</span></td>
+								<td class="num text-[var(--color-ink)]">200<span class="u">&thinsp;мм</span></td>
 								<td class="text-[var(--color-muted)]">Точение фланцев, дисков, крышек</td>
 							</tr>
 							<tr>
@@ -214,7 +214,7 @@
 					<ul class="max-w-2xl list-inside list-disc space-y-2 text-[var(--color-ink-2)]">
 						<li>
 							<strong class="font-normal text-[var(--color-ink)]"
-								>Судостроение и судоремонт (г. Светлый, г. Балтийск):</strong
+								>Промышленное машиностроение:</strong
 							> Валы, дейдвудные втулки, шпильки из высокопрочных легированных сталей с сертификатами.
 						</li>
 						<li>
@@ -253,9 +253,9 @@
 					href="{base}/zuboreznye-i-shlifovalnye-raboty/"
 					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
 				>
-					<span class="block font-normal text-[var(--color-ink)]">Круглое шлифование</span>
+					<span class="block font-normal text-[var(--color-ink)]">Зуборезные работы</span>
 					<span class="mt-1 block text-[var(--color-muted)]"
-						>Доводка шеек валов до квалитета IT6 (Ra 0.4)</span
+						>Нарезка шлицев и шестерен</span
 					>
 				</a>
 				<a
@@ -283,9 +283,7 @@
 				<a href="{base}/kalkulyator-stoimosti-chpu/" class="btn btn--sm">
 					Перейти в онлайн-калькулятор
 				</a>
-				<a href="mailto:{siteConfig.contactEmail}" class="btn btn--sm btn--line">
-					Отправить чертежи на {siteConfig.contactEmail}
-				</a>
+				<a href={siteConfig.yandexFormUrl} target="_blank" rel="noopener noreferrer" class="btn btn--sm btn--line"><span>Отправить чертеж через Яндекс.Форму</span></a>
 			</div>
 		</section>
 	</div>

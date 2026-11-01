@@ -37,8 +37,7 @@ const EXPECTED_NAV_LABELS = [
 	'Калькулятор',
 	'Портфолио',
 	'ОТК и станки',
-	'Статьи',
-	'Контакты'
+	'Статьи'
 ];
 
 test.describe('Rule 1: Viewport Containment & Zero Horizontal Overflow', () => {
@@ -479,19 +478,19 @@ test.describe('Vantage Interactive CNC CMM Inspection Twin Component', () => {
 		// Check measurement callouts
 		await expect(section.locator('.callout').first()).toBeAttached();
 		await expect(section).toContainText('45.000');
-		await expect(section).toContainText('0.38');
+		await expect(section).toContainText('1.25');
 	});
 
-	test('switchboard toggles all 4 layers reactively', async ({ page }) => {
+	test('switchboard toggles all 3 layers reactively', async ({ page }) => {
 		await page.setViewportSize(VIEWPORTS.desktop1440);
 		await page.goto(toRoute('/'));
 
 		const section = page.locator('#cmm-twin-section');
 		const switches = section.locator('button[role="switch"]');
-		expect(await switches.count()).toBe(4);
+		expect(await switches.count()).toBe(3);
 
 		// Verify initial active state
-		for (let i = 0; i < 4; i++) {
+		for (let i = 0; i < 3; i++) {
 			await expect(switches.nth(i)).toHaveAttribute('aria-checked', 'true');
 		}
 
@@ -501,11 +500,11 @@ test.describe('Vantage Interactive CNC CMM Inspection Twin Component', () => {
 		await switches.nth(0).click();
 		await expect(switches.nth(0)).toHaveAttribute('aria-checked', 'true');
 
-		// Toggle layer 4 (CMM Probes) off and on
-		await switches.nth(3).click();
-		await expect(switches.nth(3)).toHaveAttribute('aria-checked', 'false');
-		await switches.nth(3).click();
-		await expect(switches.nth(3)).toHaveAttribute('aria-checked', 'true');
+		// Toggle layer 3 (Tolerances) off and on
+		await switches.nth(2).click();
+		await expect(switches.nth(2)).toHaveAttribute('aria-checked', 'false');
+		await switches.nth(2).click();
+		await expect(switches.nth(2)).toHaveAttribute('aria-checked', 'true');
 	});
 
 	test('maintains zero horizontal overflow on mobile viewports (390px and 320px)', async ({
