@@ -1,15 +1,16 @@
 <script lang="ts">
+	import { base } from '$lib/paths';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
 
-	const breadcrumbs = [{ name: 'Прием заявок', path: '/kontakty/' }];
+	const breadcrumbs = [{ name: 'Статус производства', path: '/kontakty/' }];
 </script>
 
 <svelte:head>
-	<title>Прием заявок и чертежей на металлообработку ЧПУ | {siteConfig.brandName}</title>
+	<title>Статус производственных мощностей и график цеха ЧПУ | {siteConfig.brandName}</title>
 	<meta
 		name="description"
-		content="Прием чертежей и заявок на металлообработку с ЧПУ в Калининграде через Яндекс.Форму. Допуски до IT7, партии от 1 шт., срок до 2 недель. Безналичный расчет с НДС 22% и для физлиц."
+		content="Информация о загрузке станочного парка ЧПУ, технологических лимитах обработки и условиях логистики по Калининградской области. Допуски до IT7, безналичный расчет с НДС 22%."
 	/>
 </svelte:head>
 
@@ -19,50 +20,50 @@
 
 		<header class="border-b border-[var(--color-rule)] pb-8">
 			<h1 class="mt-4 text-3xl text-[var(--color-ink)] sm:text-4xl">
-				Прием заявок и чертежей ЧПУ
+				Производственный график и статус оборудования
 			</h1>
 			<p class="lead mt-4 max-w-2xl text-sm leading-relaxed sm:text-base">
-				Прием чертежей, 3D-моделей и технических заданий на контрактную металлообработку. Работаем
-				с юридическими лицами, ИП (с НДС 22%) и физическими лицами по всей Калининградской области.
+				Текущая загрузка станочного парка ЧПУ, технологические лимиты токарного и фрезерного участков и регламент исполнения заказов.
 			</p>
 		</header>
 
 		<div class="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-12">
-			<!-- Order Submission Channel -->
+			<!-- Workload & Technical Status -->
 			<div class="space-y-6 lg:col-span-7">
 				<div class="well">
-					<h2 class="text-sm font-normal text-[var(--color-ink)]">
-						Электронная подача заявки и чертежей
+					<div class="flex items-center gap-2 font-mono text-[11px] text-[var(--color-accent)]">
+						<span class="inline-block h-2 w-2 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
+						ТЕКУЩИЙ СТАТУС: МОЩНОСТИ ЗАКОНТРАКТОВАНЫ (100% ЗАГРУЗКА)
+					</div>
+					<h2 class="mt-2 text-sm font-normal text-[var(--color-ink)]">
+						График загрузки станочного парка ЧПУ
 					</h2>
 					<p class="mt-3 text-xs leading-relaxed text-[var(--color-muted)]">
-						Все заявки на расчет себестоимости и изготовление деталей принимаются круглосуточно через
-						защищенную форму. Прикрепите файлы чертежей или 3D-моделей, укажите количество и марку материала.
+						В текущем производственном цикле все токарные и фрезерные центры цеха задействованы на выполнении утвержденных серийных договоров. Прием новых внешних заказов в производство временно приостановлен.
 					</p>
 
 					<div class="mt-6 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-5">
 						<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 							<div>
 								<div class="text-sm font-normal text-[var(--color-ink)]">
-									Яндекс.Форма приема чертежей
+									Предварительная инженерная оценка
 								</div>
 								<div class="mt-1 text-xs text-[var(--color-muted)]">
-									Форматы: STEP, STP, IGES, PDF, DXF, DWG
+									Рассчитайте себестоимость партии и сохраните смету спецификации
 								</div>
 							</div>
 							<a
-								href={siteConfig.yandexFormUrl}
-								target="_blank"
-								rel="noopener noreferrer"
+								href="{base}/kalkulyator-stoimosti-chpu/"
 								class="btn btn--wide sm:btn--sm shrink-0"
 							>
-								<span>Заполнить Яндекс.Форму</span>
+								<span>Открыть калькулятор</span>
 							</a>
 						</div>
 					</div>
 
 					<div class="mt-6 border-t border-[var(--color-rule)] pt-4 text-xs text-[var(--color-muted)]">
-						<div>Срок инженерной оценки: <strong class="font-normal text-[var(--color-ink)]">в течение рабочего дня</strong></div>
-						<div class="mt-1">Срок изготовления партии: <strong class="font-normal text-[var(--color-ink)]">до 2 недель</strong></div>
+						<div>Нормативная длительность переналадки: <strong class="font-normal text-[var(--color-ink)]">от 45 мин.</strong></div>
+						<div class="mt-1">Стандартный срок партии деталей: <strong class="font-normal text-[var(--color-ink)]">до 2 недель</strong></div>
 					</div>
 				</div>
 
@@ -95,7 +96,7 @@
 						Доставка по всей Калининградской области
 					</h2>
 					<p class="mt-3 text-xs leading-relaxed text-[var(--color-muted)]">
-						Организуем оперативную доставку готовых деталей собственным автотранспортом цеха или курьерскими службами:
+						Организуем доставку готовых деталей собственным автотранспортом цеха или курьерскими службами:
 					</p>
 					<ul class="mt-3 list-inside list-disc space-y-1 text-xs text-[var(--color-ink-2)]">
 						<li>Доставка по Калининграду до дверей заказчика;</li>
@@ -118,7 +119,7 @@
 						</div>
 						<div>
 							<span class="text-[var(--color-muted)]">Оплата для частных лиц:</span>
-							<div class="font-normal text-[var(--color-ink)]">Безналичная оплата по счету / квитанции</div>
+							<div class="font-normal text-[var(--color-ink)]">Безналичная оплатовая квитанция / банковский счет</div>
 						</div>
 						<div>
 							<span class="text-[var(--color-muted)]">Базовый порог запуска заказа:</span>
@@ -131,14 +132,39 @@
 					</div>
 				</div>
 
+				<!-- Technical Passport / Limits -->
+				<div class="well text-xs text-[var(--color-muted)]">
+					<div class="font-normal text-[var(--color-ink)]">
+						Лимиты оборудования цеха:
+					</div>
+					<div class="mt-3 space-y-2 font-mono text-[11px]">
+						<div class="flex justify-between border-b border-[var(--color-rule)] pb-1.5">
+							<span>Токарная обработка:</span>
+							<span class="text-[var(--color-ink)]">Ø 200 × 750 мм</span>
+						</div>
+						<div class="flex justify-between border-b border-[var(--color-rule)] pb-1.5">
+							<span>Фрезерная (3 оси):</span>
+							<span class="text-[var(--color-ink)]">800 × 500 × 500 мм</span>
+						</div>
+						<div class="flex justify-between border-b border-[var(--color-rule)] pb-1.5">
+							<span>Предельный квалитет:</span>
+							<span class="text-[var(--color-ink)]">IT7</span>
+						</div>
+						<div class="flex justify-between">
+							<span>Шероховатость:</span>
+							<span class="text-[var(--color-ink)]">Ra 1.25 – 2.5 мкм</span>
+						</div>
+					</div>
+				</div>
+
 				<!-- Legal 152-FZ Compliance Box -->
 				<div class="well text-xs text-[var(--color-muted)]">
 					<div class="font-normal text-[var(--color-ink)]">
 						Защита коммерческой тайны (NDA):
 					</div>
 					<p class="mt-2 text-[11px] leading-relaxed text-[var(--color-muted)]">
-						Все полученные чертежи, 3D-модели и конструкторская документация заказчиков строго конфиденциальны.
-						По запросу подписывается двустороннее соглашение о неразглашении (NDA) до передачи файлов.
+						Все технологические расчеты, чертежи и 3D-модели заказчиков строго конфиденциальны.
+						Сайт не осуществляет сбор персональных данных в соответствии с 152-ФЗ РФ.
 					</p>
 				</div>
 			</div>

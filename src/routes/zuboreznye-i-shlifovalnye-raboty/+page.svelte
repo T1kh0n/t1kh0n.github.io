@@ -200,14 +200,14 @@
 						Отраслевой опыт
 					</h2>
 					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-						Применение в судовых редукторах и сельхозтехнике в Калининградской области.
+						Применение в редукторах промышленного оборудования и сельхозтехнике в Калининградской области.
 					</p>
 				</div>
 				<div class="space-y-3 text-xs leading-relaxed text-[var(--color-muted)] lg:col-span-8">
 					<p class="max-w-2xl">
-						Шестерни и шлицевые валы производства {siteConfig.brandName} эксплуатируются на рыбопромысловых
-						судах (Светлый, Балтийск) в лебедках и редукторах, а также на комбайнах и тракторах (Claas,
-						John Deere) в Гурьевском и Черняховском районах.
+						Шестерни и шлицевые валы производства {siteConfig.brandName} успешно эксплуатируются в приводах
+						конвейеров, редукторах производственных линий, а также на сельхозтехнике (комбайны, тракторы)
+						в хозяйствах Гурьевского и Черняховского районов.
 					</p>
 				</div>
 			</div>
@@ -259,7 +259,7 @@
 			</p>
 			<div class="mt-6 flex flex-wrap items-center justify-center gap-3">
 				<a href="{base}/kalkulyator-stoimosti-chpu/" class="btn btn--sm"> Расчет стоимости онлайн </a>
-				<a href={siteConfig.yandexFormUrl} target="_blank" rel="noopener noreferrer" class="btn btn--sm btn--line"><span>Отправить чертеж через Яндекс.Форму</span></a>
+				<a href="{base}/kontakty/" class="btn btn--sm btn--line"><span>График загрузки цеха</span></a>
 			</div>
 		</section>
 	</div>

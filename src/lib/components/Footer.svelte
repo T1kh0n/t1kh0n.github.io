@@ -25,13 +25,13 @@
 				</div>
 				<p class="text-xs leading-relaxed text-[var(--color-muted)]">
 					Специализированный участок механической обработки с ЧПУ в Калининградской
-					области. Изготовление серийных и единичных деталей по чертежам заказчика для
+					области. Изготовление деталей по чертежам заказчика для
 					машиностроения, приборостроения и промышленного оборудования. Доставка готовых изделий по всей Калининградской области.
 				</p>
 				<div
 					class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-3 text-xs"
 				>
-					<div class="font-normal text-[var(--color-ink)]">Режим работы цеха:</div>
+					<div class="font-normal text-[var(--color-ink)]">Режим работы производства:</div>
 					<div class="mt-1 font-mono text-[var(--color-muted)]">Пн–Пт: 08:00 – 20:00 (2 смены)</div>
 					<div class="font-mono text-[var(--color-muted)]">
 						Сб: 09:00 – 16:00 (дежурный технолог)
@@ -133,20 +133,18 @@
 				</ul>
 			</div>
 
-			<!-- Col 4: Lead Generation & Order Intake -->
+			<!-- Col 4: Order Calculation & Status -->
 			<div>
-				<h3 class="text-xs font-normal text-[var(--color-ink)]">Прием заказов и чертежей</h3>
+				<h3 class="text-xs font-normal text-[var(--color-ink)]">Расчет стоимости</h3>
 				<div class="mt-4 space-y-3 text-xs">
 					<p class="leading-relaxed text-[var(--color-muted)]">
-						Прием чертежей, 3D-моделей (STEP, IGES) и ТЗ через форму. Работаем с юридическими лицами, ИП и физлицами по всей Калининградской области.
+						Используйте интерактивный калькулятор для оценки себестоимости и времени обработки по чертежам и 3D-моделям (STEP).
 					</p>
 					<a
-						href={siteConfig.yandexFormUrl}
-						target="_blank"
-						rel="noopener noreferrer"
+						href="{base}/kalkulyator-stoimosti-chpu/"
 						class="btn btn--sm btn--wide"
 					>
-						<span>Заявка в Яндекс.Форме</span>
+						<span>Открыть калькулятор</span>
 					</a>
 					<div class="border-t border-[var(--color-rule)] pt-3 text-xs text-[var(--color-muted)]">
 						<div>Безналичный расчет с НДС 22% / УСН</div>
@@ -160,10 +158,10 @@
 		<div
 			class="mt-10 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-4 text-xs leading-relaxed text-[var(--color-muted)]"
 		>
-			<strong class="font-normal text-[var(--color-ink-2)]">Правовое уведомление (152-ФЗ):</strong>
-			Веб-сайт {siteConfig.brandName} не осуществляет сбор или хранение персональных данных на сервере сайта.
-			Все расчеты калькулятора носят характер предварительной технической оценки. Прием чертежей и заявок
-			от предприятий и граждан осуществляется через защищенную Яндекс.Форму.
+			<strong class="font-normal text-[var(--color-ink-2)]">Правовое уведомление (152-ФЗ и 149-ФЗ):</strong>
+			Веб-сайт {siteConfig.brandName} носит информационно-расчетный характер и не осуществляет сбор, систематизацию
+			или хранение персональных данных пользователей. Расчеты онлайн-калькулятора носят предварительный технический характер.
+			Статистика посещаемости собирается обезличенно с использованием файлов cookie сервиса Яндекс.Метрика.
 		</div>
 
 		<!-- Bottom Copyright Bar -->

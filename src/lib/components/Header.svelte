@@ -94,12 +94,11 @@
 				{/each}
 				<div class="mt-4 pt-2">
 					<a
-						href={siteConfig.yandexFormUrl}
-						target="_blank"
-						rel="noopener noreferrer"
+						href="{base}/kalkulyator-stoimosti-chpu/"
 						class="btn btn--wide text-xs"
+						onclick={() => (isMobileMenuOpen = false)}
 					>
-						<span>Заявка в Яндекс.Форме</span>
+						<span>Калькулятор стоимости ЧПУ</span>
 					</a>
 				</div>
 			</nav>

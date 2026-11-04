@@ -21,6 +21,7 @@
 		type CooperativeItemBreakdown
 	} from '#lib/calculator/engine';
 	import { parseCadFile, type CadDimensions } from '#lib/workers/cad-parser';
+	import { trackOrderSubmission, trackCalculatorInteraction } from '#lib/analytics/metrika';
 
 	// Component Props
 	interface Props {
@@ -52,6 +53,7 @@
 	let cooperativeOpIds = $state<string[]>([]);
 	let urgencyId = $state('standard');
 	let engineeringHours = $state(0);
+	let isOrderModalOpen = $state(false);
 
 	// CAD upload state
 	let isParsingCad = $state(false);
@@ -149,6 +151,23 @@
 		cadParseError = null;
 	}
 
+	function handleOrderSubmit() {
+		trackOrderSubmission({
+			operation: quote.selectedOperationName,
+			material: quote.selectedMaterialName,
+			quantity: batchQuantity,
+			complexity: SETUP_COMPLEXITIES[complexityId]?.nameRu || complexityId,
+			dimensions: `${blankLengthMm}x${blankWidthMm}x${blankHeightMm} мм`,
+			tolerance: quote.selectedToleranceName,
+			urgency: URGENCIES[urgencyId]?.nameRu || urgencyId,
+			isCustomerMaterial,
+			totalRub: quote.finalTotal,
+			unitRub: quote.finalUnitPrice,
+			discountPercent: quote.batchDiscountPercent
+		});
+		isOrderModalOpen = true;
+	}
+
 	function downloadQuoteEstimate() {
 		const now = new Date();
 		const dateStr = now.toLocaleDateString('ru-RU');
@@ -205,8 +224,8 @@
 			'3. Металлопрокат: только сертифицированный прокат по ГОСТ.',
 			'4. Доставка: по всей Калининградской области собственным транспортом',
 			'   или курьерскими службами.',
-			'5. Подать заявку и прикрепить чертежи вы можете через Яндекс.Форму:',
-			`   ${siteConfig.yandexFormUrl}`,
+			'5. График производства: запуск в обработку осуществляется согласно',
+			'   плановой загрузке станочного парка ЧПУ.',
 			'======================================================================'
 		);
 
@@ -752,16 +771,15 @@
 					{/if}
 				</div>
 
-				<!-- Action Buttons (Yandex Form + TXT Estimate) -->
+				<!-- Action Buttons (Submit Demand + TXT Estimate) -->
 				<div class="mt-6 space-y-2">
-					<a
-						href={siteConfig.yandexFormUrl}
-						target="_blank"
-						rel="noopener noreferrer"
+					<button
+						type="button"
 						class="btn btn--wide"
+						onclick={handleOrderSubmit}
 					>
-						<span>Отправить чертеж через Яндекс.Форму</span>
-					</a>
+						<span>Отправить спецификацию на оценку</span>
+					</button>
 					<button type="button" class="btn btn--wide btn--line" onclick={downloadQuoteEstimate}>
 						<span>Скачать смету (.TXT)</span>
 					</button>
@@ -783,3 +801,92 @@
 		</div>
 	</div>
 </div>
+
+{#if isOrderModalOpen}
+	<div
+		class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[var(--color-bg)]/80 backdrop-blur-sm"
+		role="dialog"
+		aria-modal="true"
+		aria-labelledby="modal-title"
+	>
+		<div
+			class="relative w-full max-w-lg rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-6 shadow-2xl ticks"
+		>
+			<div class="flex items-start justify-between border-b border-[var(--color-rule)] pb-4">
+				<div>
+					<div class="font-mono text-[10px] tracking-wider uppercase text-[var(--color-muted)]">
+						Технологический отдел ЧПУ
+					</div>
+					<h3 id="modal-title" class="mt-1 text-lg font-normal text-[var(--color-ink)]">
+						Статус производственной линии
+					</h3>
+				</div>
+				<button
+					type="button"
+					class="text-xs text-[var(--color-muted)] hover:text-[var(--color-ink)] p-1"
+					onclick={() => (isOrderModalOpen = false)}
+					aria-label="Закрыть модальное окно"
+				>
+					✕
+				</button>
+			</div>
+
+			<div class="mt-5 space-y-4 text-xs leading-relaxed text-[var(--color-muted)]">
+				<div
+					class="rounded-[var(--radius-card)] border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/10 p-3 text-[var(--color-ink)]"
+				>
+					<div class="flex items-center gap-2 font-mono text-[11px] text-[var(--color-accent)]">
+						<span class="inline-block h-2 w-2 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
+						ПРОИЗВОДСТВЕННЫЕ МОЩНОСТИ ЗАКОНТРАКТОВАНЫ
+					</div>
+					<p class="mt-2 text-xs leading-relaxed text-[var(--color-ink-2)]">
+						На текущий технологический цикл все токарные и фрезерные центры ЧПУ загружены утвержденными серийными заказами на 100%. Прием срочных заявок в производство временно приостановлен.
+					</p>
+				</div>
+
+				<div class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper)] p-3 space-y-1.5 font-mono text-[11px]">
+					<div class="text-[var(--color-muted)] font-sans text-xs mb-1">Параметры рассчитанной спецификации:</div>
+					<div class="flex justify-between">
+						<span class="text-[var(--color-muted)]">Операция:</span>
+						<span class="text-[var(--color-ink)]">{quote.selectedOperationName}</span>
+					</div>
+					<div class="flex justify-between">
+						<span class="text-[var(--color-muted)]">Материал:</span>
+						<span class="text-[var(--color-ink)]">{quote.selectedMaterialName}</span>
+					</div>
+					<div class="flex justify-between">
+						<span class="text-[var(--color-muted)]">Объем партии:</span>
+						<span class="text-[var(--color-ink)] num">{batchQuantity} шт.</span>
+					</div>
+					<div class="flex justify-between">
+						<span class="text-[var(--color-muted)]">Оценочная стоимость:</span>
+						<span class="text-[var(--color-ink)] num">{quote.finalTotal.toLocaleString('ru-RU')} ₽ (с НДС 22%)</span>
+					</div>
+				</div>
+
+				<p class="text-[11px] text-[var(--color-muted)]">
+					Параметры вашей спецификации анонимно зафиксированы в аналитической системе цеха для планирования расширения станочного парка и графика загрузки оборудования. Вы можете сохранить расчет себестоимости в виде текстовой сметы.
+				</p>
+			</div>
+
+			<div class="mt-6 flex flex-col-reverse sm:flex-row sm:justify-end gap-3 border-t border-[var(--color-rule)] pt-4">
+				<button
+					type="button"
+					class="btn btn--sm btn--line"
+					onclick={() => (isOrderModalOpen = false)}
+				>
+					<span>Закрыть</span>
+				</button>
+				<button
+					type="button"
+					class="btn btn--sm"
+					onclick={() => {
+						downloadQuoteEstimate();
+					}}
+				>
+					<span>Скачать смету (.TXT)</span>
+				</button>
+			</div>
+		</div>
+	</div>
+{/if}

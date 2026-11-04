@@ -2,22 +2,35 @@
 	import { base } from '$lib/paths';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
-	import { createServiceSchema, serializeSchema } from '#lib/seo/schema';
+	import {
+		createServiceSchema,
+		createBreadcrumbSchema,
+		serializeSchema
+	} from '#lib/seo/schema';
 
-	const breadcrumbs = [{ name: 'Фрезерные работы с ЧПУ', path: '/frezernye-raboty-chpu/' }];
+	const breadcrumbs = [
+		{ name: 'Главная', path: '/' },
+		{ name: 'Услуги', path: '/frezernye-raboty-chpu/' },
+		{ name: 'Фрезерные работы с ЧПУ', path: '/frezernye-raboty-chpu/' }
+	];
 
-	const serviceSchema = createServiceSchema({
-		name: 'Фрезерные работы с ЧПУ в Калининграде',
-		description:
-			'Высокоточная 3-осевая фрезерная обработка корпусов, плит и кронштейнов на центрах с ЧПУ. Поворотный стол, поле 800х500х500 мм, точность ±0.010 мм (IT7).',
-		serviceType: 'Фрезерная обработка металлов с ЧПУ',
-		path: '/frezernye-raboty-chpu/',
-		offers: {
-			price: 3000,
-			minOrderPrice: 5000,
-			unitText: 'нормо-час'
-		}
-	});
+	const serviceSchema = createServiceSchema(
+		{
+			name: 'Фрезерные работы с ЧПУ в Калининграде',
+			description:
+				'3-осевая фрезерная обработка корпусных деталей, кронштейнов и плит на станках с ЧПУ. Допуск до IT7, партии от 1 шт., срок до 2 недель.',
+			serviceType: 'CNC Milling',
+			path: '/frezernye-raboty-chpu',
+			offers: {
+				price: 3000,
+				unitText: 'нормо-час',
+				minOrderPrice: 5000
+			}
+		},
+		siteConfig
+	);
+
+	const breadcrumbSchema = createBreadcrumbSchema(breadcrumbs, siteConfig);
 </script>
 
 <svelte:head>
@@ -26,232 +39,270 @@
 	>
 	<meta
 		name="description"
-		content="Фрезерная обработка с ЧПУ на 3-осевых станках ЧПУ в Калининграде. Зона 800×500×500 мм, точность до ±0.010 мм (IT7). Изготовление корпусов и плит до 2 недель."
+		content="Фрезерные работы на 3-осевых станках с ЧПУ в Калининграде. Рабочая зона 800×500×500 мм. Допуски до IT7, партии от 1 шт., срок до 2 недель. Безналичный расчет с НДС 22%."
 	/>
 	{@html serializeSchema(serviceSchema)}
+	{@html serializeSchema(breadcrumbSchema)}
 </svelte:head>
 
 <main class="py-10">
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<Breadcrumbs items={breadcrumbs} />
 
-		<!-- Header & Direct Summary: 12-Column Asymmetric Hero -->
-		<div
-			class="mt-4 grid grid-cols-1 items-start gap-8 border-b border-[var(--color-rule)] pb-8 lg:grid-cols-12"
-		>
-			<div class="lg:col-span-7">
-				<h1 class="text-3xl text-[var(--color-ink)] sm:text-4xl">
-					Фрезерные работы с ЧПУ в Калининграде
-				</h1>
-				<p class="lead mt-4 text-sm leading-relaxed sm:text-base">
-					Высокоточная 3-осевая обработка корпусов, плит и кронштейнов на центрах ЧПУ. Серийные
-					партии от 5 шт., поле 800×500×500 мм, точность до ±0.010 мм (IT7).
-				</p>
+		<!-- Service Header -->
+		<header class="border-b border-[var(--color-rule)] pb-8">
+			<div class="flex items-center gap-2 font-mono text-xs tracking-wider uppercase text-[var(--color-muted)]">
+				<span class="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]"></span>
+				Фрезерный участок ЧПУ · МеталлПром39
 			</div>
-			<div class="well text-xs text-[var(--color-ink-2)] lg:col-span-5">
-				<div class="font-normal text-[var(--color-ink)]">Лимиты фрезерного участка:</div>
-				<div class="mt-3 grid grid-cols-2 gap-3 text-[var(--color-muted)]">
-					<div>
-						Зона (X/Y/Z):
-						<strong class="num block font-normal text-[var(--color-ink)]"
-							>800 × 500 × 500<span class="u">&thinsp;мм</span></strong
-						>
-					</div>
-					<div>
-						Поворотная 4-я ось:
-						<strong class="num block font-normal text-[var(--color-ink)]"
-							>патрон ⌀ 200<span class="u">&thinsp;мм</span></strong
-						>
-					</div>
-					<div>
-						Позиционирование:
-						<strong class="num block font-normal text-[var(--color-ink)]"
-							>±0.010<span class="u">&thinsp;мм (IT7)</span></strong
-						>
-					</div>
-					<div>
-						Масса заготовки:
-						<strong class="num block font-normal text-[var(--color-ink)]"
-							>до 500<span class="u">&thinsp;кг</span></strong
-						>
-					</div>
+			<h1 class="mt-4 text-3xl text-[var(--color-ink)] sm:text-4xl">
+				Фрезерные работы с ЧПУ
+			</h1>
+			<p class="lead mt-4 max-w-2xl text-sm leading-relaxed sm:text-base">
+				Скоростная 3-осевая обработка корпусных деталей, кронштейнов, плит и оснастки на вертикально-фрезерных центрах с ЧПУ. Предельная точность до IT7, чистота поверхностей Ra 1.25 – 2.5 мкм.
+			</p>
+			<dl class="readout ticks" aria-label="Параметры фрезерной обработки">
+				<div class="readout-item">
+					<dt class="readout-label">Базовый допуск</dt>
+					<dd class="readout-value">IT7</dd>
 				</div>
-			</div>
-		</div>
+				<div class="readout-item">
+					<dt class="readout-label">Партии</dt>
+					<dd class="readout-value">от 1&thinsp;<span class="readout-unit">шт.</span></dd>
+				</div>
+				<div class="readout-item">
+					<dt class="readout-label">Срок по партии</dt>
+					<dd class="readout-value">до 2&thinsp;<span class="readout-unit">нед.</span></dd>
+				</div>
+			</dl>
+		</header>
 
-		<!-- Technical Specifications Grid -->
-		<section class="mt-10" aria-labelledby="tech-params-heading">
-			<div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
-				<div class="lg:col-span-4">
-					<h2 id="tech-params-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
-						Паспортные параметры станков
-					</h2>
-					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-						Вертикальные фрезерные центры со стойками Siemens 828D и оптическими линейками Renishaw.
-					</p>
-				</div>
-				<div class="overflow-x-auto lg:col-span-8">
-					<table class="v-table">
-						<thead>
-							<tr>
-								<th>Параметр оборудования</th>
-								<th>Значение</th>
-								<th>Инженерное назначение</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="font-normal text-[var(--color-ink)]">Перемещение по осям X / Y / Z</td>
-								<td class="num text-[var(--color-ink)]"
-									>800 × 500 × 500<span class="u">&thinsp;мм</span></td
-								>
-								<td class="text-[var(--color-muted)]">
-									Обработка плит, остовов редукторов, крупногабаритных крышек
-								</td>
-							</tr>
-							<tr>
-								<td class="font-normal text-[var(--color-ink)]">
-									Поворотный стол (4-я координатная ось)
-								</td>
-								<td class="num text-[var(--color-ink)]">Индексация 360° / 0.001°</td>
-								<td class="text-[var(--color-muted)]">
-									Сверление радиальных отверстий, обработка граней за один установ
-								</td>
-							</tr>
-							<tr>
-								<td class="font-normal text-[var(--color-ink)]">Частота шпинделя</td>
-								<td class="num text-[var(--color-ink)]"
-									>до 10&thinsp;000<span class="u">&thinsp;об/мин</span></td
-								>
-								<td class="text-[var(--color-muted)]">
-									Высокоскоростная чистовая обработка алюминия и латуни (HSM)
-								</td>
-							</tr>
-							<tr>
-								<td class="font-normal text-[var(--color-ink)]">Точность позиционирования</td>
-								<td class="num text-[var(--color-ink)]">±0.010<span class="u">&thinsp;мм (IT7)</span></td>
-								<td class="text-[var(--color-muted)]">Оптические линейки Renishaw по 3 осям</td>
-							</tr>
-							<tr>
-								<td class="font-normal text-[var(--color-ink)]">Шероховатость поверхности</td>
-								<td class="num text-[var(--color-ink)]"
-									>Ra 1.6 – 3.2<span class="u">&thinsp;мкм</span></td
-								>
-								<td class="text-[var(--color-muted)]"
-									>Чистовые монолитные фрезы с покрытием AlCrN</td
-								>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+		<!-- Machine Limits Table -->
+		<section class="mt-12" aria-labelledby="limits-heading">
+			<h2 id="limits-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
+				Технологические параметры фрезерного участка
+			</h2>
+			<div class="mt-6 overflow-x-auto">
+				<table class="table-vantage">
+					<thead>
+						<tr>
+							<th>Параметр оборудования</th>
+							<th>Диапазон / Значение</th>
+							<th>Условия обработки</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="font-normal text-[var(--color-ink)]">Перемещение по осям X × Y × Z</td>
+							<td class="num">800 × 500 × 500 мм</td>
+							<td>Рабочая зона вертикально-фрезерного центра</td>
+						</tr>
+						<tr>
+							<td class="font-normal text-[var(--color-ink)]">Максимальная нагрузка на рабочий стол</td>
+							<td class="num">500 кг</td>
+							<td>Равномерно распределенная масса заготовки</td>
+						</tr>
+						<tr>
+							<td class="font-normal text-[var(--color-ink)]">Частота вращения шпинделя</td>
+							<td class="num">до 10&thinsp;000 об/мин</td>
+							<td>Высокоскоростная обработка концевыми монолитными фрезами</td>
+						</tr>
+						<tr>
+							<td class="font-normal text-[var(--color-ink)]">Предельный квалитет точности</td>
+							<td class="num font-normal text-[var(--color-accent)]">Квалитет IT7</td>
+							<td>Фрезерование пазов, посадочных мест и межосевых расстояний</td>
+						</tr>
+						<tr>
+							<td class="font-normal text-[var(--color-ink)]">Шероховатость поверхностей</td>
+							<td class="num">Ra 1.25 – 2.5 мкм</td>
+							<td>Чистовое фрезерование торцевыми и концевыми фрезами</td>
+						</tr>
+						<tr>
+							<td class="font-normal text-[var(--color-ink)]">Смена инструмента</td>
+							<td class="num">24 позиции (автоматическая)</td>
+							<td>Быстрая смена инструмента за 1.8 с для сокращения штучного времени</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</section>
 
-		<!-- Types of Machined Components -->
-		<section class="mt-14" aria-labelledby="parts-types-heading">
-			<div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
-				<div class="lg:col-span-4">
-					<h2 id="parts-types-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
-						Типовая номенклатура
-					</h2>
+		<!-- Typology of Milled Parts -->
+		<section class="mt-14" aria-labelledby="parts-heading">
+			<h2 id="parts-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
+				Номенклатура изготавливаемых деталей
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-3">
+				<div class="well">
+					<div class="font-mono text-xs text-[var(--color-accent)]">Тип 01</div>
+					<h3 class="mt-2 text-sm font-normal text-[var(--color-ink)]">
+						Корпуса и приборные шасси
+					</h3>
 					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-						Серийное изготовление корпусных узлов, оснастки и кронштейнов для машиностроения.
+						Тонкостенные корпуса из алюминиевых сплавов (Д16Т, АМг6) с глубокими карманами, ребрами жесткости и резьбовыми отверстиями М2–М16.
 					</p>
+					<div class="num mt-4 font-mono text-[11px] text-[var(--color-ink-2)]">
+						Габариты до 800×500 мм
+					</div>
 				</div>
-				<div class="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:col-span-8">
-					<div class="well">
-						<h3 class="text-sm font-normal text-[var(--color-ink)]">Корпуса и приборные блоки</h3>
-						<div class="num mt-1 text-xs text-[var(--color-muted)]">Д16Т, АМг6, POM-C</div>
-						<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-							Тонкостенные корпуса радиоэлектроники, радиаторы охлаждения, герметичные боксы.
-						</p>
+
+				<div class="well">
+					<div class="font-mono text-xs text-[var(--color-accent)]">Тип 02</div>
+					<h3 class="mt-2 text-sm font-normal text-[var(--color-ink)]">
+						Плиты, кронштейны и рычаги
+					</h3>
+					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
+						Силовые кронштейны сложной формы, базовые монтажные плиты оборудования с координатной сеткой резьбовых и штифтовых отверстий.
+					</p>
+					<div class="num mt-4 font-mono text-[11px] text-[var(--color-ink-2)]">
+						Межосевые расстояния до IT7
 					</div>
-					<div class="well">
-						<h3 class="text-sm font-normal text-[var(--color-ink)]">Плиты и кондукторы</h3>
-						<div class="num mt-1 text-xs text-[var(--color-muted)]">Сталь 45, 40Х, У8А</div>
-						<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-							Сборочные плиты технологической оснастки, шаблоны, прижимы прессов и сварочные
-							кондукторы.
-						</p>
-					</div>
-					<div class="well">
-						<h3 class="text-sm font-normal text-[var(--color-ink)]">Кронштейны и рычаги</h3>
-						<div class="num mt-1 text-xs text-[var(--color-muted)]">09Г2С, 12Х18Н10Т</div>
-						<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-							Силовые узлы крепления гидроцилиндров, петли люковых закрытий, рычаги спецтехники.
-						</p>
+				</div>
+
+				<div class="well">
+					<div class="font-mono text-xs text-[var(--color-accent)]">Тип 03</div>
+					<h3 class="mt-2 text-sm font-normal text-[var(--color-ink)]">
+						Формообразующие элементы и штампы
+					</h3>
+					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
+						Матрицы, пуансоны, вставки пресс-форм из легированных инструментальных сталей (Х12МФ, 40Х13) с чистовым 3D-фрезерованием.
+					</p>
+					<div class="num mt-4 font-mono text-[11px] text-[var(--color-ink-2)]">
+						Чистота поверхности Ra 1.25
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- Regional Industrial Cases -->
-		<section class="mt-14" aria-labelledby="regional-cases-heading">
-			<div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
-				<div class="lg:col-span-4">
-					<h2 id="regional-cases-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
-						Специфика заказов
-					</h2>
-					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-						Обеспечение промышленных предприятий Калининградской области запчастями без задержек.
-					</p>
-				</div>
-				<div class="space-y-4 text-xs leading-relaxed text-[var(--color-muted)] lg:col-span-8">
-					<p class="max-w-2xl">
-						Фрезерная ЧПУ обработка в нашем цехе ориентирована на оперативное закрытие потребностей
-						предприятий региона:
-					</p>
-					<ul class="max-w-2xl list-inside list-disc space-y-2 text-[var(--color-ink-2)]">
-						<li>
-							<strong class="font-normal text-[var(--color-ink)]"
-								>Предприятия рыбного промысла (Светлый, Пионерский):</strong
-							>
-							Матрицы, направляющие гребенки и ножевые плиты из нержавеющей стали AISI 304 / 12Х18Н10Т.
+		<!-- Materials Processing Guide -->
+		<section class="mt-14" aria-labelledby="materials-heading">
+			<h2 id="materials-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
+				Фрезерование конструкционных материалов
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+				<div class="well">
+					<h3 class="text-sm font-normal text-[var(--color-ink)]">
+						Алюминиевые и легкие сплавы
+					</h3>
+					<ul class="mt-3 space-y-2 text-xs text-[var(--color-ink-2)]">
+						<li class="flex items-start gap-2">
+							<span class="font-mono text-[var(--color-accent)]">Д16Т (дюралюминий):</span>
+							<span>Идеальная обрабатываемость, отсутствие деформаций после фрезерования, Ra 1.25.</span>
 						</li>
-						<li>
-							<strong class="font-normal text-[var(--color-ink)]"
-								>Машиностроительные сервисы (Калининград, Гурьевск):</strong
-							>
-							Фрезерование сопряженных плоскостей гидроблоков и клапанных плит под уплотнители O-Ring.
+						<li class="flex items-start gap-2">
+							<span class="font-mono text-[var(--color-accent)]">АМг6, АМг5:</span>
+							<span>Свариваемые коррозионно-стойкие корпуса насосного и емкостного промышленного оборудования.</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<span class="font-mono text-[var(--color-accent)]">В95:</span>
+							<span>Высокопрочный авиационный сплав для тяжелонагруженных кронштейнов.</span>
+						</li>
+					</ul>
+				</div>
+
+				<div class="well">
+					<h3 class="text-sm font-normal text-[var(--color-ink)]">
+						Стали, нержавеющие сплавы и полимеры
+					</h3>
+					<ul class="mt-3 space-y-2 text-xs text-[var(--color-ink-2)]">
+						<li class="flex items-start gap-2">
+							<span class="font-mono text-[var(--color-accent)]">Ст45, 40Х:</span>
+							<span>Фрезерование пазов, лысок, шпоночных пазов, профилирование плит.</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<span class="font-mono text-[var(--color-accent)]">12Х18Н10Т / AISI 304:</span>
+							<span>Фрезерование вязких нержавеющих сталей с подачей СОЖ высокого давления.</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<span class="font-mono text-[var(--color-accent)]">Капролон, Полиацеталь (POM):</span>
+							<span>Высокоскоростное сухое фрезерование изоляторов и направляющих без оплавления.</span>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</section>
 
-		<!-- Contextual Internal Linking -->
-		<section class="mt-14 border-t border-[var(--color-rule)] pt-8">
-			<h2 class="text-sm font-normal text-[var(--color-ink)]">
-				Сопутствующие услуги механического цеха:
+		<!-- Quality & Inspection -->
+		<section class="mt-14" aria-labelledby="qc-heading">
+			<h2 id="qc-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
+				Контроль плоскостности и геометрии
 			</h2>
-			<div class="mt-4 grid grid-cols-1 gap-4 text-xs sm:grid-cols-3">
-				<a
-					href="{base}/tokarnye-raboty-chpu/"
-					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
-				>
-					<span class="block font-normal text-[var(--color-ink)]">Токарная ЧПУ обработка</span>
-					<span class="mt-1 block text-[var(--color-muted)]"
-						>Точение заготовок тел вращения перед фрезеровкой</span
-					>
-				</a>
-				<a
-					href="{base}/zuboreznye-i-shlifovalnye-raboty/"
-					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
-				>
-					<span class="block font-normal text-[var(--color-ink)]">Зуборезные работы</span>
-					<span class="mt-1 block text-[var(--color-muted)]"
-						>Финишная доводка плоскостей до Ra 0.4 мкм</span
-					>
-				</a>
-				<a
-					href="{base}/portfolio/"
-					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
-				>
-					<span class="block font-normal text-[var(--color-ink)]">Портфолио корпусных деталей</span>
-					<span class="mt-1 block text-[var(--color-muted)]"
-						>Фотографии фрезерованных корпусов из Д16Т</span
-					>
-				</a>
+			<div class="mt-6 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-6">
+				<div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+					<div>
+						<div class="font-mono text-xs text-[var(--color-accent)]">Геометрия баз</div>
+						<div class="mt-1 text-sm font-normal text-[var(--color-ink)]">
+							Контроль плоскостности
+						</div>
+						<p class="mt-2 text-xs text-[var(--color-muted)]">
+							Замер неплоскостности и непараллельности на поверочных гранитных плитах с точностью до 0.005 мм.
+						</p>
+					</div>
+					<div>
+						<div class="font-mono text-xs text-[var(--color-accent)]">Координаты отверстий</div>
+						<div class="mt-1 text-sm font-normal text-[var(--color-ink)]">
+							Межосевой контроль
+						</div>
+						<p class="mt-2 text-xs text-[var(--color-muted)]">
+							Проверка межцентровых расстояний калиброванными пробками и нутромерами по квалитету IT7.
+						</p>
+					</div>
+					<div>
+						<div class="font-mono text-xs text-[var(--color-accent)]">Шероховатость</div>
+						<div class="mt-1 text-sm font-normal text-[var(--color-ink)]">
+							Профилометрия
+						</div>
+						<p class="mt-2 text-xs text-[var(--color-muted)]">
+							Контактный замер параметра Ra на дне карманов и торцевых поверхностях.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Logistics across Kaliningrad Oblast -->
+		<section class="mt-14" aria-labelledby="logistics-heading">
+			<h2 id="logistics-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
+				Доставка по всей Калининградской области
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+				<div class="well">
+					<h3 class="text-sm font-normal text-[var(--color-ink)]">
+						Региональная логистика готовых изделий
+					</h3>
+					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
+						Собственный автотранспорт и курьерские службы доставляют детали заказчикам по всей Калининградской области:
+					</p>
+					<ul class="mt-3 list-inside list-disc space-y-1 text-xs text-[var(--color-ink-2)]">
+						<li>Калининград (доставка до дверей цеха или офиса);</li>
+						<li>Светлый, Балтийск, Зеленоградск, Пионерский, Светлогорск;</li>
+						<li>Гурьевск, Гвардейск, Черняховск, Советск, Багратионовск.</li>
+					</ul>
+				</div>
+
+				<div class="well">
+					<h3 class="text-sm font-normal text-[var(--color-ink)]">
+						Условия запуска партии и оплаты
+					</h3>
+					<ul class="mt-2 space-y-2 text-xs text-[var(--color-muted)]">
+						<li class="flex justify-between border-b border-[var(--color-rule)] pb-2">
+							<span>Минимальный порог заказа:</span>
+							<span class="num text-[var(--color-ink)]">5&thinsp;000&thinsp;₽ (с НДС 22%)</span>
+						</li>
+						<li class="flex justify-between border-b border-[var(--color-rule)] pb-2">
+							<span>Стандартный срок партии:</span>
+							<span class="num text-[var(--color-ink)]">до 2 недель</span>
+						</li>
+						<li class="flex justify-between border-b border-[var(--color-rule)] pb-2">
+							<span>Форма оплаты для юр. лиц:</span>
+							<span class="text-[var(--color-ink)]">Безналичный расчет с НДС 22%</span>
+						</li>
+						<li class="flex justify-between pb-2">
+							<span>Работа с физлицами:</span>
+							<span class="text-[var(--color-ink)]">Безналичная оплата по счету</span>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</section>
 
@@ -261,14 +312,15 @@
 				Рассчитайте себестоимость фрезерной обработки онлайн
 			</h2>
 			<p class="lead mx-auto mt-2 max-w-2xl text-xs sm:text-sm">
-				Используйте инженерный калькулятор с загрузкой 3D-модели (STEP/STL) или направьте 3D-файлы
-				нашему технологу.
+				Используйте интерактивный инженерный калькулятор с загрузкой 3D-модели (STEP) для мгновенного расчета стоимости партии деталей.
 			</p>
 			<div class="mt-6 flex flex-wrap items-center justify-center gap-3">
 				<a href="{base}/kalkulyator-stoimosti-chpu/" class="btn btn--sm">
 					Перейти в онлайн-калькулятор
 				</a>
-				<a href={siteConfig.yandexFormUrl} target="_blank" rel="noopener noreferrer" class="btn btn--sm btn--line"><span>Отправить чертеж через Яндекс.Форму</span></a>
+				<a href="{base}/kontakty/" class="btn btn--sm btn--line">
+					<span>График загрузки цеха</span>
+				</a>
 			</div>
 		</section>
 	</div>

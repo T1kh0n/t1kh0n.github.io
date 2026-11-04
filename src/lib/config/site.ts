@@ -38,7 +38,7 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
 	brandLegalName: 'ИП МеталлПром39',
 	contactPhone: '',
 	contactEmail: '',
-	yandexFormUrl: 'https://forms.yandex.ru/u/metalprom39/',
+	yandexFormUrl: '',
 	addressLocality: 'Калининград',
 	addressRegion: 'Калининградская область',
 	addressStreet: '',
@@ -52,9 +52,9 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
 	googleVerification: '',
 	socialLinks: {
 		github: 'https://github.com/T1kh0n/metal-prom-web',
-		telegram: 'https://t.me/metalprom39',
-		habr: 'https://habr.com/ru/users/metalprom39',
-		linkedin: 'https://www.linkedin.com/company/metalprom39'
+		telegram: '',
+		habr: '',
+		linkedin: ''
 	}
 };
 

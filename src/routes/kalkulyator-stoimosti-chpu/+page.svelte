@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$lib/paths';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import CostCalculator from '#lib/components/CostCalculator.svelte';
 	import { siteConfig } from '#lib/config/site';
@@ -23,8 +24,7 @@
 				Инженерный калькулятор стоимости ЧПУ
 			</h1>
 			<p class="lead mt-4 max-w-2xl text-sm leading-relaxed sm:text-base">
-				Расчет себестоимости токарных и фрезерных деталей по нормо-часам. Загружайте 3D-модели STEP и
-				STEP для мгновенной оценки стоимости партии.
+				Расчет себестоимости токарных и фрезерных деталей по нормо-часам. Загружайте 3D-модели STEP для мгновенной оценки стоимости партии.
 			</p>
 		</header>
 
@@ -66,12 +66,6 @@
 							>
 						</li>
 						<li class="flex justify-between">
-							<span>Фрезерная 4-осевая и 3D обработка:</span>
-							<strong class="num font-normal text-[var(--color-ink)]"
-								>3&thinsp;500<span class="u">&thinsp;₽/ч</span></strong
-							>
-						</li>
-						<li class="flex justify-between">
 							<span>Инженерная подготовка и CAM-программирование:</span>
 							<strong class="num font-normal text-[var(--color-ink)]"
 								>2&thinsp;000<span class="u">&thinsp;₽/ч</span></strong
@@ -80,7 +74,7 @@
 					</ul>
 					<p class="text-[11px] text-[var(--color-muted)]">
 						Все ставки включают работу оператора станка 5–6 разряда, амортизацию оборудования, СОЖ
-						Blaser и стандартный инструмент.
+						и стандартный инструмент.
 					</p>
 				</div>
 
@@ -97,12 +91,12 @@
 					<ul class="list-inside list-disc space-y-1.5 text-[var(--color-ink-2)]">
 						<li>Разработка управляющей программы (УП) в CAM-системе;</li>
 						<li>Установка и выкатка технологической оснастки;</li>
-						<li>Привязка инструмента с помощью оптических щупов;</li>
-						<li>Контроль первой детали (First Article Inspection) в лаборатории ОТК.</li>
+						<li>Привязка инструмента с помощью щупов;</li>
+						<li>Контроль первой детали в лаборатории ОТК.</li>
 					</ul>
 					<p class="text-[11px] text-[var(--color-muted)]">
 						При увеличении размера партии постоянные затраты на наладку распределяются на все
-						изделия: скидки от 10% (от 1 шт.) до 40% (от 100 шт.).
+						изделия: серийные скидки от 10% (от 10 шт.) до 25% (от 100 шт.).
 					</p>
 				</div>
 			</div>
@@ -120,22 +114,20 @@
 			</p>
 		</section>
 
-		<!-- Order Form Anchor Target -->
+		<!-- Production Status Notice -->
 		<section
 			id="order-form"
 			class="mt-12 border-t border-[var(--color-rule)] pt-12 pb-6 text-center"
 		>
 			<h2 class="text-lg text-[var(--color-ink)] sm:text-xl">
-				Отправка чертежей и согласование спецификации
+				Статус производственного цикла
 			</h2>
 			<p class="lead mx-auto mt-2 max-w-2xl text-xs sm:text-sm">
-				Для точного технологического согласования направьте чертежи и 3D-модели на нашу инженерную
-				почту:
+				Все токарные и фрезерные центры ЧПУ цеха загружены утвержденными серийными заказами на 100%. Вы можете сформировать и сохранить текстовую смету расчета для предварительного планирования бюджета.
 			</p>
 			<div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-				<a href={siteConfig.yandexFormUrl} target="_blank" rel="noopener noreferrer" class="btn btn--sm btn--line"><span>Отправить чертеж через Яндекс.Форму</span></a>
-				<a href="tel:{siteConfig.contactPhone}" class="btn btn--sm btn--line num">
-					{siteConfig.contactPhone}
+				<a href="{base}/kontakty/" class="btn btn--sm btn--line">
+					<span>График загрузки оборудования</span>
 				</a>
 			</div>
 		</section>

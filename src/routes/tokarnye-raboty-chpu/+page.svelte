@@ -2,22 +2,35 @@
 	import { base } from '$lib/paths';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
-	import { createServiceSchema, serializeSchema } from '#lib/seo/schema';
+	import {
+		createServiceSchema,
+		createBreadcrumbSchema,
+		serializeSchema
+	} from '#lib/seo/schema';
 
-	const breadcrumbs = [{ name: 'Токарные работы с ЧПУ', path: '/tokarnye-raboty-chpu/' }];
+	const breadcrumbs = [
+		{ name: 'Главная', path: '/' },
+		{ name: 'Услуги', path: '/tokarnye-raboty-chpu/' },
+		{ name: 'Токарные работы с ЧПУ', path: '/tokarnye-raboty-chpu/' }
+	];
 
-	const serviceSchema = createServiceSchema({
-		name: 'Токарные работы с ЧПУ в Калининграде',
-		description:
-			'Токарная обработка деталей вращения на станках с ЧПУ по чертежам заказчика. Диаметр до 200 мм, длина до 750 мм, допуски IT7, партии от 5 шт.',
-		serviceType: 'Токарная обработка металлов с ЧПУ',
-		path: '/tokarnye-raboty-chpu/',
-		offers: {
-			price: 2500,
-			minOrderPrice: 5000,
-			unitText: 'нормо-час'
-		}
-	});
+	const serviceSchema = createServiceSchema(
+		{
+			name: 'Токарные работы с ЧПУ в Калининграде',
+			description:
+				'Высокоточная токарная обработка деталей на станках с ЧПУ: валы, фланцы, штуцеры, пальцы. Допуск до IT7, партии от 1 шт., срок до 2 недель.',
+			serviceType: 'CNC Turning',
+			path: '/tokarnye-raboty-chpu',
+			offers: {
+				price: 2500,
+				unitText: 'нормо-час',
+				minOrderPrice: 5000
+			}
+		},
+		siteConfig
+	);
+
+	const breadcrumbSchema = createBreadcrumbSchema(breadcrumbs, siteConfig);
 </script>
 
 <svelte:head>
@@ -26,247 +39,275 @@
 	>
 	<meta
 		name="description"
-		content="Высокоточная токарная обработка на станках ЧПУ в Калининграде. Диаметр до ⌀200 мм, длина до 750 мм, партии от 5 шт. до 2 недель. Контроль ОТК, НДС 22%."
+		content="Токарная обработка на станках с ЧПУ в Калининграде. Диаметр до 200 мм, длина до 750 мм. Допуски до IT7, партии от 1 шт., срок до 2 недель. Безналичный расчет с НДС 22%."
 	/>
 	{@html serializeSchema(serviceSchema)}
+	{@html serializeSchema(breadcrumbSchema)}
 </svelte:head>
 
 <main class="py-10">
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<Breadcrumbs items={breadcrumbs} />
 
-		<!-- Header & Direct Summary: Vantage 12-Column Asymmetric Hero -->
-		<div
-			class="mt-4 grid grid-cols-1 items-start gap-8 border-b border-[var(--color-rule)] pb-8 lg:grid-cols-12"
-		>
-			<div class="lg:col-span-7">
-				<h1 class="text-3xl text-[var(--color-ink)] sm:text-4xl">
-					Токарные работы с ЧПУ в Калининграде
-				</h1>
-				<p class="lead mt-4 text-sm leading-relaxed sm:text-base">
-					Серийное точение валов, втулок и фланцев по чертежам заказчика. Партии от 5 штук,
-					квалитеты <span class="num text-[var(--color-ink)]">IT7–IT8</span>, ставка от
-					<span class="num text-[var(--color-ink)]"
-						>2&thinsp;500<span class="u">&thinsp;₽/ч</span></span
-					> с НДС 22%.
-				</p>
+		<!-- Service Header -->
+		<header class="border-b border-[var(--color-rule)] pb-8">
+			<div class="flex items-center gap-2 font-mono text-xs tracking-wider uppercase text-[var(--color-muted)]">
+				<span class="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]"></span>
+				Токарный участок ЧПУ · МеталлПром39
 			</div>
-			<div class="well text-xs text-[var(--color-ink-2)] lg:col-span-5">
-				<div class="font-normal text-[var(--color-ink)]">Ключевые лимиты токарного участка:</div>
-				<div class="mt-3 grid grid-cols-2 gap-3 text-[var(--color-muted)]">
-					<div>
-						Макс. диаметр:
-						<strong class="num block font-normal text-[var(--color-ink)]"
-							>⌀ 200<span class="u">&thinsp;мм</span></strong
-						>
-					</div>
-					<div>
-						Макс. длина:
-						<strong class="num block font-normal text-[var(--color-ink)]"
-							>750<span class="u">&thinsp;мм</span></strong
-						>
-					</div>
-					<div>
-						Точность точения:
-						<strong class="num block font-normal text-[var(--color-ink)]"
-							>±0.012<span class="u">&thinsp;мм</span> (IT7)</strong
-						>
-					</div>
-					<div>
-						Шероховатость:
-						<strong class="num block font-normal text-[var(--color-ink)]"
-							>Ra 1.6 – 3.2<span class="u">&thinsp;мкм</span></strong
-						>
-					</div>
+			<h1 class="mt-4 text-3xl text-[var(--color-ink)] sm:text-4xl">
+				Токарные работы с ЧПУ
+			</h1>
+			<p class="lead mt-4 max-w-2xl text-sm leading-relaxed sm:text-base">
+				Изготовление тел вращения на токарных центрах с ЧПУ: валы, штуцеры, втулки, фланцы. Предельный допуск до IT7, шероховатость поверхностей Ra 1.25 – 2.5 мкм.
+			</p>
+			<dl class="readout ticks" aria-label="Параметры токарной обработки">
+				<div class="readout-item">
+					<dt class="readout-label">Базовый допуск</dt>
+					<dd class="readout-value">IT7</dd>
 				</div>
-			</div>
-		</div>
+				<div class="readout-item">
+					<dt class="readout-label">Партии</dt>
+					<dd class="readout-value">от 1&thinsp;<span class="readout-unit">шт.</span></dd>
+				</div>
+				<div class="readout-item">
+					<dt class="readout-label">Срок по партии</dt>
+					<dd class="readout-value">до 2&thinsp;<span class="readout-unit">нед.</span></dd>
+				</div>
+			</dl>
+		</header>
 
-		<!-- Technical Specifications Grid (Hallmark Data Density) -->
-		<section class="mt-10" aria-labelledby="tech-params-heading">
-			<div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
-				<div class="lg:col-span-4">
-					<h2 id="tech-params-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
-						Параметры оборудования
-					</h2>
+		<!-- Machine Limits Table -->
+		<section class="mt-12" aria-labelledby="limits-heading">
+			<h2 id="limits-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
+				Технологические параметры токарного участка
+			</h2>
+			<div class="mt-6 overflow-x-auto">
+				<table class="table-vantage">
+					<thead>
+						<tr>
+							<th>Параметр оборудования</th>
+							<th>Диапазон / Значение</th>
+							<th>Условия обработки</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="font-normal text-[var(--color-ink)]">Максимальный обрабатываемый диаметр</td>
+							<td class="num">ø&thinsp;200 мм</td>
+							<td>При обработке в 3-кулачковом патроне</td>
+						</tr>
+						<tr>
+							<td class="font-normal text-[var(--color-ink)]">Максимальная длина заготовки в центрах</td>
+							<td class="num">750 мм</td>
+							<td>С поддержкой задней бабкой (люнет по запросу)</td>
+						</tr>
+						<tr>
+							<td class="font-normal text-[var(--color-ink)]">Диаметр проходного отверстия шпинделя</td>
+							<td class="num">ø&thinsp;52 мм</td>
+							<td>Для серийной прутковой автоподачи</td>
+						</tr>
+						<tr>
+							<td class="font-normal text-[var(--color-ink)]">Предельная достижимая точность</td>
+							<td class="num font-normal text-[var(--color-accent)]">Квалитет IT7</td>
+							<td>На чистовых проходах твердосплавными пластинами</td>
+						</tr>
+						<tr>
+							<td class="font-normal text-[var(--color-ink)]">Шероховатость обработанных шеек</td>
+							<td class="num">Ra 1.25 – 2.5 мкм</td>
+							<td>Тонкое чистовое точение специальными пластинами</td>
+						</tr>
+						<tr>
+							<td class="font-normal text-[var(--color-ink)]">Нарезаемые резьбы</td>
+							<td>Метрическая, дюймовая (BSW, NPT), трапецеидальная (Tr), упорная</td>
+							<td>Резьбовыми резцами и гребенками в автоматическом цикле</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<!-- Typology of Machined Parts -->
+		<section class="mt-14" aria-labelledby="parts-heading">
+			<h2 id="parts-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
+				Номенклатура изготавливаемых деталей
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-3">
+				<div class="well">
+					<div class="font-mono text-xs text-[var(--color-accent)]">Тип 01</div>
+					<h3 class="mt-2 text-sm font-normal text-[var(--color-ink)]">
+						Валы и ступенчатые оси
+					</h3>
 					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-						Паспортные технологические характеристики токарно-револьверных центров с ЧПУ и
-						применяемый режущий инструмент.
+						Шпоночные, шлицевые и посадочные валы под подшипники (допуск IT7). Центровочные отверстия, канавки под стопорные кольца по ГОСТ.
 					</p>
+					<div class="num mt-4 font-mono text-[11px] text-[var(--color-ink-2)]">
+						L до 750 мм · ø до 200 мм
+					</div>
 				</div>
-				<div class="overflow-x-auto lg:col-span-8">
-					<table class="v-table">
-						<thead>
-							<tr>
-								<th>Параметр обработки</th>
-								<th>Техническое значение</th>
-								<th>Стандарт / Примечание</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="font-normal text-[var(--color-ink)]">
-									Максимальный диаметр над станиной
-								</td>
-								<td class="num text-[var(--color-ink)]">200<span class="u">&thinsp;мм</span></td>
-								<td class="text-[var(--color-muted)]">Точение фланцев, дисков, крышек</td>
-							</tr>
-							<tr>
-								<td class="font-normal text-[var(--color-ink)]">
-									Максимальный диаметр над суппортом
-								</td>
-								<td class="num text-[var(--color-ink)]">210<span class="u">&thinsp;мм</span></td>
-								<td class="text-[var(--color-muted)]">Проходная обработка длинномерных заготовок</td
-								>
-							</tr>
-							<tr>
-								<td class="font-normal text-[var(--color-ink)]">
-									Предельная длина обработки в центрах
-								</td>
-								<td class="num text-[var(--color-ink)]">750<span class="u">&thinsp;мм</span></td>
-								<td class="text-[var(--color-muted)]">С люнетом для жесткости валопроводов</td>
-							</tr>
-							<tr>
-								<td class="font-normal text-[var(--color-ink)]">Отверстие в шпинделе</td>
-								<td class="num text-[var(--color-ink)]">52<span class="u">&thinsp;мм</span></td>
-								<td class="text-[var(--color-muted)]">Прутковая подача серийного металлопроката</td>
-							</tr>
-							<tr>
-								<td class="font-normal text-[var(--color-ink)]">Достижимый квалитет</td>
-								<td class="num text-[var(--color-ink)]">IT7 – IT8</td>
-								<td class="text-[var(--color-muted)]">ГОСТ 25346-2015 (Единая система допусков)</td>
-							</tr>
-							<tr>
-								<td class="font-normal text-[var(--color-ink)]">
-									Шероховатость после чистового резца
-								</td>
-								<td class="num text-[var(--color-ink)]">Ra 1.6<span class="u">&thinsp;мкм</span></td
-								>
-								<td class="text-[var(--color-muted)]">Пластины твердосплавные Sandvik / Korloy</td>
-							</tr>
-						</tbody>
-					</table>
+
+				<div class="well">
+					<div class="font-mono text-xs text-[var(--color-accent)]">Тип 02</div>
+					<h3 class="mt-2 text-sm font-normal text-[var(--color-ink)]">
+						Фланцы и дисковые детали
+					</h3>
+					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
+						Переходные фланцы, ступицы, прижимные кольца. Расточка внутренних посадочных диаметров и проточка уплотнительных канавок.
+					</p>
+					<div class="num mt-4 font-mono text-[11px] text-[var(--color-ink-2)]">
+						ø до 200 мм · торец Ra 1.25
+					</div>
+				</div>
+
+				<div class="well">
+					<div class="font-mono text-xs text-[var(--color-accent)]">Тип 03</div>
+					<h3 class="mt-2 text-sm font-normal text-[var(--color-ink)]">
+						Штуцеры, ниппели и втулки
+					</h3>
+					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
+						Гидравлические и пневматические фитинги из коррозионно-стойких сталей и латуни. Прецизионное нарезание резьб без заусенцев.
+					</p>
+					<div class="num mt-4 font-mono text-[11px] text-[var(--color-ink-2)]">
+						Метрические / дюймовые резьбы
+					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- Processed Materials Section -->
+		<!-- Materials Processing Guide -->
 		<section class="mt-14" aria-labelledby="materials-heading">
-			<div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
-				<div class="lg:col-span-4">
-					<h2 id="materials-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
-						Обрабатываемые металлы
-					</h2>
-					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-						Складской запас сертифицированного сортового проката и опыт работы с давальческим сырьем
-						заказчиков.
-					</p>
+			<h2 id="materials-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
+				Обрабатываемые металлы и сплавы
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+				<div class="well">
+					<h3 class="text-sm font-normal text-[var(--color-ink)]">
+						Конструкционные и легированные стали
+					</h3>
+					<ul class="mt-3 space-y-2 text-xs text-[var(--color-ink-2)]">
+						<li class="flex items-start gap-2">
+							<span class="font-mono text-[var(--color-accent)]">Ст45, Ст20, Ст35:</span>
+							<span>Валы, крепеж, пальцы, ступенчатые втулки общего машиностроения.</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<span class="font-mono text-[var(--color-accent)]">40Х, 30ХГСА:</span>
+							<span>Высоконагруженные детали, зубчатые венцы, штоки под последующую закалку.</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<span class="font-mono text-[var(--color-accent)]">09Г2С:</span>
+							<span>Хладостойкие фланцы и корпусные элементы с повышенной ударной вязкостью.</span>
+						</li>
+					</ul>
 				</div>
-				<div class="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:col-span-8">
-					<div class="well">
-						<h3 class="text-sm font-normal text-[var(--color-ink)]">Конструкционные стали</h3>
-						<div class="num mt-1 text-xs text-[var(--color-muted)]">Ст45, Ст20, 40Х, 09Г2С</div>
-						<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-							Пальцы гидроцилиндров, промежуточные и первичные валы, переходные фланцы и ступенчатые
-							оси.
-						</p>
-					</div>
-					<div class="well">
-						<h3 class="text-sm font-normal text-[var(--color-ink)]">Нержавеющие стали</h3>
-						<div class="num mt-1 text-xs text-[var(--color-muted)]">
-							12Х18Н10Т, AISI 304, AISI 316L
-						</div>
-						<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-							Судовые штуцеры, элементы забортной арматуры, штоки клапанов и детали оборудования
-							пищепрома.
-						</p>
-					</div>
-					<div class="well">
-						<h3 class="text-sm font-normal text-[var(--color-ink)]">Бронза и сплавы</h3>
-						<div class="num mt-1 text-xs text-[var(--color-muted)]">
-							БрАЖ9-4, БрОЦС5-5-5, ЛС59-1
-						</div>
-						<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-							Антифрикционные втулки скольжения, гайки ходовых винтов, уплотнительные кольца и
-							вкладыши.
-						</p>
-					</div>
-				</div>
-			</div>
-		</section>
 
-		<!-- Regional Sector Focus (Kaliningrad Industrial Clusters) -->
-		<section class="mt-14" aria-labelledby="regional-cases-heading">
-			<div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
-				<div class="lg:col-span-4">
-					<h2 id="regional-cases-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
-						Отраслевой опыт
-					</h2>
-					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-						Локальное импортозамещение тел вращения для предприятий Калининградского эксклава.
-					</p>
-				</div>
-				<div class="space-y-4 text-xs leading-relaxed text-[var(--color-muted)] lg:col-span-8">
-					<p class="max-w-2xl">
-						Цех {siteConfig.brandName} обеспечивает оперативное изготовление тел вращения без задержек
-						поставок из ЕС и большой России:
-					</p>
-					<ul class="max-w-2xl list-inside list-disc space-y-2 text-[var(--color-ink-2)]">
-						<li>
-							<strong class="font-normal text-[var(--color-ink)]"
-								>Промышленное машиностроение:</strong
-							> Валы, дейдвудные втулки, шпильки из высокопрочных легированных сталей с сертификатами.
+				<div class="well">
+					<h3 class="text-sm font-normal text-[var(--color-ink)]">
+						Нержавеющие стали, цветные сплавы и полимеры
+					</h3>
+					<ul class="mt-3 space-y-2 text-xs text-[var(--color-ink-2)]">
+						<li class="flex items-start gap-2">
+							<span class="font-mono text-[var(--color-accent)]">12Х18Н10Т / AISI 304:</span>
+							<span>Пищевые и химические штуцеры, детали оборудования с повышенными требованиями к коррозии.</span>
 						</li>
-						<li>
-							<strong class="font-normal text-[var(--color-ink)]"
-								>Сельское хозяйство и спецтехника (Гурьевск, Багратионовск):</strong
-							>
-							Оси прицепов, шлицевые муфты комбайнов, пальцы навесного оборудования с термообработкой
-							ТВЧ.
+						<li class="flex items-start gap-2">
+							<span class="font-mono text-[var(--color-accent)]">Д16Т, АМг6:</span>
+							<span>Легкие прецизионные корпуса, приборные корпуса и переходники.</span>
 						</li>
-						<li>
-							<strong class="font-normal text-[var(--color-ink)]"
-								>Ремонт промышленного оборудования (г. Калининград):</strong
-							> Расточка посадочных мест под подшипники, восстановление соосности шеек и ремонтные втулки.
+						<li class="flex items-start gap-2">
+							<span class="font-mono text-[var(--color-accent)]">БрАЖ9-4, ЛС59-1:</span>
+							<span>Антифрикционные втулки, гайки ходовых винтов, червячные колеса.</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<span class="font-mono text-[var(--color-accent)]">Капролон (ПА-6), Фторопласт:</span>
+							<span>Изоляторы, направляющие скольжения, химически стойкие уплотнители.</span>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</section>
 
-		<!-- Contextual Internal Linking -->
-		<section class="mt-14 border-t border-[var(--color-rule)] pt-8">
-			<h2 class="text-sm font-normal text-[var(--color-ink)]">
-				Связанные производственные переделы цеха:
+		<!-- Quality Control & Calibration -->
+		<section class="mt-14" aria-labelledby="qc-heading">
+			<h2 id="qc-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
+				Контроль геометрии и метрология ОТК
 			</h2>
-			<div class="mt-4 grid grid-cols-1 gap-4 text-xs sm:grid-cols-3">
-				<a
-					href="{base}/frezernye-raboty-chpu/"
-					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
-				>
-					<span class="block font-normal text-[var(--color-ink)]">Фрезерная ЧПУ обработка</span>
-					<span class="mt-1 block text-[var(--color-muted)]"
-						>Фрезерование пазов, лысок, шпоночных канавок на валах</span
-					>
-				</a>
-				<a
-					href="{base}/zuboreznye-i-shlifovalnye-raboty/"
-					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
-				>
-					<span class="block font-normal text-[var(--color-ink)]">Зуборезные работы</span>
-					<span class="mt-1 block text-[var(--color-muted)]"
-						>Нарезка шлицев и шестерен</span
-					>
-				</a>
-				<a
-					href="{base}/portfolio/"
-					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
-				>
-					<span class="block font-normal text-[var(--color-ink)]">Портфолио валов и втулок</span>
-					<span class="mt-1 block text-[var(--color-muted)]"
-						>Фотографии и параметры выполненных партий</span
-					>
-				</a>
+			<div class="mt-6 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-6">
+				<div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+					<div>
+						<div class="font-mono text-xs text-[var(--color-accent)]">Входной контроль</div>
+						<div class="mt-1 text-sm font-normal text-[var(--color-ink)]">
+							Проверка заготовок
+						</div>
+						<p class="mt-2 text-xs text-[var(--color-muted)]">
+							Проверка геометрических размеров сортового проката и сертификатов соответствия металлургических заводов.
+						</p>
+					</div>
+					<div>
+						<div class="font-mono text-xs text-[var(--color-accent)]">Межоперационный контроль</div>
+						<div class="mt-1 text-sm font-normal text-[var(--color-ink)]">
+							First Article Inspection
+						</div>
+						<p class="mt-2 text-xs text-[var(--color-muted)]">
+							Сплошной замер первой детали после наладки станка и привязки инструмента до запуска всей партии.
+						</p>
+					</div>
+					<div>
+						<div class="font-mono text-xs text-[var(--color-accent)]">Финишная приемка</div>
+						<div class="mt-1 text-sm font-normal text-[var(--color-ink)]">
+							Выходной контроль ОТК
+						</div>
+						<p class="mt-2 text-xs text-[var(--color-muted)]">
+							Замер диаметров, биений, соосности и шероховатости калиброванным цифровым инструментом.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Logistics across Kaliningrad Oblast -->
+		<section class="mt-14" aria-labelledby="logistics-heading">
+			<h2 id="logistics-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
+				Доставка по Калининградской области
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+				<div class="well">
+					<h3 class="text-sm font-normal text-[var(--color-ink)]">
+						Логистическая доступность цеха
+					</h3>
+					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
+						Цех {siteConfig.brandName} обеспечивает оперативное изготовление тел вращения без задержек
+						на границах. Доставка деталей по всей Калининградской области собственным транспортом цеха или курьерскими службами:
+					</p>
+					<ul class="mt-3 list-inside list-disc space-y-1 text-xs text-[var(--color-ink-2)]">
+						<li>Калининград (доставка до дверей заказчика);</li>
+						<li>Светлый, Балтийск, Зеленоградск, Пионерский, Светлогорск;</li>
+						<li>Гурьевск, Гвардейск, Черняховск, Советск, Нестеров.</li>
+					</ul>
+				</div>
+
+				<div class="well">
+					<h3 class="text-sm font-normal text-[var(--color-ink)]">
+						Условия запуска партии и оплаты
+					</h3>
+					<ul class="mt-2 space-y-2 text-xs text-[var(--color-muted)]">
+						<li class="flex justify-between border-b border-[var(--color-rule)] pb-2">
+							<span>Минимальный порог заказа:</span>
+							<span class="num text-[var(--color-ink)]">5&thinsp;000&thinsp;₽ (с НДС 22%)</span>
+						</li>
+						<li class="flex justify-between border-b border-[var(--color-rule)] pb-2">
+							<span>Стандартный срок партии:</span>
+							<span class="num text-[var(--color-ink)]">до 2 недель</span>
+						</li>
+						<li class="flex justify-between border-b border-[var(--color-rule)] pb-2">
+							<span>Форма оплаты для юр. лиц:</span>
+							<span class="text-[var(--color-ink)]">Безналичный расчет с НДС 22%</span>
+						</li>
+						<li class="flex justify-between pb-2">
+							<span>Работа с физлицами:</span>
+							<span class="text-[var(--color-ink)]">Безналичная оплата по счету</span>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</section>
 
@@ -276,14 +317,15 @@
 				Рассчитайте себестоимость партии токарных деталей онлайн
 			</h2>
 			<p class="lead mx-auto mt-2 max-w-2xl text-xs sm:text-sm">
-				Воспользуйтесь инженерным калькулятором или направьте чертежи на прямую почту главного
-				технолога.
+				Воспользуйтесь интерактивным инженерным калькулятором для моментального расчета трудоемкости и себестоимости партии деталей.
 			</p>
 			<div class="mt-6 flex flex-wrap items-center justify-center gap-3">
 				<a href="{base}/kalkulyator-stoimosti-chpu/" class="btn btn--sm">
 					Перейти в онлайн-калькулятор
 				</a>
-				<a href={siteConfig.yandexFormUrl} target="_blank" rel="noopener noreferrer" class="btn btn--sm btn--line"><span>Отправить чертеж через Яндекс.Форму</span></a>
+				<a href="{base}/kontakty/" class="btn btn--sm btn--line">
+					<span>График загрузки цеха</span>
+				</a>
 			</div>
 		</section>
 	</div>
