@@ -1,0 +1,1 @@
+export { default as component } from "../../../../../src/routes/zuboreznye-i-shlifovalnye-raboty/+page.svelte";

@@ -1,0 +1,1 @@
+export { default as component } from "../../../../../src/routes/kalkulyator-stoimosti-chpu/+page.svelte";
