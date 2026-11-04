@@ -3,16 +3,16 @@
 </script>
 
 {#if a11y.settings.isEnabled}
-	<div
-		class="sticky top-0 z-50 border-b-2 border-black bg-white text-black p-3 text-xs shadow-md a11y-toolbar"
+	<aside
+		class="sticky top-0 z-50 border-b-2 border-black bg-white text-black p-2 sm:p-3 text-xs shadow-md a11y-toolbar select-none"
 		role="region"
 		aria-label="Панель настройки доступности по ГОСТ Р 52872-2019"
 	>
-		<div class="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-4">
+		<div class="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-2 sm:gap-4">
 			<!-- Group 1: Font Size -->
-			<div class="flex items-center gap-2">
-				<span class="font-bold">Размер шрифта:</span>
-				<div class="flex items-center gap-1 border border-black p-0.5 rounded-xs">
+			<div class="flex items-center gap-1.5 sm:gap-2">
+				<span class="font-bold text-[11px] sm:text-xs">Шрифт:</span>
+				<div class="flex items-center gap-0.5 sm:gap-1 border border-black p-0.5 rounded-xs">
 					<button
 						type="button"
 						class="px-2 py-1 font-bold transition-colors {a11y.settings.fontSize === 'normal' ? 'bg-black text-white' : 'hover:bg-gray-200'}"
@@ -44,8 +44,8 @@
 			</div>
 
 			<!-- Group 2: Color Schemes -->
-			<div class="flex items-center gap-2">
-				<span class="font-bold">Цвета:</span>
+			<div class="flex items-center gap-1.5 sm:gap-2">
+				<span class="font-bold text-[11px] sm:text-xs">Цвет:</span>
 				<div class="flex items-center gap-1">
 					<button
 						type="button"
@@ -75,12 +75,12 @@
 			</div>
 
 			<!-- Group 3: Kerning (Inter-letter spacing) -->
-			<div class="flex items-center gap-2">
-				<span class="font-bold">Кернинг:</span>
-				<div class="flex items-center gap-1 border border-black p-0.5 rounded-xs">
+			<div class="flex items-center gap-1.5 sm:gap-2">
+				<span class="font-bold text-[11px] sm:text-xs">Кернинг:</span>
+				<div class="flex items-center gap-0.5 sm:gap-1 border border-black p-0.5 rounded-xs">
 					<button
 						type="button"
-						class="px-2 py-1 font-bold {a11y.settings.kerning === 'normal' ? 'bg-black text-white' : 'hover:bg-gray-200'}"
+						class="px-1.5 sm:px-2 py-1 font-bold {a11y.settings.kerning === 'normal' ? 'bg-black text-white' : 'hover:bg-gray-200'}"
 						onclick={() => a11y.setKerning('normal')}
 						title="Стандартный интервал"
 					>
@@ -88,7 +88,7 @@
 					</button>
 					<button
 						type="button"
-						class="px-2 py-1 font-bold {a11y.settings.kerning === 'medium' ? 'bg-black text-white' : 'hover:bg-gray-200'}"
+						class="px-1.5 sm:px-2 py-1 font-bold {a11y.settings.kerning === 'medium' ? 'bg-black text-white' : 'hover:bg-gray-200'}"
 						onclick={() => a11y.setKerning('medium')}
 						title="Средний интервал"
 					>
@@ -96,7 +96,7 @@
 					</button>
 					<button
 						type="button"
-						class="px-2 py-1 font-bold {a11y.settings.kerning === 'large' ? 'bg-black text-white' : 'hover:bg-gray-200'}"
+						class="px-1.5 sm:px-2 py-1 font-bold {a11y.settings.kerning === 'large' ? 'bg-black text-white' : 'hover:bg-gray-200'}"
 						onclick={() => a11y.setKerning('large')}
 						title="Большой интервал"
 					>
@@ -106,9 +106,9 @@
 			</div>
 
 			<!-- Group 4: Line Height -->
-			<div class="flex items-center gap-2">
-				<span class="font-bold">Интервал:</span>
-				<div class="flex items-center gap-1 border border-black p-0.5 rounded-xs">
+			<div class="flex items-center gap-1.5 sm:gap-2">
+				<span class="font-bold text-[11px] sm:text-xs">Интервал:</span>
+				<div class="flex items-center gap-0.5 sm:gap-1 border border-black p-0.5 rounded-xs">
 					<button
 						type="button"
 						class="px-2 py-1 font-bold {a11y.settings.lineHeight === 'normal' ? 'bg-black text-white' : 'hover:bg-gray-200'}"
@@ -137,10 +137,10 @@
 			</div>
 
 			<!-- Group 5: Images & Speech Synthesizer -->
-			<div class="flex items-center gap-2">
+			<div class="flex items-center gap-1.5 sm:gap-2">
 				<button
 					type="button"
-					class="border border-black px-2.5 py-1 font-bold transition-colors {a11y.settings.showImages ? 'hover:bg-gray-200' : 'bg-black text-white'}"
+					class="border border-black px-2 py-1 font-bold transition-colors whitespace-nowrap {a11y.settings.showImages ? 'hover:bg-gray-200' : 'bg-black text-white'}"
 					onclick={() => a11y.toggleImages()}
 					title="Включить / отключить изображения на страницах"
 				>
@@ -148,7 +148,7 @@
 				</button>
 				<button
 					type="button"
-					class="border border-black px-2.5 py-1 font-bold transition-colors {a11y.settings.speechActive ? 'bg-red-700 text-white animate-pulse' : 'hover:bg-gray-200'}"
+					class="border border-black px-2 py-1 font-bold transition-colors whitespace-nowrap {a11y.settings.speechActive ? 'bg-red-700 text-white animate-pulse' : 'hover:bg-gray-200'}"
 					onclick={() => a11y.toggleSpeech()}
 					title="Озвучить содержимое страницы синтезатором речи"
 				>
@@ -157,10 +157,10 @@
 			</div>
 
 			<!-- Group 6: Reset & Close -->
-			<div class="flex items-center gap-2">
+			<div class="flex items-center gap-1.5 sm:gap-2">
 				<button
 					type="button"
-					class="border border-black px-2.5 py-1 font-bold hover:bg-gray-200"
+					class="border border-black px-2 py-1 font-bold hover:bg-gray-200"
 					onclick={() => a11y.resetDefaults()}
 					title="Сбросить все настройки"
 				>
@@ -168,7 +168,7 @@
 				</button>
 				<button
 					type="button"
-					class="border-2 border-black bg-black text-white px-3 py-1 font-bold hover:bg-gray-800"
+					class="border-2 border-black bg-black text-white px-2.5 sm:px-3 py-1 font-bold hover:bg-gray-800 whitespace-nowrap"
 					onclick={() => a11y.toggleEnabled()}
 					title="Вернуться к стандартной версии сайта"
 				>
@@ -176,5 +176,5 @@
 				</button>
 			</div>
 		</div>
-	</div>
+	</aside>
 {/if}

@@ -461,31 +461,41 @@ main p {
 	color: var(--color-muted);
 }
 
-/* Vantage Data Table */
+/* Vantage Data Tables & Specification Grids (Desktop & Mobile Scroll) */
+.table-vantage,
 .v-table {
 	width: 100%;
+	min-width: 580px;
 	border-collapse: collapse;
 	text-align: left;
-	font-size: var(--text-xs);
+	font-size: var(--text-sm);
 }
 
+.table-vantage th,
 .v-table th {
-	padding: var(--space-sm) var(--space-md);
-	border-bottom: var(--rule-hair) solid var(--color-rule-2);
+	padding: 0.85rem 1.25rem;
+	border-bottom: 1px solid var(--color-rule-2);
 	color: var(--color-muted);
 	font-weight: 400;
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
-}
-
-.v-table td {
-	padding: var(--space-sm) var(--space-md);
-	border-bottom: var(--rule-hair) solid var(--color-rule);
-	color: var(--color-ink);
-}
-
-.v-table tr:hover td {
+	font-size: 11px;
+	white-space: nowrap;
 	background: var(--color-paper-2);
+}
+
+.table-vantage td,
+.v-table td {
+	padding: 0.85rem 1.25rem;
+	border-bottom: 1px solid var(--color-rule);
+	color: var(--color-ink);
+	line-height: 1.5;
+	vertical-align: middle;
+}
+
+.table-vantage tr:hover td,
+.v-table tr:hover td {
+	background: color-mix(in oklab, var(--color-paper-2) 70%, transparent);
 }
 
 /* Smooth micro-interactions & entrance animations */
@@ -606,20 +616,60 @@ html.a11y-scheme-boc {
 	color: #002255 !important;
 }
 
-html.a11y-kerning-medium * {
-	letter-spacing: 0.05em !important;
+/* A11y Kerning: Target readable text elements, NOT symbols, icons or UI toolbars */
+html.a11y-kerning-medium p,
+html.a11y-kerning-medium li,
+html.a11y-kerning-medium dd,
+html.a11y-kerning-medium dt,
+html.a11y-kerning-medium td,
+html.a11y-kerning-medium th,
+html.a11y-kerning-medium .article-prose {
+	letter-spacing: 0.04em !important;
 }
 
-html.a11y-kerning-large * {
-	letter-spacing: 0.12em !important;
+html.a11y-kerning-medium h1,
+html.a11y-kerning-medium h2,
+html.a11y-kerning-medium h3,
+html.a11y-kerning-medium h4 {
+	letter-spacing: 0.02em !important;
+	word-break: normal !important;
 }
 
-html.a11y-lh-relaxed * {
+html.a11y-kerning-large p,
+html.a11y-kerning-large li,
+html.a11y-kerning-large dd,
+html.a11y-kerning-large dt,
+html.a11y-kerning-large td,
+html.a11y-kerning-large th,
+html.a11y-kerning-large .article-prose {
+	letter-spacing: 0.08em !important;
+}
+
+html.a11y-kerning-large h1,
+html.a11y-kerning-large h2,
+html.a11y-kerning-large h3,
+html.a11y-kerning-large h4 {
+	letter-spacing: 0.035em !important;
+	word-break: normal !important;
+}
+
+/* A11y Line Height: Target prose and content blocks */
+html.a11y-lh-relaxed p,
+html.a11y-lh-relaxed li,
+html.a11y-lh-relaxed dd,
+html.a11y-lh-relaxed dt,
+html.a11y-lh-relaxed td,
+html.a11y-lh-relaxed .article-prose {
 	line-height: 1.65 !important;
 }
 
-html.a11y-lh-double * {
-	line-height: 2.1 !important;
+html.a11y-lh-double p,
+html.a11y-lh-double li,
+html.a11y-lh-double dd,
+html.a11y-lh-double dt,
+html.a11y-lh-double td,
+html.a11y-lh-double .article-prose {
+	line-height: 2.0 !important;
 }
 
 html.a11y-hide-images img:not(.a11y-icon),
@@ -629,10 +679,18 @@ html.a11y-hide-images .pointcloud-twin {
 	display: none !important;
 }
 
-html.a11y-active a,
-html.a11y-active button {
+/* Underlines on content links only, preserving UI toolbar readability */
+html.a11y-active a:not(.a11y-toolbar a):not(header a),
+html.a11y-active main button:not(.a11y-toolbar button) {
 	text-decoration: underline !important;
-	font-weight: 600 !important;
+	font-weight: 500 !important;
+}
+
+/* Toolbar immunity from destructive global text cascades */
+.a11y-toolbar button {
+	text-decoration: none !important;
+	letter-spacing: normal !important;
+	line-height: 1.2 !important;
 }
 
 /* Engineering Article Prose Typography */

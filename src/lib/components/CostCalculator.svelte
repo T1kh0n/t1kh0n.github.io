@@ -23,8 +23,7 @@
 	} from '#lib/calculator/engine';
 	import { parseCadFile, type CadDimensions } from '#lib/workers/cad-parser';
 	import { trackOrderSubmission, trackCalculatorInteraction, reachMetrikaGoal } from '#lib/analytics/metrika';
-	import { buildYandexFormUrl } from '#lib/calculator/yandex-form';
-
+	
 	// Component Props
 	interface Props {
 		initialOperation?: string;
@@ -56,12 +55,8 @@
 	let urgencyId = $state('standard');
 	let engineeringHours = $state(0);
 	
-	// Modal & Yandex Form Redirect State
+	// Modal State (Production Capacity & Direct Demand Queue)
 	let isOrderModalOpen = $state(false);
-	let customerNote = $state('');
-	let isRedirecting = $state(false);
-	let redirectCountdown = $state(3);
-	let redirectTimer: ReturnType<typeof setInterval> | null = null;
 
 	// CAD / Drawing upload state
 	let isParsingCad = $state(false);
@@ -177,60 +172,6 @@
 			discountPercent: quote.batchDiscountPercent
 		});
 		isOrderModalOpen = true;
-		isRedirecting = false;
-	}
-
-	function initiateYandexFormRedirect() {
-		const formUrl = buildYandexFormUrl({
-			operation: quote.selectedOperationName,
-			material: quote.selectedMaterialName,
-			quantity: batchQuantity,
-			dimensions: `${blankLengthMm} × ${blankWidthMm} × ${blankHeightMm} мм`,
-			tolerance: quote.selectedToleranceName,
-			complexity: SETUP_COMPLEXITIES[complexityId]?.nameRu || complexityId,
-			urgency: URGENCIES[urgencyId]?.nameRu || urgencyId,
-			totalRub: quote.finalTotal,
-			unitRub: quote.finalUnitPrice,
-			attachedFileName: cadFileName || undefined,
-			customerNote: customerNote.trim() || undefined
-		});
-
-		reachMetrikaGoal('yandex_form_redirect', {
-			operation: quote.selectedOperationName,
-			material: quote.selectedMaterialName,
-			quantity: batchQuantity,
-			totalRub: quote.finalTotal
-		});
-
-		isRedirecting = true;
-		redirectCountdown = 3;
-
-		if (redirectTimer) clearInterval(redirectTimer);
-		redirectTimer = setInterval(() => {
-			redirectCountdown -= 1;
-			if (redirectCountdown <= 0) {
-				if (redirectTimer) clearInterval(redirectTimer);
-				window.open(formUrl, '_blank');
-			}
-		}, 1000);
-	}
-
-	function jumpToYandexFormNow() {
-		if (redirectTimer) clearInterval(redirectTimer);
-		const formUrl = buildYandexFormUrl({
-			operation: quote.selectedOperationName,
-			material: quote.selectedMaterialName,
-			quantity: batchQuantity,
-			dimensions: `${blankLengthMm} × ${blankWidthMm} × ${blankHeightMm} мм`,
-			tolerance: quote.selectedToleranceName,
-			complexity: SETUP_COMPLEXITIES[complexityId]?.nameRu || complexityId,
-			urgency: URGENCIES[urgencyId]?.nameRu || urgencyId,
-			totalRub: quote.finalTotal,
-			unitRub: quote.finalUnitPrice,
-			attachedFileName: cadFileName || undefined,
-			customerNote: customerNote.trim() || undefined
-		});
-		window.open(formUrl, '_blank');
 	}
 
 	function downloadQuoteEstimate() {
@@ -847,7 +788,7 @@
 						class="btn btn--wide"
 						onclick={handleOrderSubmit}
 					>
-						<span>Отправить заявку в Яндекс.Форму</span>
+						<span>Отправить спецификацию на расчет</span>
 					</button>
 					<button type="button" class="btn btn--wide btn--line" onclick={downloadQuoteEstimate}>
 						<span>Скачать смету (.TXT)</span>
@@ -872,10 +813,10 @@
 	</div>
 </div>
 
-<!-- Modal Dialog with Pre-filled Yandex Form Redirect Notification -->
+<!-- Modal Dialog with Capacity Status & Direct Metrika Tracking -->
 {#if isOrderModalOpen}
 	<div
-		class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[var(--color-paper)]/80 backdrop-blur-sm"
+		class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[var(--color-paper)]/85 backdrop-blur-sm"
 		role="dialog"
 		aria-modal="true"
 		aria-labelledby="modal-title"
@@ -886,148 +827,90 @@
 			<div class="flex items-start justify-between border-b border-[var(--color-rule)] pb-4">
 				<div>
 					<div class="font-mono text-[10px] tracking-wider uppercase text-[var(--color-accent)]">
-						Официальная форма заказа цеха
+						Очередь производства · Калининград
 					</div>
 					<h3 id="modal-title" class="mt-1 text-lg font-normal text-[var(--color-ink)]">
-						Отправка спецификации в Яндекс.Форму
+						Спецификация партии зафиксирована
 					</h3>
 				</div>
 				<button
 					type="button"
 					class="text-xs text-[var(--color-muted)] hover:text-[var(--color-ink)] p-1"
-					onclick={() => {
-						isOrderModalOpen = false;
-						isRedirecting = false;
-						if (redirectTimer) clearInterval(redirectTimer);
-					}}
+					onclick={() => (isOrderModalOpen = false)}
 					aria-label="Закрыть модальное окно"
 				>
 					✕
 				</button>
 			</div>
 
-			{#if isRedirecting}
-				<div class="mt-6 space-y-4 text-center py-4">
-					<div class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-accent)]/15 text-[var(--color-accent)]">
-						<svg class="h-6 w-6 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-							<circle cx="12" cy="12" r="10" stroke-width="2" stroke-dasharray="32" stroke-linecap="round"></circle>
-						</svg>
+			<div class="mt-5 space-y-4 text-xs leading-relaxed text-[var(--color-muted)]">
+				<div class="rounded-[var(--radius-card)] border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/10 p-3.5 text-xs text-[var(--color-ink)]">
+					<div class="flex items-center gap-2 font-normal text-[var(--color-accent)]">
+						<span class="live-dot" aria-hidden="true"></span>
+						<span>Мощности станочного парка законтрактованы (100% загрузка)</span>
 					</div>
-					<div>
-						<h4 class="text-base font-normal text-[var(--color-ink)]">
-							Перенаправляем в Яндекс.Форму...
-						</h4>
-						<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)] max-w-md mx-auto">
-							Все параметры спецификации (деталь, металл, тираж {batchQuantity} шт., габариты, расчетная сумма {quote.finalTotal.toLocaleString('ru-RU')} ₽) уже заполнены за вас. Вам останется только нажать кнопку «Отправить».
-						</p>
-					</div>
-
-					<div class="rounded-[var(--radius-card)] border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/10 p-3 text-xs text-[var(--color-ink)] font-mono">
-						Переход в форму через <span class="text-[var(--color-accent)] font-bold text-sm">{redirectCountdown}</span> сек...
-					</div>
-
-					<div class="pt-2 flex flex-col sm:flex-row justify-center gap-3">
-						<button
-							type="button"
-							class="btn btn--sm"
-							onclick={jumpToYandexFormNow}
-						>
-							<span>Перейти прямо сейчас</span>
-						</button>
-						<button
-							type="button"
-							class="btn btn--sm btn--line"
-							onclick={() => {
-								isRedirecting = false;
-								if (redirectTimer) clearInterval(redirectTimer);
-							}}
-						>
-							<span>Отмена</span>
-						</button>
-					</div>
-				</div>
-			{:else}
-				<div class="mt-5 space-y-4 text-xs leading-relaxed text-[var(--color-muted)]">
-					<p class="text-xs text-[var(--color-ink-2)]">
-						Спецификация сформирована. Нажмите кнопку ниже, чтобы перейти в Яндекс.Форму с предзаполненными данными вашего расчета:
+					<p class="mt-2 text-[12px] leading-relaxed text-[var(--color-ink-2)]">
+						Параметры вашей детали ({quote.selectedOperationName}, материал: {quote.selectedMaterialName}, тираж: {batchQuantity} шт., расчетная сумма: {quote.finalTotal.toLocaleString('ru-RU')} ₽ с НДС 22%) успешно зафиксированы в аналитике производственного спроса цеха.
 					</p>
+				<p class="mt-2 text-[11px] text-[var(--color-muted)]">
+						В настоящий момент оба обрабатывающих центра с ЧПУ работают с максимальной загрузкой по долгосрочным контрактам. Новые коммерческие заявки регистрируются в резервный лист ожидания.
+					</p>
+				</div>
 
-					<div class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper)] p-3 space-y-1.5 font-mono text-[11px]">
-						<div class="flex justify-between">
-							<span class="text-[var(--color-muted)]">Операция:</span>
-							<span class="text-[var(--color-ink)]">{quote.selectedOperationName}</span>
-						</div>
-						<div class="flex justify-between">
-							<span class="text-[var(--color-muted)]">Материал:</span>
-							<span class="text-[var(--color-ink)]">{quote.selectedMaterialName}</span>
-						</div>
-						<div class="flex justify-between">
-							<span class="text-[var(--color-muted)]">Объем партии:</span>
-							<span class="text-[var(--color-ink)] num">{batchQuantity} шт.</span>
-						</div>
-						<div class="flex justify-between">
-							<span class="text-[var(--color-muted)]">Габариты:</span>
-							<span class="text-[var(--color-ink)] num">{blankLengthMm} × {blankWidthMm} × {blankHeightMm} мм</span>
-						</div>
-						<div class="flex justify-between">
-							<span class="text-[var(--color-muted)]">Точность:</span>
-							<span class="text-[var(--color-ink)]">{quote.selectedToleranceName}</span>
-						</div>
-						{#if cadFileName}
-							<div class="flex justify-between border-t border-[var(--color-rule)] pt-1 text-[var(--color-accent)]">
-								<span>Прикрепленный файл:</span>
-								<span class="truncate max-w-[200px]">{cadFileName}</span>
-							</div>
-						{/if}
-						<div class="flex justify-between border-t border-[var(--color-rule)] pt-1 text-[var(--color-ink)] font-bold">
-							<span>Оценочная стоимость:</span>
-							<span class="num text-[var(--color-accent)]">{quote.finalTotal.toLocaleString('ru-RU')} ₽ (НДС 22%)</span>
-						</div>
+				<div class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper)] p-3 space-y-1.5 font-mono text-[11px]">
+					<div class="flex justify-between">
+						<span class="text-[var(--color-muted)]">Операция:</span>
+						<span class="text-[var(--color-ink)]">{quote.selectedOperationName}</span>
 					</div>
-
-					<div>
-						<label for="order-customer-note" class="block text-[11px] text-[var(--color-muted)] mb-1">
-							Дополнительные требования или комментарий к заказу (необязательно):
-						</label>
-						<textarea
-							id="order-customer-note"
-							bind:value={customerNote}
-							rows="2"
-							placeholder="Например: требуется маркировка торца, фаски 1х45°, особые требования к упаковке..."
-							class="w-full rounded-[var(--radius-card)] border border-[var(--color-rule-2)] bg-[var(--color-paper)] p-2 text-xs text-[var(--color-ink)] focus:border-[var(--color-accent)] focus:outline-none"
-						></textarea>
+					<div class="flex justify-between">
+						<span class="text-[var(--color-muted)]">Материал:</span>
+						<span class="text-[var(--color-ink)]">{quote.selectedMaterialName}</span>
 					</div>
-
-					<div class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-2.5 text-[11px] text-[var(--color-muted)]">
-						<span class="font-normal text-[var(--color-ink)]">Как это работает:</span>
-						при переходе все параметры будут автоматически перенесены в поля официальной Яндекс.Формы цеха, вам не придется заполнять их вручную.
+					<div class="flex justify-between">
+						<span class="text-[var(--color-muted)]">Объем партии:</span>
+						<span class="text-[var(--color-ink)] num">{batchQuantity} шт.</span>
+					</div>
+					<div class="flex justify-between">
+						<span class="text-[var(--color-muted)]">Габариты:</span>
+						<span class="text-[var(--color-ink)] num">{blankLengthMm} × {blankWidthMm} × {blankHeightMm} мм</span>
+					</div>
+					<div class="flex justify-between">
+						<span class="text-[var(--color-muted)]">Точность:</span>
+						<span class="text-[var(--color-accent)]">{quote.selectedToleranceName} (0% наценка)</span>
+					</div>
+					{#if cadFileName}
+						<div class="flex justify-between border-t border-[var(--color-rule)] pt-1 text-[var(--color-accent)]">
+							<span>Чертеж / модель:</span>
+							<span class="truncate max-w-[200px]">{cadFileName}</span>
+						</div>
+					{/if}
+					<div class="flex justify-between border-t border-[var(--color-rule)] pt-1 text-[var(--color-ink)] font-bold">
+						<span>Расчетная сумма партии:</span>
+						<span class="num text-[var(--color-accent)]">{quote.finalTotal.toLocaleString('ru-RU')} ₽ (вкл. НДС 22%)</span>
 					</div>
 				</div>
 
-				<div class="mt-6 flex flex-col-reverse sm:flex-row sm:justify-end gap-3 border-t border-[var(--color-rule)] pt-4">
-					<button
-						type="button"
-						class="btn btn--sm btn--line"
-						onclick={() => (isOrderModalOpen = false)}
-					>
-						<span>Закрыть</span>
-					</button>
-					<button
-						type="button"
-						class="btn btn--sm btn--line"
-						onclick={downloadQuoteEstimate}
-					>
-						<span>Скачать (.TXT)</span>
-					</button>
-					<button
-						type="button"
-						class="btn btn--sm"
-						onclick={initiateYandexFormRedirect}
-					>
-						<span>Перейти в Яндекс.Форму →</span>
-					</button>
-				</div>
-			{/if}
+				<p class="text-[11px] text-[var(--color-muted)]">
+					Вы можете скачать официальную инженерную смету в текстовом формате (.TXT) с детальной раскладкой норма-часов, затрат на металл и серийных скидок для согласования с вашим отделом снабжения.
+				</p>
+			</div>
+
+			<div class="mt-6 flex flex-col-reverse sm:flex-row sm:justify-end gap-3 border-t border-[var(--color-rule)] pt-4">
+				<button
+					type="button"
+					class="btn btn--sm btn--line"
+					onclick={() => (isOrderModalOpen = false)}
+				>
+					<span>Закрыть</span>
+				</button>
+				<button
+					type="button"
+					class="btn btn--sm"
+					onclick={downloadQuoteEstimate}
+				>
+					<span>Скачать смету (.TXT)</span>
+				</button>
+			</div>
 		</div>
 	</div>
 {/if}

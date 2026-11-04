@@ -426,10 +426,13 @@
 			const cosRot = Math.cos(rotAxial);
 			const sinRot = Math.sin(rotAxial);
 
-			// Viewport projection scaling
-			const zoom = Math.min(width / 340, height / 250) * 1.05;
+			// Responsive Viewport Projection Scaling
+			const isMobile = width < 640;
+			const zoom = isMobile
+				? Math.min(width / 420, height / 300) * 0.82
+				: Math.min(width / 340, height / 250) * 1.05;
 			const centerX = width * 0.5;
-			const centerY = height * 0.52;
+			const centerY = isMobile ? height * 0.48 : height * 0.52;
 
 			// Sweep plane along workpiece X axis (-130 to 130 mm every 5 seconds)
 			const sweepCycle = (sweepTime % 5000) / 5000;
@@ -569,78 +572,11 @@
 
 		animId = requestAnimationFrame(render);
 
-		function onGlobalPointerMove(e: PointerEvent) {
-			if (!isDragging) return;
-			const dx = e.clientX - lastPointerX;
-			const dy = e.clientY - lastPointerY;
-			lastPointerX = e.clientX;
-			lastPointerY = e.clientY;
-
-			targetYaw += dx * 0.007;
-			targetPitch = Math.max(-0.85, Math.min(0.85, targetPitch - dy * 0.007));
-		}
-
-		function onGlobalPointerUp(e: PointerEvent) {
-			if (isDragging) {
-				isDragging = false;
-				try {
-					canvasEl?.releasePointerCapture(e.pointerId);
-				} catch {
-					// Ignore
-				}
-			}
-		}
-
-		window.addEventListener('pointermove', onGlobalPointerMove, { passive: true });
-		window.addEventListener('pointerup', onGlobalPointerUp, { passive: true });
-		window.addEventListener('pointercancel', onGlobalPointerUp, { passive: true });
-
-		// Touch gestures explicit handling with non-passive touchmove for mobile devices
-		function onTouchStart(e: TouchEvent) {
-			if (e.touches.length === 1) {
-				isDragging = true;
-				lastPointerX = e.touches[0].clientX;
-				lastPointerY = e.touches[0].clientY;
-			}
-		}
-
-		function onTouchMove(e: TouchEvent) {
-			if (!isDragging || e.touches.length !== 1) return;
-			if (e.cancelable) {
-				e.preventDefault(); // Stop mobile browsers from hijacking into page scroll
-			}
-			const touch = e.touches[0];
-			const dx = touch.clientX - lastPointerX;
-			const dy = touch.clientY - lastPointerY;
-			lastPointerX = touch.clientX;
-			lastPointerY = touch.clientY;
-
-			targetYaw += dx * 0.007;
-			targetPitch = Math.max(-0.85, Math.min(0.85, targetPitch - dy * 0.007));
-		}
-
-		function onTouchEnd() {
-			isDragging = false;
-		}
-
-		const targetNode = containerEl;
-		targetNode.addEventListener('touchstart', onTouchStart, { passive: true });
-		targetNode.addEventListener('touchmove', onTouchMove, { passive: false });
-		targetNode.addEventListener('touchend', onTouchEnd, { passive: true });
-		targetNode.addEventListener('touchcancel', onTouchEnd, { passive: true });
-
 		return () => {
 			cancelAnimationFrame(animId);
 			resizeObserver.disconnect();
 			observer.disconnect();
 			mediaQuery.removeEventListener?.('change', onMqChange);
-			window.removeEventListener('pointermove', onGlobalPointerMove);
-			window.removeEventListener('pointerup', onGlobalPointerUp);
-			window.removeEventListener('pointercancel', onGlobalPointerUp);
-			targetNode.removeEventListener('touchstart', onTouchStart);
-			targetNode.removeEventListener('touchmove', onTouchMove);
-			targetNode.removeEventListener('touchend', onTouchEnd);
-			targetNode.removeEventListener('touchcancel', onTouchEnd);
 		};
 	});
 
@@ -798,7 +734,7 @@
 						<canvas
 							bind:this={canvasEl}
 							class="block h-full w-full cursor-grab active:cursor-grabbing touch-none select-none"
-							style="touch-action: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; -webkit-mask-image: radial-gradient(ellipse 65% 62% at 50% 50%, var(--color-ink) 65%, transparent); mask-image: radial-gradient(ellipse 65% 62% at 50% 50%, var(--color-ink) 65%, transparent);"
+							style="touch-action: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; -webkit-mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, var(--color-ink) 85%, transparent); mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, var(--color-ink) 85%, transparent);"
 						></canvas>
 
 						<!-- Measurement Callout A: Bearing Seat IT7 (Extends UP into upper clearance zone) -->
@@ -1018,7 +954,8 @@
 		display: grid;
 		gap: 2px;
 		padding: 6px 10px;
-		white-space: nowrap;
+		max-width: min(260px, calc(100vw - 40px));
+		white-space: normal;
 		font-size: var(--text-xs);
 		color: var(--color-ink-2);
 		background: color-mix(in oklab, var(--color-paper) 88%, transparent);
@@ -1053,7 +990,8 @@
 		display: grid;
 		gap: 2px;
 		padding: 6px 10px;
-		white-space: nowrap;
+		max-width: min(260px, calc(100vw - 40px));
+		white-space: normal;
 		font-size: var(--text-xs);
 		color: var(--color-ink-2);
 		background: color-mix(in oklab, var(--color-paper) 88%, transparent);
