@@ -262,7 +262,7 @@
 	</section>
 
 	<!-- Online Engineering Calculator Section -->
-	<section id="calculator-section" class="scroll-mt-8">
+	<section id="calculator-section" class="scroll-mt-8 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<CostCalculator />
 	</section>
 

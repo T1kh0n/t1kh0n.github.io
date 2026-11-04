@@ -160,4 +160,28 @@ test.describe('CNC Cost Calculator Interactive Component', () => {
 		await expect(errorAlert).toBeVisible();
 		await expect(errorAlert).toContainText('Ошибка CAD');
 	});
+
+	test("opens modal and displays production capacity notice on mobile viewport", async ({ page }) => {
+		await page.setViewportSize({ width: 375, height: 667 });
+		await page.goto(`${BASE}/`);
+
+		const submitBtn = page.locator("button:has-text(\"Отправить спецификацию на расчет\")");
+		await submitBtn.scrollIntoViewIfNeeded();
+		await submitBtn.click();
+
+		const modal = page.locator("[role=\"dialog\"]");
+		await expect(modal).toBeVisible();
+
+		const modalBox = await modal.boundingBox();
+		expect(modalBox).not.toBeNull();
+		expect(modalBox!.width).toBeGreaterThanOrEqual(300);
+
+		const modalCard = modal.locator("h3:has-text(\"Спецификация партии зафиксирована\")");
+		await expect(modalCard).toBeVisible();
+
+		const closeBtn = modal.locator("button[aria-label=\"Закрыть модальное окно\"]");
+		await closeBtn.click();
+		await expect(modal).not.toBeVisible();
+	});
+
 });

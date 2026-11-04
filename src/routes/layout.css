@@ -510,11 +510,10 @@ main p {
 	}
 }
 
-main > section,
+main > section:not(#calculator-section),
 main > div,
 .well,
-.passport,
-.calculator-root {
+.passport {
 	animation: fadeInSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 

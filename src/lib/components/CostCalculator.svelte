@@ -833,13 +833,13 @@
 <!-- Modal Dialog with Capacity Status & Direct Metrika Tracking -->
 {#if isOrderModalOpen}
 	<div
-		class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[var(--color-paper)]/85 backdrop-blur-sm"
+		class="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto p-4 sm:p-6 bg-[var(--color-paper)]/85 backdrop-blur-sm"
 		role="dialog"
 		aria-modal="true"
 		aria-labelledby="modal-title"
 	>
 		<div
-			class="relative w-full max-w-lg rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-6 shadow-2xl ticks"
+			class="relative my-auto w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-4 sm:p-6 shadow-2xl ticks"
 		>
 			<div class="flex items-start justify-between border-b border-[var(--color-rule)] pb-4">
 				<div>
