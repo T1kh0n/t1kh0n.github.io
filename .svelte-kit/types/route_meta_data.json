@@ -1,0 +1,48 @@
+{
+	"/": [
+		"src/routes/+layout.ts",
+		"src/routes/+layout.ts"
+	],
+	"/frezernye-raboty-chpu": [
+		"src/routes/+layout.ts"
+	],
+	"/kalkulyator-stoimosti-chpu": [
+		"src/routes/+layout.ts"
+	],
+	"/kontakty": [
+		"src/routes/+layout.ts"
+	],
+	"/kontrol-kachestva-i-oborudovanie": [
+		"src/routes/+layout.ts"
+	],
+	"/politika-konfidentsialnosti": [
+		"src/routes/+layout.ts"
+	],
+	"/portfolio": [
+		"src/routes/+layout.ts"
+	],
+	"/sitemap.xml": [
+		"src/routes/sitemap.xml/+server.ts"
+	],
+	"/sitemap": [
+		"src/routes/+layout.ts"
+	],
+	"/stati": [
+		"src/routes/+layout.ts"
+	],
+	"/stati/kvalitety-tochnosti-i-sherohovatost-gost": [
+		"src/routes/+layout.ts"
+	],
+	"/stati/optimizaciya-stoimosti-detaley-chpu": [
+		"src/routes/+layout.ts"
+	],
+	"/stati/vybor-stali-dlya-chpu-obrabotki": [
+		"src/routes/+layout.ts"
+	],
+	"/tokarnye-raboty-chpu": [
+		"src/routes/+layout.ts"
+	],
+	"/zuboreznye-i-shlifovalnye-raboty": [
+		"src/routes/+layout.ts"
+	]
+}

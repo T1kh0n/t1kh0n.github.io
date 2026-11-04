@@ -1,0 +1,1 @@
+export { default as component } from "../../../../../src/routes/frezernye-raboty-chpu/+page.svelte";
