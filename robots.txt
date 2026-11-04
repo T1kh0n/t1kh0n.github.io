@@ -1,3 +1,44 @@
-# allow crawling everything by default
+# robots.txt for MetalProm39 CNC Machining Workshop
+# Optimized for Yandex, Google, and AI Search Crawlers (AEO)
+
 User-agent: *
-Disallow:
+Allow: /
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /cdn-cgi/
+
+User-agent: Yandex
+Allow: /
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /cdn-cgi/
+Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term /
+Clean-param: yclid&gclid&_openstat /
+
+User-agent: Googlebot
+Allow: /
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /cdn-cgi/
+
+# XML Sitemap
+Sitemap: https://metalprom39.com/sitemap.xml
+Sitemap: https://t1kh0n.github.io/metal-prom-web/sitemap.xml
