@@ -1,7 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import { WORKSHOP_SPECS } from './workshop-specs';
 import { parseMarkdown, injectWorkshopVariables } from './markdown-parser';
-import { getAllArticles, getArticleBySlug } from './articles-loader';
+import {
+	getAllArticles,
+	getArticleBySlug,
+	getAllTags,
+	getArticlesByTag,
+	getRelatedArticles
+} from './articles-loader';
 import { getAllPages, getPageBySlug } from './pages-loader';
 import { SITEMAP_REGISTRY, getGroupedSitemap } from './sitemap-registry';
 import { buildYandexFormUrl } from '#lib/calculator/yandex-form';
@@ -77,7 +83,7 @@ describe('Articles Loader', () => {
 			expect(art.excerpt).toBeTruthy();
 			expect(art.html).toBeTruthy();
 			// Ensure readTime is not part of the model
-			expect((art as Record<string, unknown>).readTime).toBeUndefined();
+			expect((art as unknown as Record<string, unknown>).readTime).toBeUndefined();
 		}
 	});
 
@@ -86,6 +92,24 @@ describe('Articles Loader', () => {
 		expect(art).toBeDefined();
 		expect(art?.title).toContain('IT7–IT12');
 		expect(art?.html).toContain('ГОСТ 25346');
+	});
+
+	it('extracts all unique tags with count', () => {
+		const tags = getAllTags();
+		expect(tags.length).toBeGreaterThan(0);
+		expect(tags.some((t) => t.tag === 'Материаловедение' || t.tag === 'ГОСТ 25346' || t.tag === 'DFM')).toBe(true);
+	});
+
+	it('filters articles by tag', () => {
+		const articles = getArticlesByTag('Материаловедение');
+		expect(articles.length).toBeGreaterThan(0);
+		expect(articles[0].tags).toContain('Материаловедение');
+	});
+
+	it('retrieves related articles with cross-linking', () => {
+		const related = getRelatedArticles('vybor-stali-dlya-chpu-obrabotki', 2);
+		expect(related.length).toBeGreaterThan(0);
+		expect(related.some((a) => a.slug === 'vybor-stali-dlya-chpu-obrabotki')).toBe(false);
 	});
 });
 

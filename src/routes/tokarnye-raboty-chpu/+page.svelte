@@ -41,6 +41,17 @@
 		name="description"
 		content="Токарная обработка на станках с ЧПУ в Калининграде. Диаметр до 200 мм, длина до 750 мм. Допуски до IT7, партии от 1 шт., срок до 2 недель. Безналичный расчет с НДС 22%."
 	/>
+	<link rel="canonical" href="{siteConfig.siteDomain}/tokarnye-raboty-chpu/" />
+
+	<!-- OpenGraph & Social Cards -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Токарные работы с ЧПУ в Калининграде | {siteConfig.brandName}" />
+	<meta
+		property="og:description"
+		content="Токарная обработка на станках с ЧПУ в Калининграде. Диаметр до 200 мм, длина до 750 мм. Допуски до IT7, партии от 1 шт., срок до 2 недель."
+	/>
+	<meta property="og:url" content="{siteConfig.siteDomain}/tokarnye-raboty-chpu/" />
+
 	{@html serializeSchema(serviceSchema)}
 	{@html serializeSchema(breadcrumbSchema)}
 </svelte:head>

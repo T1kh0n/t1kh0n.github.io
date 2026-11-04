@@ -3,8 +3,10 @@
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import CostCalculator from '#lib/components/CostCalculator.svelte';
 	import { siteConfig } from '#lib/config/site';
+	import { createBreadcrumbSchema, serializeSchema } from '#lib/seo/schema';
 
-	const breadcrumbs = [{ name: 'Калькулятор стоимости ЧПУ', path: '/kalkulyator-stoimosti-chpu/' }];
+	const breadcrumbs = [{ name: 'Главная', path: '/' }, { name: 'Калькулятор стоимости ЧПУ', path: '/kalkulyator-stoimosti-chpu/' }];
+	const breadcrumbSchema = createBreadcrumbSchema(breadcrumbs);
 </script>
 
 <svelte:head>
@@ -13,6 +15,18 @@
 		name="description"
 		content="Мгновенный расчет себестоимости токарной и фрезерной ЧПУ обработки в Калининграде. Загрузка 3D-моделей STEP/CAD, выбор сталей и цветмета, расчет партий от 1 шт. НДС 22%."
 	/>
+	<link rel="canonical" href="{siteConfig.siteDomain}/kalkulyator-stoimosti-chpu/" />
+
+	<!-- OpenGraph & Social Cards -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Инженерный калькулятор стоимости ЧПУ | {siteConfig.brandName}" />
+	<meta
+		property="og:description"
+		content="Онлайн-расчет себестоимости токарной и фрезерной ЧПУ обработки в Калининграде. Загрузка 3D-моделей STEP, расчет нормо-часов и серийных скидок."
+	/>
+	<meta property="og:url" content="{siteConfig.siteDomain}/kalkulyator-stoimosti-chpu/" />
+
+	{@html serializeSchema(breadcrumbSchema)}
 </svelte:head>
 
 <main class="py-10">

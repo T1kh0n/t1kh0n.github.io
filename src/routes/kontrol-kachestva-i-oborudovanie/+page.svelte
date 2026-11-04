@@ -2,10 +2,14 @@
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
 	import { WORKSHOP_SPECS } from '#lib/content/workshop-specs';
+	import { createBreadcrumbSchema, serializeSchema } from '#lib/seo/schema';
 
 	const breadcrumbs = [
+		{ name: 'Главная', path: '/' },
 		{ name: 'Контроль качества и оборудование', path: '/kontrol-kachestva-i-oborudovanie/' }
 	];
+
+	const breadcrumbSchema = createBreadcrumbSchema(breadcrumbs);
 
 	const metrology = [
 		{
@@ -49,6 +53,18 @@
 		name="description"
 		content="Лаборатория ОТК, поверенные средства измерений, протокол контроля. Станочный парк MetalProm39 в Калининграде: 2 обрабатывающих центра с ЧПУ (токарный и 3-осевой фрезерный)."
 	/>
+	<link rel="canonical" href="{siteConfig.siteDomain}/kontrol-kachestva-i-oborudovanie/" />
+
+	<!-- OpenGraph & Social Cards -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Контроль качества (ОТК) и станочный парк ЧПУ | {siteConfig.brandName}" />
+	<meta
+		property="og:description"
+		content="Лаборатория ОТК и станочный парк MetalProm39 в Калининграде: 2 обрабатывающих центра ЧПУ, допуск IT7, протокол FAI."
+	/>
+	<meta property="og:url" content="{siteConfig.siteDomain}/kontrol-kachestva-i-oborudovanie/" />
+
+	{@html serializeSchema(breadcrumbSchema)}
 </svelte:head>
 
 <main class="py-10">

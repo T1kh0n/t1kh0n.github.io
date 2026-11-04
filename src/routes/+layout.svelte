@@ -20,6 +20,20 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	
+	<!-- GEO Targeting: Kaliningrad, Russia -->
+	<meta name="geo.region" content="RU-KGD" />
+	<meta name="geo.placename" content="Калининград" />
+	<meta name="geo.position" content="54.710426;20.452214" />
+	<meta name="ICBM" content="54.710426, 20.452214" />
+
+	<!-- Technical SEO & Crawling Directives -->
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+	<meta name="author" content="Цех контрактной металлообработки ЧПУ MetalProm39" />
+	<meta property="og:locale" content="ru_RU" />
+	<meta property="og:site_name" content="МеталлПром39" />
+
+	<!-- Schema.org JSON-LD Structured Data -->
 	{@html serializeSchema(orgSchema)}
 	{@html serializeSchema(localBusinessSchema)}
 </svelte:head>

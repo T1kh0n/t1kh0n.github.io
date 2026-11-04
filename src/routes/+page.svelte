@@ -42,6 +42,21 @@
 		name="description"
 		content="Металлообработка деталей на токарных и фрезерных станках с ЧПУ в Калининграде. Точность IT7, шероховатость до Ra 1.25. Доставка по всей Калининградской области. Безналичный расчет с НДС 22%."
 	/>
+	<link rel="canonical" href="{siteConfig.siteDomain}/" />
+
+	<!-- OpenGraph & Social Cards -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Металлообработка с ЧПУ в Калининграде: токарные и фрезерные работы | {siteConfig.brandName}" />
+	<meta
+		property="og:description"
+		content="Металлообработка деталей на токарных и фрезерных станках с ЧПУ в Калининграде. Точность IT7, шероховатость до Ra 1.25. Доставка по всей Калининградской области. Безналичный расчет с НДС 22%."
+	/>
+	<meta property="og:url" content="{siteConfig.siteDomain}/" />
+	<meta property="og:site_name" content="МеталлПром39" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Металлообработка с ЧПУ в Калининграде | {siteConfig.brandName}" />
+	<meta name="twitter:description" content="Контрактная токарная и фрезерная обработка ЧПУ с точностью IT7 и НДС 22%." />
+
 	{@html serializeSchema(faqSchema)}
 </svelte:head>
 

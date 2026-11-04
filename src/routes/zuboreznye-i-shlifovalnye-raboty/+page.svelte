@@ -2,10 +2,11 @@
 	import { base } from '$lib/paths';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
-	import { createServiceSchema, serializeSchema } from '#lib/seo/schema';
+	import { createServiceSchema, createBreadcrumbSchema, serializeSchema } from '#lib/seo/schema';
 	import { WORKSHOP_SPECS } from '#lib/content/workshop-specs';
 
 	const breadcrumbs = [
+		{ name: 'Главная', path: '/' },
 		{ name: 'Зуборезные работы', path: '/zuboreznye-i-shlifovalnye-raboty/' }
 	];
 
@@ -21,6 +22,8 @@
 			unitText: 'нормо-час'
 		}
 	});
+
+	const breadcrumbSchema = createBreadcrumbSchema(breadcrumbs);
 </script>
 
 <svelte:head>
@@ -31,7 +34,19 @@
 		name="description"
 		content="Нарезка круглых шестерен m1–m8, шлицевых соединений, нарезка шлицевых валов в Калининграде. Доставка по всей области. Точность ГОСТ 1643-81, НДС 22%."
 	/>
+	<link rel="canonical" href="{siteConfig.siteDomain}/zuboreznye-i-shlifovalnye-raboty/" />
+
+	<!-- OpenGraph & Social Cards -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Зуборезные работы ЧПУ в Калининграде | {siteConfig.brandName}" />
+	<meta
+		property="og:description"
+		content="Нарезка круглых шестерен m1–m8, шлицевых соединений и зубчатых венцов в Калининграде. Точность ГОСТ 1643-81, НДС 22%."
+	/>
+	<meta property="og:url" content="{siteConfig.siteDomain}/zuboreznye-i-shlifovalnye-raboty/" />
+
 	{@html serializeSchema(serviceSchema)}
+	{@html serializeSchema(breadcrumbSchema)}
 </svelte:head>
 
 <main class="py-10">

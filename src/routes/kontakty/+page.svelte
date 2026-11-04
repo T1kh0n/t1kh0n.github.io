@@ -2,8 +2,10 @@
 	import { base } from '$lib/paths';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
+	import { createBreadcrumbSchema, serializeSchema } from '#lib/seo/schema';
 
-	const breadcrumbs = [{ name: 'Статус производства', path: '/kontakty/' }];
+	const breadcrumbs = [{ name: 'Главная', path: '/' }, { name: 'Статус производства', path: '/kontakty/' }];
+	const breadcrumbSchema = createBreadcrumbSchema(breadcrumbs);
 </script>
 
 <svelte:head>
@@ -12,6 +14,18 @@
 		name="description"
 		content="Информация о загрузке станочного парка ЧПУ, технологических лимитах обработки и условиях логистики по Калининградской области. Допуски до IT7, безналичный расчет с НДС 22%."
 	/>
+	<link rel="canonical" href="{siteConfig.siteDomain}/kontakty/" />
+
+	<!-- OpenGraph & Social Cards -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Статус производства и график мощностей | {siteConfig.brandName}" />
+	<meta
+		property="og:description"
+		content="График работы цеха, текущая загрузка станочного парка ЧПУ и регламент логистики по Калининградской области."
+	/>
+	<meta property="og:url" content="{siteConfig.siteDomain}/kontakty/" />
+
+	{@html serializeSchema(breadcrumbSchema)}
 </svelte:head>
 
 <main class="py-10">

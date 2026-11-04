@@ -2,8 +2,10 @@
 	import { base } from '$lib/paths';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
+	import { createBreadcrumbSchema, serializeSchema } from '#lib/seo/schema';
 
-	const breadcrumbs = [{ name: 'Портфолио деталей', path: '/portfolio/' }];
+	const breadcrumbs = [{ name: 'Главная', path: '/' }, { name: 'Портфолио деталей', path: '/portfolio/' }];
+	const breadcrumbSchema = createBreadcrumbSchema(breadcrumbs);
 
 	const cases = [
 		{
@@ -55,7 +57,7 @@
 				'Калибровка крепежных резьб и снятие микрозаусенцев'
 			],
 			description:
-				'Легкосплавный корпус прибора с ребрами охлаждения. Обработка выполнена на 3-осевом вертикально-фрезерном центре монолитными фрезами для исключения коробления тонких стенок.'
+				'Герметичный фрезерованный корпус для морской и климатической электроники. Минимальная масса при максимальной жесткости конструкции.'
 		},
 		{
 			title: 'Шестерня привода зерноуборочного комбайна',
@@ -83,6 +85,18 @@
 		name="description"
 		content="Примеры изготовленных деталей с ЧПУ в Калининграде: приводные валы, гидравлические фланцы, алюминиевые корпуса, шестерни. Допуски до IT7, сроки, контроль ОТК."
 	/>
+	<link rel="canonical" href="{siteConfig.siteDomain}/portfolio/" />
+
+	<!-- OpenGraph & Social Cards -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Портфолио деталей с ЧПУ в Калининграде | {siteConfig.brandName}" />
+	<meta
+		property="og:description"
+		content="Примеры изготовленных деталей на 2 обрабатывающих центрах ЧПУ в Калининграде: приводные валы, фланцы, корпуса, шестерни."
+	/>
+	<meta property="og:url" content="{siteConfig.siteDomain}/portfolio/" />
+
+	{@html serializeSchema(breadcrumbSchema)}
 </svelte:head>
 
 <main class="py-10">

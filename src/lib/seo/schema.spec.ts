@@ -5,6 +5,7 @@ import {
 	createServiceSchema,
 	createBreadcrumbSchema,
 	createFaqSchema,
+	createTechArticleSchema,
 	createVideoSchema,
 	serializeJsonLd
 } from './schema';
@@ -29,6 +30,8 @@ describe('Schema.org JSON-LD Generators', () => {
 		expect(biz.geo.longitude).toBe(20.4522);
 		expect(biz.address.addressLocality).toBe('Калининград');
 		expect(biz.priceRange).toBe('₽₽');
+		expect(biz.currenciesAccepted).toBe('RUB');
+		expect(Array.isArray(biz.areaServed)).toBe(true);
 		expect(biz.aggregateRating.ratingValue).toBe('4.9');
 	});
 
@@ -85,6 +88,26 @@ describe('Schema.org JSON-LD Generators', () => {
 		expect(faq['@type']).toBe('FAQPage');
 		expect(faq.mainEntity[0].name).toBe('Какая минимальная сумма заказа?');
 		expect(faq.mainEntity[0].acceptedAnswer.text).toContain('5 000 ₽');
+	});
+
+	it('generates valid TechArticle schema', () => {
+		const article = createTechArticleSchema(
+			{
+				title: 'Выбор конструкционных сталей для ЧПУ',
+				description: 'Технологический обзор обрабатываемости сталей Ст45 и 40Х',
+				url: '/stati/vybor-stali-dlya-chpu-obrabotki',
+				datePublished: '2026-10-25',
+				tags: ['Материаловедение', 'ЧПУ точение']
+			},
+			DEFAULT_SITE_CONFIG
+		);
+
+		expect(article['@context']).toBe('https://schema.org');
+		expect(article['@type']).toBe('TechArticle');
+		expect(article.headline).toBe('Выбор конструкционных сталей для ЧПУ');
+		expect(article.inLanguage).toBe('ru-RU');
+		expect(article.keywords).toBe('Материаловедение, ЧПУ точение');
+		expect(article.proficiencyLevel).toBe('Expert');
 	});
 
 	it('generates valid VideoObject schema', () => {

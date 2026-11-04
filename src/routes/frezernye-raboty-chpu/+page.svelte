@@ -41,6 +41,17 @@
 		name="description"
 		content="Фрезерные работы на 3-осевых станках с ЧПУ в Калининграде. Рабочая зона 800×500×500 мм. Допуски до IT7, партии от 1 шт., срок до 2 недель. Безналичный расчет с НДС 22%."
 	/>
+	<link rel="canonical" href="{siteConfig.siteDomain}/frezernye-raboty-chpu/" />
+
+	<!-- OpenGraph & Social Cards -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Фрезерные работы с ЧПУ в Калининграде | {siteConfig.brandName}" />
+	<meta
+		property="og:description"
+		content="3-осевые фрезерные работы ЧПУ в Калининграде. Зона обработки 800×500×500 мм, допуски до IT7, партии от 1 шт. Безналичный расчет с НДС 22%."
+	/>
+	<meta property="og:url" content="{siteConfig.siteDomain}/frezernye-raboty-chpu/" />
+
 	{@html serializeSchema(serviceSchema)}
 	{@html serializeSchema(breadcrumbSchema)}
 </svelte:head>

@@ -1,6 +1,6 @@
 /**
  * Schema.org JSON-LD Generators for Technical SEO, AEO, and GEO.
- * Complies with Google Rich Results and Yandex Microformat standards.
+ * Complies with Google Rich Results, Yandex Microformat, and LLM (AEO) standards.
  */
 
 import { siteConfig, type SiteConfig } from '../config/site';
@@ -39,6 +39,19 @@ export interface VideoSchemaParams {
 	embedUrl?: string;
 }
 
+export interface TechArticleSchemaParams {
+	title: string;
+	description: string;
+	url: string;
+	datePublished: string;
+	dateModified?: string;
+	authorName?: string;
+	category?: string;
+	tags?: string[];
+	dependencies?: string;
+	proficiencyLevel?: string;
+}
+
 /**
  * Creates Schema.org Organization structured data.
  */
@@ -75,7 +88,7 @@ export function createOrganizationSchema(config: SiteConfig = siteConfig) {
 }
 
 /**
- * Creates Schema.org ManufacturingBusiness (LocalBusiness) structured data.
+ * Creates Schema.org ManufacturingBusiness (LocalBusiness) structured data with GEO targeting.
  */
 export function createLocalBusinessSchema(config: SiteConfig = siteConfig) {
 	return {
@@ -89,6 +102,8 @@ export function createLocalBusinessSchema(config: SiteConfig = siteConfig) {
 		telephone: config.contactPhone,
 		email: config.contactEmail,
 		priceRange: '₽₽',
+		currenciesAccepted: 'RUB',
+		paymentAccepted: 'Безналичный расчет с НДС 22%',
 		address: {
 			'@type': 'PostalAddress',
 			streetAddress: config.addressStreet,
@@ -102,6 +117,14 @@ export function createLocalBusinessSchema(config: SiteConfig = siteConfig) {
 			latitude: config.geoLatitude,
 			longitude: config.geoLongitude
 		},
+		areaServed: [
+			{ '@type': 'AdministrativeArea', name: 'Калининград' },
+			{ '@type': 'AdministrativeArea', name: 'Гурьевск' },
+			{ '@type': 'AdministrativeArea', name: 'Балтийск' },
+			{ '@type': 'AdministrativeArea', name: 'Светлый' },
+			{ '@type': 'AdministrativeArea', name: 'Черняховск' },
+			{ '@type': 'AdministrativeArea', name: config.addressRegion }
+		],
 		openingHoursSpecification: [
 			{
 				'@type': 'OpeningHoursSpecification',
@@ -194,6 +217,52 @@ export function createFaqSchema(faqs: FaqItem[]) {
 				text: faq.answer
 			}
 		}))
+	};
+}
+
+/**
+ * Creates Schema.org TechArticle structured data (AEO & Engineering SEO).
+ */
+export function createTechArticleSchema(
+	params: TechArticleSchemaParams,
+	config: SiteConfig = siteConfig
+) {
+	const articleUrl = params.url.startsWith('http')
+		? params.url
+		: `${config.siteDomain}${params.url.startsWith('/') ? params.url : `/${params.url}`}`;
+
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'TechArticle',
+		'@id': `${articleUrl}#article`,
+		headline: params.title,
+		description: params.description,
+		url: articleUrl,
+		inLanguage: 'ru-RU',
+		datePublished: params.datePublished,
+		dateModified: params.dateModified || params.datePublished,
+		author: {
+			'@type': 'Organization',
+			name: params.authorName || `${config.brandName} — Инженерно-технологический отдел`,
+			url: config.siteDomain
+		},
+		publisher: {
+			'@type': 'Organization',
+			name: config.brandName,
+			url: config.siteDomain,
+			logo: {
+				'@type': 'ImageObject',
+				url: `${config.siteDomain}/logo.svg`
+			}
+		},
+		mainEntityOfPage: {
+			'@type': 'WebPage',
+			'@id': articleUrl
+		},
+		about: params.category || 'Металлообработка ЧПУ',
+		keywords: params.tags && params.tags.length > 0 ? params.tags.join(', ') : undefined,
+		dependencies: params.dependencies || 'ГОСТ 25346-2013, ЕСКД',
+		proficiencyLevel: params.proficiencyLevel || 'Expert'
 	};
 }
 

@@ -2,6 +2,7 @@ import { load } from 'js-yaml';
 import { marked } from 'marked';
 import { WORKSHOP_SPECS } from './workshop-specs';
 import { siteConfig } from '#lib/config/site';
+import { base } from '#lib/paths';
 
 export interface ParsedMarkdown<T = Record<string, unknown>> {
 	data: T;
@@ -38,10 +39,21 @@ export function injectWorkshopVariables(text: string): string {
 
 /**
  * Configure marked renderer for clean engineering typography & accessible rendering
+ * Automatically prefixes internal absolute links with base path if not present.
  */
 marked.setOptions({
 	gfm: true,
 	breaks: true
+});
+
+marked.use({
+	walkTokens(token) {
+		if (token.type === 'link' && token.href) {
+			if (base && token.href.startsWith('/') && !token.href.startsWith(base) && !token.href.startsWith('//')) {
+				token.href = `${base}${token.href}`;
+			}
+		}
+	}
 });
 
 /**
