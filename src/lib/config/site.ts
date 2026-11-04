@@ -47,7 +47,7 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
 	geoLongitude: 20.4522,
 	openingHours: 'Пн-Пт 08:00-18:00',
 	gaMeasurementId: '',
-	ymCounterId: '',
+	ymCounterId: '114070369',
 	yandexVerification: '',
 	googleVerification: '',
 	socialLinks: {
@@ -98,7 +98,7 @@ export function resolveSiteConfig(
 		DEFAULT_SITE_CONFIG.geoLongitude;
 	const openingHours = getVal('PUBLIC_OPENING_HOURS', DEFAULT_SITE_CONFIG.openingHours);
 	const gaMeasurementId = getVal('PUBLIC_GA_MEASUREMENT_ID', '');
-	const ymCounterId = getVal('PUBLIC_YM_COUNTER_ID', '');
+	const ymCounterId = getVal('PUBLIC_YM_COUNTER_ID', DEFAULT_SITE_CONFIG.ymCounterId);
 	const yandexVerification = getVal('PUBLIC_YANDEX_VERIFICATION', '');
 	const googleVerification = getVal('PUBLIC_GOOGLE_VERIFICATION', '');
 
