@@ -22,7 +22,7 @@
 		type CooperativeItemBreakdown
 	} from '#lib/calculator/engine';
 	import { parseCadFile, type CadDimensions } from '#lib/workers/cad-parser';
-	import { trackOrderSubmission, trackCalculatorInteraction, reachMetrikaGoal } from '#lib/analytics/metrika';
+	import { trackOrderSubmission, syncCalculatorInteractionDebounced, trackCalculatorInteraction, reachMetrikaGoal } from '#lib/analytics/metrika';
 	
 	// Component Props
 	interface Props {
@@ -85,11 +85,26 @@
 		})
 	);
 
-	// Emit calculation updates to parent if requested
+	// Emit calculation updates to parent and sync visit parameters to Yandex Metrika
 	$effect(() => {
 		if (onQuoteCalculated) {
 			onQuoteCalculated(quote);
 		}
+		syncCalculatorInteractionDebounced({
+			operation: quote.selectedOperationName,
+			material: quote.selectedMaterialName,
+			quantity: batchQuantity,
+			complexity: SETUP_COMPLEXITIES[complexityId]?.nameRu || complexityId,
+			dimensions: `${blankLengthMm}x${blankWidthMm}x${blankHeightMm} мм`,
+			tolerance: quote.selectedToleranceName,
+			urgency: URGENCIES[urgencyId]?.nameRu || urgencyId,
+			isCustomerMaterial,
+			hasGearCutting: cooperativeOpIds.includes('gear_cutting'),
+			isFileAttached: !!cadFileName,
+			totalRub: quote.finalTotal,
+			unitRub: quote.finalUnitPrice,
+			discountPercent: quote.batchDiscountPercent
+		});
 	});
 
 	function toggleCooperativeOp(opId: string) {
@@ -167,6 +182,8 @@
 			tolerance: quote.selectedToleranceName,
 			urgency: URGENCIES[urgencyId]?.nameRu || urgencyId,
 			isCustomerMaterial,
+			hasGearCutting: cooperativeOpIds.includes('gear_cutting'),
+			isFileAttached: !!cadFileName,
 			totalRub: quote.finalTotal,
 			unitRub: quote.finalUnitPrice,
 			discountPercent: quote.batchDiscountPercent
