@@ -1,1 +1,0 @@
-export { default as component } from "../../../../../src/routes/stati/kvalitety-tochnosti-i-sherohovatost-gost/+page.svelte";

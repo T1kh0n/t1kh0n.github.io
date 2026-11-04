@@ -1,1 +1,0 @@
-export { default as component } from "../../../../../src/routes/stati/vybor-stali-dlya-chpu-obrabotki/+page.svelte";
