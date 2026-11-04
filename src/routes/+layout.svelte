@@ -4,6 +4,7 @@
 	import Header from '#lib/components/Header.svelte';
 	import Footer from '#lib/components/Footer.svelte';
 	import CookieNotice from '#lib/components/CookieNotice.svelte';
+	import AccessibilityPanel from '#lib/components/AccessibilityPanel.svelte';
 	import {
 		createOrganizationSchema,
 		createLocalBusinessSchema,
@@ -26,6 +27,7 @@
 <div
 	class="flex min-h-screen flex-col bg-[var(--color-paper)] text-[var(--color-ink)] antialiased selection:bg-[color-mix(in_oklab,var(--color-accent)_30%,transparent)]"
 >
+	<AccessibilityPanel />
 	<Header />
 	<div class="flex-1">
 		{@render children()}

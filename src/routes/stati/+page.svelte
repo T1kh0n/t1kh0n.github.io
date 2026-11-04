@@ -2,38 +2,11 @@
 	import { base } from '$lib/paths';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
+	import { getAllArticles } from '#lib/content/articles-loader';
 
-	const breadcrumbs = [{ name: 'База знаний', path: '/stati/' }];
+	const breadcrumbs = [{ name: 'База знаний', path: `${base}/stati/` }];
 
-	const articles = [
-		{
-			slug: 'vybor-stali-dlya-chpu-obrabotki',
-			title:
-				'Выбор конструкционных и нержавеющих сталей для ЧПУ обработки: Ст45, 40Х, 09Г2С, AISI 304',
-			category: 'Материаловедение',
-			readTime: '6 мин чтения',
-			excerpt:
-				'Сравнительный технологический анализ обрабатываемости ключевых марок сталей. Коэффициенты обрабатываемости Кv, влияние легирования на износ инструмента и себестоимость нормо-часа.'
-		},
-		{
-			slug: 'kvalitety-tochnosti-i-sherohovatost-gost',
-			title:
-				'Квалитеты точности IT7–IT12 и шероховатость поверхности Ra по ГОСТ в контрактном производстве',
-			category: 'Метрология и стандарты',
-			readTime: '8 мин чтения',
-			excerpt:
-				'Инженерное руководство по назначению допусков и шероховатости на чертежах. Почему необоснованное завышение требований до IT7 удорожает партию в 2–3 раза .'
-		},
-		{
-			slug: 'optimizaciya-stoimosti-detaley-chpu',
-			title:
-				'DFM-оптимизация: как снизить себестоимость фрезерованных и токарных деталей на 20–40%',
-			category: 'Экономика производства',
-			readTime: '7 мин чтения',
-			excerpt:
-				'Практические рекомендации конструкторам (Design for Manufacturability): радиусы внутренних углов, глубина резьб, толщина стенок и технологические базы, позволяющие избежать брака и снизить машинное время.'
-		}
-	];
+	const articles = getAllArticles();
 </script>
 
 <svelte:head>
@@ -53,8 +26,8 @@
 				База знаний по металлообработке с ЧПУ
 			</h1>
 			<p class="lead mt-4 max-w-2xl text-sm leading-relaxed sm:text-base">
-				Инженерные статьи и руководства технологов: выбор сталей, назначение допусков по ГОСТ и
-				DFM-оптимизация себестоимости деталей.
+				Инженерные статьи и фундаментальные руководства технологов: выбор сталей, назначение допусков по ГОСТ и
+				DFM-оптимизация себестоимости деталей на станках с ЧПУ.
 			</p>
 		</header>
 
@@ -71,7 +44,7 @@
 							>
 								{article.category}
 							</span>
-							<span class="num">{article.readTime}</span>
+							<span class="num text-[var(--color-muted)]">{article.publishedDate}</span>
 						</div>
 						<h2
 							class="mt-4 text-base leading-snug font-normal text-[var(--color-ink)] hover:text-white"
@@ -81,13 +54,14 @@
 						<p class="mt-3 text-xs leading-relaxed text-[var(--color-muted)]">{article.excerpt}</p>
 					</div>
 
-					<div class="mt-6 border-t border-[var(--color-rule)] pt-4">
+					<div class="mt-6 border-t border-[var(--color-rule)] pt-4 flex items-center justify-between">
 						<a
 							href="{base}/stati/{article.slug}/"
 							class="text-xs text-[var(--color-ink-2)] hover:text-[var(--color-ink)]"
 						>
 							Читать инженерный разбор &rarr;
 						</a>
+						<span class="text-[11px] text-[var(--color-accent)] font-mono">MetalProm39</span>
 					</div>
 				</article>
 			{/each}

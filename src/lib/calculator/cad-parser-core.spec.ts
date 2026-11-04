@@ -248,9 +248,14 @@ END-ISO-10303-21;`;
 		expect(result.heightMm).toBe(30);
 	});
 
-	it('rejects unsupported file formats gracefully', () => {
+	it('attaches 2D drawings and engineering specifications (PDF, DXF, DWG) gracefully', () => {
 		const buffer = new ArrayBuffer(50);
-		expect(() => parseCadBuffer(buffer, 'drawing.dxf')).toThrow(/Unsupported CAD format/i);
-		expect(() => parseCadBuffer(buffer, 'spec.pdf')).toThrow(/Unsupported CAD format/i);
+		const dxfRes = parseCadBuffer(buffer, 'drawing.dxf');
+		expect(dxfRes.fileType).toBe('drawing_2d');
+		expect(dxfRes.is2dDrawing).toBe(true);
+
+		const pdfRes = parseCadBuffer(buffer, 'part_spec.pdf');
+		expect(pdfRes.fileType).toBe('drawing_2d');
+		expect(pdfRes.is2dDrawing).toBe(true);
 	});
 });

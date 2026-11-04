@@ -127,7 +127,7 @@ describe('CNC Cost Calculator Engine (Empirical Pricing)', () => {
 		expect(supplierMat.totalMaterialCost).toBe(supplierMat.unitMaterialCost * 10);
 	});
 
-	it('applies high-precision tolerance multiplier (+50%)', () => {
+	it('guarantees zero surcharge for high-precision tolerance IT7 (multiplier 1.0)', () => {
 		const standardTol = calculateCncQuote({
 			operationId: 'lathe_turning',
 			batchQuantity: 10,
@@ -156,7 +156,7 @@ describe('CNC Cost Calculator Engine (Empirical Pricing)', () => {
 			customCycleTimeMinutes: 30
 		});
 
-		expect(precisionTol.unitMachiningCost).toBe(Math.round(standardTol.unitMachiningCost * 1.5));
+		expect(precisionTol.unitMachiningCost).toBe(standardTol.unitMachiningCost);
 	});
 
 	it('computes gear cutting cooperative operation correctly', () => {

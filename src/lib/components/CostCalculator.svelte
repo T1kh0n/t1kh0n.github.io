@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { siteConfig } from '#lib/config/site';
+	import { WORKSHOP_SPECS } from '#lib/content/workshop-specs';
 	import {
 		OPERATIONS,
 		OPERATIONS_LIST,
@@ -21,7 +22,8 @@
 		type CooperativeItemBreakdown
 	} from '#lib/calculator/engine';
 	import { parseCadFile, type CadDimensions } from '#lib/workers/cad-parser';
-	import { trackOrderSubmission, trackCalculatorInteraction } from '#lib/analytics/metrika';
+	import { trackOrderSubmission, trackCalculatorInteraction, reachMetrikaGoal } from '#lib/analytics/metrika';
+	import { buildYandexFormUrl } from '#lib/calculator/yandex-form';
 
 	// Component Props
 	interface Props {
@@ -49,13 +51,19 @@
 	let blankWidthMm = $state(50);
 	let blankHeightMm = $state(50);
 
-	let toleranceId = $state('elevated');
+	let toleranceId = $state('high_precision_grinding');
 	let cooperativeOpIds = $state<string[]>([]);
 	let urgencyId = $state('standard');
 	let engineeringHours = $state(0);
+	
+	// Modal & Yandex Form Redirect State
 	let isOrderModalOpen = $state(false);
+	let customerNote = $state('');
+	let isRedirecting = $state(false);
+	let redirectCountdown = $state(3);
+	let redirectTimer: ReturnType<typeof setInterval> | null = null;
 
-	// CAD upload state
+	// CAD / Drawing upload state
 	let isParsingCad = $state(false);
 	let cadParseError = $state<string | null>(null);
 	let parsedCadInfo = $state<CadDimensions | null>(null);
@@ -82,6 +90,7 @@
 		})
 	);
 
+	// Emit calculation updates to parent if requested
 	$effect(() => {
 		if (onQuoteCalculated) {
 			onQuoteCalculated(quote);
@@ -89,6 +98,7 @@
 	});
 
 	function toggleCooperativeOp(opId: string) {
+		trackCalculatorInteraction('toggle_cooperative_op', opId);
 		if (cooperativeOpIds.includes(opId)) {
 			cooperativeOpIds = cooperativeOpIds.filter((id) => id !== opId);
 		} else {
@@ -96,7 +106,7 @@
 		}
 	}
 
-	function applyRecommendedBatch() {
+	function applySuggestedBatch() {
 		if (quote.recommendedBatchForMov > batchQuantity) {
 			batchQuantity = quote.recommendedBatchForMov;
 		}
@@ -112,7 +122,7 @@
 			blankLengthMm = Math.max(5, Math.round(dims.suggestedLengthMm));
 			blankWidthMm = Math.max(5, Math.round(dims.suggestedDiameterMm));
 			blankHeightMm = blankWidthMm;
-		} else {
+		} else if (!dims.is2dDrawing) {
 			blankLengthMm = Math.max(5, Math.round(dims.lengthMm));
 			blankWidthMm = Math.max(5, Math.round(dims.widthMm));
 			blankHeightMm = Math.max(5, Math.round(dims.heightMm));
@@ -132,15 +142,16 @@
 		try {
 			const dims = await parseCadFile(file);
 			parsedCadInfo = dims;
-			applyCadDimensions(dims);
+			if (!dims.is2dDrawing) {
+				applyCadDimensions(dims);
+			}
 		} catch (err) {
 			cadParseError =
 				err instanceof Error
 					? err.message
-					: 'Не удалось проанализировать CAD-файл. Проверьте геометрию 3D-модели.';
+					: 'Не удалось проанализировать файл. Вы можете ввести габариты детали вручную.';
 		} finally {
 			isParsingCad = false;
-			// Reset file input value to allow uploading the same file again
 			target.value = '';
 		}
 	}
@@ -166,6 +177,60 @@
 			discountPercent: quote.batchDiscountPercent
 		});
 		isOrderModalOpen = true;
+		isRedirecting = false;
+	}
+
+	function initiateYandexFormRedirect() {
+		const formUrl = buildYandexFormUrl({
+			operation: quote.selectedOperationName,
+			material: quote.selectedMaterialName,
+			quantity: batchQuantity,
+			dimensions: `${blankLengthMm} × ${blankWidthMm} × ${blankHeightMm} мм`,
+			tolerance: quote.selectedToleranceName,
+			complexity: SETUP_COMPLEXITIES[complexityId]?.nameRu || complexityId,
+			urgency: URGENCIES[urgencyId]?.nameRu || urgencyId,
+			totalRub: quote.finalTotal,
+			unitRub: quote.finalUnitPrice,
+			attachedFileName: cadFileName || undefined,
+			customerNote: customerNote.trim() || undefined
+		});
+
+		reachMetrikaGoal('yandex_form_redirect', {
+			operation: quote.selectedOperationName,
+			material: quote.selectedMaterialName,
+			quantity: batchQuantity,
+			totalRub: quote.finalTotal
+		});
+
+		isRedirecting = true;
+		redirectCountdown = 3;
+
+		if (redirectTimer) clearInterval(redirectTimer);
+		redirectTimer = setInterval(() => {
+			redirectCountdown -= 1;
+			if (redirectCountdown <= 0) {
+				if (redirectTimer) clearInterval(redirectTimer);
+				window.open(formUrl, '_blank');
+			}
+		}, 1000);
+	}
+
+	function jumpToYandexFormNow() {
+		if (redirectTimer) clearInterval(redirectTimer);
+		const formUrl = buildYandexFormUrl({
+			operation: quote.selectedOperationName,
+			material: quote.selectedMaterialName,
+			quantity: batchQuantity,
+			dimensions: `${blankLengthMm} × ${blankWidthMm} × ${blankHeightMm} мм`,
+			tolerance: quote.selectedToleranceName,
+			complexity: SETUP_COMPLEXITIES[complexityId]?.nameRu || complexityId,
+			urgency: URGENCIES[urgencyId]?.nameRu || urgencyId,
+			totalRub: quote.finalTotal,
+			unitRub: quote.finalUnitPrice,
+			attachedFileName: cadFileName || undefined,
+			customerNote: customerNote.trim() || undefined
+		});
+		window.open(formUrl, '_blank');
 	}
 
 	function downloadQuoteEstimate() {
@@ -189,9 +254,13 @@
 			`· Давальческий металл:${isCustomerMaterial ? ' Да (металл заказчика)' : ' Нет (сертифицированный металл цеха)'}`,
 			`· Габариты заготовки: ${blankLengthMm} × ${blankWidthMm} × ${blankHeightMm} мм`,
 			`· Расчетная масса:    ${quote.blankMassKg} кг/шт (объем ${quote.blankVolumeCm3} см³)`,
-			`· Требуемый квалитет: ${quote.selectedToleranceName}`,
+			`· Требуемый квалитет: ${quote.selectedToleranceName} (без наценки)`,
 			`· Категория сложности:${SETUP_COMPLEXITIES[complexityId]?.nameRu}`,
 			`· Срок изготовления:  ${URGENCIES[urgencyId]?.nameRu} (${URGENCIES[urgencyId]?.leadTimeRu})`,
+			cadFileName ? `· Прикрепленный файл: ${cadFileName}` : '· Чертеж / CAD:       Параметрический расчет'
+		];
+
+		lines.push(
 			'----------------------------------------------------------------------',
 			'2. СТОИМОСТЬ И ОБЪЕМ ПАРТИИ:',
 			'----------------------------------------------------------------------',
@@ -200,7 +269,7 @@
 			`· Стоимость заготовок:${quote.totalMaterialCost.toLocaleString('ru-RU')} ₽`,
 			`· Механообработка:    ${quote.totalMachiningCost.toLocaleString('ru-RU')} ₽`,
 			`· Наладка, УП, оснастка: ${(quote.totalSetupCost + quote.totalEngineeringCost).toLocaleString('ru-RU')} ₽`
-		];
+		);
 
 		if (quote.totalCooperativeCost > 0) {
 			lines.push(`· Доп. операции:      ${quote.totalCooperativeCost.toLocaleString('ru-RU')} ₽`);
@@ -219,13 +288,12 @@
 			'----------------------------------------------------------------------',
 			'1. Оплата: безналичный расчет с выделением НДС 22% (для юридических лиц',
 			'   и ИП), а также безналичный расчет для физических лиц.',
-			'2. Контроль качества: 100% межоперационный и финишный контроль ОТК',
-			'   калиброванным цифровым инструментом (точность до IT7, Ra 1.25 мкм).',
-			'3. Металлопрокат: только сертифицированный прокат по ГОСТ.',
-			'4. Доставка: по всей Калининградской области собственным транспортом',
+			'2. Станочный парк: 2 обрабатывающих центра с ЧПУ (токарный и фрезерный 3 оси).',
+			'3. Контроль качества: 100% контроль ОТК калиброванным цифровым инструментом',
+			'   (допуск до IT7, шероховатость до Ra 1.25 мкм, без наценки за квалитет).',
+			'4. Металлопрокат: только сертифицированный заводской прокат по ГОСТ.',
+			'5. Доставка: по всей Калининградской области собственным транспортом',
 			'   или курьерскими службами.',
-			'5. График производства: запуск в обработку осуществляется согласно',
-			'   плановой загрузке станочного парка ЧПУ.',
 			'======================================================================'
 		);
 
@@ -249,7 +317,7 @@
 				Инженерный калькулятор стоимости ЧПУ
 			</h2>
 			<p class="mt-1 text-xs text-[var(--color-muted)] sm:text-sm">
-				Мгновенный расчет себестоимости партии деталей с учетом времени цикла, материала и
+				Мгновенный расчет себестоимости партии деталей на 2 обрабатывающих центрах ЧПУ с учетом времени цикла, материала и
 				серийной скидки. Доставка по всей Калининградской области. Базовый порог заказа — 5&thinsp;000&thinsp;₽ с НДС 22%.
 			</p>
 		</div>
@@ -276,7 +344,7 @@
 								: 'border-[var(--color-rule)] bg-[var(--color-paper)] text-[var(--color-ink-2)] hover:border-[var(--color-rule-2)]'}"
 							onclick={() => {
 								operationId = op.id;
-								if (parsedCadInfo) {
+								if (parsedCadInfo && !parsedCadInfo.is2dDrawing) {
 									applyCadDimensions(parsedCadInfo);
 								}
 							}}
@@ -419,7 +487,7 @@
 				</select>
 			</div>
 
-			<!-- 5. Blank Dimensions & CAD Upload -->
+			<!-- 5. Blank Dimensions & File Upload (STEP / PDF / DXF) -->
 			<div
 				class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-4"
 			>
@@ -427,14 +495,14 @@
 					<span class="text-xs font-normal text-[var(--color-muted)]">
 						5. Размеры заготовки (мм):
 					</span>
-					<!-- CAD Upload button (No STL) -->
+					<!-- File Upload button for STEP, PDF, DXF, DWG -->
 					<label
 						class="btn btn--sm btn--line inline-flex cursor-pointer items-center gap-1.5 text-xs"
 					>
-						<span>{isParsingCad ? 'Анализ CAD...' : 'Загрузить STEP / CAD'}</span>
+						<span>{isParsingCad ? 'Обработка файла...' : 'Прикрепить чертеж / STEP'}</span>
 						<input
 							type="file"
-							accept=".stl,.step,.stp,.iges,.igs,.pdf,.dwg,.dxf"
+							accept=".step,.stp,.iges,.igs,.pdf,.dwg,.dxf,.png,.jpg,.jpeg,.stl"
 							data-testid="cad-file-input"
 							class="hidden"
 							onchange={handleFileUpload}
@@ -461,9 +529,9 @@
 						<div class="flex items-center justify-between border-b border-[var(--color-rule)] pb-2">
 							<div class="flex items-center gap-2">
 								<span
-									class="rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--color-ink)]"
+									class="rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--color-accent)]"
 								>
-									{parsedCadInfo.fileType.replace('_', ' ').toUpperCase()}
+									{parsedCadInfo.is2dDrawing ? 'ЧЕРТЕЖ' : parsedCadInfo.fileType === 'stl_binary' ? 'STL BINARY' : parsedCadInfo.fileType === 'stl_ascii' ? 'STL ASCII' : '3D STEP'}
 								</span>
 								<span class="truncate text-xs font-normal text-[var(--color-ink)]"
 									>{cadFileName}</span
@@ -474,42 +542,50 @@
 								data-testid="cad-clear-btn"
 								class="text-[var(--color-muted)] hover:text-[var(--color-ink)]"
 								onclick={clearCadModel}
-								title="Удалить привязку к CAD"
+								title="Открепить файл"
 							>
 								✕
 							</button>
 						</div>
-						<div class="mt-2 grid grid-cols-2 gap-2 text-[var(--color-muted)] sm:grid-cols-3">
-							<div>
-								Габариты:
-								<strong class="num block font-normal text-[var(--color-ink)]">
-									{parsedCadInfo.boundingBox.dx.toFixed(1)} × {parsedCadInfo.boundingBox.dy.toFixed(
-										1
-									)} × {parsedCadInfo.boundingBox.dz.toFixed(1)}<span class="u">&thinsp;мм</span>
-								</strong>
+
+						{#if parsedCadInfo.is2dDrawing}
+							<div class="mt-2 text-xs text-[var(--color-ink-2)]">
+								<span class="inline-block h-2 w-2 rounded-full bg-[var(--color-accent)] mr-1.5"></span>
+								{parsedCadInfo.statusMessage || 'Чертеж успешно прикреплен. Задайте требуемые габариты в полях ниже.'}
 							</div>
-							<div>
-								Объем:
-								<strong class="num block font-normal text-[var(--color-ink)]">
-									{parsedCadInfo.volumeCm3.toFixed(2)}<span class="u">&thinsp;см³</span>
-								</strong>
+						{:else}
+							<div class="mt-2 grid grid-cols-2 gap-2 text-[var(--color-muted)] sm:grid-cols-3">
+								<div>
+									Габариты 3D:
+									<strong class="num block font-normal text-[var(--color-ink)]">
+										{parsedCadInfo.boundingBox.dx.toFixed(1)} × {parsedCadInfo.boundingBox.dy.toFixed(
+											1
+										)} × {parsedCadInfo.boundingBox.dz.toFixed(1)}<span class="u">&thinsp;мм</span>
+									</strong>
+								</div>
+								<div>
+									Объем детали:
+									<strong class="num block font-normal text-[var(--color-ink)]">
+										{parsedCadInfo.volumeCm3.toFixed(2)}<span class="u">&thinsp;см³</span>
+									</strong>
+								</div>
+								<div>
+									Точек контура:
+									<strong class="num block font-normal text-[var(--color-ink)]">
+										{parsedCadInfo.triangleCount.toLocaleString('ru-RU')}<span class="u"
+											>&thinsp;коорд.</span
+										>
+									</strong>
+								</div>
 							</div>
-							<div>
-								Сетка:
-								<strong class="num block font-normal text-[var(--color-ink)]">
-									{parsedCadInfo.triangleCount.toLocaleString('ru-RU')}<span class="u"
-										>&thinsp;треуг.</span
-									>
-								</strong>
-							</div>
-						</div>
-						{#if parsedCadInfo.isRotationalSymmetric}
-							<div class="mt-2 border-t border-[var(--color-rule)] pt-2 text-[var(--color-muted)]">
-								<span>Распознано тело вращения: </span>
-								<strong class="num font-normal text-[var(--color-ink)]">
-									⌀{parsedCadInfo.suggestedDiameterMm?.toFixed(1)} × {parsedCadInfo.suggestedLengthMm?.toFixed(1)} мм
-								</strong>
-							</div>
+							{#if parsedCadInfo.isRotationalSymmetric}
+								<div class="mt-2 border-t border-[var(--color-rule)] pt-2 text-[var(--color-muted)]">
+									<span>Распознано тело вращения (токарная ЧПУ): </span>
+									<strong class="num font-normal text-[var(--color-ink)]">
+										⌀{parsedCadInfo.suggestedDiameterMm?.toFixed(1)} × {parsedCadInfo.suggestedLengthMm?.toFixed(1)} мм
+									</strong>
+								</div>
+							{/if}
 						{/if}
 					</div>
 				{/if}
@@ -573,14 +649,17 @@
 				</div>
 			</div>
 
-			<!-- 6. Tolerance Grade (IT7–IT12, No IT6, No Grinding) -->
+			<!-- 6. Tolerance Grade (IT7–IT12, Zero Surcharge Policy) -->
 			<div>
-				<label
-					for="tolerance-select"
-					class="mb-2 block text-xs font-normal text-[var(--color-muted)]"
-				>
-					6. Квалитет точности и шероховатость поверхности:
-				</label>
+				<div class="mb-2 flex items-center justify-between">
+					<label
+						for="tolerance-select"
+						class="text-xs font-normal text-[var(--color-muted)]"
+					>
+						6. Квалитет точности (без наценки):
+					</label>
+					<span class="text-[11px] text-[var(--color-accent)]">0% наценка за точность IT7</span>
+				</div>
 				<div class="grid grid-cols-1 gap-2 sm:grid-cols-3">
 					{#each TOLERANCES_LIST as tol}
 						<button
@@ -598,7 +677,7 @@
 				</div>
 			</div>
 
-			<!-- 7. Cooperative Operations (No heat treatment, No galvanics) -->
+			<!-- 7. Cooperative Operations -->
 			{#if COOPERATIVE_OPERATIONS_LIST.length > 0}
 				<div>
 					<span class="mb-2 block text-xs font-normal text-[var(--color-muted)]">
@@ -630,15 +709,12 @@
 				</div>
 			{/if}
 
-			<!-- 8. Urgency -->
+			<!-- 8. Urgency & Production Schedule -->
 			<div>
-				<label
-					for="urgency-select"
-					class="mb-2 block text-xs font-normal text-[var(--color-muted)]"
-				>
-					8. Срочность выполнения:
+				<label for="urgency-select" class="mb-2 block text-xs font-normal text-[var(--color-muted)]">
+					8. Срок выполнения заказа:
 				</label>
-				<div class="grid grid-cols-2 gap-3">
+				<div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
 					{#each URGENCIES_LIST as urg}
 						<button
 							type="button"
@@ -648,90 +724,83 @@
 								: 'border-[var(--color-rule)] bg-[var(--color-paper)] text-[var(--color-ink-2)] hover:border-[var(--color-rule-2)]'}"
 							onclick={() => (urgencyId = urg.id)}
 						>
-							<div class="text-xs font-normal text-[var(--color-ink)]">{urg.nameRu}</div>
-							<div class="mt-1 text-xs text-[var(--color-muted)]">{urg.leadTimeRu}</div>
+							<div class="flex items-center justify-between text-xs font-normal text-[var(--color-ink)]">
+								<span>{urg.nameRu}</span>
+								{#if urg.multiplier > 1.0}
+									<span class="rounded bg-[var(--color-accent)]/15 px-1.5 py-0.5 font-mono text-[10px] text-[var(--color-accent)]"
+										>+{Math.round((urg.multiplier - 1) * 100)}%</span
+									>
+								{/if}
+							</div>
+							<div class="num mt-1 text-xs text-[var(--color-muted)]">{urg.leadTimeRu}</div>
 						</button>
 					{/each}
 				</div>
 			</div>
 		</div>
 
-		<!-- Right / Live Quotation Summary Panel -->
+		<!-- Right / Sticky Summary Column -->
 		<div class="lg:col-span-5">
 			<div
-				class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-6 lg:sticky lg:top-24"
+				class="sticky top-20 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-6 shadow-xl ticks"
 			>
 				<div class="flex items-center justify-between border-b border-[var(--color-rule)] pb-4">
 					<span class="text-xs font-normal text-[var(--color-muted)]">
-						Итоговая оценка партии
+						Смета партии ({batchQuantity} шт.)
 					</span>
-					<span
-						class="rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper)] px-2.5 py-0.5 text-xs text-[var(--color-muted)]"
-					>
-						Ориентировочная смета
+					<span class="font-mono text-xs text-[var(--color-accent)]">
+						{quote.batchDiscountPercent > 0
+							? `Скидка ${quote.batchDiscountPercent}%`
+							: 'Базовый тариф'}
 					</span>
 				</div>
 
-				<!-- Total Price Big Display -->
-				<div class="my-5">
-					<div class="flex items-baseline justify-between">
-						<span class="text-xs text-[var(--color-muted)]">Общая сумма:</span>
-						<div class="num text-3xl font-light tracking-tight text-[var(--color-ink)] md:text-4xl">
-							{quote.finalTotal.toLocaleString('ru-RU')}<span class="u">&thinsp;₽</span>
-						</div>
+				<!-- Highlight Pricing Block -->
+				<div class="py-6 text-center">
+					<div class="num text-4xl text-[var(--color-ink)] tracking-tight sm:text-5xl">
+						{quote.finalTotal.toLocaleString('ru-RU')}&thinsp;₽
 					</div>
-					<div class="mt-1 flex items-baseline justify-between text-xs">
-						<span class="text-[var(--color-muted)]">Цена за деталь:</span>
-						<span class="num text-sm font-normal text-[var(--color-ink)]">
-							{quote.finalUnitPrice.toLocaleString('ru-RU')}<span class="u">&thinsp;₽ / шт</span>
-						</span>
+					<div class="num mt-2 text-xs text-[var(--color-muted)]">
+						Цена за единицу: <span class="font-normal text-[var(--color-ink)]"
+							>{quote.finalUnitPrice.toLocaleString('ru-RU')}&thinsp;₽/шт</span
+						> (с НДС 22%)
 					</div>
 				</div>
 
-				<!-- Minimum Order Value Alert -->
+				<!-- Minimum Order Value (MOV) Callout -->
 				{#if quote.isMinimumOrderApplied}
 					<div
 						data-testid="mov-alert"
-						class="mb-5 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper)] p-3.5 text-xs text-[var(--color-ink-2)]"
+						class="mb-4 rounded-[var(--radius-card)] border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/10 p-3 text-xs text-[var(--color-ink)]"
 					>
-						<div class="flex items-center gap-2 font-normal text-[var(--color-ink)]">
-							<span class="live-dot"></span>
-							<span>Минимальный заказ — 5&thinsp;000&thinsp;₽ (с НДС 22%)</span>
+						<div class="flex items-center justify-between font-normal text-[var(--color-accent)]">
+							<span>Базовый порог заказа</span>
+							<span class="num">5&thinsp;000&thinsp;₽</span>
 						</div>
-						<p class="mt-1 text-[var(--color-muted)]">
-							Включает переналадку станка ЧПУ, написание управляющей программы и инструментальный
-							контроль ОТК.
-						</p>
-						{#if quote.recommendedBatchForMov > quote.totalBatchQuantity}
-							<div
-								class="mt-2.5 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-2.5 text-[var(--color-muted)]"
+						<p class="mt-1 text-[11px] leading-relaxed text-[var(--color-ink-2)]">
+							В расчет включена стоимость переналадки станка ЧПУ. При тираже
+							<strong class="font-normal text-[var(--color-ink)]"
+								>{quote.recommendedBatchForMov} шт.</strong
 							>
-								<span>Рекомендуем увеличить партию до </span>
-								<strong class="num font-normal text-[var(--color-ink)]"
-									>{quote.recommendedBatchForMov}<span class="u">&thinsp;шт.</span></strong
-								>,
-								<span> чтобы снизить себестоимость до </span>
-								<strong class="num font-normal text-[var(--color-accent)]">
-									{quote.recommendedBatchUnitCost.toLocaleString('ru-RU')}<span class="u"
-										>&thinsp;₽/шт</span
-									>
-								</strong>.
-								<button
-									type="button"
-									class="btn btn--sm btn--line mt-2 block w-full text-center text-xs"
-									onclick={applyRecommendedBatch}
-								>
-									Пересчитать на {quote.recommendedBatchForMov} шт.
-								</button>
-							</div>
-						{/if}
+							цена за штуку снизится до
+							<strong class="font-normal text-[var(--color-accent)]"
+								>{quote.recommendedBatchUnitCost.toLocaleString('ru-RU')}&thinsp;₽</strong
+							>.
+						</p>
+						<button
+							type="button"
+							class="mt-2 text-[11px] text-[var(--color-accent)] underline hover:no-underline"
+							onclick={applySuggestedBatch}
+						>
+							Увеличить партию до {quote.recommendedBatchForMov} шт. →
+						</button>
 					</div>
 				{/if}
 
-				<!-- Cost Components Breakdown -->
+				<!-- Line Item Breakdown -->
 				<div class="space-y-2 border-t border-[var(--color-rule)] pt-4 text-xs">
 					<div class="flex justify-between text-[var(--color-muted)]">
-						<span>Металл / Заготовка:</span>
+						<span>Металл / заготовки:</span>
 						<span class="num text-[var(--color-ink)]">
 							{isCustomerMaterial
 								? 'Давальческий (0 ₽)'
@@ -778,7 +847,7 @@
 						class="btn btn--wide"
 						onclick={handleOrderSubmit}
 					>
-						<span>Отправить спецификацию на оценку</span>
+						<span>Отправить заявку в Яндекс.Форму</span>
 					</button>
 					<button type="button" class="btn btn--wide btn--line" onclick={downloadQuoteEstimate}>
 						<span>Скачать смету (.TXT)</span>
@@ -792,7 +861,8 @@
 					<div class="font-normal text-[var(--color-ink)]">Гарантии цеха MetalProm39:</div>
 					<ul class="mt-1 list-inside list-disc space-y-1 text-[var(--color-muted)]">
 						<li>Безналичный расчет с НДС 22% (юр. лица, ИП) и для физ. лиц</li>
-						<li>100% контроль ОТК калиброванным инструментом (до IT7)</li>
+						<li>Станочный парк: 2 обрабатывающих центра с ЧПУ</li>
+						<li>100% контроль ОТК цифровым инструментом (до IT7, без наценки)</li>
 						<li>Сертификаты на заводской металлопрокат по ГОСТ</li>
 						<li>Доставка по всей Калининградской области</li>
 					</ul>
@@ -802,9 +872,10 @@
 	</div>
 </div>
 
+<!-- Modal Dialog with Pre-filled Yandex Form Redirect Notification -->
 {#if isOrderModalOpen}
 	<div
-		class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[var(--color-bg)]/80 backdrop-blur-sm"
+		class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[var(--color-paper)]/80 backdrop-blur-sm"
 		role="dialog"
 		aria-modal="true"
 		aria-labelledby="modal-title"
@@ -814,79 +885,149 @@
 		>
 			<div class="flex items-start justify-between border-b border-[var(--color-rule)] pb-4">
 				<div>
-					<div class="font-mono text-[10px] tracking-wider uppercase text-[var(--color-muted)]">
-						Технологический отдел ЧПУ
+					<div class="font-mono text-[10px] tracking-wider uppercase text-[var(--color-accent)]">
+						Официальная форма заказа цеха
 					</div>
 					<h3 id="modal-title" class="mt-1 text-lg font-normal text-[var(--color-ink)]">
-						Статус производственной линии
+						Отправка спецификации в Яндекс.Форму
 					</h3>
 				</div>
 				<button
 					type="button"
 					class="text-xs text-[var(--color-muted)] hover:text-[var(--color-ink)] p-1"
-					onclick={() => (isOrderModalOpen = false)}
+					onclick={() => {
+						isOrderModalOpen = false;
+						isRedirecting = false;
+						if (redirectTimer) clearInterval(redirectTimer);
+					}}
 					aria-label="Закрыть модальное окно"
 				>
 					✕
 				</button>
 			</div>
 
-			<div class="mt-5 space-y-4 text-xs leading-relaxed text-[var(--color-muted)]">
-				<div
-					class="rounded-[var(--radius-card)] border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/10 p-3 text-[var(--color-ink)]"
-				>
-					<div class="flex items-center gap-2 font-mono text-[11px] text-[var(--color-accent)]">
-						<span class="inline-block h-2 w-2 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
-						ПРОИЗВОДСТВЕННЫЕ МОЩНОСТИ ЗАКОНТРАКТОВАНЫ
+			{#if isRedirecting}
+				<div class="mt-6 space-y-4 text-center py-4">
+					<div class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-accent)]/15 text-[var(--color-accent)]">
+						<svg class="h-6 w-6 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+							<circle cx="12" cy="12" r="10" stroke-width="2" stroke-dasharray="32" stroke-linecap="round"></circle>
+						</svg>
 					</div>
-					<p class="mt-2 text-xs leading-relaxed text-[var(--color-ink-2)]">
-						На текущий технологический цикл все токарные и фрезерные центры ЧПУ загружены утвержденными серийными заказами на 100%. Прием срочных заявок в производство временно приостановлен.
+					<div>
+						<h4 class="text-base font-normal text-[var(--color-ink)]">
+							Перенаправляем в Яндекс.Форму...
+						</h4>
+						<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)] max-w-md mx-auto">
+							Все параметры спецификации (деталь, металл, тираж {batchQuantity} шт., габариты, расчетная сумма {quote.finalTotal.toLocaleString('ru-RU')} ₽) уже заполнены за вас. Вам останется только нажать кнопку «Отправить».
+						</p>
+					</div>
+
+					<div class="rounded-[var(--radius-card)] border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/10 p-3 text-xs text-[var(--color-ink)] font-mono">
+						Переход в форму через <span class="text-[var(--color-accent)] font-bold text-sm">{redirectCountdown}</span> сек...
+					</div>
+
+					<div class="pt-2 flex flex-col sm:flex-row justify-center gap-3">
+						<button
+							type="button"
+							class="btn btn--sm"
+							onclick={jumpToYandexFormNow}
+						>
+							<span>Перейти прямо сейчас</span>
+						</button>
+						<button
+							type="button"
+							class="btn btn--sm btn--line"
+							onclick={() => {
+								isRedirecting = false;
+								if (redirectTimer) clearInterval(redirectTimer);
+							}}
+						>
+							<span>Отмена</span>
+						</button>
+					</div>
+				</div>
+			{:else}
+				<div class="mt-5 space-y-4 text-xs leading-relaxed text-[var(--color-muted)]">
+					<p class="text-xs text-[var(--color-ink-2)]">
+						Спецификация сформирована. Нажмите кнопку ниже, чтобы перейти в Яндекс.Форму с предзаполненными данными вашего расчета:
 					</p>
+
+					<div class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper)] p-3 space-y-1.5 font-mono text-[11px]">
+						<div class="flex justify-between">
+							<span class="text-[var(--color-muted)]">Операция:</span>
+							<span class="text-[var(--color-ink)]">{quote.selectedOperationName}</span>
+						</div>
+						<div class="flex justify-between">
+							<span class="text-[var(--color-muted)]">Материал:</span>
+							<span class="text-[var(--color-ink)]">{quote.selectedMaterialName}</span>
+						</div>
+						<div class="flex justify-between">
+							<span class="text-[var(--color-muted)]">Объем партии:</span>
+							<span class="text-[var(--color-ink)] num">{batchQuantity} шт.</span>
+						</div>
+						<div class="flex justify-between">
+							<span class="text-[var(--color-muted)]">Габариты:</span>
+							<span class="text-[var(--color-ink)] num">{blankLengthMm} × {blankWidthMm} × {blankHeightMm} мм</span>
+						</div>
+						<div class="flex justify-between">
+							<span class="text-[var(--color-muted)]">Точность:</span>
+							<span class="text-[var(--color-ink)]">{quote.selectedToleranceName}</span>
+						</div>
+						{#if cadFileName}
+							<div class="flex justify-between border-t border-[var(--color-rule)] pt-1 text-[var(--color-accent)]">
+								<span>Прикрепленный файл:</span>
+								<span class="truncate max-w-[200px]">{cadFileName}</span>
+							</div>
+						{/if}
+						<div class="flex justify-between border-t border-[var(--color-rule)] pt-1 text-[var(--color-ink)] font-bold">
+							<span>Оценочная стоимость:</span>
+							<span class="num text-[var(--color-accent)]">{quote.finalTotal.toLocaleString('ru-RU')} ₽ (НДС 22%)</span>
+						</div>
+					</div>
+
+					<div>
+						<label for="order-customer-note" class="block text-[11px] text-[var(--color-muted)] mb-1">
+							Дополнительные требования или комментарий к заказу (необязательно):
+						</label>
+						<textarea
+							id="order-customer-note"
+							bind:value={customerNote}
+							rows="2"
+							placeholder="Например: требуется маркировка торца, фаски 1х45°, особые требования к упаковке..."
+							class="w-full rounded-[var(--radius-card)] border border-[var(--color-rule-2)] bg-[var(--color-paper)] p-2 text-xs text-[var(--color-ink)] focus:border-[var(--color-accent)] focus:outline-none"
+						></textarea>
+					</div>
+
+					<div class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-2.5 text-[11px] text-[var(--color-muted)]">
+						<span class="font-normal text-[var(--color-ink)]">Как это работает:</span>
+						при переходе все параметры будут автоматически перенесены в поля официальной Яндекс.Формы цеха, вам не придется заполнять их вручную.
+					</div>
 				</div>
 
-				<div class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper)] p-3 space-y-1.5 font-mono text-[11px]">
-					<div class="text-[var(--color-muted)] font-sans text-xs mb-1">Параметры рассчитанной спецификации:</div>
-					<div class="flex justify-between">
-						<span class="text-[var(--color-muted)]">Операция:</span>
-						<span class="text-[var(--color-ink)]">{quote.selectedOperationName}</span>
-					</div>
-					<div class="flex justify-between">
-						<span class="text-[var(--color-muted)]">Материал:</span>
-						<span class="text-[var(--color-ink)]">{quote.selectedMaterialName}</span>
-					</div>
-					<div class="flex justify-between">
-						<span class="text-[var(--color-muted)]">Объем партии:</span>
-						<span class="text-[var(--color-ink)] num">{batchQuantity} шт.</span>
-					</div>
-					<div class="flex justify-between">
-						<span class="text-[var(--color-muted)]">Оценочная стоимость:</span>
-						<span class="text-[var(--color-ink)] num">{quote.finalTotal.toLocaleString('ru-RU')} ₽ (с НДС 22%)</span>
-					</div>
+				<div class="mt-6 flex flex-col-reverse sm:flex-row sm:justify-end gap-3 border-t border-[var(--color-rule)] pt-4">
+					<button
+						type="button"
+						class="btn btn--sm btn--line"
+						onclick={() => (isOrderModalOpen = false)}
+					>
+						<span>Закрыть</span>
+					</button>
+					<button
+						type="button"
+						class="btn btn--sm btn--line"
+						onclick={downloadQuoteEstimate}
+					>
+						<span>Скачать (.TXT)</span>
+					</button>
+					<button
+						type="button"
+						class="btn btn--sm"
+						onclick={initiateYandexFormRedirect}
+					>
+						<span>Перейти в Яндекс.Форму →</span>
+					</button>
 				</div>
-
-				<p class="text-[11px] text-[var(--color-muted)]">
-					Параметры вашей спецификации анонимно зафиксированы в аналитической системе цеха для планирования расширения станочного парка и графика загрузки оборудования. Вы можете сохранить расчет себестоимости в виде текстовой сметы.
-				</p>
-			</div>
-
-			<div class="mt-6 flex flex-col-reverse sm:flex-row sm:justify-end gap-3 border-t border-[var(--color-rule)] pt-4">
-				<button
-					type="button"
-					class="btn btn--sm btn--line"
-					onclick={() => (isOrderModalOpen = false)}
-				>
-					<span>Закрыть</span>
-				</button>
-				<button
-					type="button"
-					class="btn btn--sm"
-					onclick={() => {
-						downloadQuoteEstimate();
-					}}
-				>
-					<span>Скачать смету (.TXT)</span>
-				</button>
-			</div>
+			{/if}
 		</div>
 	</div>
 {/if}

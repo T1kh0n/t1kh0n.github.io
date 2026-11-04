@@ -213,9 +213,9 @@
 		}
 
 		// ==========================================
-		// LAYER 3: Precision Tolerance Zones (IT6/IT7)
+		// LAYER 3: Precision Tolerance Zones (IT7)
 		// ==========================================
-		// Ground Bearing Seat IT6 (x: -105 to -75, r: 22.5)
+		// Bearing Seat IT7 (x: -105 to -75, r: 22.5)
 		for (let i = 0; i < 18; i++) {
 			const x = -105 + (i / 17) * 30;
 			for (let j = 0; j < 36; j++) {
@@ -754,7 +754,7 @@
 						</button>
 					</li>
 
-					<!-- Layer 3: Precision Tolerance Zones (IT6/IT7) -->
+					<!-- Layer 3: Precision Tolerance Zones (IT7) -->
 					<li class="switch">
 						<div class="switch__name">
 							<b>Посадочные пояски IT7</b>
@@ -801,7 +801,7 @@
 							style="touch-action: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; -webkit-mask-image: radial-gradient(ellipse 65% 62% at 50% 50%, var(--color-ink) 65%, transparent); mask-image: radial-gradient(ellipse 65% 62% at 50% 50%, var(--color-ink) 65%, transparent);"
 						></canvas>
 
-						<!-- Measurement Callout A: Bearing Seat IT6 (Extends UP into upper clearance zone) -->
+						<!-- Measurement Callout A: Bearing Seat IT7 (Extends UP into upper clearance zone) -->
 						<div
 							class="callout callout--up {calloutA.visible ? '' : 'is-hidden'} {calloutA.flip
 								? 'is-flip'
@@ -817,7 +817,7 @@
 							</div>
 						</div>
 
-						<!-- Measurement Callout B: Grinding Roughness IT6 (Extends DOWN into lower clearance zone) -->
+						<!-- Measurement Callout B: Finish Roughness IT7 (Extends DOWN into lower clearance zone) -->
 						<div
 							class="callout callout--found callout--down {calloutB.visible
 								? ''

@@ -183,6 +183,10 @@ export const MATERIALS: Record<string, MaterialConfig> = {
 
 export const MATERIALS_LIST: MaterialConfig[] = Object.values(MATERIALS);
 
+/**
+ * Tolerances: Zero surcharge policy.
+ * Highest precision (IT7) is covered within standard machine hour rates.
+ */
 export const TOLERANCES: Record<string, ToleranceConfig> = {
 	standard: {
 		id: 'standard',
@@ -197,15 +201,15 @@ export const TOLERANCES: Record<string, ToleranceConfig> = {
 		nameRu: 'Повышенная (IT8–IT9)',
 		toleranceGrade: 'IT8–IT9',
 		roughnessRa: 'Ra 1.6–2.5',
-		multiplier: 1.25,
+		multiplier: 1.0,
 		includesGrinding: false
 	},
 	high_precision_grinding: {
 		id: 'high_precision_grinding',
-		nameRu: 'Высокоточная (IT7)',
+		nameRu: 'Высокоточная (IT7, без наценки)',
 		toleranceGrade: 'IT7',
 		roughnessRa: 'Ra 1.25',
-		multiplier: 1.5,
+		multiplier: 1.0,
 		includesGrinding: false
 	}
 };

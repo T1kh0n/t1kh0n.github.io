@@ -544,3 +544,187 @@ main > div,
 		transition: none !important;
 	}
 }
+
+/* ==========================================================================
+   GOST R 52872-2019 Accessibility System (Режим для слабовидящих)
+   ========================================================================== */
+
+html.a11y-active {
+	filter: none !important;
+}
+
+html.a11y-font-large {
+	font-size: 118% !important;
+}
+
+html.a11y-font-huge {
+	font-size: 136% !important;
+}
+
+html.a11y-scheme-bow {
+	--color-paper: #ffffff !important;
+	--color-paper-2: #f4f4f4 !important;
+	--color-paper-3: #e6e6e6 !important;
+	--color-ink: #000000 !important;
+	--color-ink-2: #111111 !important;
+	--color-muted: #222222 !important;
+	--color-rule: #000000 !important;
+	--color-rule-2: #000000 !important;
+	--color-accent: #000000 !important;
+	--color-accent-ink: #ffffff !important;
+	background-color: #ffffff !important;
+	color: #000000 !important;
+}
+
+html.a11y-scheme-wob {
+	--color-paper: #000000 !important;
+	--color-paper-2: #111111 !important;
+	--color-paper-3: #222222 !important;
+	--color-ink: #ffffff !important;
+	--color-ink-2: #eeeeee !important;
+	--color-muted: #dddddd !important;
+	--color-rule: #ffffff !important;
+	--color-rule-2: #ffffff !important;
+	--color-accent: #ffffff !important;
+	--color-accent-ink: #000000 !important;
+	background-color: #000000 !important;
+	color: #ffffff !important;
+}
+
+html.a11y-scheme-boc {
+	--color-paper: #cbe6ff !important;
+	--color-paper-2: #b8dcff !important;
+	--color-paper-3: #a4d1ff !important;
+	--color-ink: #002255 !important;
+	--color-ink-2: #001a40 !important;
+	--color-muted: #003377 !important;
+	--color-rule: #002255 !important;
+	--color-rule-2: #002255 !important;
+	--color-accent: #002255 !important;
+	--color-accent-ink: #cbe6ff !important;
+	background-color: #cbe6ff !important;
+	color: #002255 !important;
+}
+
+html.a11y-kerning-medium * {
+	letter-spacing: 0.05em !important;
+}
+
+html.a11y-kerning-large * {
+	letter-spacing: 0.12em !important;
+}
+
+html.a11y-lh-relaxed * {
+	line-height: 1.65 !important;
+}
+
+html.a11y-lh-double * {
+	line-height: 2.1 !important;
+}
+
+html.a11y-hide-images img:not(.a11y-icon),
+html.a11y-hide-images canvas,
+html.a11y-hide-images video,
+html.a11y-hide-images .pointcloud-twin {
+	display: none !important;
+}
+
+html.a11y-active a,
+html.a11y-active button {
+	text-decoration: underline !important;
+	font-weight: 600 !important;
+}
+
+/* Engineering Article Prose Typography */
+.article-prose {
+	color: var(--color-ink-2);
+	font-size: var(--text-sm);
+	line-height: 1.7;
+}
+
+.article-prose h2 {
+	margin-top: 2.25rem;
+	margin-bottom: 0.85rem;
+	font-size: 1.25rem;
+	font-weight: 500;
+	color: var(--color-ink);
+	border-bottom: 1px solid var(--color-rule);
+	padding-bottom: 0.5rem;
+}
+
+.article-prose h3 {
+	margin-top: 1.75rem;
+	margin-bottom: 0.5rem;
+	font-size: 1.05rem;
+	font-weight: 500;
+	color: var(--color-ink);
+}
+
+.article-prose p {
+	margin-bottom: 1.25rem;
+}
+
+.article-prose ul,
+.article-prose ol {
+	margin-top: 0.75rem;
+	margin-bottom: 1.25rem;
+	padding-left: 1.5rem;
+}
+
+.article-prose ul {
+	list-style-type: disc;
+}
+
+.article-prose ol {
+	list-style-type: decimal;
+}
+
+.article-prose li {
+	margin-bottom: 0.5rem;
+}
+
+.article-prose hr {
+	margin: 2.5rem 0;
+	border: 0;
+	border-top: 1px solid var(--color-rule);
+}
+
+.article-prose table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.5rem 0;
+	font-size: 0.8125rem;
+	display: table;
+}
+
+.article-prose th,
+.article-prose td {
+	padding: 0.75rem 1rem;
+	border: 1px solid var(--color-rule);
+	text-align: left;
+}
+
+.article-prose th {
+	background: var(--color-paper-2);
+	color: var(--color-ink);
+	font-weight: 500;
+}
+
+.article-prose blockquote {
+	border-left: 3px solid var(--color-accent);
+	padding: 0.75rem 1rem;
+	margin: 1.5rem 0;
+	color: var(--color-ink);
+	background: var(--color-paper-2);
+	border-radius: 0 var(--radius-card) var(--radius-card) 0;
+}
+
+.article-prose code {
+	background: var(--color-paper-2);
+	border: 1px solid var(--color-rule);
+	padding: 0.15rem 0.35rem;
+	border-radius: 3px;
+	font-family: var(--font-mono);
+	font-size: 0.9em;
+	color: var(--color-accent);
+}

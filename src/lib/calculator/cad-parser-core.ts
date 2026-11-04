@@ -1,5 +1,5 @@
 /**
- * Core CAD file parsing engine (STL Binary, STL ASCII, STEP).
+ * Core CAD file parsing engine (STL Binary, STL ASCII, STEP, 2D Drawings).
  * Pure, platform-agnostic, zero-memory-leak streaming parser using typed arrays.
  * Computes bounding boxes, exact signed volumes (divergence theorem), and rotational symmetry.
  */
@@ -30,12 +30,15 @@ export interface CadDimensions {
 	volumeCm3: number;
 	triangleCount: number;
 	fileName: string;
-	fileType: 'stl_binary' | 'stl_ascii' | 'step' | 'unknown';
+	fileType: 'stl_binary' | 'stl_ascii' | 'step' | 'drawing_2d' | 'unknown';
 	boundingBox: BoundingBox;
 	isRotationalSymmetric: boolean;
 	rotationalAxis?: 'x' | 'y' | 'z';
 	suggestedDiameterMm?: number;
 	suggestedLengthMm?: number;
+	is2dDrawing?: boolean;
+	fileSizeBytes?: number;
+	statusMessage?: string;
 }
 
 /**
@@ -88,7 +91,7 @@ export function detectRotationalSymmetry(dx: number, dy: number, dz: number): Ro
 }
 
 /**
- * Parses raw CAD file buffer (STL or STEP) and returns geometric bounding metrics.
+ * Parses raw CAD file buffer (STL, STEP, or 2D Drawing) and returns geometric bounding metrics.
  */
 export function parseCadBuffer(buffer: ArrayBuffer, fileName: string): CadDimensions {
 	const lower = fileName.toLowerCase();
@@ -101,7 +104,45 @@ export function parseCadBuffer(buffer: ArrayBuffer, fileName: string): CadDimens
 		return parseStep(buffer, fileName);
 	}
 
-	throw new Error('Unsupported CAD format. Only .STL and .STEP (.stp) files are supported.');
+	return parseDrawingOrDocument(buffer, fileName);
+}
+
+/**
+ * Handles 2D engineering drawings and non-mesh documentation formats gracefully.
+ */
+function parseDrawingOrDocument(buffer: ArrayBuffer, fileName: string): CadDimensions {
+	const lower = fileName.toLowerCase();
+	let label = 'Чертеж детали';
+	if (lower.endsWith('.pdf')) label = 'Чертеж (PDF)';
+	else if (lower.endsWith('.dxf')) label = 'Чертеж (DXF)';
+	else if (lower.endsWith('.dwg')) label = 'Чертеж (DWG)';
+	else if (lower.endsWith('.iges') || lower.endsWith('.igs')) label = '3D модель (IGES)';
+	else if (lower.endsWith('.png') || lower.endsWith('.jpg') || lower.endsWith('.jpeg')) label = 'Эскиз (Изображение)';
+
+	return {
+		lengthMm: 100,
+		widthMm: 50,
+		heightMm: 50,
+		volumeCm3: 0,
+		triangleCount: 0,
+		fileName,
+		fileType: 'drawing_2d',
+		boundingBox: {
+			minX: 0,
+			maxX: 100,
+			minY: 0,
+			maxY: 50,
+			minZ: 0,
+			maxZ: 50,
+			dx: 100,
+			dy: 50,
+			dz: 50
+		},
+		isRotationalSymmetric: false,
+		is2dDrawing: true,
+		fileSizeBytes: buffer.byteLength,
+		statusMessage: `${label} успешно прикреплен к спецификации. Укажите габаритные размеры заготовки ниже.`
+	};
 }
 
 /**
@@ -111,8 +152,6 @@ function parseStl(buffer: ArrayBuffer, fileName: string): CadDimensions {
 	const byteLength = buffer.byteLength;
 
 	if (byteLength < 84) {
-		// Minimum size for binary STL is 84 bytes (80 header + 4 count)
-		// Try ASCII if smaller
 		const text = new TextDecoder('utf-8', { fatal: false }).decode(buffer);
 		if (text.includes('facet') && text.includes('vertex')) {
 			return parseAsciiStl(buffer, fileName);
@@ -124,12 +163,10 @@ function parseStl(buffer: ArrayBuffer, fileName: string): CadDimensions {
 	const declaredTriangles = view.getUint32(80, true);
 	const expectedBinaryLength = 84 + declaredTriangles * 50;
 
-	// Exact length match guarantees binary STL
 	if (expectedBinaryLength === byteLength) {
 		return parseBinaryStl(view, declaredTriangles, fileName);
 	}
 
-	// Check first 512 bytes for non-printable binary characters (null bytes or byte > 127)
 	const sampleLength = Math.min(byteLength, 512);
 	const sampleBytes = new Uint8Array(buffer, 0, sampleLength);
 	let hasNullByte = false;
@@ -142,16 +179,13 @@ function parseStl(buffer: ArrayBuffer, fileName: string): CadDimensions {
 	}
 
 	if (hasNullByte) {
-		// Binary STL with trailing comments/padding or custom metadata
 		const safeTriangles = Math.min(declaredTriangles, Math.floor((byteLength - 84) / 50));
 		return parseBinaryStl(view, safeTriangles, fileName);
 	}
 
-	// Attempt ASCII parser
 	try {
 		return parseAsciiStl(buffer, fileName);
 	} catch {
-		// Fallback to binary if ASCII fails and length allows at least 1 triangle
 		if (byteLength >= 134) {
 			const safeTriangles = Math.min(declaredTriangles, Math.floor((byteLength - 84) / 50));
 			return parseBinaryStl(view, safeTriangles, fileName);
@@ -162,7 +196,6 @@ function parseStl(buffer: ArrayBuffer, fileName: string): CadDimensions {
 
 /**
  * High-speed binary STL parser with O(N) single-pass vertex streaming.
- * Uses DataView for safe unaligned 32-bit float reads across 50-byte facet boundaries.
  */
 function parseBinaryStl(view: DataView, triangleCount: number, fileName: string): CadDimensions {
 	const totalTriangles = Math.min(triangleCount, Math.floor((view.byteLength - 84) / 50));
@@ -182,31 +215,25 @@ function parseBinaryStl(view: DataView, triangleCount: number, fileName: string)
 	let offset = 84;
 
 	for (let i = 0; i < totalTriangles; i++) {
-		// Skip facet normal (12 bytes: 3 x float32)
 		offset += 12;
 
-		// Vertex 1
 		const x1 = view.getFloat32(offset, true);
 		const y1 = view.getFloat32(offset + 4, true);
 		const z1 = view.getFloat32(offset + 8, true);
 		offset += 12;
 
-		// Vertex 2
 		const x2 = view.getFloat32(offset, true);
 		const y2 = view.getFloat32(offset + 4, true);
 		const z2 = view.getFloat32(offset + 8, true);
 		offset += 12;
 
-		// Vertex 3
 		const x3 = view.getFloat32(offset, true);
 		const y3 = view.getFloat32(offset + 4, true);
 		const z3 = view.getFloat32(offset + 8, true);
 		offset += 12;
 
-		// Skip attribute byte count (2 bytes)
 		offset += 2;
 
-		// Skip corrupted/NaN vertices
 		if (
 			!Number.isFinite(x1) ||
 			!Number.isFinite(y1) ||
@@ -221,7 +248,6 @@ function parseBinaryStl(view: DataView, triangleCount: number, fileName: string)
 			continue;
 		}
 
-		// Update Bounding Box
 		if (x1 < minX) minX = x1;
 		if (x1 > maxX) maxX = x1;
 		if (x2 < minX) minX = x2;
@@ -243,7 +269,6 @@ function parseBinaryStl(view: DataView, triangleCount: number, fileName: string)
 		if (z3 < minZ) minZ = z3;
 		if (z3 > maxZ) maxZ = z3;
 
-		// Signed tetrahedron volume via divergence theorem: (v1 . (v2 x v3)) / 6
 		const crossX = y2 * z3 - z2 * y3;
 		const crossY = z2 * x3 - x2 * z3;
 		const crossZ = x2 * y3 - y2 * x3;
@@ -264,20 +289,14 @@ function parseBinaryStl(view: DataView, triangleCount: number, fileName: string)
 	});
 }
 
-/**
- * Zero-heap-allocation ASCII float scanner from raw byte array.
- * Parses ASCII floating-point numbers without creating intermediate string allocations.
- */
 function parseAsciiFloat(bytes: Uint8Array, start: number, end: number): number {
 	let i = start;
 	let sign = 1;
 
 	if (bytes[i] === 45) {
-		// '-'
 		sign = -1;
 		i++;
 	} else if (bytes[i] === 43) {
-		// '+'
 		i++;
 	}
 
@@ -290,7 +309,6 @@ function parseAsciiFloat(bytes: Uint8Array, start: number, end: number): number 
 	let fracPart = 0;
 	let fracDiv = 1;
 	if (i < end && bytes[i] === 46) {
-		// '.'
 		i++;
 		while (i < end && bytes[i] >= 48 && bytes[i] <= 57) {
 			fracPart = fracPart * 10 + (bytes[i] - 48);
@@ -302,7 +320,6 @@ function parseAsciiFloat(bytes: Uint8Array, start: number, end: number): number 
 	let val = sign * (intPart + fracPart / fracDiv);
 
 	if (i < end && (bytes[i] === 101 || bytes[i] === 69)) {
-		// 'e' or 'E'
 		i++;
 		let expSign = 1;
 		if (bytes[i] === 45) {
@@ -322,11 +339,6 @@ function parseAsciiFloat(bytes: Uint8Array, start: number, end: number): number 
 	return val;
 }
 
-/**
- * Ultra-lightweight streaming ASCII STL parser.
- * Scans byte array directly without generating a massive JS string heap object.
- * Computes exact signed volume and bounding box in a single pass.
- */
 function parseAsciiStl(buffer: ArrayBuffer, fileName: string): CadDimensions {
 	const bytes = new Uint8Array(buffer);
 	const len = bytes.length;
@@ -341,7 +353,6 @@ function parseAsciiStl(buffer: ArrayBuffer, fileName: string): CadDimensions {
 	let totalSignedVolume = 0;
 	let vertexCount = 0;
 
-	// Triplet coordinates for tetrahedron volume
 	let v1x = 0,
 		v1y = 0,
 		v1z = 0;
@@ -349,7 +360,6 @@ function parseAsciiStl(buffer: ArrayBuffer, fileName: string): CadDimensions {
 		v2y = 0,
 		v2z = 0;
 
-	// Scan for 'vertex' token: 'v'=118, 'e'=101, 'r'=114, 't'=116, 'e'=101, 'x'=120
 	let i = 0;
 	while (i < len - 10) {
 		if (
@@ -360,7 +370,6 @@ function parseAsciiStl(buffer: ArrayBuffer, fileName: string): CadDimensions {
 			bytes[i + 4] === 101 &&
 			bytes[i + 5] === 120
 		) {
-			// Verify delimiter before 'vertex'
 			const prevByte = i > 0 ? bytes[i - 1] : 32;
 			const nextByte = bytes[i + 6];
 
@@ -370,7 +379,6 @@ function parseAsciiStl(buffer: ArrayBuffer, fileName: string): CadDimensions {
 			) {
 				let cursor = i + 6;
 
-				// Parse X
 				while (cursor < len && (bytes[cursor] === 32 || bytes[cursor] === 9)) cursor++;
 				const startX = cursor;
 				while (
@@ -383,7 +391,6 @@ function parseAsciiStl(buffer: ArrayBuffer, fileName: string): CadDimensions {
 					cursor++;
 				const x = parseAsciiFloat(bytes, startX, cursor);
 
-				// Parse Y
 				while (cursor < len && (bytes[cursor] === 32 || bytes[cursor] === 9)) cursor++;
 				const startY = cursor;
 				while (
@@ -396,7 +403,6 @@ function parseAsciiStl(buffer: ArrayBuffer, fileName: string): CadDimensions {
 					cursor++;
 				const y = parseAsciiFloat(bytes, startY, cursor);
 
-				// Parse Z
 				while (cursor < len && (bytes[cursor] === 32 || bytes[cursor] === 9)) cursor++;
 				const startZ = cursor;
 				while (
@@ -427,7 +433,6 @@ function parseAsciiStl(buffer: ArrayBuffer, fileName: string): CadDimensions {
 						v2y = y;
 						v2z = z;
 					} else {
-						// 3rd vertex: compute tetrahedron volume
 						const crossX = v2y * z - v2z * y;
 						const crossY = v2z * x - v2x * z;
 						const crossZ = v2x * y - v2y * x;
@@ -524,7 +529,21 @@ function parseStep(buffer: ArrayBuffer, fileName: string): CadDimensions {
 	}
 
 	if (pointCount === 0) {
-		throw new Error('Could not extract Cartesian point coordinates from STEP file.');
+		// Graceful attachment without failing
+		return {
+			lengthMm: 100,
+			widthMm: 50,
+			heightMm: 50,
+			volumeCm3: 0,
+			triangleCount: 0,
+			fileName,
+			fileType: 'step',
+			boundingBox: { minX: 0, maxX: 100, minY: 0, maxY: 50, minZ: 0, maxZ: 50, dx: 100, dy: 50, dz: 50 },
+			isRotationalSymmetric: false,
+			is2dDrawing: true,
+			fileSizeBytes: buffer.byteLength,
+			statusMessage: 'STEP файл успешно прикреплен. Задайте требуемые размеры заготовки ниже.'
+		};
 	}
 
 	const dx = Math.max(0.1, maxX - minX);
@@ -538,7 +557,6 @@ function parseStep(buffer: ArrayBuffer, fileName: string): CadDimensions {
 	const widthMm = Math.round(sorted[1] * 10) / 10;
 	const heightMm = Math.round(sorted[2] * 10) / 10;
 
-	// Conservative machined solid ratio estimate (0.70 of bounding box)
 	const volumeCm3 = Math.max(0.01, Math.round(((dx * dy * dz) / 1000) * 0.7 * 100) / 100);
 
 	return {
@@ -563,7 +581,10 @@ function parseStep(buffer: ArrayBuffer, fileName: string): CadDimensions {
 		isRotationalSymmetric: rot.isRotational,
 		rotationalAxis: rot.axis,
 		suggestedDiameterMm: rot.diameter,
-		suggestedLengthMm: rot.length
+		suggestedLengthMm: rot.length,
+		is2dDrawing: false,
+		fileSizeBytes: buffer.byteLength,
+		statusMessage: 'Геометрия 3D модели успешно распознана'
 	};
 }
 
@@ -594,7 +615,6 @@ function buildResult(params: {
 	const bboxVolumeCm3 = (dx * dy * dz) / 1000;
 	const rawVolumeCm3 = Math.abs(params.totalSignedVolume) / 1000;
 
-	// Fallback to solid ratio if signed volume is zero (e.g. inverted/open mesh)
 	const volumeCm3 =
 		rawVolumeCm3 > 0.001 && rawVolumeCm3 <= bboxVolumeCm3 * 1.05
 			? Math.max(0.01, Math.round(rawVolumeCm3 * 100) / 100)

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { base } from '$lib/paths';
 	import { siteConfig } from '#lib/config/site';
+	import BrandLogo from '#lib/components/BrandLogo.svelte';
 
 	const currentYear = new Date().getFullYear();
 </script>
@@ -13,18 +14,11 @@
 		<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
 			<!-- Col 1: Production Plant Summary -->
 			<div class="space-y-4">
-				<div class="flex items-center gap-2">
-					<div
-						class="flex h-7 w-7 items-center justify-center rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] font-mono text-sm font-light text-[var(--color-ink)]"
-					>
-						M
-					</div>
-					<span class="text-base font-light tracking-tight text-[var(--color-ink)]"
-						>{siteConfig.brandName}</span
-					>
-				</div>
+				<a href="{base}/" class="inline-block">
+					<BrandLogo size="sm" showTagline={false} />
+				</a>
 				<p class="text-xs leading-relaxed text-[var(--color-muted)]">
-					Специализированный участок механической обработки с ЧПУ в Калининградской
+					Специализированный участок механообработки: 2 обрабатывающих центра с ЧПУ в Калининградской
 					области. Изготовление деталей по чертежам заказчика для
 					машиностроения, приборостроения и промышленного оборудования. Доставка готовых изделий по всей Калининградской области.
 				</p>
@@ -87,7 +81,7 @@
 							href="{base}/kontrol-kachestva-i-oborudovanie/"
 							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
-							Контроль ОТК и станочный парк
+							Контроль ОТК и станочный парк (2 центра)
 						</a>
 					</li>
 					<li>
@@ -170,7 +164,7 @@
 		>
 			<div>
 				© {currentYear}
-				{siteConfig.brandName}. Металлообработка с ЧПУ в Калининграде. Доставка по всей области.
+				{siteConfig.brandName}. 2 обрабатывающих центра с ЧПУ в Калининграде. Доставка по всей области.
 			</div>
 			<div class="mt-3 flex items-center gap-6 text-xs sm:mt-0">
 				<a

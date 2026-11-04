@@ -3,6 +3,7 @@
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
 	import { createServiceSchema, serializeSchema } from '#lib/seo/schema';
+	import { WORKSHOP_SPECS } from '#lib/content/workshop-specs';
 
 	const breadcrumbs = [
 		{ name: 'Зуборезные работы', path: '/zuboreznye-i-shlifovalnye-raboty/' }
@@ -11,7 +12,7 @@
 	const serviceSchema = createServiceSchema({
 		name: 'Зуборезные работы ЧПУ в Калининграде',
 		description:
-			'Нарезание прямозубых и косозубых шестерен m1-m8, нарезка шлицев. Нарезание шестерен, прямозубых и косозубых зубчатых колес, нарезка шлицев по ГОСТ.',
+			'Нарезание прямозубых и косозубых круглых колес m1-m8, нарезка шлицев. Нарезание шестерен, прямозубых и косозубых зубчатых венцов по ГОСТ 1643-81.',
 		serviceType: 'Зуборезные работы ЧПУ по металлу',
 		path: '/zuboreznye-i-shlifovalnye-raboty/',
 		offers: {
@@ -28,7 +29,7 @@
 	>
 	<meta
 		name="description"
-		content="Нарезка шестерен m1–m8, шлицевых соединений, нарезка шлицевых валов в Калининграде. Доставка по всей области. Закалка 55 HRC, точность ГОСТ 1643-81."
+		content="Нарезка круглых шестерен m1–m8, шлицевых соединений, нарезка шлицевых валов в Калининграде. Доставка по всей области. Точность ГОСТ 1643-81, НДС 22%."
 	/>
 	{@html serializeSchema(serviceSchema)}
 </svelte:head>
@@ -42,37 +43,39 @@
 			class="mt-4 grid grid-cols-1 items-start gap-8 border-b border-[var(--color-rule)] pb-8 lg:grid-cols-12"
 		>
 			<div class="lg:col-span-7">
-				<h1 class="text-3xl text-[var(--color-ink)] sm:text-4xl">
+				<div class="flex items-center gap-2 font-mono text-xs tracking-wider uppercase text-[var(--color-muted)]">
+					<span class="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]"></span>
+					Зуборезный участок · Калининград
+				</div>
+				<h1 class="mt-4 text-3xl text-[var(--color-ink)] sm:text-4xl">
 					Зуборезные работы с ЧПУ
 				</h1>
 				<p class="lead mt-4 text-sm leading-relaxed sm:text-base">
-					Нарезка шестерен m1–m8, шлицевых валов деталей передач
-					<span class="num text-[var(--color-ink)]">Ra 0.4<span class="u">&thinsp;мкм</span></span>.
-					допуски по ГОСТ 1643-81, партии от 5 штук.
+					Нарезка круглых колес m1–m8, прямозубых и косозубых венцов и шлицев на валах. Посадки до IT7, шероховатость Ra 1.25 мкм, точность по ГОСТ 1643-81, партии от 1 шт.
 				</p>
 			</div>
 			<div class="well text-xs text-[var(--color-ink-2)] lg:col-span-5">
-				<div class="font-normal text-[var(--color-ink)]">Лимиты участка зуборезки и шлифовки:</div>
+				<div class="font-normal text-[var(--color-ink)]">Лимиты зуборезного участка:</div>
 				<div class="mt-3 grid grid-cols-2 gap-3 text-[var(--color-muted)]">
 					<div>
 						Модуль зубьев:
 						<strong class="num block font-normal text-[var(--color-ink)]">m = 1.0 – 8.0</strong>
 					</div>
 					<div>
-						Круглая шлифовка:
+						Диаметр круглых колес:
 						<strong class="num block font-normal text-[var(--color-ink)]"
-							>⌀ до 200, L до 800<span class="u">&thinsp;мм</span></strong
+							>до ⌀500<span class="u">&thinsp;мм</span></strong
 						>
 					</div>
 					<div>
-						Шероховатость:
+						Шероховатость шеек:
 						<strong class="num block font-normal text-[var(--color-ink)]"
-							>Ra 0.4<span class="u">&thinsp;мкм</span></strong
+							>Ra 1.25<span class="u">&thinsp;мкм</span></strong
 						>
 					</div>
 					<div>
-						Закалка ТВЧ:
-						<strong class="num block font-normal text-[var(--color-ink)]">до 55 HRC</strong>
+						Длина шлицевых валов:
+						<strong class="num block font-normal text-[var(--color-ink)]">до 750 мм</strong>
 					</div>
 				</div>
 			</div>
@@ -83,10 +86,10 @@
 			<div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
 				<div class="lg:col-span-4">
 					<h2 id="tech-params-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
-						Параметры станков
+						Параметры зубофрезерного оборудования
 					</h2>
 					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-						Зубофрезерные и шлифовальные станки высокой точности с приборами активного контроля.
+						Зубофрезерный полуавтомат высокой точности для единичного и серийного нарезания венцов.
 					</p>
 				</div>
 				<div class="overflow-x-auto lg:col-span-8">
@@ -101,7 +104,7 @@
 						<tbody>
 							<tr>
 								<td class="font-normal text-[var(--color-ink)]">
-									Зубофрезерование цилиндрических колес
+									Зубофрезерование круглых колес
 								</td>
 								<td class="num text-[var(--color-ink)]"
 									>Диаметр до 500<span class="u">&thinsp;мм</span>, модуль m1–m8</td
@@ -122,72 +125,26 @@
 							</tr>
 							<tr>
 								<td class="font-normal text-[var(--color-ink)]">
-									Круглое наружное шлифование валов
+									Чистовая обработка посадочных шеек валов
 								</td>
 								<td class="num text-[var(--color-ink)]">
-									Диаметр до 200<span class="u">&thinsp;мм</span>, длина до 800<span class="u"
+									Диаметр до 200<span class="u">&thinsp;мм</span>, длина до 750<span class="u"
 										>&thinsp;мм</span
 									>
 								</td>
 								<td class="text-[var(--color-muted)]">
-									Квалитет IT6, шероховатость Ra 0.4 мкм под подшипники
+									Квалитет IT7, шероховатость Ra 1.25 мкм под подшипники
 								</td>
 							</tr>
 							<tr>
-								<td class="font-normal text-[var(--color-ink)]">Плоское шлифование плит и ножей</td>
+								<td class="font-normal text-[var(--color-ink)]">Косозубые зубчатые венцы</td>
 								<td class="num text-[var(--color-ink)]"
-									>Зеркало стола 800 × 320<span class="u">&thinsp;мм</span></td
+									>Угол наклона зуба до ±45°</td
 								>
-								<td class="text-[var(--color-muted)]">Параллельность 0.005 мм, Ra 0.4–0.8 мкм</td>
-							</tr>
-							<tr>
-								<td class="font-normal text-[var(--color-ink)]">
-									Закалка токами высокой частоты (ТВЧ)
-								</td>
-								<td class="num text-[var(--color-ink)]"
-									>Глубина слоя 1.5 – 3.0<span class="u">&thinsp;мм</span></td
-								>
-								<td class="text-[var(--color-muted)]">
-									Твердость 48–55 HRCэ при сохранении вязкой сердцевины
-								</td>
+								<td class="text-[var(--color-muted)]">Плавное зацепление, бесшумная работа редукторов</td>
 							</tr>
 						</tbody>
 					</table>
-				</div>
-			</div>
-		</section>
-
-		<!-- Why High Precision Grinding Matters -->
-		<section class="mt-14" aria-labelledby="why-grinding-heading">
-			<div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
-				<div class="lg:col-span-4">
-					<h2 id="why-grinding-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
-						Значение шлифования
-					</h2>
-					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-						Устранение поводок после термообработки и формирование опорных шеек под подшипники.
-					</p>
-				</div>
-				<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-8">
-					<div class="well">
-						<h3 class="font-normal text-[var(--color-ink)]">Устранение термических поводок</h3>
-						<p class="mt-2 text-xs text-[var(--color-muted)]">
-							При объемной термообработке сталей (40Х, 30ХГСА) деталь неизбежно коробится. Чистовое
-							круглое шлифование восстанавливает оси с биением не более
-							<strong class="num font-normal text-[var(--color-ink)]"
-								>0.005<span class="u">&thinsp;мм</span></strong
-							>.
-						</p>
-					</div>
-					<div class="well">
-						<h3 class="font-normal text-[var(--color-ink)]">Ресурс подшипников и сальников</h3>
-						<p class="mt-2 text-xs text-[var(--color-muted)]">
-							Токарная чистовая обработка оставляет микрогребешки (Ra 1.6–3.2). Шлифование до
-							<strong class="num font-normal text-[var(--color-ink)]"
-								>Ra 0.4<span class="u">&thinsp;мкм</span></strong
-							> образует зеркальную поверхность, увеличивая ресурс редукторов в 3–4 раза.
-						</p>
-					</div>
 				</div>
 			</div>
 		</section>
@@ -207,7 +164,7 @@
 					<p class="max-w-2xl">
 						Шестерни и шлицевые валы производства {siteConfig.brandName} успешно эксплуатируются в приводах
 						конвейеров, редукторах производственных линий, а также на сельхозтехнике (комбайны, тракторы)
-						в хозяйствах Гурьевского и Черняховского районов.
+						в хозяйствах Гурьевского, Черняховского и других районов Калининградской области.
 					</p>
 				</div>
 			</div>
@@ -223,7 +180,7 @@
 				>
 					<span class="block font-normal text-[var(--color-ink)]">Токарная ЧПУ обработка</span>
 					<span class="mt-1 block text-[var(--color-muted)]"
-						>Черновое и чистовое точение венцов и валов</span
+						>Черновое и чистовое точение венцов и валов до IT7</span
 					>
 				</a>
 				<a
@@ -239,8 +196,7 @@
 					href="{base}/portfolio/"
 					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
 				>
-					<span class="block font-normal text-[var(--color-ink)]">Примеры шестерен в портфолио</span
-					>
+					<span class="block font-normal text-[var(--color-ink)]">Примеры шестерен в портфолио</span>
 					<span class="mt-1 block text-[var(--color-muted)]"
 						>Реализованные зубчатые пары и шлицевые муфты</span
 					>
@@ -251,7 +207,7 @@
 		<!-- Direct CTA Action -->
 		<section class="mt-14 border-t border-[var(--color-rule)] pt-12 pb-6 text-center">
 			<h2 class="text-lg text-[var(--color-ink)] sm:text-xl">
-				Заказ нарезки зубьев и шлифования деталей в Калининграде
+				Заказ нарезки зубьев и шестерен в Калининграде
 			</h2>
 			<p class="lead mx-auto mt-2 max-w-2xl text-xs sm:text-sm">
 				Принимаем чертежи и образцы изношенных деталей для реверс-инжиниринга. Минимальный заказ —
