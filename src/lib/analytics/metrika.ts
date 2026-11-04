@@ -7,7 +7,7 @@ import { siteConfig } from '#lib/config/site';
 
 declare global {
 	interface Window {
-		ym?: (counterId: number, action: string, targetOrParams: string | object, params?: object) => void;
+		ym?: (counterId: number, action: string, targetOrParams?: string | object, params?: object) => void;
 	}
 }
 
@@ -51,8 +51,13 @@ export function reachMetrikaGoal(goalName: string, params?: Record<string, strin
 
 /**
  * Tracks a simulated order submission from the cost calculator.
+ * Sends both the JS goal 'demand_order_submit' and hierarchical visit parameters.
  */
 export function trackOrderSubmission(quote: QuoteMetricsPayload) {
+	const rawCounterId = siteConfig.ymCounterId;
+	const counterId = parseInt(rawCounterId, 10);
+
+	// 1. Goal with flat parameters
 	reachMetrikaGoal('demand_order_submit', {
 		operation: quote.operation,
 		material: quote.material,
@@ -66,6 +71,25 @@ export function trackOrderSubmission(quote: QuoteMetricsPayload) {
 		unit_rub: quote.unitRub,
 		batch_discount_percent: quote.discountPercent
 	});
+
+	// 2. Hierarchical visit parameters tree for easy drill-down in Yandex.Metrika reports
+	if (typeof window !== 'undefined' && !isNaN(counterId) && counterId > 0 && typeof window.ym === 'function') {
+		window.ym(counterId, 'params', {
+			'Заявка_на_расчет': {
+				'Вид_обработки': quote.operation,
+				'Материал': quote.material,
+				'Количество_шт': quote.quantity,
+				'Сложность': quote.complexity,
+				'Габариты': quote.dimensions,
+				'Квалитет': quote.tolerance,
+				'Срочность': quote.urgency,
+				'Металл_заказчика': quote.isCustomerMaterial ? 'Да' : 'Нет',
+				'Сумма_заказа_руб': quote.totalRub,
+				'Цена_за_штуку_руб': quote.unitRub,
+				'Скидка_за_серию': `${quote.discountPercent}%`
+			}
+		});
+	}
 }
 
 /**

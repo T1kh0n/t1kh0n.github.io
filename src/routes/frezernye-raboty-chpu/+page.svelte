@@ -180,41 +180,41 @@
 				Фрезерование конструкционных материалов
 			</h2>
 			<div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
-				<div class="well">
-					<h3 class="text-sm font-normal text-[var(--color-ink)]">
+				<div class="well flex flex-col">
+					<h3 class="text-sm font-normal text-[var(--color-ink)] min-h-[44px] flex items-center border-b border-[var(--color-rule)] pb-2">
 						Алюминиевые и легкие сплавы
 					</h3>
-					<ul class="mt-3 space-y-2 text-xs text-[var(--color-ink-2)]">
-						<li class="flex items-start gap-2">
-							<span class="font-mono text-[var(--color-accent)]">Д16Т (дюралюминий):</span>
+					<ul class="mt-3 space-y-2.5 text-xs text-[var(--color-ink-2)]">
+						<li class="grid grid-cols-1 md:grid-cols-[190px_1fr] items-baseline gap-1 md:gap-3">
+							<span class="font-mono text-[var(--color-accent)]">Д16Т (дюраль):</span>
 							<span>Идеальная обрабатываемость, отсутствие деформаций после фрезерования, Ra 1.25.</span>
 						</li>
-						<li class="flex items-start gap-2">
+						<li class="grid grid-cols-1 md:grid-cols-[190px_1fr] items-baseline gap-1 md:gap-3">
 							<span class="font-mono text-[var(--color-accent)]">АМг6, АМг5:</span>
-							<span>Свариваемые коррозионно-стойкие корпуса насосного и емкостного промышленного оборудования.</span>
+							<span>Свариваемые коррозионно-стойкие корпуса насосного и емкостного оборудования.</span>
 						</li>
-						<li class="flex items-start gap-2">
-							<span class="font-mono text-[var(--color-accent)]">В95:</span>
+						<li class="grid grid-cols-1 md:grid-cols-[190px_1fr] items-baseline gap-1 md:gap-3">
+							<span class="font-mono text-[var(--color-accent)]">В95 (авиационный):</span>
 							<span>Высокопрочный авиационный сплав для тяжелонагруженных кронштейнов.</span>
 						</li>
 					</ul>
 				</div>
 
-				<div class="well">
-					<h3 class="text-sm font-normal text-[var(--color-ink)]">
+				<div class="well flex flex-col">
+					<h3 class="text-sm font-normal text-[var(--color-ink)] min-h-[44px] flex items-center border-b border-[var(--color-rule)] pb-2">
 						Стали, нержавеющие сплавы и полимеры
 					</h3>
-					<ul class="mt-3 space-y-2 text-xs text-[var(--color-ink-2)]">
-						<li class="flex items-start gap-2">
+					<ul class="mt-3 space-y-2.5 text-xs text-[var(--color-ink-2)]">
+						<li class="grid grid-cols-1 md:grid-cols-[190px_1fr] items-baseline gap-1 md:gap-3">
 							<span class="font-mono text-[var(--color-accent)]">Ст45, 40Х:</span>
 							<span>Фрезерование пазов, лысок, шпоночных пазов, профилирование плит.</span>
 						</li>
-						<li class="flex items-start gap-2">
+						<li class="grid grid-cols-1 md:grid-cols-[190px_1fr] items-baseline gap-1 md:gap-3">
 							<span class="font-mono text-[var(--color-accent)]">12Х18Н10Т / AISI 304:</span>
 							<span>Фрезерование вязких нержавеющих сталей с подачей СОЖ высокого давления.</span>
 						</li>
-						<li class="flex items-start gap-2">
-							<span class="font-mono text-[var(--color-accent)]">Капролон, Полиацеталь (POM):</span>
+						<li class="grid grid-cols-1 md:grid-cols-[190px_1fr] items-baseline gap-1 md:gap-3">
+							<span class="font-mono text-[var(--color-accent)]">Капролон, POM:</span>
 							<span>Высокоскоростное сухое фрезерование изоляторов и направляющих без оплавления.</span>
 						</li>
 					</ul>

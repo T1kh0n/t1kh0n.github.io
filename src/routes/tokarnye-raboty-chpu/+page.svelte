@@ -180,45 +180,45 @@
 				Обрабатываемые металлы и сплавы
 			</h2>
 			<div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
-				<div class="well">
-					<h3 class="text-sm font-normal text-[var(--color-ink)]">
+				<div class="well flex flex-col">
+					<h3 class="text-sm font-normal text-[var(--color-ink)] min-h-[44px] flex items-center border-b border-[var(--color-rule)] pb-2">
 						Конструкционные и легированные стали
 					</h3>
-					<ul class="mt-3 space-y-2 text-xs text-[var(--color-ink-2)]">
-						<li class="flex items-start gap-2">
+					<ul class="mt-3 space-y-2.5 text-xs text-[var(--color-ink-2)]">
+						<li class="grid grid-cols-1 md:grid-cols-[190px_1fr] items-baseline gap-1 md:gap-3">
 							<span class="font-mono text-[var(--color-accent)]">Ст45, Ст20, Ст35:</span>
 							<span>Валы, крепеж, пальцы, ступенчатые втулки общего машиностроения.</span>
 						</li>
-						<li class="flex items-start gap-2">
+						<li class="grid grid-cols-1 md:grid-cols-[190px_1fr] items-baseline gap-1 md:gap-3">
 							<span class="font-mono text-[var(--color-accent)]">40Х, 30ХГСА:</span>
 							<span>Высоконагруженные детали, зубчатые венцы, штоки под последующую закалку.</span>
 						</li>
-						<li class="flex items-start gap-2">
+						<li class="grid grid-cols-1 md:grid-cols-[190px_1fr] items-baseline gap-1 md:gap-3">
 							<span class="font-mono text-[var(--color-accent)]">09Г2С:</span>
 							<span>Хладостойкие фланцы и корпусные элементы с повышенной ударной вязкостью.</span>
 						</li>
 					</ul>
 				</div>
 
-				<div class="well">
-					<h3 class="text-sm font-normal text-[var(--color-ink)]">
+				<div class="well flex flex-col">
+					<h3 class="text-sm font-normal text-[var(--color-ink)] min-h-[44px] flex items-center border-b border-[var(--color-rule)] pb-2">
 						Нержавеющие стали, цветные сплавы и полимеры
 					</h3>
-					<ul class="mt-3 space-y-2 text-xs text-[var(--color-ink-2)]">
-						<li class="flex items-start gap-2">
+					<ul class="mt-3 space-y-2.5 text-xs text-[var(--color-ink-2)]">
+						<li class="grid grid-cols-1 md:grid-cols-[190px_1fr] items-baseline gap-1 md:gap-3">
 							<span class="font-mono text-[var(--color-accent)]">12Х18Н10Т / AISI 304:</span>
 							<span>Пищевые и химические штуцеры, детали оборудования с повышенными требованиями к коррозии.</span>
 						</li>
-						<li class="flex items-start gap-2">
+						<li class="grid grid-cols-1 md:grid-cols-[190px_1fr] items-baseline gap-1 md:gap-3">
 							<span class="font-mono text-[var(--color-accent)]">Д16Т, АМг6:</span>
 							<span>Легкие прецизионные корпуса, приборные корпуса и переходники.</span>
 						</li>
-						<li class="flex items-start gap-2">
+						<li class="grid grid-cols-1 md:grid-cols-[190px_1fr] items-baseline gap-1 md:gap-3">
 							<span class="font-mono text-[var(--color-accent)]">БрАЖ9-4, ЛС59-1:</span>
 							<span>Антифрикционные втулки, гайки ходовых винтов, червячные колеса.</span>
 						</li>
-						<li class="flex items-start gap-2">
-							<span class="font-mono text-[var(--color-accent)]">Капролон (ПА-6), Фторопласт:</span>
+						<li class="grid grid-cols-1 md:grid-cols-[190px_1fr] items-baseline gap-1 md:gap-3">
+							<span class="font-mono text-[var(--color-accent)]">Капролон, Фторопласт:</span>
 							<span>Изоляторы, направляющие скольжения, химически стойкие уплотнители.</span>
 						</li>
 					</ul>

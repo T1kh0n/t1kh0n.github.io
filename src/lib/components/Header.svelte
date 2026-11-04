@@ -21,14 +21,19 @@
 	class="sticky top-0 z-40 border-b border-[var(--color-rule)] bg-[var(--color-paper)]/95 backdrop-blur-md"
 >
 	<!-- Single Clean Navigation Bar -->
-	<div class="mx-auto flex max-w-7xl items-center justify-between gap-2 px-4 py-2.5 sm:gap-4 sm:px-6 lg:px-8">
+	<div class="mx-auto flex max-w-7xl items-center justify-between gap-1.5 px-3 py-2 sm:gap-4 sm:px-6 sm:py-2.5 lg:px-8">
 		<!-- Brand Logo -->
 		<a href="{base}/" class="group flex shrink-0 items-center">
-			<BrandLogo size="md" />
+			<span class="sm:hidden inline-flex">
+				<BrandLogo size="sm" showTagline={false} />
+			</span>
+			<span class="hidden sm:inline-flex">
+				<BrandLogo size="md" />
+			</span>
 		</a>
 
 		<!-- Right Section: Navigation Links & Actions -->
-		<div class="flex items-center gap-2 sm:gap-3 lg:gap-5">
+		<div class="flex items-center gap-1.5 sm:gap-3 lg:gap-5">
 			<!-- Desktop Navigation -->
 			<nav class="hidden items-center gap-3.5 lg:flex xl:gap-4" aria-label="Основная навигация">
 				{#each navLinks as link}
@@ -71,10 +76,31 @@
 				<span>Калькулятор ЧПУ</span>
 			</a>
 
-			<!-- Mobile Menu Button (≥ 44px touch target) -->
+			<!-- Mobile Accessibility Toggle (Eye icon, left of burger menu) -->
 			<button
 				type="button"
-				class="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-card)] border border-[var(--color-rule)] text-[var(--color-ink-2)] transition-colors hover:text-white lg:hidden"
+				class="flex sm:hidden h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-card)] border border-[var(--color-rule)] text-[var(--color-ink-2)] transition-colors hover:text-white"
+				onclick={() => a11y.toggleEnabled()}
+				aria-label="Версия для слабовидящих"
+				title="Версия для слабовидящих (ГОСТ Р 52872-2019)"
+			>
+				<svg
+					class="h-4.5 w-4.5 text-[var(--color-accent)] a11y-icon"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					aria-hidden="true"
+				>
+					<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+					<circle cx="12" cy="12" r="3"></circle>
+				</svg>
+			</button>
+
+			<!-- Mobile Menu Button (touch target) -->
+			<button
+				type="button"
+				class="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-[var(--radius-card)] border border-[var(--color-rule)] text-[var(--color-ink-2)] transition-colors hover:text-white lg:hidden"
 				onclick={() => (isMobileMenuOpen = !isMobileMenuOpen)}
 				aria-expanded={isMobileMenuOpen}
 				aria-label="Переключить меню"
@@ -119,7 +145,7 @@
 						stroke-width="2"
 						aria-hidden="true"
 					>
-						<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+						<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
 						<circle cx="12" cy="12" r="3"></circle>
 					</svg>
 					<span>Версия для слабовидящих</span>

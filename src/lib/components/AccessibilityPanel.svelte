@@ -136,23 +136,15 @@
 				</div>
 			</div>
 
-			<!-- Group 5: Images & Speech Synthesizer -->
+			<!-- Group 5: Images Display Toggle -->
 			<div class="flex items-center gap-1.5 sm:gap-2">
 				<button
 					type="button"
-					class="border border-black px-2 py-1 font-bold transition-colors whitespace-nowrap {a11y.settings.showImages ? 'hover:bg-gray-200' : 'bg-black text-white'}"
+					class="border border-black px-2.5 py-1 font-bold transition-colors whitespace-nowrap {a11y.settings.showImages ? 'hover:bg-gray-200' : 'bg-black text-white'}"
 					onclick={() => a11y.toggleImages()}
 					title="Включить / отключить изображения на страницах"
 				>
 					{a11y.settings.showImages ? 'Изображения: Вкл' : 'Изображения: Выкл'}
-				</button>
-				<button
-					type="button"
-					class="border border-black px-2 py-1 font-bold transition-colors whitespace-nowrap {a11y.settings.speechActive ? 'bg-red-700 text-white animate-pulse' : 'hover:bg-gray-200'}"
-					onclick={() => a11y.toggleSpeech()}
-					title="Озвучить содержимое страницы синтезатором речи"
-				>
-					{a11y.settings.speechActive ? '⏹ Стоп голос' : '🔊 Озвучить'}
 				</button>
 			</div>
 

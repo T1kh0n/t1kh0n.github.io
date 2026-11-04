@@ -632,10 +632,10 @@
 
 <section
 	id="cmm-twin-section"
-	class="border-b border-[var(--color-rule)] bg-[var(--color-paper)] py-16 sm:py-24"
+	class="border-b border-[var(--color-rule)] bg-[var(--color-paper)] py-16 sm:py-20 lg:min-h-[calc(100vh-4.5rem)] lg:flex lg:flex-col lg:justify-center"
 	aria-labelledby="cmm-inspection-heading"
 >
-	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+	<div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
 			<!-- Left: Layer Ledger Switchboard (lg:col-span-5) -->
 			<div class="lg:col-span-5">

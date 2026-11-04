@@ -15,7 +15,6 @@ export interface AccessibilitySettings {
 	kerning: KerningTier;
 	lineHeight: LineHeightTier;
 	showImages: boolean;
-	speechActive: boolean;
 }
 
 const STORAGE_KEY = 'metalprom39_a11y_settings';
@@ -26,8 +25,7 @@ const DEFAULT_SETTINGS: AccessibilitySettings = {
 	colorScheme: 'black_on_white',
 	kerning: 'normal',
 	lineHeight: 'relaxed',
-	showImages: true,
-	speechActive: false
+	showImages: true
 };
 
 class AccessibilityManager {
@@ -45,7 +43,7 @@ class AccessibilityManager {
 			const saved = localStorage.getItem(STORAGE_KEY);
 			if (saved) {
 				const parsed = JSON.parse(saved);
-				this.settings = { ...DEFAULT_SETTINGS, ...parsed, speechActive: false };
+				this.settings = { ...DEFAULT_SETTINGS, ...parsed };
 			}
 		} catch {
 			// localStorage blocked or restricted
@@ -66,8 +64,6 @@ class AccessibilityManager {
 		this.settings.isEnabled = !this.settings.isEnabled;
 		if (this.settings.isEnabled) {
 			this.settings.colorScheme = 'black_on_white';
-		} else {
-			this.stopSpeech();
 		}
 		this.saveSettings();
 	}
@@ -99,51 +95,7 @@ class AccessibilityManager {
 
 	resetDefaults() {
 		this.settings = { ...DEFAULT_SETTINGS, isEnabled: false };
-		this.stopSpeech();
 		this.saveSettings();
-	}
-
-	toggleSpeech() {
-		if (typeof window === 'undefined') return;
-		if (!('speechSynthesis' in window)) {
-			alert('Ваш браузер не поддерживает голосовое озвучивание страниц.');
-			return;
-		}
-
-		if (this.settings.speechActive) {
-			this.stopSpeech();
-		} else {
-			this.startSpeech();
-		}
-	}
-
-	startSpeech() {
-		if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
-		window.speechSynthesis.cancel();
-
-		// Collect page text (excluding nav, footer and script tags)
-		const mainEl = document.querySelector('main') || document.body;
-		const text = mainEl.innerText.replace(/\s+/g, ' ').slice(0, 5000);
-
-		const utterance = new SpeechSynthesisUtterance(text);
-		utterance.lang = 'ru-RU';
-		utterance.rate = 1.0;
-
-		utterance.onend = () => {
-			this.settings.speechActive = false;
-		};
-		utterance.onerror = () => {
-			this.settings.speechActive = false;
-		};
-
-		this.settings.speechActive = true;
-		window.speechSynthesis.speak(utterance);
-	}
-
-	stopSpeech() {
-		if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
-		window.speechSynthesis.cancel();
-		this.settings.speechActive = false;
 	}
 
 	applyToDocument() {
