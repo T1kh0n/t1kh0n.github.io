@@ -476,3 +476,110 @@ The `openseo` platform provides 12 specialized agent workflows that guide keywor
 │ 3. Metrika API: Extract demand tree (`scripts/get_yandex_metrics`)     │
 └────────────────────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## 8. Agent-Automated Search Console & Webmaster Configuration
+
+When setting up and administering search consoles, the AI agent is authorized and equipped to execute configuration actions directly through API and browser automation rather than delegating manual user steps.
+
+### 8.1. Google Search Console Automated Setup Workflow
+1. **Property Provisioning:**
+   - Execute `mcp-search-console:add_site` with target URL (`siteUrl: "https://metalprom39.github.io/"`).
+2. **Automated HTML Meta Verification:**
+   - Agent injects `<meta name="google-site-verification" content="..." />` into `src/routes/+layout.svelte` via `siteConfig.googleVerification`.
+   - Agent builds and executes automatic deployment (`pnpm build && git push`).
+3. **Sitemap Pipeline:**
+   - Agent invokes `mcp-search-console:submit_sitemap` with `feedpath: "https://metalprom39.github.io/sitemap.xml"`.
+   - Agent checks sitemap status via `mcp-search-console:list_sitemaps`.
+4. **Fast Index Queue:**
+   - Agent queries `mcp-search-console:inspect_url` for `/`, `/kalkulyator-stoimosti-chpu/`, and key service pages to trigger inspection and indexation.
+
+### 8.2. Yandex.Webmaster Automated Setup Workflow
+1. **API & Meta Verification:**
+   - Agent registers verification code into `PUBLIC_YANDEX_VERIFICATION` in `.env` and `src/routes/+layout.svelte`.
+2. **Re-crawl Scheduling via API:**
+   - Agent triggers priority re-crawl of key routes via Yandex.Webmaster API `recrawl/queue` endpoint.
+3. **Regional Geotargeting Binding:**
+   - Agent binds geographic target to **Калининград / Калининградская область** in Webmaster geo-settings.
+4. **Metrika Linkage:**
+   - Counter ID `114070369` is linked directly with the Webmaster property to feed user behavioral signals into the indexing algorithms.
+
+---
+
+## 9. Organic Ranking Expansion & Content Growth Roadmap
+
+Search engines (especially Yandex and Google) rank manufacturing sites significantly higher when they possess strong topical authority, internal and external citation graphs, and confirmed local physical entity presence (NAP — Name, Address, Phone).
+
+### 9.1. Topical Authority & Article Production Queue (`/stati`)
+To capture long-tail and mid-tail commercial demand across Kaliningrad Oblast and the Russian Federation, the following engineering articles are scheduled for authoring with frontmatter tags, ГОСТ references, cross-links to workshop services, and external citations:
+
+| Slug | Topic & Primary Keyword | Target Services Linked | External Authority Sources Cited |
+| :--- | :--- | :--- | :--- |
+| `obrabotka-nerzhaveyushchey-stali-12x18n10t` | Особенности точения и фрезерования нержавейки 12Х18Н10Т / AISI 304 | `/tokarnye-raboty-chpu`, `/frezernye-raboty-chpu` | ГОСТ 5632-2014, Sandvik Coromant machining guidelines |
+| `izgotovlenie-zubchatykh-koles-gost` | Нарезание цилиндрических шестерен m=1-6: выбор модуля и термообработка | `/zuboreznye-i-shlifovalnye-raboty` | ГОСТ 2144-93, ГОСТ 1643-81, металлургические стандарты |
+| `alyuminievye-splavy-d16t-amg6-chpu` | Обработка авиационных алюминиевых сплавов Д16Т и АМг6: скорости и СОЖ | `/frezernye-raboty-chpu`, `/portfolio` | ГОСТ 4784-2019, Kennametal алюминиевые фрезы |
+| `termicheskaya-obrabotka-detaley-chpu` | Закалка ТВЧ, цементация и нормализация деталей после механической обработки | `/kontrol-kachestva-i-oborudovanie` | ГОСТ 8479-70, ГОСТ 4543-2016 |
+| `posadochnye-mesta-pod-podshipniki-it6-it7` | Допуски и посадки под подшипники: тонкости расточки и шлифования | `/tokarnye-raboty-chpu`, `/kontrol-kachestva-i-oborudovanie` | ГОСТ 3325-85, SKF Bearing Installation Manual |
+
+**Rules for Content Expansion:**
+- Every article must contain:
+  1. Direct Answer Block (AEO citation summary for LLMs).
+  2. Frontmatter YAML with `tags`, `readingTime`, `relatedArticles`, and `relatedServices`.
+  3. At least 2 contextual inbound links to workshop services and the interactive cost calculator.
+  4. At least 2 external links to authoritative engineering standards (GOST, ISO, tool manufacturer whitepapers) to enhance citation trust.
+  5. Schema.org `TechArticle` metadata.
+
+### 9.2. Physical Entity Verification & Map Geo-Dominance (Yandex Maps, Google Maps, 2GIS)
+Google and Yandex prioritize companies with verified physical addresses in local search ("металлообработка Калининград", "токарные работы ЧПУ рядом"). The agent tracks and automates profile creation:
+
+1. **Yandex.Бизнес (Яндекс.Карты):**
+   - Profile submission using the verified kit from Section 6.2.
+   - Address pin placement in the industrial cluster (ул. Промышленная).
+   - Syncing photo catalog of CNC machine centers (Fanuc 0i-TF, Siemens 828D) and Mitutoyo CMM QC equipment.
+   - Setting categories: *Металлообработка*, *Токарные работы*, *Фрезерные работы*.
+2. **Google Business Profile (Google Maps):**
+   - Profile submission using Section 6.3 kit.
+   - Target area: Kaliningrad Oblast.
+   - Products & Services catalog linking directly to `/kalkulyator-stoimosti-chpu/`.
+3. **2ГИС Калининград:**
+   - Registration in 2GIS business portal (dominates B2B mobile search in Russian regions).
+   - Linking company card to site domain `https://metalprom39.github.io/`.
+
+---
+
+## 10. Universal Autonomous Search Optimization Agent Prompt
+
+This prompt is designed for any AI agent resuming or initiating search optimization tasks on `metal-prom-web`. It guarantees continuity, strict adherence to `PROJ.md`, continuous progress logging, and end-to-end autonomous execution using installed MCP tools and skills.
+
+```markdown
+You are the Lead SEO/AEO/GEO Engineer and Webmaster for `metal-prom-web`.
+Your mission is to autonomously execute, audit, and advance the search engine optimization (SEO), answer engine optimization (AEO), and local map optimization (GEO) of the platform.
+
+### MANDATORY INGESTION & CONTEXT:
+1. Always start by thoroughly inspecting `metal-prom-web/PROJ.md` (specifically Section 1, Section 5, Section 7, Section 8, and Section 9).
+2. Read the latest status from the 48-point checklist and Stage Progress Tracker.
+3. Identify unfinished, pending, or next-priority tasks in the optimization lifecycle.
+
+### YOUR TOOLKIT:
+- **`geo-optimizer` MCP & CLI:** Use `/home/tikho/.local/bin/geo` and MCP tools (`geo_audit`, `geo_fix`, `geo_llms_generate`, `geo_citability`, `geo_track`) for Generative Engine audits, citability checks, and AI crawler validation.
+- **`mcp-search-console` MCP:** Use MCP tools (`inspect_url`, `submit_sitemap`, `get_search_analytics`, `list_properties`) and skills (`indexing-audit`, `cannibalization-check`, `content-opportunities`, `seo-weekly-report`) for Google indexing and performance tracking.
+- **`openseo` MCP & Skills:** Use the 12 OpenSEO skills (`local-seo`, `keyword-research`, `competitor-analysis`, `seo-audit`, `ai-visibility-audit`, `link-prospecting`) for market and competitive intelligence.
+- **Bash & Codebase Tools:** Build, test (`pnpm check`, `pnpm test:unit`, `pnpm test:e2e`), commit, and deploy changes directly.
+
+### EXECUTION INVARIANTS:
+1. **Never stop at recommendations:** If an action can be performed (editing code, updating markdown, creating articles, verifying schemas, deploying, submitting sitemaps, running audits), execute it directly.
+2. **Zero Personal Data (152-FZ):** Never introduce input fields collecting phone numbers, emails, or names. Preserve anonymous quotation sheets.
+3. **Living Document Maintenance:** After completing any task, you MUST update `metal-prom-web/PROJ.md`:
+   - Mark the item completed in the Stage Tracker and 48-Point Checklist.
+   - Log the verification output (scores, test results, commit hashes).
+   - Keep the next actions clearly prioritized.
+
+### WORKFLOW SEQUENCE:
+1. **Phase Diagnosis:** Determine current phase from `PROJ.md`.
+2. **Audit Execution:** Run `geo audit` or `indexing-audit` to detect fresh regressions or opportunities.
+3. **Implementation:** Write required articles, fix schema issues, adjust `robots.txt`/`llms.txt`, or configure webmaster endpoints.
+4. **Automated Verification:** Run `pnpm check`, unit tests, and E2E tests.
+5. **Deployment & Ping:** Deploy static build to `gh-pages` and notify search engine crawl queues.
+6. **Documentation Update:** Update `PROJ.md` with timestamps, metrics, and completed checklist entries.
+```
