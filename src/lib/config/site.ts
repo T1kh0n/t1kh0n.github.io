@@ -32,8 +32,8 @@ export interface SiteConfig {
 }
 
 export const DEFAULT_SITE_CONFIG: SiteConfig = {
-	siteDomain: 'https://metalprom39.com',
-	siteHost: 'metalprom39.com',
+	siteDomain: 'https://metalprom39.github.io',
+	siteHost: 'metalprom39.github.io',
 	brandName: 'МеталлПром39',
 	brandLegalName: 'ИП МеталлПром39',
 	contactPhone: '',
@@ -51,7 +51,7 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
 	yandexVerification: '',
 	googleVerification: '',
 	socialLinks: {
-		github: 'https://github.com/T1kh0n/metal-prom-web',
+		github: 'https://github.com/metalprom39/metalprom39.github.io',
 		telegram: '',
 		habr: '',
 		linkedin: ''

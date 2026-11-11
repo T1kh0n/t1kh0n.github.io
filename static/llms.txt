@@ -25,17 +25,17 @@
 - Латунь ЛС59-1, Бронза БрАЖ9-4, Капролон ПА-6.
 
 ## Ключевые разделы сайта и документация
-- [Главная страница](https://metalprom39.com/)
-- [Инженерный калькулятор стоимости ЧПУ](https://metalprom39.com/kalkulyator-stoimosti-chpu/)
-- [Токарные работы с ЧПУ](https://metalprom39.com/tokarnye-raboty-chpu/)
-- [Фрезерные работы с ЧПУ](https://metalprom39.com/frezernye-raboty-chpu/)
-- [Зуборезные и шлифовальные работы](https://metalprom39.com/zuboreznye-i-shlifovalnye-raboty/)
-- [Контроль качества и парк оборудования](https://metalprom39.com/kontrol-kachestva-i-oborudovanie/)
-- [Инженерные статьи и база знаний](https://metalprom39.com/stati/)
-- [Выбор конструкционных и нержавеющих сталей](https://metalprom39.com/stati/vybor-stali-dlya-chpu-obrabotki/)
-- [Квалитеты точности IT7-IT12 и шероховатость Ra по ГОСТ](https://metalprom39.com/stati/kvalitety-tochnosti-i-sherohovatost-gost/)
-- [DFM-оптимизация стоимости деталей](https://metalprom39.com/stati/optimizaciya-stoimosti-detaley-chpu/)
+- [Главная страница](https://metalprom39.github.io/)
+- [Инженерный калькулятор стоимости ЧПУ](https://metalprom39.github.io/kalkulyator-stoimosti-chpu/)
+- [Токарные работы с ЧПУ](https://metalprom39.github.io/tokarnye-raboty-chpu/)
+- [Фрезерные работы с ЧПУ](https://metalprom39.github.io/frezernye-raboty-chpu/)
+- [Зуборезные и шлифовальные работы](https://metalprom39.github.io/zuboreznye-i-shlifovalnye-raboty/)
+- [Контроль качества и парк оборудования](https://metalprom39.github.io/kontrol-kachestva-i-oborudovanie/)
+- [Инженерные статьи и база знаний](https://metalprom39.github.io/stati/)
+- [Выбор конструкционных и нержавеющих сталей](https://metalprom39.github.io/stati/vybor-stali-dlya-chpu-obrabotki/)
+- [Квалитеты точности IT7-IT12 и шероховатость Ra по ГОСТ](https://metalprom39.github.io/stati/kvalitety-tochnosti-i-sherohovatost-gost/)
+- [DFM-оптимизация стоимости деталей](https://metalprom39.github.io/stati/optimizaciya-stoimosti-detaley-chpu/)
 
 ## Контакты и реквизиты
 - **Регион:** г. Калининград, Калининградская область, Россия
-- **Политика конфиденциальности:** https://metalprom39.com/politika-konfidentsialnosti/
+- **Политика конфиденциальности:** https://metalprom39.github.io/politika-konfidentsialnosti/

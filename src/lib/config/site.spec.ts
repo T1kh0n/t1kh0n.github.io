@@ -4,8 +4,8 @@ import { DEFAULT_SITE_CONFIG, resolveSiteConfig, getCanonicalUrl, getOgImageUrl 
 describe('Site Configuration & Dynamic Environment Resolution', () => {
 	it('uses default values when no environment variables are provided', () => {
 		const config = resolveSiteConfig({});
-		expect(config.siteDomain).toBe('https://metalprom39.com');
-		expect(config.siteHost).toBe('metalprom39.com');
+		expect(config.siteDomain).toBe(DEFAULT_SITE_CONFIG.siteDomain);
+		expect(config.siteHost).toBe(DEFAULT_SITE_CONFIG.siteHost);
 		expect(config.brandName).toBe('МеталлПром39');
 		expect(config.brandLegalName).toBe('ИП МеталлПром39');
 		expect(config.contactPhone).toBe('');
@@ -50,31 +50,31 @@ describe('Site Configuration & Dynamic Environment Resolution', () => {
 
 	describe('getCanonicalUrl', () => {
 		it('generates canonical root URL with trailing slash', () => {
-			expect(getCanonicalUrl('/', 'https://metalprom39.com')).toBe('https://metalprom39.com/');
-			expect(getCanonicalUrl('', 'https://metalprom39.com/')).toBe('https://metalprom39.com/');
+			expect(getCanonicalUrl('/', 'https://metalprom39.github.io')).toBe('https://metalprom39.github.io/');
+			expect(getCanonicalUrl('', 'https://metalprom39.github.io/')).toBe('https://metalprom39.github.io/');
 		});
 
 		it('appends trailing slash to inner routes', () => {
-			expect(getCanonicalUrl('tokarnye-raboty-chpu', 'https://metalprom39.com')).toBe(
-				'https://metalprom39.com/tokarnye-raboty-chpu/'
+			expect(getCanonicalUrl('tokarnye-raboty-chpu', 'https://metalprom39.github.io')).toBe(
+				'https://metalprom39.github.io/tokarnye-raboty-chpu/'
 			);
 
-			expect(getCanonicalUrl('/frezernye-raboty-chpu/', 'https://metalprom39.com')).toBe(
-				'https://metalprom39.com/frezernye-raboty-chpu/'
+			expect(getCanonicalUrl('/frezernye-raboty-chpu/', 'https://metalprom39.github.io')).toBe(
+				'https://metalprom39.github.io/frezernye-raboty-chpu/'
 			);
 		});
 	});
 
 	describe('getOgImageUrl', () => {
 		it('returns default og image url', () => {
-			expect(getOgImageUrl('default', 'https://metalprom39.com')).toBe(
-				'https://metalprom39.com/og/default.webp'
+			expect(getOgImageUrl('default', 'https://metalprom39.github.io')).toBe(
+				'https://metalprom39.github.io/og/default.webp'
 			);
 		});
 
 		it('returns slug-specific og image url', () => {
-			expect(getOgImageUrl('tokarnye-raboty-chpu', 'https://metalprom39.com')).toBe(
-				'https://metalprom39.com/og/tokarnye-raboty-chpu.webp'
+			expect(getOgImageUrl('tokarnye-raboty-chpu', 'https://metalprom39.github.io')).toBe(
+				'https://metalprom39.github.io/og/tokarnye-raboty-chpu.webp'
 			);
 		});
 	});
