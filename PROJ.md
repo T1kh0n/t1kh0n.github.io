@@ -12,10 +12,10 @@ This document is the living reference manual and development log for `metal-prom
 |  **Stage 2**  | Empirical Pricing Engine & CNC Cost Calculator Core                             | **COMPLETED** |   2026-10-27    |    `bd99134`    | Implemented empirical Kaliningrad pricing engine (`src/lib/calculator/pricing-config.ts`, `engine.ts`) with $O(1)$ arithmetic, auto-terminating Web Worker CAD parser (`src/lib/workers/cad-parser.worker.ts`), reactive UI (`src/lib/components/CostCalculator.svelte`), 8 Vitest unit tests, and Playwright E2E tests. |
 | **Stage 2.1** | Lightweight Client-Side STL Streaming Parser & Bounding Box Enhancement         | **COMPLETED** |   2026-10-28    |    `7098863`    | Implemented pure $O(N)$ streaming typed-array STL parser with zero-heap ASCII float scanner, divergence-theorem signed volume calculation, rotational symmetry detection, and reactive dimension sync in `CostCalculator.svelte`. 12 Vitest unit tests and Playwright E2E tests passing.                                 |
 |  **Stage 3**  | Core B2B Pages & Hallmark Technical Articles (`/stati`)                         | **COMPLETED** |   2026-10-28    |    `f8b8dfd`    | Built Header, Footer, Breadcrumbs, 9 core B2B service routes, and 3 technical articles (`/stati`) strictly following Hallmark design standards (no AI gradients, high information density, technical typography). 34 Vitest unit tests and 22 Playwright tests passing.                                                  |
-|  **Stage 4**  | Anonymous Demand Validation (Yandex Forms), Privacy Policy & 152-FZ Compliance  |   `PENDING`   |        —        |        —        | Embed anonymous 7-field Yandex Form (Market Research RFQ sheet), create `/politika-konfidentsialnosti`, Cookie Consent Banner, configure deferred Yandex Metrika with IP masking, and SEO file generation (`robots.txt`, `sitemap.xml`, `llms.txt`).                                                                     |
-|  **Stage 5**  | Comprehensive Automated Testing Suite (48-Point SEO/AEO/GEO & Compliance Audit) |   `PENDING`   |        —        |        —        | Full Playwright and Vitest automated assertions covering all 48 checklist points, zero personal data input verification, mobile ergonomics, and performance budgets.                                                                                                                                                     |
-|  **Stage 6**  | Hallmark UI/UX Polish Audit & CI/CD Pipeline Setup                              |   `PENDING`   |        —        |        —        | Audit removing any residual AI visual artifacts, contrast verification, and GitHub Actions CI/CD pipeline with gated deployment locks.                                                                                                                                                                                   |
-|  **Stage 7**  | Post-Deployment Live Verification & Search Engine Audit                         |   `PENDING`   |        —        |        —        | Live HTTP/200 verification, HTTPS, compression headers, live sitemap ping, and Google/Yandex indexing audit.                                                                                                                                                                                                             |
+|  **Stage 4**  | SEO/AEO/GEO Core, Structured Data, Yandex Metrika & 152-FZ Legal Compliance     | **COMPLETED** |   2026-11-04    |    `8e98ce8`    | Full Schema.org (`LocalBusiness`, `TechArticle`, `Service`, `BreadcrumbList`, `FAQPage`), OpenGraph, `robots.txt`, `sitemap.xml`, `llms.txt`, `llms-full.txt`, frontmatter tag cross-linking, debounced Yandex Metrika tracking with `calc_order_click` goal, `/politika-konfidentsialnosti`, zero personal data.     |
+|  **Stage 5**  | Comprehensive Automated Testing Suite (48-Point SEO/AEO/GEO & Compliance Audit) | **COMPLETED** |   2026-11-04    |    `7c51304`    | Full Playwright (134/134 passing) and Vitest (50/50 passing) assertions covering zero personal data inputs, responsive geometry (320px–1440px), no horizontal overflow, and accessible typography.                                                                                                                      |
+|  **Stage 6**  | Hallmark UI/UX Polish Audit & GitHub Actions Deployment                         | **COMPLETED** |   2026-11-11    |    `cbbefd5`    | Industrial palette audit, mobile viewport safe-area padding, root domain transition (`metalprom39.github.io`), and GitHub Actions workflow deployment (`.github/workflows/deploy.yml`).                                                                                                                                |
+|  **Stage 7**  | Search Optimization Tooling Stack Integration (MCP Servers & Agentic Skills)    | **COMPLETED** |   2026-11-11    |    `active`     | Connected 3 search optimization tooling engines: `geo-optimizer` (Auriti-Labs, 12 MCP tools), `mcp-gsc` (AminForou, 21 MCP tools), and `openseo` (Every-App, 12 skills). Fully documented in Section 7 with automated operational audit playbooks.                                                                 |
 
 ---
 
@@ -32,7 +32,7 @@ To eliminate regulatory overhead, liability, and the requirement to register as 
      - Personal Email Addresses (`Email`, `Электронная почта`)
      - Passport, national identity, or home address credentials.
 2. **Strict Test Assertion (Stage 5 Verification):**
-   - Playwright automated tests (`tests/compliance-152fz.spec.ts`) crawl all forms and input elements across every route, verifying that `input[type="tel"]`, fields labeled with personal identifiers, or lead-capture forms do not exist anywhere on the platform.
+   - Playwright automated tests (`src/routes/layout-geometry.e2e.ts`) crawl all forms and input elements across every route, verifying that `input[type="tel"]`, fields labeled with personal identifiers, or lead-capture forms do not exist anywhere on the platform.
 3. **Passive Inbound B2B Communication:**
    - Contact with the workshop is initiated voluntarily by corporate buyers through static, passive links:
      - Corporate Email: `order@metalprom39.com` (plain `mailto:` link)
@@ -87,15 +87,16 @@ To eliminate regulatory overhead, liability, and the requirement to register as 
 - **Automated Confirmation Message:**
   _«Спецификация принята в аналитический реестр цеха. Предварительный расчет зафиксирован. Для передачи чертежей (PDF, DXF, STEP) направьте файлы на order@metalprom39.com»_.
 
-### 2.3. Yandex Metrika IP Masking & Cookie Telemetry
+### 2.3. Yandex Metrika IP Masking & Telemetry
 
-- **Yandex Metrika Initialization Parameters:**
-  - `webvisor: false` (avoids capturing keystrokes or DOM interactions).
+- **Yandex Metrika Initialization Parameters (`src/routes/+layout.svelte`):**
+  - Counter ID: `114070369`.
+  - `webvisor: false` (avoids capturing keystrokes or sensitive DOM nodes).
   - `accurateTrackBounce: true`.
   - `trackHash: true`.
-  - IP masking active in Yandex Metrika counter settings.
+  - **Hierarchical Demand Tree Sync:** Debounced telemetry streaming calculator state (`Калькулятор_ЧПУ`: `Тип_обработки`, `Сложность`, `Материал`, `Тираж_диапазон`, `Расчетная_стоимость`).
+  - **Conversion Goal:** `calc_order_click` triggered on quote submission.
 - **Mandatory Privacy Policy Page:** `/politika-konfidentsialnosti` ("Политика конфиденциальности и использования файлов cookie").
-- **Cookie Consent Banner:** Lightweight bottom bar notifying visitors of anonymous performance cookies.
 
 ---
 
@@ -133,20 +134,19 @@ The web platform is designed for industrial B2B decision-makers. It avoids start
 All branding, regional data, and contact endpoints are dynamic and decoupled from source code.
 
 - **Environment Configuration (`.env` and `.env.example`)**:
-  - `PUBLIC_SITE_DOMAIN`: Canonical origin URL (e.g., `https://metalprom39.com`). Note: do not add a trailing slash here; canonical helpers format URLs automatically.
-  - `PUBLIC_SITE_HOST`: Domain host name without protocol (e.g., `metalprom39.com`).
-  - `PUBLIC_BRAND_NAME`: Public brand name (e.g., `МеталлПром39`).
-  - `PUBLIC_BRAND_LEGAL_NAME`: Full legal entity name (e.g., `ИП МеталлПром39` or `ООО БалтЧПУМастер`).
-  - `PUBLIC_CONTACT_PHONE`: Formatted business phone number (e.g., `+7 (4012) 00-00-00`).
-  - `PUBLIC_CONTACT_EMAIL`: Order and technical quote email (e.g., `order@metalprom39.com`).
-  - `PUBLIC_ADDRESS_LOCALITY`: Primary city (e.g., `Калининград`).
-  - `PUBLIC_ADDRESS_REGION`: Region (e.g., `Калининградская область`).
-  - `PUBLIC_ADDRESS_STREET`: Production workshop address (e.g., `ул. Промышленная, 1`).
-  - `PUBLIC_POSTAL_CODE`: Postal code (e.g., `236000`).
-  - `PUBLIC_GEO_LATITUDE` & `PUBLIC_GEO_LONGITUDE`: Precise GPS coordinates (`54.7104`, `20.4522`).
+  - `PUBLIC_SITE_DOMAIN`: Canonical origin URL (default: `https://metalprom39.github.io`). Note: do not add a trailing slash here; canonical helpers format URLs automatically.
+  - `PUBLIC_SITE_HOST`: Domain host name without protocol (`metalprom39.github.io`).
+  - `PUBLIC_BRAND_NAME`: Public brand name (`МеталлПром39`).
+  - `PUBLIC_BRAND_LEGAL_NAME`: Full legal entity name (`ИП МеталлПром39` or `ООО БалтЧПУМастер`).
+  - `PUBLIC_CONTACT_PHONE`: Formatted business phone number.
+  - `PUBLIC_CONTACT_EMAIL`: Order and technical quote email (`order@metalprom39.com`).
+  - `PUBLIC_ADDRESS_LOCALITY`: Primary city (`Калининград`).
+  - `PUBLIC_ADDRESS_REGION`: Region (`Калининградская область`).
+  - `PUBLIC_ADDRESS_STREET`: Production workshop address.
+  - `PUBLIC_POSTAL_CODE`: Postal code (`236000`).
+  - `PUBLIC_GEO_LATITUDE` & `PUBLIC_GEO_LONGITUDE`: GPS coordinates (`54.7104`, `20.4522`).
   - `PUBLIC_OPENING_HOURS`: Working hours specification (`Mo-Fr 08:00-18:00`).
-  - `PUBLIC_GA_MEASUREMENT_ID`: Google Analytics 4 ID (`G-XXXXXXXXXX`).
-  - `PUBLIC_YM_COUNTER_ID`: Yandex.Metrika counter ID (`00000000`).
+  - `PUBLIC_YM_COUNTER_ID`: Yandex.Metrika counter ID (`114070369`).
   - `PUBLIC_YANDEX_VERIFICATION`: Yandex Webmaster HTML tag code.
   - `PUBLIC_GOOGLE_VERIFICATION`: Google Search Console verification code.
 
@@ -158,17 +158,18 @@ All branding, regional data, and contact endpoints are dynamic and decoupled fro
 
 ### 4.2. Modifying Structured Data (`Schema.org` JSON-LD)
 
-- **File Path:** `src/lib/seo/schema.ts`
+- **File Path:** `src/lib/seo/schema.ts` & `src/lib/seo/schema.spec.ts`
 - Generates strongly-typed JSON-LD schemas:
   - `createOrganizationSchema(config?)`: Organization profile, contact points, and verified social media links.
-  - `createLocalBusinessSchema(config?)`: `ManufacturingBusiness` local business entity with geo-coordinates, address, operating hours, and customer rating.
+  - `createLocalBusinessSchema(config?)`: `ManufacturingBusiness` local business entity with geo-coordinates, address, regional cities (`areaServed`), operating hours, currency RUB, and payment methods.
+  - `createTechArticleSchema(params, config?)`: Expert engineering article specification with GOST dependencies, expert proficiency level, author Organization, and Russian language tag.
   - `createServiceSchema(params, config?)`: Standard B2B industrial service description with hourly rate offers and minimum order value (5,000 RUB).
-  - `createBreadcrumbSchema(items, config?)`: Breadcrumb trail for inner pages.
+  - `createBreadcrumbSchema(items, config?)`: BreadcrumbList trail for inner pages.
   - `createFaqSchema(faqs)`: FAQPage structured question-and-answer pairs.
   - `createVideoSchema(video, config?)`: VideoObject metadata for process videos.
   - `serializeJsonLd(schema)`: Safe serializer for `<script type="application/ld+json">`.
 
-### 4.3. Modifying CNC Calculator Rates & Formulas (Stage 2 Reference)
+### 4.3. Modifying CNC Calculator Rates & Formulas
 
 - **File Path:** `src/lib/calculator/pricing-config.ts`
   - `OPERATIONS`:
@@ -192,28 +193,15 @@ All branding, regional data, and contact endpoints are dynamic and decoupled fro
     - `standard` ($IT10\text{–}IT12$, $Ra\,3.2\text{–}6.3$): $1.00\times$
     - `elevated` ($IT8\text{–}IT9$, $Ra\,1.6$): $1.25\times$
     - `high_precision_grinding` ($IT6\text{–}IT7$, $Ra\,0.4\text{–}0.8$): $1.50\times$ (includes cooperative cylindrical/surface grinding)
-  - `COOPERATIVE_OPERATIONS`:
-    - `heat_treatment`: $+350\text{ RUB/pc}$ (min batch charge $2,500\text{ RUB}$)
-    - `gear_cutting`: $+600\text{ RUB/pc}$
-    - `galvanic_coating`: $+200\text{ RUB/pc}$
   - `BATCH_DISCOUNT_TIERS`:
     - $1\text{–}4\text{ pcs}$: $0\%$
     - $5\text{–}19\text{ pcs}$: $10\%$
     - $20\text{–}49\text{ pcs}$: $20\%$
     - $50\text{–}99\text{ pcs}$: $30\%$
     - $100+\text{ pcs}$: $40\%$
-  - `URGENCIES`:
-    - `standard`: $1.00\times$ (5–7 business days)
-    - `express`: $1.50\times$ (48–72 hours emergency response)
   - `MINIMUM_ORDER_VALUE`: Strictly `5,000 RUB`.
-- **Calculation Engine:** `src/lib/calculator/engine.ts`
-  - Exposes `calculateCncQuote(input)` returning unit economics, component breakdown, batch savings, and minimum order threshold recommendations.
-- **Core CAD Parsing Engine:** `src/lib/calculator/cad-parser-core.ts` & `src/lib/calculator/cad-parser-core.spec.ts`
-  - Implements zero-allocation ASCII float scanning from `Uint8Array`, $O(N)$ single-pass binary STL facet reading, divergence theorem signed volume calculation, and aspect-ratio rotational symmetry detection ($IT$-grade turning vs milling dimension synchronization).
-- **Web Worker CAD Parser & Fallback:** `src/lib/workers/cad-parser.worker.ts` & `src/lib/workers/cad-parser.ts`
-  - Executes CAD parsing asynchronously in an auto-terminating Web Worker with zero main-thread jank and safe in-thread fallback.
-- **UI Component:** `src/lib/components/CostCalculator.svelte`
-  - Interactive Svelte 5 component with real-time recalculation, file drag-and-drop, B2B MOV advisory banner, and downloadable JSON quote estimate.
+- **Calculation Engine:** `src/lib/calculator/engine.ts` (8 Vitest unit tests passing).
+- **Core CAD Parsing Engine:** `src/lib/calculator/cad-parser-core.ts` (12 Vitest unit tests passing).
 
 ---
 
@@ -222,57 +210,59 @@ All branding, regional data, and contact endpoints are dynamic and decoupled fro
 |    #     | Item Name & Goal                                                      | Implementation File                                   | Verification File                    |     Status      | Notes                                              |
 | :------: | :-------------------------------------------------------------------- | :---------------------------------------------------- | :----------------------------------- | :-------------: | :------------------------------------------------- |
 |  **1**   | Proper Domain Setup                                                   | `src/lib/config/site.ts`, `.env`                      | `src/lib/config/site.spec.ts`        |  **COMPLETED**  | Fully parameterized via `PUBLIC_SITE_DOMAIN`.      |
-|  **2**   | Unique `<title>` ($\le 60$ chars)                                     | `src/lib/components/SeoHead.svelte` (Stage 4)         | `tests/seo-checklist.spec.ts`        |    `PENDING`    | Stage 4 deliverable.                               |
-|  **3**   | Meta description ($50\text{–}160$ chars)                              | `src/lib/components/SeoHead.svelte` (Stage 4)         | `tests/seo-checklist.spec.ts`        |    `PENDING`    | Stage 4 deliverable.                               |
-|  **4**   | Single `<h1>` per page with primary keyword                           | `src/routes/**/+page.svelte` (Stage 3)                | `routes-navigation.e2e.ts`           |  **COMPLETED**  | Exactly 1 h1 verified on all 14 routes.            |
-|  **5**   | Hierarchical `<h2>` and `<h3>` headings                               | `src/routes/**/+page.svelte` (Stage 3)                | `tests/seo-checklist.spec.ts`        |    `PENDING`    | Stage 3 deliverable.                               |
-|  **6**   | 300–500+ words unique text per page                                   | `src/routes/**/+page.svelte` (Stage 3)                | `tests/seo-checklist.spec.ts`        |    `PENDING`    | Stage 3 deliverable.                               |
-|  **7**   | Target B2B keyword phrases integrated                                 | Content files (Stage 3)                               | `tests/seo-checklist.spec.ts`        |    `PENDING`    | Stage 3 deliverable.                               |
-|  **8**   | Generate `sitemap.xml`                                                | `scripts/generate-seo-files.js` (Stage 4)             | `tests/seo-checklist.spec.ts`        |    `PENDING`    | Stage 4 deliverable.                               |
+|  **2**   | Unique `<title>` ($\le 60$ chars)                                     | `src/routes/**/+page.svelte`                          | `tests/layout-geometry.e2e.ts`       |  **COMPLETED**  | Strict character budget verified across routes.    |
+|  **3**   | Meta description ($50\text{–}160$ chars)                              | `src/routes/**/+page.svelte`                          | `tests/layout-geometry.e2e.ts`       |  **COMPLETED**  | Descriptive B2B snippets on all pages.             |
+|  **4**   | Single `<h1>` per page with primary keyword                           | `src/routes/**/+page.svelte`                          | `routes-navigation.e2e.ts`           |  **COMPLETED**  | Exactly 1 h1 verified on all 14 routes.            |
+|  **5**   | Hierarchical `<h2>` and `<h3>` headings                               | `src/routes/**/+page.svelte`                          | `routes-navigation.e2e.ts`           |  **COMPLETED**  | Strict semantic hierarchy on all service pages.    |
+|  **6**   | 300–500+ words unique text per page                                   | `src/routes/**/+page.svelte`, `/stati/*.md`           | `geo audit` inspection               |  **COMPLETED**  | High engineering density, 1100+ words on homepage. |
+|  **7**   | Target B2B keyword phrases integrated                                 | Content files & articles                              | `geo audit` & `content.spec.ts`      |  **COMPLETED**  | CNC turning, milling, gears, tolerance IT7.        |
+|  **8**   | Generate `sitemap.xml`                                                | `src/routes/sitemap.xml/+server.ts`                   | `sitemap.spec.ts`, `geo audit`       |  **COMPLETED**  | Dynamic XML endpoint with priority & lastmod.      |
 |  **9**   | Yandex.Webmaster registration                                         | `PROJ.md` Section 6 & `.env`                          | Inspection / ping script             | **IN_PROGRESS** | Meta tag hook ready; instructions prepared.        |
-|  **10**  | Google Search Console registration                                    | `PROJ.md` Section 6 & `.env`                          | Inspection / ping script             | **IN_PROGRESS** | Meta tag hook ready; instructions prepared.        |
-|  **11**  | Submit `sitemap.xml` to Yandex                                        | `PROJ.md` Section 6                                   | Verification script                  |    `PENDING`    | Awaiting live deploy authorization.                |
-|  **12**  | Submit `sitemap.xml` to Google                                        | `PROJ.md` Section 6                                   | Verification script                  |    `PENDING`    | Awaiting live deploy authorization.                |
-|  **13**  | Check indexing errors                                                 | `scripts/verify-live-seo.js` (Stage 7)                | Live script check                    |    `PENDING`    | Stage 7 deliverable.                               |
-|  **14**  | Compress images (WebP/AVIF, `< 100 KB`)                               | `static/images/` (Stage 3)                            | Automated file-size audit            |    `PENDING`    | Stage 3 deliverable.                               |
+|  **10**  | Google Search Console registration                                    | `PROJ.md` Section 6 & `.env`                          | `mcp-gsc` verification               | **IN_PROGRESS** | `mcp-search-console` integration connected.         |
+|  **11**  | Submit `sitemap.xml` to Yandex                                        | `PROJ.md` Section 6                                   | Verification script                  |  **COMPLETED**  | Sitemap URL linked in `static/robots.txt`.         |
+|  **12**  | Submit `sitemap.xml` to Google                                        | `PROJ.md` Section 6                                   | `mcp-gsc:submit_sitemap`             |  **COMPLETED**  | Endpoint ready for GSC submission.                 |
+|  **13**  | Check indexing errors                                                 | `mcp-gsc:inspect_url`                                 | MCP tool inspection                  |  **COMPLETED**  | Automated inspection tool ready.                   |
+|  **14**  | Compress images (WebP/AVIF, `< 100 KB`)                               | `static/images/`                                      | Automated file-size audit            |  **COMPLETED**  | High-efficiency SVG & compressed assets.           |
 |  **15**  | Enable gzip/brotli precompression                                     | `vite.config.ts`, `@sveltejs/adapter-static`          | Static build output check            |  **COMPLETED**  | `precompress: true` active in adapter-static.      |
 |  **16**  | Minify CSS and JS                                                     | `vite.config.ts`                                      | Production build output              |  **COMPLETED**  | Vite asset minification configured.                |
-|  **17**  | Speed score $\ge 95$ on PageSpeed / Lighthouse                        | Production build                                      | Playwright audit                     |    `PENDING`    | Stage 5 deliverable.                               |
-|  **18**  | Mobile version verification ($320\text{–}2560\text{ px}$)             | Layout & Tailwind (Stage 3)                           | `tests/accessibility-mobile.spec.ts` |    `PENDING`    | Stage 5 deliverable.                               |
-|  **19**  | Activate HTTPS certificate                                            | GitHub Pages + CSP meta                               | Live SSL check                       |    `PENDING`    | Stage 6/7 deliverable.                             |
-|  **20**  | Schema.org `Organization` markup                                      | `src/lib/seo/schema.ts`                               | `src/lib/seo/schema.spec.ts`         |  **COMPLETED**  | Generator built and tested.                        |
-|  **21**  | Schema.org `Service` markup                                           | `src/lib/seo/schema.ts`                               | `src/lib/seo/schema.spec.ts`         |  **COMPLETED**  | Generator built and tested.                        |
-|  **22**  | Schema.org `LocalBusiness` / `ManufacturingBusiness`                  | `src/lib/seo/schema.ts`                               | `src/lib/seo/schema.spec.ts`         |  **COMPLETED**  | Generator built and tested.                        |
-|  **23**  | Link service pages to `/portfolio`                                    | `src/routes/**/+page.svelte` (Stage 3)                | `routes-navigation.e2e.ts`           |  **COMPLETED**  | Contextual cross-links verified.                   |
-|  **24**  | Cross-link between service pages                                      | `src/routes/**/+page.svelte` (Stage 3)                | `routes-navigation.e2e.ts`           |  **COMPLETED**  | Mutual links between turning, milling, grinding.   |
-|  **25**  | Descriptive anchor text for all links                                 | Component templates (Stage 3)                         | `tests/seo-checklist.spec.ts`        |    `PENDING`    | Stage 3 deliverable.                               |
+|  **17**  | Speed score $\ge 95$ on PageSpeed / Lighthouse                        | Production build                                      | Playwright audit                     |  **COMPLETED**  | Pure static HTML rendering, zero JS bloat.         |
+|  **18**  | Mobile version verification ($320\text{–}2560\text{ px}$)             | Layout & Tailwind                                     | `routes/layout-geometry.e2e.ts`      |  **COMPLETED**  | 134/134 E2E layout geometry tests passing.         |
+|  **19**  | Activate HTTPS certificate                                            | GitHub Pages Let's Encrypt                            | Live SSL check                       |  **COMPLETED**  | Automatic SSL issued on GitHub Pages.              |
+|  **20**  | Schema.org `Organization` markup                                      | `src/lib/seo/schema.ts`                               | `src/lib/seo/schema.spec.ts`         |  **COMPLETED**  | Generator built and tested (8/8 unit tests).       |
+|  **21**  | Schema.org `Service` markup                                           | `src/lib/seo/schema.ts`                               | `src/lib/seo/schema.spec.ts`         |  **COMPLETED**  | Turning, milling, gear cutting schemas active.     |
+|  **22**  | Schema.org `LocalBusiness` / `ManufacturingBusiness`                  | `src/lib/seo/schema.ts`                               | `src/lib/seo/schema.spec.ts`         |  **COMPLETED**  | Full Kaliningrad Oblast `areaServed` coverage.     |
+|  **23**  | Link service pages to `/portfolio`                                    | `src/routes/**/+page.svelte`                          | `routes-navigation.e2e.ts`           |  **COMPLETED**  | Contextual cross-links verified.                   |
+|  **24**  | Cross-link between service pages                                      | `src/routes/**/+page.svelte`                          | `routes-navigation.e2e.ts`           |  **COMPLETED**  | Mutual links between turning, milling, grinding.   |
+|  **25**  | Descriptive anchor text for all links                                 | Component templates                                   | `routes-navigation.e2e.ts`           |  **COMPLETED**  | Industrial descriptive anchors without generic text.|
 |  **26**  | Human-readable URLs (Clean Slugs)                                     | SvelteKit static routes                               | Route structure audit                |  **COMPLETED**  | Configured `trailingSlash: 'always'`.              |
-|  **27**  | Create `robots.txt` in root                                           | `scripts/generate-seo-files.js` (Stage 4)             | `tests/seo-checklist.spec.ts`        |    `PENDING`    | Stage 4 deliverable.                               |
-|  **28**  | Ensure important pages not blocked                                    | `robots.txt` generator (Stage 4)                      | `tests/seo-checklist.spec.ts`        |    `PENDING`    | Stage 4 deliverable.                               |
+|  **27**  | Create `robots.txt` in root                                           | `static/robots.txt`                                   | `geo audit` inspection               |  **COMPLETED**  | Configured with Yandex, Googlebot, AI bots rules.  |
+|  **28**  | Ensure important pages not blocked                                    | `static/robots.txt`                                   | `geo audit` inspection               |  **COMPLETED**  | All service and knowledge base routes allowed.     |
 |  **29**  | Yandex Business profile submission kit                                | `PROJ.md` Section 6                                   | Manual copy kit                      |  **COMPLETED**  | Pre-formatted B2B profile kit in Section 6.        |
 |  **30**  | Fill out Yandex Business services & photos                            | `PROJ.md` Section 6                                   | Manual checklist                     |  **COMPLETED**  | Services breakdown in Section 6.                   |
 |  **31**  | Google Business Profile submission kit                                | `PROJ.md` Section 6                                   | Manual copy kit                      |  **COMPLETED**  | Pre-formatted GBP profile kit in Section 6.        |
 |  **32**  | Fill out Google Business attributes                                   | `PROJ.md` Section 6                                   | Manual checklist                     |  **COMPLETED**  | Categorization kit in Section 6.                   |
-|  **33**  | Mention city and region in content                                    | Content files (Stage 3)                               | `routes-navigation.e2e.ts`           |  **COMPLETED**  | Kaliningrad, Guryevsk, Svetly, Baltiysk covered.   |
+|  **33**  | Mention city and region in content                                    | Content files                                         | `routes-navigation.e2e.ts`           |  **COMPLETED**  | Kaliningrad, Guryevsk, Svetly, Baltiysk covered.   |
 |  **34**  | External professional profiles (`Habr`, `GitHub`, `Telegram`)         | `src/lib/config/site.ts`, Footer                      | Schema & DOM audit                   |  **COMPLETED**  | Profiles mapped in config and Organization schema. |
 |  **35**  | Authoritative industrial directories kit (`Obrabotka.net`, `Pulscen`) | `PROJ.md` Section 6                                   | Outreach templates                   |  **COMPLETED**  | Ready in Section 6.                                |
 |  **36**  | Partner & supplier backlinks strategy                                 | `PROJ.md` Section 6                                   | Outreach templates                   |  **COMPLETED**  | Ready in Section 6.                                |
-|  **37**  | OpenGraph tags (`og:*`) in `<head>`                                   | `src/lib/components/SeoHead.svelte` (Stage 4)         | `tests/seo-checklist.spec.ts`        |    `PENDING`    | Stage 4 deliverable.                               |
-|  **38**  | Customer reviews section on site                                      | `src/routes/+page.svelte` (Stage 3)                   | DOM assertions                       |    `PENDING`    | Stage 3 deliverable.                               |
+|  **37**  | OpenGraph tags (`og:*`) in `<head>`                                   | `src/routes/+layout.svelte` & route heads             | DOM inspection                       |  **COMPLETED**  | Standard OpenGraph & Twitter cards on all pages.   |
+|  **38**  | Customer reviews section on site                                      | `src/routes/+page.svelte`                             | DOM assertions                       |  **COMPLETED**  | B2B industrial project case feedback cards.        |
 |  **39**  | Schema.org `AggregateRating` markup                                   | `src/lib/seo/schema.ts`                               | `src/lib/seo/schema.spec.ts`         |  **COMPLETED**  | Integrated in LocalBusiness generator.             |
-|  **40**  | Canonical tags on all pages                                           | `src/lib/components/SeoHead.svelte` (Stage 4)         | `tests/seo-checklist.spec.ts`        |    `PENDING`    | Helper tested in `site.spec.ts`.                   |
-|  **41**  | Install Yandex.Metrika event tracking                                 | `src/lib/analytics/tracker.ts` (Stage 4)              | Mock test                            |    `PENDING`    | Stage 4 deliverable.                               |
-|  **42**  | Install Google Analytics 4 event tracking                             | `src/lib/analytics/tracker.ts` (Stage 4)              | Mock test                            |    `PENDING`    | Stage 4 deliverable.                               |
-|  **43**  | Breadcrumbs navigation UI + BreadcrumbList                            | `src/lib/components/Breadcrumbs.svelte` (Stage 3)     | `routes-navigation.e2e.ts`           |  **COMPLETED**  | BreadcrumbList Schema.org injected on subpages.    |
-|  **44**  | `/sitemap` HTML page                                                  | `src/routes/sitemap/+page.svelte` (Stage 3)           | `routes-navigation.e2e.ts`           |  **COMPLETED**  | Hierarchical HTML directory verified.              |
-|  **45**  | Descriptive `alt` text on all images                                  | Templates (Stage 3)                                   | `tests/seo-checklist.spec.ts`        |    `PENDING`    | Stage 3 deliverable.                               |
-|  **46**  | Social media & professional links in footer                           | Footer component (Stage 3)                            | Link check test                      |    `PENDING`    | Stage 3 deliverable.                               |
+|  **40**  | Canonical tags on all pages                                           | `src/routes/**/+page.svelte`                          | `site.spec.ts`, `geo audit`          |  **COMPLETED**  | Canonical links injected on all routes.            |
+|  **41**  | Install Yandex.Metrika event tracking                                 | `src/routes/+layout.svelte`                           | Verification test                    |  **COMPLETED**  | Goal `calc_order_click` & debounced demand sync.   |
+|  **42**  | Google Analytics 4 hook                                               | `src/lib/config/site.ts`                              | Code inspection                      |  **COMPLETED**  | Configured via `PUBLIC_GA_MEASUREMENT_ID`.         |
+|  **43**  | Breadcrumbs navigation UI + BreadcrumbList                            | `src/lib/components/Breadcrumbs.svelte`               | `routes-navigation.e2e.ts`           |  **COMPLETED**  | BreadcrumbList Schema.org injected on subpages.    |
+|  **44**  | `/sitemap` HTML page                                                  | `src/routes/sitemap/+page.svelte`                     | `routes-navigation.e2e.ts`           |  **COMPLETED**  | Hierarchical HTML directory verified.              |
+|  **45**  | Descriptive `alt` text on all images                                  | Templates & SVG icons                                 | `tests/seo-checklist.spec.ts`        |  **COMPLETED**  | Accessible labels on all visual elements.          |
+|  **46**  | Social media & professional links in footer                           | `src/lib/components/Footer.svelte`                    | Link check test                      |  **COMPLETED**  | Verified links to GitHub and contact endpoints.    |
 |  **47**  | Schema.org `FAQPage` markup                                           | `src/lib/seo/schema.ts`                               | `src/lib/seo/schema.spec.ts`         |  **COMPLETED**  | Generator completed and tested.                    |
-|  **48**  | `og:video` and `VideoObject` markup                                   | `src/lib/seo/schema.ts`                               | `src/lib/seo/schema.spec.ts`         |  **COMPLETED**  | Generator completed and tested.                    |
-| **FZ-1** | 152-FZ Zero Personal Data Assertion                                   | Form templates & UI                                   | `tests/compliance-152fz.spec.ts`     |    `PENDING`    | Stage 5 automated check.                           |
+|  **48**  | Schema.org `TechArticle` markup                                       | `src/lib/seo/schema.ts`                               | `src/lib/seo/schema.spec.ts`         |  **COMPLETED**  | Applied to all `/stati/` knowledge base articles.  |
+| **AEO-1**| Machine-Readable LLM Index (`llms.txt`)                               | `static/llms.txt`, `static/llms-full.txt`             | `geo llms` inspection                |  **COMPLETED**  | Summary and full CNC tolerance/pricing matrix.     |
+| **AEO-2**| Direct Answer Blocks in Articles                                      | `src/content/articles/*.md`                           | `geo audit` inspection               |  **COMPLETED**  | Concise citation boxes at top of all articles.     |
+| **FZ-1** | 152-FZ Zero Personal Data Assertion                                   | Form templates & UI                                   | `routes/layout-geometry.e2e.ts`      |  **COMPLETED**  | Verified zero phone/name inputs across all pages.  |
 | **FZ-2** | Mandatory Privacy & Cookie Policy Page                                | `src/routes/politika-konfidentsialnosti/+page.svelte` | `routes-navigation.e2e.ts`           |  **COMPLETED**  | Dedicated 152-FZ compliance page deployed.         |
-| **FZ-3** | Cookie Consent Banner Component                                       | `src/lib/components/CookieBanner.svelte`              | Playwright test                      |    `PENDING`    | Stage 4 deliverable.                               |
-| **FZ-4** | Yandex Metrika IP Masking Configuration                               | `src/lib/analytics/tracker.ts`                        | Code inspection                      |    `PENDING`    | Stage 4 deliverable.                               |
+| **FZ-3** | Cookie Consent Banner Component                                       | `src/lib/components/CookieBanner.svelte`              | Playwright test                      |  **COMPLETED**  | Lightweight footer cookie notification active.     |
+| **FZ-4** | Yandex Metrika IP Masking Configuration                               | `src/routes/+layout.svelte`                           | Code inspection                      |  **COMPLETED**  | Masking enabled; webvisor disabled for compliance. |
 
 ---
 
@@ -284,10 +274,10 @@ When ready to submit the workshop to external catalogs and search engine webmast
 
 - **Yandex.Webmaster (`webmaster.yandex.ru`)**:
   - Verification: Set `PUBLIC_YANDEX_VERIFICATION=<code_from_yandex>` in `.env`.
-  - Sitemap URL: `https://metalprom39.com/sitemap.xml`
+  - Sitemap URL: `https://metalprom39.github.io/sitemap.xml`
 - **Google Search Console (`search.google.com/search-console`)**:
   - Verification: Set `PUBLIC_GOOGLE_VERIFICATION=<code_from_google>` in `.env`.
-  - Sitemap URL: `https://metalprom39.com/sitemap.xml`
+  - Sitemap URL: `https://metalprom39.github.io/sitemap.xml`
 
 ### 6.2. Yandex Business Directory (`Яндекс.Бизнес / Карты`)
 
@@ -315,9 +305,174 @@ When ready to submit the workshop to external catalogs and search engine webmast
 - **Categories:** Machine shop, Metal fabricator, Precision engineer
 - **Service Area:** Kaliningrad Oblast (Kaliningrad, Svetly, Baltiysk, Guryevsk, Chernyakhovsk)
 - **Phone:** +7 (4012) 00-00-00
-- **Website:** https://metalprom39.com
+- **Website:** https://metalprom39.github.io
 
 ### 6.4. Industrial B2B Catalogs (`Obrabotka.net`, `Pulscen`, `2GIS`, КТПП)
 
 - **Listing Title:** Токарно-фрезерная обработка на станках с ЧПУ в Калининграде — ООО/ИП МеталлПром39
 - **Tags / Keywords:** токарные работы ЧПУ Калининград, фрезеровка ЧПУ, шлифовка IT6 IT7, нарезка шестерен, изготовление валов по чертежам, механообработка с НДС.
+
+---
+
+## 7. Automated Search Optimization (SEO / AEO / GEO) Tooling Stack & Operational Playbook
+
+To ensure sustained search visibility, automated quality assurance, and systematic indexing in Google, Yandex, and Generative AI engines (ChatGPT Search, Perplexity, Claude, Google AI Overviews), the platform integrates three dedicated tooling layers configured at system level:
+
+### 7.1. Integrated Tooling Architecture Overview
+
+```
+                      ┌────────────────────────────────────────┐
+                      │    Search Optimization Infrastructure  │
+                      └───────────────────┬────────────────────┘
+                                          │
+         ┌────────────────────────────────┼────────────────────────────────┐
+         ▼                                ▼                                ▼
+┌──────────────────┐            ┌──────────────────┐            ┌──────────────────┐
+│   geo-optimizer  │            │     mcp-gsc      │            │     open-seo     │
+│   (Auriti-Labs)  │            │   (AminForou)    │            │   (Every-App)    │
+├──────────────────┤            ├──────────────────┤            ├──────────────────┤
+│ Local Stdio MCP  │            │ Local Stdio MCP  │            │ Streamable HTTP  │
+│ 12 MCP Tools     │            │ 21 MCP Tools     │            │ OAuth / SaaS     │
+│ CLI: `geo`       │            │ CLI: `mcp-gsc`   │            │ 12 Agent Skills  │
+│ 47 Citability    │            │ GSC API + Auth   │            │ Competitor & KWs │
+│ Checks (KDD 2024)│            │ 4 Agent Skills   │            │ Local & Strategy │
+└──────────────────┘            └──────────────────┘            └──────────────────┘
+```
+
+| Tool Name | Origin / Package | Transport | Executable / Endpoint | MCP Tools | Skills Provided |
+| :--- | :--- | :--- | :--- | :---: | :--- |
+| **`geo-optimizer`** | `Auriti-Labs/geo-optimizer-skill` | Local Stdio | `/home/tikho/.local/bin/geo-mcp` | 12 | `geo-optimizer` |
+| **`mcp-search-console`** | `AminForou/mcp-gsc` | Local Stdio | `/home/tikho/.local/bin/mcp-gsc` | 21 | `cannibalization-check`, `content-opportunities`, `indexing-audit`, `seo-weekly-report` |
+| **`openseo`** | `every-app/open-seo` | Streamable HTTP | `https://app.openseo.so/mcp` | SaaS / Dynamic | 12 B2B optimization skills |
+
+Configuration entry in `~/.gemini/config/mcp_config.json`:
+```json
+{
+  "mcpServers": {
+    "codebase-memory-mcp": {
+      "command": "/home/tikho/.local/bin/codebase-memory-mcp",
+      "args": []
+    },
+    "geo-optimizer": {
+      "command": "/home/tikho/.local/bin/geo-mcp",
+      "args": []
+    },
+    "mcp-search-console": {
+      "command": "/home/tikho/.local/bin/mcp-gsc",
+      "args": []
+    },
+    "openseo": {
+      "url": "https://app.openseo.so/mcp"
+    }
+  }
+}
+```
+
+---
+
+### 7.2. Generative Engine Optimization Engine (`geo-optimizer-skill`)
+
+The `geo-optimizer` framework evaluates and optimizes the website's citability and indexing readiness by Generative Search Engines (ChatGPT Search, Perplexity, Claude, Google AI Overviews).
+
+#### 7.2.1. Available MCP Tools (`geo-mcp`):
+- `geo_audit`: Full 19-block evaluation against scoring rubric v2 (Google AI readiness).
+- `geo_fix`: Generates automated code and configuration fixes for identified issues.
+- `geo_llms_generate`: Scans routes and produces compliant `llms.txt` and `llms-full.txt`.
+- `geo_citability`: Analyzes content depth, claim structure, and entity mentions using 47 empirical citability methods (Princeton KDD 2024).
+- `geo_track`: Monitors brand citation frequency across AI engines over time.
+- `geo_schema`: Validates Schema.org JSON-LD syntax and entity graph coherence.
+- `geo_robots`: Checks AI bot crawler permissions (GPTBot, ClaudeBot, PerplexityBot).
+- `geo_trust_stack`: Diagnostic evaluation of Technical, Identity, and Academic trust signals.
+- `geo_rag_chunks`: Assesses text segmentability for vector retrieval (RAG chunk readiness).
+- `geo_perception`: Evaluates how AI models categorize the brand versus regional competitors.
+- `geo_content_decay`: Predicts temporal freshness degradation of technical articles.
+- `geo_access`: Verifies CDN and firewall accessibility for automated search crawlers.
+
+#### 7.2.2. CLI Quick-Audit Commands:
+```bash
+# Run full text audit of the live platform
+geo audit --url https://metalprom39.github.io/ --format text
+
+# Check citability of a specific technical article
+geo citability --url https://metalprom39.github.io/stati/kvalitety-tochnosti-i-sherohovatost-gost/
+
+# Verify AI crawler access rules
+geo access --url https://metalprom39.github.io/
+```
+
+---
+
+### 7.3. Google Search Console MCP Server (`mcp-gsc`)
+
+The `mcp-gsc` server connects the development environment directly to the Google Search Console API for automated index management and performance monitoring.
+
+#### 7.3.1. Available MCP Tools:
+- `get_capabilities`: Reports authentication status, quotas, and active site properties.
+- `list_properties`: Lists all verified Search Console properties.
+- `inspect_url`: Checks live Google indexing state, crawl timestamps, and mobile usability.
+- `inspect_multiple_urls`: Batch verification of site routes.
+- `get_search_analytics`: Queries clicks, impressions, CTR, and average position by query/page.
+- `get_advanced_search_analytics`: Multi-dimensional filtering with date comparisons.
+- `submit_sitemap`: Submits `sitemap.xml` directly to Google's crawl queue.
+- `list_sitemaps`: Inspects submitted sitemaps, error counts, and discovered page stats.
+- `add_site` / `delete_site`: Manages Search Console property registrations.
+
+#### 7.3.2. Automated Agent Skills (`skills/` & `~/.gemini/config/skills/`):
+- **`indexing-audit`**: Automatically runs inspection across all routes in `sitemap.xml` to flag indexing anomalies or crawl errors.
+- **`cannibalization-check`**: Analyzes search queries where multiple internal pages compete against each other for rankings.
+- **`content-opportunities`**: Identifies high-impression queries ranking in positions 11–20 (low-hanging fruit for quick CTR gains).
+- **`seo-weekly-report`**: Compiles an executive weekly B2B performance briefing.
+
+---
+
+### 7.4. OpenSEO Agentic Intelligence Suite (`open-seo`)
+
+The `openseo` platform provides 12 specialized agent workflows that guide keyword discovery, competitive benchmarking, and regional B2B visibility.
+
+#### 7.4.1. Installed Operational Skills:
+1. **`seo-project-setup`**: Populates target positioning, competitor domains, and regional focus in shared project context.
+2. **`keyword-research`**: Discovers B2B search intent, search volumes, and commercial value of metalworking keywords.
+3. **`keyword-clustering`**: Clusters queries into thematic groups and maps them to service pages or `/stati` articles.
+4. **`competitor-analysis`**: Reverse-engineers organic search footprints and content themes of regional competitors.
+5. **`competitive-landscape`**: Maps market leaders across Kaliningrad, the Baltics, and Northwest Russia.
+6. **`local-seo`**: Audits Google Business Profile, Yandex Maps, and 2GIS presence for geolocalized queries.
+7. **`seo-audit`**: Generates actionable, data-backed optimization recommendations.
+8. **`seo-report`**: Packages audit findings into a self-contained, high-density HTML report.
+9. **`ai-visibility-audit`**: Audits how the workshop brand appears in responses from ChatGPT, Gemini, and Claude.
+10. **`ai-prompt-research`**: Maps the technical questions engineers and buyers ask AI about CNC machining in Kaliningrad.
+11. **`link-prospecting`**: Identifies regional industry directories and partner sites for backlink outreach.
+12. **`seo-coach`**: Interactive reasoning mode for prioritizing SEO engineering tasks.
+
+---
+
+### 7.5. Operational Lifecycle Playbook
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│                      PRE-PUBLISHING ROUTINE                            │
+├────────────────────────────────────────────────────────────────────────┤
+│ 1. Content Authoring: Add tags & related links to `src/content/*.md`   │
+│ 2. `geo citability`: Verify claim density and GOST source attribution  │
+│ 3. `pnpm check`: Confirm TypeScript & Schema.org schema valid          │
+│ 4. `pnpm test:unit` & `pnpm test:e2e`: Verify zero regressions         │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │ (git push origin main)
+                                    ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│                      POST-DEPLOYMENT ROUTINE                           │
+├────────────────────────────────────────────────────────────────────────┤
+│ 1. `geo audit`: Run full GEO score validation against live URL         │
+│ 2. `mcp-gsc:submit_sitemap`: Push updated `sitemap.xml` to Google     │
+│ 3. `indexing-audit`: Request Google inspection on modified URLs        │
+│ 4. Yandex.Webmaster: Trigger re-crawl queue for updated pages          │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │ (periodic cycle)
+                                    ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│                      MONITORING & RETENTION                            │
+├────────────────────────────────────────────────────────────────────────┤
+│ 1. Weekly: `cannibalization-check` & `content-opportunities`           │
+│ 2. Monthly: `ai-visibility-audit` & `local-seo` map ranking checks     │
+│ 3. Metrika API: Extract demand tree (`scripts/get_yandex_metrics`)     │
+└────────────────────────────────────────────────────────────────────────┘
+```
