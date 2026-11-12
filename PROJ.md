@@ -17,6 +17,7 @@ This document is the living reference manual and development log for `metal-prom
 |  **Stage 6**  | Hallmark UI/UX Polish Audit & GitHub Actions Deployment                         | **COMPLETED** |   2026-11-11    |    `cbbefd5`    | Industrial palette audit, mobile viewport safe-area padding, root domain transition (`metalprom39.github.io`), and GitHub Actions workflow deployment (`.github/workflows/deploy.yml`).                                                                                                                                |
 |  **Stage 7**  | Search Optimization Tooling Stack Integration (MCP Servers & Agentic Skills)    | **COMPLETED** |   2026-11-11    |    `c504b97`    | Connected 3 search optimization tooling engines: `geo-optimizer` (Auriti-Labs, 12 MCP tools), `mcp-gsc` (AminForou, 21 MCP tools), and `openseo` (Every-App, 12 skills). Fully documented in Section 7 with automated operational audit playbooks.                                                                 |
 |  **Stage 8**  | Content Authority Expansion & Playwright Multi-Worker Optimization             | **COMPLETED** |   2026-11-12    |    `9fa984e`    | Authored 2 fundamental engineering articles (`/stati/obrabotka-nerzhaveyushchey-stali-12x18n10t`, `/stati/izgotovlenie-zubchatykh-koles-gost`) with GOST citations, direct answer blocks, Schema.org `TechArticle`. Enabled 4-worker Playwright parallelism (150/150 E2E tests passing in 44s, 50/50 unit tests passing). Updated sitemap registry & llms.txt. |
+|  **Stage 9**  | Root Domain Migration to `t1kh0n.github.io` & Search Webmaster Verification     | **COMPLETED** |   2026-11-12    |    `3cfba8b`    | Renamed repository to `t1kh0n.github.io`. Configured root domain `https://t1kh0n.github.io/` across site config, sitemaps, robots.txt, llms.txt. Deployed Google verification file (`googlebffb7acba9853275.html`) and Yandex verification file (`yandex_cbf1eb49dd9b13b2.html`). Verified live HTTP 200 responses and conducted live GEO audit (Score 74/100, GOOD). |
 
 ---
 
@@ -271,14 +272,24 @@ All branding, regional data, and contact endpoints are dynamic and decoupled fro
 
 When ready to submit the workshop to external catalogs and search engine webmasters, use the verified Russian industrial texts below:
 
-### 6.1. Search Engine Webmasters
+### 6.1. Search Engine Webmasters (Verified & Live on Root Domain)
 
-- **Yandex.Webmaster (`webmaster.yandex.ru`)**:
-  - Verification: Set `PUBLIC_YANDEX_VERIFICATION=<code_from_yandex>` in `.env`.
-  - Sitemap URL: `https://metalprom39.github.io/sitemap.xml`
-- **Google Search Console (`search.google.com/search-console`)**:
-  - Verification: Set `PUBLIC_GOOGLE_VERIFICATION=<code_from_google>` in `.env`.
-  - Sitemap URL: `https://metalprom39.github.io/sitemap.xml`
+- **Active Production Domain:** `https://t1kh0n.github.io/`
+- **Sitemap Index:** `https://t1kh0n.github.io/sitemap.xml` (HTTP 200 Verified)
+- **Robots Endpoint:** `https://t1kh0n.github.io/robots.txt` (HTTP 200 Verified)
+- **AI Agent Context:** `https://t1kh0n.github.io/llms.txt` (HTTP 200 Verified)
+
+#### Verification Files Deployed:
+1. **Google Search Console (`search.google.com/search-console`)**:
+   - Verification File: `googlebffb7acba9853275.html`
+   - Verification URL: `https://t1kh0n.github.io/googlebffb7acba9853275.html` (HTTP 200 Verified)
+   - Verification Body: `google-site-verification: googlebffb7acba9853275.html`
+   - Status: Ready for instant one-click ownership confirmation in Google Search Console.
+2. **Yandex.Webmaster (`webmaster.yandex.ru`)**:
+   - Verification File: `yandex_cbf1eb49dd9b13b2.html`
+   - Verification URL: `https://t1kh0n.github.io/yandex_cbf1eb49dd9b13b2.html` (HTTP 200 Verified)
+   - Verification Body: `<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body>Verification: cbf1eb49dd9b13b2</body></html>`
+   - Status: Ready for instant one-click verification (кнопка «Подтвердить») in Yandex.Webmaster.
 
 ### 6.2. Yandex Business Directory (`Яндекс.Бизнес / Карты`)
 
