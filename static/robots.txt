@@ -40,4 +40,4 @@ Allow: /llms-full.txt
 Disallow: /cdn-cgi/
 
 # XML Sitemap
-Sitemap: https://t1kh0n.github.io/metal-prom-web/sitemap.xml
+Sitemap: https://t1kh0n.github.io/sitemap.xml

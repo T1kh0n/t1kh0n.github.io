@@ -50,31 +50,31 @@ describe('Site Configuration & Dynamic Environment Resolution', () => {
 
 	describe('getCanonicalUrl', () => {
 		it('generates canonical root URL with trailing slash', () => {
-			expect(getCanonicalUrl('/', 'https://metalprom39.github.io')).toBe('https://metalprom39.github.io/');
-			expect(getCanonicalUrl('', 'https://metalprom39.github.io/')).toBe('https://metalprom39.github.io/');
+			expect(getCanonicalUrl('/', 'https://t1kh0n.github.io')).toBe('https://t1kh0n.github.io/');
+			expect(getCanonicalUrl('', 'https://t1kh0n.github.io/')).toBe('https://t1kh0n.github.io/');
 		});
 
 		it('appends trailing slash to inner routes', () => {
-			expect(getCanonicalUrl('tokarnye-raboty-chpu', 'https://metalprom39.github.io')).toBe(
-				'https://metalprom39.github.io/tokarnye-raboty-chpu/'
+			expect(getCanonicalUrl('tokarnye-raboty-chpu', 'https://t1kh0n.github.io')).toBe(
+				'https://t1kh0n.github.io/tokarnye-raboty-chpu/'
 			);
 
-			expect(getCanonicalUrl('/frezernye-raboty-chpu/', 'https://metalprom39.github.io')).toBe(
-				'https://metalprom39.github.io/frezernye-raboty-chpu/'
+			expect(getCanonicalUrl('/frezernye-raboty-chpu/', 'https://t1kh0n.github.io')).toBe(
+				'https://t1kh0n.github.io/frezernye-raboty-chpu/'
 			);
 		});
 	});
 
 	describe('getOgImageUrl', () => {
 		it('returns default og image url', () => {
-			expect(getOgImageUrl('default', 'https://metalprom39.github.io')).toBe(
-				'https://metalprom39.github.io/og/default.webp'
+			expect(getOgImageUrl('default', 'https://t1kh0n.github.io')).toBe(
+				'https://t1kh0n.github.io/og/default.webp'
 			);
 		});
 
 		it('returns slug-specific og image url', () => {
-			expect(getOgImageUrl('tokarnye-raboty-chpu', 'https://metalprom39.github.io')).toBe(
-				'https://metalprom39.github.io/og/tokarnye-raboty-chpu.webp'
+			expect(getOgImageUrl('tokarnye-raboty-chpu', 'https://t1kh0n.github.io')).toBe(
+				'https://t1kh0n.github.io/og/tokarnye-raboty-chpu.webp'
 			);
 		});
 	});

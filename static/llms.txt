@@ -25,19 +25,19 @@
 - Латунь ЛС59-1, Бронза БрАЖ9-4, Капролон ПА-6.
 
 ## Ключевые разделы сайта и документация
-- [Главная страница](https://t1kh0n.github.io/metal-prom-web/)
-- [Инженерный калькулятор стоимости ЧПУ](https://t1kh0n.github.io/metal-prom-web/kalkulyator-stoimosti-chpu/)
-- [Токарные работы с ЧПУ](https://t1kh0n.github.io/metal-prom-web/tokarnye-raboty-chpu/)
-- [Фрезерные работы с ЧПУ](https://t1kh0n.github.io/metal-prom-web/frezernye-raboty-chpu/)
-- [Зуборезные и шлифовальные работы](https://t1kh0n.github.io/metal-prom-web/zuboreznye-i-shlifovalnye-raboty/)
-- [Контроль качества и парк оборудования](https://t1kh0n.github.io/metal-prom-web/kontrol-kachestva-i-oborudovanie/)
-- [Инженерные статьи и база знаний](https://t1kh0n.github.io/metal-prom-web/stati/)
-- [Выбор конструкционных и нержавеющих сталей](https://t1kh0n.github.io/metal-prom-web/stati/vybor-stali-dlya-chpu-obrabotki/)
-- [Квалитеты точности IT7-IT12 и шероховатость Ra по ГОСТ](https://t1kh0n.github.io/metal-prom-web/stati/kvalitety-tochnosti-i-sherohovatost-gost/)
-- [DFM-оптимизация стоимости деталей](https://t1kh0n.github.io/metal-prom-web/stati/optimizaciya-stoimosti-detaley-chpu/)
-- [Обработка нержавеющей стали 12Х18Н10Т и AISI 304](https://t1kh0n.github.io/metal-prom-web/stati/obrabotka-nerzhaveyushchey-stali-12x18n10t/)
-- [Нарезание зубчатых колес и шестерен по ГОСТ 1643-81](https://t1kh0n.github.io/metal-prom-web/stati/izgotovlenie-zubchatykh-koles-gost/)
+- [Главная страница](https://t1kh0n.github.io/)
+- [Инженерный калькулятор стоимости ЧПУ](https://t1kh0n.github.io/kalkulyator-stoimosti-chpu/)
+- [Токарные работы с ЧПУ](https://t1kh0n.github.io/tokarnye-raboty-chpu/)
+- [Фрезерные работы с ЧПУ](https://t1kh0n.github.io/frezernye-raboty-chpu/)
+- [Зуборезные и шлифовальные работы](https://t1kh0n.github.io/zuboreznye-i-shlifovalnye-raboty/)
+- [Контроль качества и парк оборудования](https://t1kh0n.github.io/kontrol-kachestva-i-oborudovanie/)
+- [Инженерные статьи и база знаний](https://t1kh0n.github.io/stati/)
+- [Выбор конструкционных и нержавеющих сталей](https://t1kh0n.github.io/stati/vybor-stali-dlya-chpu-obrabotki/)
+- [Квалитеты точности IT7-IT12 и шероховатость Ra по ГОСТ](https://t1kh0n.github.io/stati/kvalitety-tochnosti-i-sherohovatost-gost/)
+- [DFM-оптимизация стоимости деталей](https://t1kh0n.github.io/stati/optimizaciya-stoimosti-detaley-chpu/)
+- [Обработка нержавеющей стали 12Х18Н10Т и AISI 304](https://t1kh0n.github.io/stati/obrabotka-nerzhaveyushchey-stali-12x18n10t/)
+- [Нарезание зубчатых колес и шестерен по ГОСТ 1643-81](https://t1kh0n.github.io/stati/izgotovlenie-zubchatykh-koles-gost/)
 
 ## Контакты и реквизиты
 - **Регион:** г. Калининград, Калининградская область, Россия
-- **Политика конфиденциальности:** https://t1kh0n.github.io/metal-prom-web/politika-konfidentsialnosti/
+- **Политика конфиденциальности:** https://t1kh0n.github.io/politika-konfidentsialnosti/
