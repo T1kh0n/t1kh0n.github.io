@@ -90,6 +90,34 @@ export function createOrganizationSchema(config: SiteConfig = siteConfig) {
 /**
  * Creates Schema.org ManufacturingBusiness (LocalBusiness) structured data with GEO targeting.
  */
+
+/**
+ * Creates Schema.org WebSite structured data for search engine discovery and sitelinks.
+ */
+export function createWebSiteSchema(config: SiteConfig = siteConfig) {
+	return {
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"@id": `${config.siteDomain}/#website`,
+		url: config.siteDomain,
+		name: config.brandName,
+		alternateName: ["MetalProm39", "МеталлПром39 ЧПУ Калининград"],
+		description: "Высокоточная контрактная металлообработка деталей на токарных и фрезерных станках с ЧПУ в Калининграде. Точность IT7, шероховатость до Ra 1.25. Безналичный расчет с НДС 22%.",
+		inLanguage: "ru-RU",
+		publisher: {
+			"@id": `${config.siteDomain}/#organization`
+		},
+		potentialAction: {
+			"@type": "SearchAction",
+			target: {
+				"@type": "EntryPoint",
+				urlTemplate: `${config.siteDomain}/sitemap/?q={search_term_string}`
+			},
+			"query-input": "required name=search_term_string"
+		}
+	};
+}
+
 export function createLocalBusinessSchema(config: SiteConfig = siteConfig) {
 	return {
 		'@context': 'https://schema.org',

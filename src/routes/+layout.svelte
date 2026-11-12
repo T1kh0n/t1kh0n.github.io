@@ -8,6 +8,7 @@
 	import {
 		createOrganizationSchema,
 		createLocalBusinessSchema,
+		createWebSiteSchema,
 		serializeSchema
 	} from '#lib/seo/schema';
 	import type { LayoutProps } from './$types';
@@ -16,10 +17,16 @@
 
 	const orgSchema = createOrganizationSchema();
 	const localBusinessSchema = createLocalBusinessSchema();
+	const webSiteSchema = createWebSiteSchema();
 </script>
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<link rel="alternate" type="application/rss+xml" title="МеталлПром39 — Контрактная металлообработка с ЧПУ" href="/feed.xml" />
+
+	<!-- Search Engine & Webmaster Verification -->
+	<meta name="google-site-verification" content="googlebffb7acba9853275.html" />
+	<meta name="yandex-verification" content="cbf1eb49dd9b13b2" />
 	
 	<!-- GEO Targeting: Kaliningrad, Russia -->
 	<meta name="geo.region" content="RU-KGD" />
@@ -30,12 +37,16 @@
 	<!-- Technical SEO & Crawling Directives -->
 	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 	<meta name="author" content="Цех контрактной металлообработки ЧПУ MetalProm39" />
+	<meta property="article:modified_time" content="2026-11-12T15:00:00+02:00" />
+	<meta name="revised" content="2026-11-12T15:00:00+02:00" />
 	<meta property="og:locale" content="ru_RU" />
 	<meta property="og:site_name" content="МеталлПром39" />
+	<meta property="og:image" content="https://t1kh0n.github.io/og/default.webp" />
 
 	<!-- Schema.org JSON-LD Structured Data -->
 	{@html serializeSchema(orgSchema)}
 	{@html serializeSchema(localBusinessSchema)}
+	{@html serializeSchema(webSiteSchema)}
 </svelte:head>
 
 <div
