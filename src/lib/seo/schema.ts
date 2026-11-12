@@ -161,12 +161,27 @@ export function createLocalBusinessSchema(config: SiteConfig = siteConfig) {
 				closes: '18:00'
 			}
 		],
-		aggregateRating: {
-			'@type': 'AggregateRating',
-			ratingValue: '4.9',
-			reviewCount: '28',
-			bestRating: '5',
-			worstRating: '1'
+		hasOfferCatalog: {
+			'@type': 'OfferCatalog',
+			name: 'Услуги металлообработки с ЧПУ',
+			itemListElement: [
+				{
+					'@type': 'Offer',
+					itemOffered: {
+						'@type': 'Service',
+						name: 'Токарные работы с ЧПУ',
+						url: `${config.siteDomain}/tokarnye-raboty-chpu/`
+					}
+				},
+				{
+					'@type': 'Offer',
+					itemOffered: {
+						'@type': 'Service',
+						name: 'Фрезерные работы с ЧПУ',
+						url: `${config.siteDomain}/frezernye-raboty-chpu/`
+					}
+				}
+			]
 		}
 	};
 }

@@ -32,7 +32,7 @@ describe('Schema.org JSON-LD Generators', () => {
 		expect(biz.priceRange).toBe('₽₽');
 		expect(biz.currenciesAccepted).toBe('RUB');
 		expect(Array.isArray(biz.areaServed)).toBe(true);
-		expect(biz.aggregateRating.ratingValue).toBe('4.9');
+		expect(biz.hasOfferCatalog.name).toBe('Услуги металлообработки с ЧПУ');
 	});
 
 	it('generates valid Service schema with pricing offers', () => {
