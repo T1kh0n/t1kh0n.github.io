@@ -15,7 +15,8 @@ This document is the living reference manual and development log for `metal-prom
 |  **Stage 4**  | SEO/AEO/GEO Core, Structured Data, Yandex Metrika & 152-FZ Legal Compliance     | **COMPLETED** |   2026-11-04    |    `8e98ce8`    | Full Schema.org (`LocalBusiness`, `TechArticle`, `Service`, `BreadcrumbList`, `FAQPage`), OpenGraph, `robots.txt`, `sitemap.xml`, `llms.txt`, `llms-full.txt`, frontmatter tag cross-linking, debounced Yandex Metrika tracking with `calc_order_click` goal, `/politika-konfidentsialnosti`, zero personal data.     |
 |  **Stage 5**  | Comprehensive Automated Testing Suite (48-Point SEO/AEO/GEO & Compliance Audit) | **COMPLETED** |   2026-11-04    |    `7c51304`    | Full Playwright (134/134 passing) and Vitest (50/50 passing) assertions covering zero personal data inputs, responsive geometry (320px–1440px), no horizontal overflow, and accessible typography.                                                                                                                      |
 |  **Stage 6**  | Hallmark UI/UX Polish Audit & GitHub Actions Deployment                         | **COMPLETED** |   2026-11-11    |    `cbbefd5`    | Industrial palette audit, mobile viewport safe-area padding, root domain transition (`metalprom39.github.io`), and GitHub Actions workflow deployment (`.github/workflows/deploy.yml`).                                                                                                                                |
-|  **Stage 7**  | Search Optimization Tooling Stack Integration (MCP Servers & Agentic Skills)    | **COMPLETED** |   2026-11-11    |    `active`     | Connected 3 search optimization tooling engines: `geo-optimizer` (Auriti-Labs, 12 MCP tools), `mcp-gsc` (AminForou, 21 MCP tools), and `openseo` (Every-App, 12 skills). Fully documented in Section 7 with automated operational audit playbooks.                                                                 |
+|  **Stage 7**  | Search Optimization Tooling Stack Integration (MCP Servers & Agentic Skills)    | **COMPLETED** |   2026-11-11    |    `c504b97`    | Connected 3 search optimization tooling engines: `geo-optimizer` (Auriti-Labs, 12 MCP tools), `mcp-gsc` (AminForou, 21 MCP tools), and `openseo` (Every-App, 12 skills). Fully documented in Section 7 with automated operational audit playbooks.                                                                 |
+|  **Stage 8**  | Content Authority Expansion & Playwright Multi-Worker Optimization             | **COMPLETED** |   2026-11-12    |    `9fa984e`    | Authored 2 fundamental engineering articles (`/stati/obrabotka-nerzhaveyushchey-stali-12x18n10t`, `/stati/izgotovlenie-zubchatykh-koles-gost`) with GOST citations, direct answer blocks, Schema.org `TechArticle`. Enabled 4-worker Playwright parallelism (150/150 E2E tests passing in 44s, 50/50 unit tests passing). Updated sitemap registry & llms.txt. |
 
 ---
 
@@ -514,13 +515,13 @@ Search engines (especially Yandex and Google) rank manufacturing sites significa
 ### 9.1. Topical Authority & Article Production Queue (`/stati`)
 To capture long-tail and mid-tail commercial demand across Kaliningrad Oblast and the Russian Federation, the following engineering articles are scheduled for authoring with frontmatter tags, ГОСТ references, cross-links to workshop services, and external citations:
 
-| Slug | Topic & Primary Keyword | Target Services Linked | External Authority Sources Cited |
-| :--- | :--- | :--- | :--- |
-| `obrabotka-nerzhaveyushchey-stali-12x18n10t` | Особенности точения и фрезерования нержавейки 12Х18Н10Т / AISI 304 | `/tokarnye-raboty-chpu`, `/frezernye-raboty-chpu` | ГОСТ 5632-2014, Sandvik Coromant machining guidelines |
-| `izgotovlenie-zubchatykh-koles-gost` | Нарезание цилиндрических шестерен m=1-6: выбор модуля и термообработка | `/zuboreznye-i-shlifovalnye-raboty` | ГОСТ 2144-93, ГОСТ 1643-81, металлургические стандарты |
-| `alyuminievye-splavy-d16t-amg6-chpu` | Обработка авиационных алюминиевых сплавов Д16Т и АМг6: скорости и СОЖ | `/frezernye-raboty-chpu`, `/portfolio` | ГОСТ 4784-2019, Kennametal алюминиевые фрезы |
-| `termicheskaya-obrabotka-detaley-chpu` | Закалка ТВЧ, цементация и нормализация деталей после механической обработки | `/kontrol-kachestva-i-oborudovanie` | ГОСТ 8479-70, ГОСТ 4543-2016 |
-| `posadochnye-mesta-pod-podshipniki-it6-it7` | Допуски и посадки под подшипники: тонкости расточки и шлифования | `/tokarnye-raboty-chpu`, `/kontrol-kachestva-i-oborudovanie` | ГОСТ 3325-85, SKF Bearing Installation Manual |
+| Slug | Topic & Primary Keyword | Target Services Linked | External Authority Sources Cited | Status |
+| :--- | :--- | :--- | :--- | :---: |
+| `obrabotka-nerzhaveyushchey-stali-12x18n10t` | Особенности точения и фрезерования нержавейки 12Х18Н10Т / AISI 304 | `/tokarnye-raboty-chpu`, `/frezernye-raboty-chpu` | ГОСТ 5632-2014, Sandvik Coromant machining guidelines | **COMPLETED** |
+| `izgotovlenie-zubchatykh-koles-gost` | Нарезание цилиндрических шестерен m=1-6: выбор модуля и термообработка | `/zuboreznye-i-shlifovalnye-raboty` | ГОСТ 2144-93, ГОСТ 1643-81, металлургические стандарты | **COMPLETED** |
+| `alyuminievye-splavy-d16t-amg6-chpu` | Обработка авиационных алюминиевых сплавов Д16Т и АМг6: скорости и СОЖ | `/frezernye-raboty-chpu`, `/portfolio` | ГОСТ 4784-2019, Kennametal алюминиевые фрезы | **NEXT** |
+| `termicheskaya-obrabotka-detaley-chpu` | Закалка ТВЧ, цементация и нормализация деталей после механической обработки | `/kontrol-kachestva-i-oborudovanie` | ГОСТ 8479-70, ГОСТ 4543-2016 | **PENDING** |
+| `posadochnye-mesta-pod-podshipniki-it6-it7` | Допуски и посадки под подшипники: тонкости расточки и шлифования | `/tokarnye-raboty-chpu`, `/kontrol-kachestva-i-oborudovanie` | ГОСТ 3325-85, SKF Bearing Installation Manual | **PENDING** |
 
 **Rules for Content Expansion:**
 - Every article must contain:

@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-const BASE = '/metal-prom-web';
+const BASE = process.env.BASE_PATH || '';
 
 const coreRoutes = [
 	{ path: `${BASE}/`, titlePart: 'Металлообработка' },
@@ -15,6 +15,8 @@ const coreRoutes = [
 	{ path: `${BASE}/stati/vybor-stali-dlya-chpu-obrabotki/`, titlePart: 'Выбор сталей' },
 	{ path: `${BASE}/stati/kvalitety-tochnosti-i-sherohovatost-gost/`, titlePart: 'Квалитеты точности' },
 	{ path: `${BASE}/stati/optimizaciya-stoimosti-detaley-chpu/`, titlePart: 'DFM-оптимизация' },
+	{ path: `${BASE}/stati/obrabotka-nerzhaveyushchey-stali-12x18n10t/`, titlePart: 'нержавейк' },
+	{ path: `${BASE}/stati/izgotovlenie-zubchatykh-koles-gost/`, titlePart: 'зубчат' },
 	{ path: `${BASE}/politika-konfidentsialnosti/`, titlePart: 'Политика конфиденциальности' },
 	{ path: `${BASE}/sitemap/`, titlePart: 'Карта сайта' }
 ];

@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-const BASE = '/metal-prom-web';
+const BASE = process.env.BASE_PATH || '';
 
 test('has expected h1', async ({ page }) => {
 	await page.goto(`${BASE}/`);

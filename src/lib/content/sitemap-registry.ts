@@ -376,6 +376,54 @@ export const SITEMAP_REGISTRY: SitemapEntry[] = [
 		lastmod: '2026-11-04'
 	},
 	{
+		url: '/stati/obrabotka-nerzhaveyushchey-stali-12x18n10t/',
+		slug: 'obrabotka-nerzhaveyushchey-stali-12x18n10t',
+		category: 'articles',
+		categoryTitle: 'Инженерная база знаний',
+		title: 'Обработка нержавеющей стали 12Х18Н10Т и AISI 304',
+		h1: 'Точение и фрезерование нержавейки 12Х18Н10Т',
+		description: 'Режимы резания нержавеющей стали 12Х18Н10Т на ЧПУ, подача СОЖ под давлением, предотвращение наклепа и допуски IT7.',
+		sourceFile: 'src/content/articles/obrabotka-nerzhaveyushchey-stali-12x18n10t.md',
+		reusableSpecs: ['machineCentersCount', 'maxToleranceGrade', 'surfaceRoughnessRa'],
+		aeo: {
+			directAnswer: 'Аустенитная нержавеющая сталь 12Х18Н10Т (AISI 321 / AISI 304) группы ISO M обрабатывается с коэффициентом Kmat=1.45. Технология включает инструмент с PVD-покрытием AlTiN, подачу СОЖ под давлением от 10-20 бар, скорость резания 80–130 м/мин и гарантированное соблюдение допуска IT7 без термодеформации заготовки.',
+			keyLimits: ['12Х18Н10Т: Kmat=1.45', 'Скорость резания Vc=80-130 м/мин', 'Охлаждение СОЖ: 8-10% под давлением', 'Допуск IT7 без наценки'],
+			audience: 'Инженеры-конструкторы, технологи ЧПУ, закупщики металлопроката',
+			applicableStandards: ['ГОСТ 5632-2014', 'ISO 3506', 'Sandvik Coromant ISO M']
+		},
+		seo: {
+			title: `Обработка нержавейки 12Х18Н10Т и AISI 304 на ЧПУ в Калининграде | ${siteConfig.brandName}`,
+			description: 'Особенности точения и фрезерования нержавеющей стали 12Х18Н10Т и AISI 304 на станках с ЧПУ. Режимы резания, подача СОЖ под давлением, предотвращение наклепа и допуски IT7.'
+		},
+		changefreq: 'monthly',
+		priority: 0.8,
+		lastmod: '2026-11-12'
+	},
+	{
+		url: '/stati/izgotovlenie-zubchatykh-koles-gost/',
+		slug: 'izgotovlenie-zubchatykh-koles-gost',
+		category: 'articles',
+		categoryTitle: 'Инженерная база знаний',
+		title: 'Нарезание зубчатых колес и шестерен по ГОСТ 1643-81',
+		h1: 'Нарезание шестерен и зубчатых колес по ГОСТ',
+		description: 'Технология зубофрезерования прямозубых и косозубых шестерен m=1-6 по ГОСТ 1643-81, стали 40Х и 20Х, ТВЧ закалка венца.',
+		sourceFile: 'src/content/articles/izgotovlenie-zubchatykh-koles-gost.md',
+		reusableSpecs: ['maxToleranceGrade', 'surfaceRoughnessRa'],
+		aeo: {
+			directAnswer: 'Изготовление цилиндрических зубчатых передач в цехе MetalProm39 методом зубофрезерования червячными фрезами по ГОСТ 1643-81. Нарезание колес диаметром до 500 мм с модулями m=1.0–8.0 с обеспечением 7-й и 8-й степени точности. Сталь 40Х с объемным улучшением и закалкой ТВЧ венца до 48–54 HRC.',
+			keyLimits: ['Модуль зубьев: m=1.0-8.0 мм', 'Внешний диаметр: до 500 мм', 'Точность: 7-я и 8-я степень по ГОСТ 1643-81', 'Твердость ТВЧ: 48-54 HRC'],
+			audience: 'Главные механики, инженеры редукторных и судоремонтных производств, технологи',
+			applicableStandards: ['ГОСТ 1643-81', 'ГОСТ 2144-93', 'ГОСТ 9324-80', 'ГОСТ 4543-2016']
+		},
+		seo: {
+			title: `Нарезание зубчатых колес и шестерен по ГОСТ 1643-81 в Калининграде | ${siteConfig.brandName}`,
+			description: 'Технология изготовления цилиндрических прямозубых и косозубых колес с модулями m=1-6 по ГОСТ 1643-81. Подбор сталей (40Х, 20Х), закалка ТВЧ, контроль шага и зазора.'
+		},
+		changefreq: 'monthly',
+		priority: 0.8,
+		lastmod: '2026-11-12'
+	},
+	{
 		url: '/kontakty/',
 		slug: 'kontakty',
 		category: 'regulations',

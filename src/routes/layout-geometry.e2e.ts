@@ -1,7 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
 
-const BASE = '/metal-prom-web';
-const toRoute = (r: string) => (r.startsWith(BASE) ? r : `${BASE}${r === "/" ? "/" : r}`);
+const BASE = process.env.BASE_PATH || '';
+const toRoute = (r: string) => (BASE ? (r.startsWith(BASE) ? r : `${BASE}${r === "/" ? "/" : r}`) : r);
 
 const RAW_ROUTES = [
 	'/',
@@ -16,6 +16,8 @@ const RAW_ROUTES = [
 	'/stati/vybor-stali-dlya-chpu-obrabotki/',
 	'/stati/kvalitety-tochnosti-i-sherohovatost-gost/',
 	'/stati/optimizaciya-stoimosti-detaley-chpu/',
+	'/stati/obrabotka-nerzhaveyushchey-stali-12x18n10t/',
+	'/stati/izgotovlenie-zubchatykh-koles-gost/',
 	'/politika-konfidentsialnosti/',
 	'/sitemap/'
 ];

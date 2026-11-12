@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-const BASE = '/metal-prom-web';
+const BASE = process.env.BASE_PATH || '';
 
 function createSyntheticBinaryStlBuffer(
 	dx: number,
