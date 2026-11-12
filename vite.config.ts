@@ -4,7 +4,7 @@ import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
 import path from 'node:path';
 
-const base = (process.env.BASE_PATH !== undefined ? process.env.BASE_PATH : '') as
+const base = (process.env.BASE_PATH !== undefined ? process.env.BASE_PATH : '/metal-prom-web') as
 	| ''
 	| `/${string}`;
 

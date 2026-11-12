@@ -1,7 +1,7 @@
-export const base = '';
+export const base = '/metal-prom-web';
 
 export function pageHref(path: string): string {
-	if (path === '/') return '/';
+	if (path === '/') return base || '/';
 	const clean = path.startsWith('/') ? path : `/${path}`;
-	return clean;
+	return `${base}${clean}`;
 }
