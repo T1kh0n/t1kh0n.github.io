@@ -1,3 +1,4 @@
+import katex from 'katex';
 import { load } from 'js-yaml';
 import { marked } from 'marked';
 import { WORKSHOP_SPECS } from './workshop-specs';
@@ -59,6 +60,23 @@ marked.use({
 /**
  * Parse raw markdown content with frontmatter and variable interpolation
  */
+
+/**
+ * Render LaTeX math expressions enclosed in $...$ into KaTeX HTML strings
+ */
+export function renderMathInMarkdown(text: string): string {
+	return text.replace(/\$([^$\n]+)\$/g, (_, mathExpr) => {
+		try {
+			return katex.renderToString(mathExpr.trim(), {
+				displayMode: false,
+				throwOnError: false
+			});
+		} catch {
+			return mathExpr;
+		}
+	});
+}
+
 export function parseMarkdown<T = Record<string, unknown>>(rawContent: string): ParsedMarkdown<T> {
 	const interpolated = injectWorkshopVariables(rawContent);
 
@@ -81,7 +99,8 @@ export function parseMarkdown<T = Record<string, unknown>>(rawContent: string): 
 		}
 	}
 
-	const html = marked.parse(content, { async: false }) as string;
+	const contentWithMath = renderMathInMarkdown(content);
+	const html = marked.parse(contentWithMath, { async: false }) as string;
 
 	return {
 		data,

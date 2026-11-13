@@ -719,6 +719,9 @@ html.a11y-active main button:not(.a11y-toolbar button) {
 
 .article-prose p {
 	margin-bottom: 1.25rem;
+	text-align: justify;
+	text-justify: inter-word;
+	hyphens: auto;
 }
 
 .article-prose ul,

@@ -171,7 +171,7 @@
 					href="{base}/politika-konfidentsialnosti/"
 					class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 				>
-					Политика конфиденциальности
+					Политика конфиденциальности и безопасности
 				</a>
 				<a
 					href="{base}/sitemap/"

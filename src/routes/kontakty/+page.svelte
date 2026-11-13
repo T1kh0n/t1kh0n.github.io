@@ -57,8 +57,8 @@
 					</p>
 
 					<div class="mt-6 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-5">
-						<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-							<div>
+						<div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+							<div class="min-w-0 flex-1">
 								<div class="text-sm font-normal text-[var(--color-ink)]">
 									Предварительная инженерная оценка
 								</div>
@@ -68,7 +68,7 @@
 							</div>
 							<a
 								href="{base}/kalkulyator-stoimosti-chpu/"
-								class="btn btn--wide sm:btn--sm shrink-0"
+								class="btn btn--sm w-full md:w-auto shrink-0 text-center"
 							>
 								<span>Открыть калькулятор</span>
 							</a>
