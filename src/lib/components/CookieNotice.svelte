@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { base } from '$lib/paths';
+	import { siteConfig } from '#lib/config/site';
 	import {
 		COOKIE_STORAGE_KEY,
 		initMetrikaIfConsented,
@@ -67,9 +68,9 @@
 					</strong>
 				</div>
 				<p>
-					Наш сайт использует строго необходимые технические файлы cookie для стабильной работы интерфейса,
+					Наш сайт использует строго необходимые технические файлы cookie для стабильной работы интерфейса{#if siteConfig.enableYandexMetrika},
 					а также с вашего предварительного согласия — обезличенный сервис веб-аналитики Яндекс.Метрика для
-					оценки спроса и улучшения калькулятора. Мы гарантируем право на отказ от сбора аналитических данных.
+					оценки спроса и улучшения калькулятора. Мы гарантируем право на отказ от сбора аналитических данных{/if}.
 					Подробнее — в нашей
 					<a
 						href="{base}/politika-konfidentsialnosti/"
@@ -87,20 +88,30 @@
 				</p>
 			</div>
 			<div class="flex shrink-0 flex-wrap items-center gap-2.5 sm:flex-nowrap">
-				<button
-					type="button"
-					onclick={rejectCookies}
-					class="btn btn--sm btn--line whitespace-nowrap text-xs"
-				>
-					<span>Только необходимые (отказаться)</span>
-				</button>
-				<button
-					type="button"
-					onclick={acceptCookies}
-					class="btn btn--sm whitespace-nowrap text-xs"
-				>
-					<span>Принять все</span>
-				</button>
+				{#if siteConfig.enableYandexMetrika}
+					<button
+						type="button"
+						onclick={rejectCookies}
+						class="btn btn--sm btn--line whitespace-nowrap text-xs"
+					>
+						<span>Только необходимые (отказаться)</span>
+					</button>
+					<button
+						type="button"
+						onclick={acceptCookies}
+						class="btn btn--sm whitespace-nowrap text-xs"
+					>
+						<span>Принять все</span>
+					</button>
+				{:else}
+					<button
+						type="button"
+						onclick={acceptCookies}
+						class="btn btn--sm whitespace-nowrap text-xs"
+					>
+						<span>Понятно</span>
+					</button>
+				{/if}
 			</div>
 		</div>
 	</aside>

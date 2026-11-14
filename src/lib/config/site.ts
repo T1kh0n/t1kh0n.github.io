@@ -1,6 +1,6 @@
 /**
  * Centralized Site and Organization Configuration.
- * Fully supports runtime overrides via environment variables or test fixtures.
+ * Fully supports runtime and build-time overrides via environment variables or test fixtures.
  */
 
 export interface SiteConfig {
@@ -19,6 +19,7 @@ export interface SiteConfig {
 	geoLongitude: number;
 	openingHours: string;
 	gaMeasurementId: string;
+	enableYandexMetrika: boolean;
 	ymCounterId: string;
 	yandexVerification: string;
 	googleVerification: string;
@@ -49,6 +50,7 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
 	geoLongitude: 20.4522,
 	openingHours: 'Пн-Пт 08:00-18:00',
 	gaMeasurementId: '',
+	enableYandexMetrika: false, // Default is false: Yandex Metrika is disabled at build time
 	ymCounterId: '114070369',
 	yandexVerification: '',
 	googleVerification: '',
@@ -102,6 +104,13 @@ export function resolveSiteConfig(
 		DEFAULT_SITE_CONFIG.geoLongitude;
 	const openingHours = getVal('PUBLIC_OPENING_HOURS', DEFAULT_SITE_CONFIG.openingHours);
 	const gaMeasurementId = getVal('PUBLIC_GA_MEASUREMENT_ID', '');
+	
+	const rawEnableYm = source['PUBLIC_ENABLE_YANDEX_METRIKA'];
+	const enableYandexMetrika =
+		rawEnableYm !== undefined
+			? rawEnableYm === 'true' || rawEnableYm === '1'
+			: DEFAULT_SITE_CONFIG.enableYandexMetrika;
+
 	const ymCounterId = getVal('PUBLIC_YM_COUNTER_ID', DEFAULT_SITE_CONFIG.ymCounterId);
 	const yandexVerification = getVal('PUBLIC_YANDEX_VERIFICATION', '');
 	const googleVerification = getVal('PUBLIC_GOOGLE_VERIFICATION', '');
@@ -122,6 +131,7 @@ export function resolveSiteConfig(
 		geoLongitude,
 		openingHours,
 		gaMeasurementId,
+		enableYandexMetrika,
 		ymCounterId,
 		yandexVerification,
 		googleVerification,

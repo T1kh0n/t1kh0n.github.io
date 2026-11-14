@@ -13,6 +13,7 @@ describe('Site Configuration & Dynamic Environment Resolution', () => {
 		expect(config.addressRegion).toBe('Калининградская область');
 		expect(config.geoLatitude).toBe(54.7104);
 		expect(config.geoLongitude).toBe(20.4522);
+		expect(config.enableYandexMetrika).toBe(false);
 	});
 
 	it('overrides default values with custom environment variables', () => {
@@ -30,6 +31,7 @@ describe('Site Configuration & Dynamic Environment Resolution', () => {
 			PUBLIC_GEO_LATITUDE: '54.6750',
 			PUBLIC_GEO_LONGITUDE: '20.1340',
 			PUBLIC_GA_MEASUREMENT_ID: 'G-1234567890',
+			PUBLIC_ENABLE_YANDEX_METRIKA: 'true',
 			PUBLIC_YM_COUNTER_ID: '98765432'
 		};
 
@@ -45,6 +47,7 @@ describe('Site Configuration & Dynamic Environment Resolution', () => {
 		expect(config.geoLatitude).toBe(54.675);
 		expect(config.geoLongitude).toBe(20.134);
 		expect(config.gaMeasurementId).toBe('G-1234567890');
+		expect(config.enableYandexMetrika).toBe(true);
 		expect(config.ymCounterId).toBe('98765432');
 	});
 
