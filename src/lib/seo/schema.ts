@@ -66,6 +66,11 @@ export function createOrganizationSchema(config: SiteConfig = siteConfig) {
 		logo: `${config.siteDomain}/logo.svg`,
 		email: config.contactEmail,
 		telephone: config.contactPhone,
+		author: {
+			'@type': 'Organization',
+			name: config.brandName,
+			url: config.siteDomain
+		},
 		address: {
 			'@type': 'PostalAddress',
 			streetAddress: config.addressStreet,
@@ -88,36 +93,36 @@ export function createOrganizationSchema(config: SiteConfig = siteConfig) {
 }
 
 /**
- * Creates Schema.org ManufacturingBusiness (LocalBusiness) structured data with GEO targeting.
- */
-
-/**
  * Creates Schema.org WebSite structured data for search engine discovery and sitelinks.
  */
 export function createWebSiteSchema(config: SiteConfig = siteConfig) {
 	return {
-		"@context": "https://schema.org",
-		"@type": "WebSite",
-		"@id": `${config.siteDomain}/#website`,
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		'@id': `${config.siteDomain}/#website`,
 		url: config.siteDomain,
 		name: config.brandName,
-		alternateName: ["MetalProm39", "МеталлПром39 ЧПУ Калининград"],
-		description: "Высокоточная контрактная металлообработка деталей на токарных и фрезерных станках с ЧПУ в Калининграде. Точность IT7, шероховатость до Ra 1.25. Безналичный расчет с НДС 22%.",
-		inLanguage: "ru-RU",
+		alternateName: ['MetalProm39', 'МеталлПром39 ЧПУ Калининград'],
+		description: 'Высокоточная контрактная металлообработка деталей на токарных и фрезерных станках с ЧПУ в Калининграде. Точность IT7, шероховатость до Ra 1.25. Безналичный расчет с НДС 22%.',
+		inLanguage: 'ru-RU',
+		dateModified: '2026-11-13T21:00:00+02:00',
 		publisher: {
-			"@id": `${config.siteDomain}/#organization`
+			'@id': `${config.siteDomain}/#organization`
 		},
 		potentialAction: {
-			"@type": "SearchAction",
+			'@type': 'SearchAction',
 			target: {
-				"@type": "EntryPoint",
+				'@type': 'EntryPoint',
 				urlTemplate: `${config.siteDomain}/sitemap/?q={search_term_string}`
 			},
-			"query-input": "required name=search_term_string"
+			'query-input': 'required name=search_term_string'
 		}
 	};
 }
 
+/**
+ * Creates Schema.org ManufacturingBusiness (LocalBusiness) structured data with GEO targeting.
+ */
 export function createLocalBusinessSchema(config: SiteConfig = siteConfig) {
 	return {
 		'@context': 'https://schema.org',
@@ -183,6 +188,44 @@ export function createLocalBusinessSchema(config: SiteConfig = siteConfig) {
 				}
 			]
 		}
+	};
+}
+
+/**
+ * Creates Schema.org Homepage TechArticle structured data (AEO & AI Search Readiness).
+ */
+export function createHomepageTechArticleSchema(config: SiteConfig = siteConfig) {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'TechArticle',
+		'@id': `${config.siteDomain}/#article`,
+		headline: `${config.brandName} — Регламент и производственные возможности контрактной металлообработки ЧПУ в Калининграде`,
+		description: 'Высокоточная контрактная металлообработка деталей на 2 обрабатывающих центрах ЧПУ с квалитетом точности IT7 и шероховатостью Ra 1.25. Расчет с НДС 22%.',
+		url: `${config.siteDomain}/`,
+		inLanguage: 'ru-RU',
+		datePublished: '2026-11-04',
+		dateModified: '2026-11-13T21:00:00+02:00',
+		author: {
+			'@type': 'Organization',
+			name: `${config.brandName} — Инженерно-технологический отдел`,
+			url: config.siteDomain
+		},
+		publisher: {
+			'@type': 'Organization',
+			name: config.brandName,
+			url: config.siteDomain,
+			logo: {
+				'@type': 'ImageObject',
+				url: `${config.siteDomain}/logo.svg`
+			}
+		},
+		mainEntityOfPage: {
+			'@type': 'WebPage',
+			'@id': `${config.siteDomain}/`
+		},
+		about: 'Металлообработка с ЧПУ',
+		dependencies: 'ГОСТ 25346-2013, ГОСТ 1050-2013, ГОСТ 4543-2016, ЕСКД',
+		proficiencyLevel: 'Expert'
 	};
 }
 
@@ -342,5 +385,5 @@ export function serializeJsonLd(
 export function serializeSchema(
 	schema: Record<string, unknown> | Array<Record<string, unknown>>
 ): string {
-	return `<script type="application/ld+json">${JSON.stringify(schema, null, 2)}<\/script>`;
+	return `<script type="application/ld+json">${JSON.stringify(schema, null, 2)}</` + `script>`;
 }

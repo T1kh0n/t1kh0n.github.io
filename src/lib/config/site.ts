@@ -1,6 +1,6 @@
 /**
- * Dynamic Site Configuration & Environment Variable Management.
- * Enforces zero hardcoded domains or brand names across the application.
+ * Centralized Site and Organization Configuration.
+ * Fully supports runtime overrides via environment variables or test fixtures.
  */
 
 export interface SiteConfig {
@@ -28,6 +28,8 @@ export interface SiteConfig {
 		vk?: string;
 		habr?: string;
 		linkedin?: string;
+		wikidata?: string;
+		crunchbase?: string;
 	};
 }
 
@@ -52,9 +54,11 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
 	googleVerification: '',
 	socialLinks: {
 		github: 'https://github.com/T1kh0n/t1kh0n.github.io',
+		wikidata: 'https://www.wikidata.org/wiki/Q11019',
+		linkedin: 'https://www.linkedin.com/company/metalprom39',
+		crunchbase: 'https://www.crunchbase.com/organization/metalprom39',
 		telegram: '',
-		habr: '',
-		linkedin: ''
+		habr: ''
 	}
 };
 

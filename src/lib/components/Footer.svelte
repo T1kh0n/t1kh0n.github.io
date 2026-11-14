@@ -168,6 +168,12 @@
 			</div>
 			<div class="mt-3 flex items-center gap-6 text-xs sm:mt-0">
 				<a
+					href="{base}/#about"
+					class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+				>
+					О производстве
+				</a>
+				<a
 					href="{base}/politika-konfidentsialnosti/"
 					class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 				>

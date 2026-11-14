@@ -37,9 +37,9 @@
 
 	<!-- Technical SEO & Crawling Directives -->
 	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-	<meta name="author" content="Цех контрактной металлообработки ЧПУ MetalProm39" />
-	<meta property="article:modified_time" content="2026-11-12T15:00:00+02:00" />
-	<meta name="revised" content="2026-11-12T15:00:00+02:00" />
+	<meta name="author" content="Цех контрактной металлообработки ЧПУ МеталлПром39" />
+	<meta property="article:modified_time" content="2026-11-13T21:00:00+02:00" />
+	<meta name="revised" content="2026-11-13T21:00:00+02:00" />
 	<meta property="og:locale" content="ru_RU" />
 	<meta property="og:site_name" content="МеталлПром39" />
 	<meta property="og:image" content="https://t1kh0n.github.io/og/default.webp" />
@@ -53,6 +53,10 @@
 <div
 	class="flex min-h-screen flex-col bg-[var(--color-paper)] text-[var(--color-ink)] antialiased selection:bg-[color-mix(in_oklab,var(--color-accent)_30%,transparent)]"
 >
+	<div class="hidden" aria-hidden="true">
+		<time datetime="2026-11-13">13 ноября 2026</time>
+		<span class="author">Инженерно-технологический отдел МеталлПром39</span>
+	</div>
 	<AccessibilityPanel />
 	<Header />
 	<div class="flex-1">

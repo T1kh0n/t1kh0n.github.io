@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { base } from '$lib/paths';
 	import { siteConfig } from '#lib/config/site';
-	import { createFaqSchema, serializeSchema } from '#lib/seo/schema';
+	import {
+		createFaqSchema,
+		createHomepageTechArticleSchema,
+		serializeSchema
+	} from '#lib/seo/schema';
 	import CostCalculator from '#lib/components/CostCalculator.svelte';
 	import WorkpieceInspectionScan from '#lib/components/WorkpieceInspectionScan.svelte';
 
@@ -34,10 +38,11 @@
 	];
 
 	const faqSchema = createFaqSchema(faqs);
+	const homepageArticleSchema = createHomepageTechArticleSchema();
 </script>
 
 <svelte:head>
-	<title>Металлообработка с ЧПУ в Калининграде: токарные и фрезерные работы | {siteConfig.brandName}</title>
+	<title>МеталлПром39 — Металлообработка с ЧПУ в Калининграде: токарные и фрезерные работы</title>
 	<meta
 		name="description"
 		content="Металлообработка деталей на токарных и фрезерных станках с ЧПУ в Калининграде. Точность IT7, шероховатость до Ra 1.25. Доставка по всей Калининградской области. Безналичный расчет с НДС 22%."
@@ -46,7 +51,7 @@
 
 	<!-- OpenGraph & Social Cards -->
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Металлообработка с ЧПУ в Калининграде: токарные и фрезерные работы | {siteConfig.brandName}" />
+	<meta property="og:title" content="МеталлПром39 — Металлообработка с ЧПУ в Калининграде: токарные и фрезерные работы" />
 	<meta
 		property="og:description"
 		content="Металлообработка деталей на токарных и фрезерных станках с ЧПУ в Калининграде. Точность IT7, шероховатость до Ra 1.25. Доставка по всей Калининградской области. Безналичный расчет с НДС 22%."
@@ -54,10 +59,11 @@
 	<meta property="og:url" content="{siteConfig.siteDomain}/" />
 	<meta property="og:site_name" content="МеталлПром39" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Металлообработка с ЧПУ в Калининграде | {siteConfig.brandName}" />
+	<meta name="twitter:title" content="МеталлПром39 — Металлообработка с ЧПУ в Калининграде" />
 	<meta name="twitter:description" content="Контрактная токарная и фрезерная обработка ЧПУ с точностью IT7 и НДС 22%." />
 
 	{@html serializeSchema(faqSchema)}
+	{@html serializeSchema(homepageArticleSchema)}
 </svelte:head>
 
 <main class="space-y-20 pb-20">
@@ -71,11 +77,11 @@
 				</div>
 
 				<h1 class="mt-4 text-3xl tracking-tight text-[var(--color-ink)] sm:text-5xl lg:text-6xl">
-					Металлообработка с ЧПУ в Калининграде
+					МеталлПром39 — Металлообработка с ЧПУ в Калининграде
 				</h1>
 
 				<p class="lead mt-6 max-w-2xl text-lg sm:text-xl">
-					Изготовление серийных и единичных деталей на станках с ЧПУ. Квалитеты точности до IT7, контроль ОТК, расчет с НДС 22%.
+					Изготовление серийных и единичных деталей на станках с ЧПУ. Квалитеты точности до IT7 по <a href="https://protect.gost.ru/" target="_blank" rel="noopener noreferrer" class="underline hover:text-[var(--color-accent)]">ГОСТ 25346-2013</a>, контроль ОТК, расчет с НДС 22%.
 				</p>
 
 				<div class="mt-8 flex flex-wrap items-center gap-3">
@@ -218,7 +224,7 @@
 				</div>
 				<h3 class="mt-4 text-xl text-[var(--color-ink)]">Токарная обработка с ЧПУ</h3>
 				<p class="mt-2 text-xs text-[var(--color-ink-2)]">
-					Обработка тел вращения: фланцы, валы, штуцеры, пальцы, втулки. Нарезание метрических, дюймовых и трапецеидальных резьб.
+					Обработка тел вращения: фланцы, валы, штуцеры, пальцы, втулки. Нарезание метрических, дюймовых и трапецеидальных резьб инструментом <a href="https://www.sandvik.coromant.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-[var(--color-accent)]">Sandvik Coromant</a>.
 				</p>
 				<ul class="mt-4 space-y-1.5 text-xs text-[var(--color-muted)]">
 					<li class="flex items-center gap-2">
@@ -272,6 +278,41 @@
 					</a>
 					<span class="font-mono text-xs text-[var(--color-muted)]">от 3 000 ₽/ч</span>
 				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- About the CNC Workshop Section (#about for AI brand & trust signals) -->
+	<section id="about" class="scroll-mt-8 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="О цехе МеталлПром39">
+		<div class="border-b border-[var(--color-rule)] pb-4">
+			<div class="font-mono text-xs tracking-wider uppercase text-[var(--color-muted)]">
+				О предприятии
+			</div>
+			<h2 class="mt-2 text-2xl text-[var(--color-ink)] sm:text-3xl">
+				МеталлПром39 — Производственный цех контрактной металлообработки ЧПУ
+			</h2>
+		</div>
+
+		<div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
+			<div class="panel p-6">
+				<h3 class="text-base font-normal text-[var(--color-ink)]">Станочный парк и точность IT7</h3>
+				<p class="mt-2 text-xs leading-relaxed text-[var(--color-ink-2)]">
+					Цех эксплуатирует 2 современных обрабатывающих центра ЧПУ: токарный комплекс Fanuc 0i-TF и вертикально-фрезерный центр Siemens 828D. Изготовление серийных партий выполняется в строгом соответствии с <a href="https://protect.gost.ru/" target="_blank" rel="noopener noreferrer" class="underline hover:text-[var(--color-accent)]">ГОСТ 25346-2013</a> с допусками квалитета IT7 и шероховатостью Ra 1.25.
+				</p>
+			</div>
+
+			<div class="panel p-6">
+				<h3 class="text-base font-normal text-[var(--color-ink)]">Профессиональный инструмент</h3>
+				<p class="mt-2 text-xs leading-relaxed text-[var(--color-ink-2)]">
+					Для скоростного фрезерования и прецизионного точения используются твердосплавные пластины и концевые фрезы мировых лидеров <a href="https://www.sandvik.coromant.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-[var(--color-accent)]">Sandvik Coromant</a> и Kennametal, что обеспечивает безупречное качество резьбы и посадочных шеек.
+				</p>
+			</div>
+
+			<div class="panel p-6">
+				<h3 class="text-base font-normal text-[var(--color-ink)]">Контроль ОТК и расчет с НДС 22%</h3>
+				<p class="mt-2 text-xs leading-relaxed text-[var(--color-ink-2)]">
+					100% партий проходят входной спектральный контроль сплава и финишную приемку калиброванными нутромерами и микрометрами. Прозрачное ценообразование, официальные договоры B2B, система ЭДО Диадок и СБИС, минимальный порог от 5 000 ₽ с учетом НДС 22%.
+				</p>
 			</div>
 		</div>
 	</section>
