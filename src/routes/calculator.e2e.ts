@@ -52,14 +52,14 @@ function createSyntheticBinaryStlBuffer(
 		offset += 12;
 
 		// 3 vertices
-		for (const pt of tri) {
-			buf.writeFloatLE(pt[0], offset);
-			buf.writeFloatLE(pt[1], offset + 4);
-			buf.writeFloatLE(pt[2], offset + 8);
+		for (const p of tri) {
+			buf.writeFloatLE(p[0], offset);
+			buf.writeFloatLE(p[1], offset + 4);
+			buf.writeFloatLE(p[2], offset + 8);
 			offset += 12;
 		}
 
-		// Attribute byte count
+		// 2 bytes attribute byte count
 		buf.writeUInt16LE(0, offset);
 		offset += 2;
 	}
@@ -69,6 +69,11 @@ function createSyntheticBinaryStlBuffer(
 
 test.describe('CNC Cost Calculator Interactive Component', () => {
 	test.beforeEach(async ({ page }) => {
+		await page.addInitScript(() => {
+			try {
+				localStorage.setItem('mp39_cookie_consent_v1', 'accepted');
+			} catch {}
+		});
 		await page.goto(`${BASE}/`);
 	});
 
@@ -82,7 +87,7 @@ test.describe('CNC Cost Calculator Interactive Component', () => {
 		// Check operations are rendered inside calculator section
 		await expect(calcSection.getByText('Токарная ЧПУ')).toBeVisible();
 		await expect(calcSection.getByText('Фрезерная 3-оси')).toBeVisible();
-			});
+	});
 
 	test('shows Minimum Order Value warning when batch size is small', async ({ page }) => {
 		const qtyInput = page.locator('#calculator-section input[type="number"][min="1"][max="5000"]');
@@ -99,16 +104,17 @@ test.describe('CNC Cost Calculator Interactive Component', () => {
 		const qtyInput = page.locator('#calculator-section input[type="number"][min="1"][max="5000"]');
 		await qtyInput.fill('20');
 
-		const ownMatCheckbox = page.getByRole('checkbox', {
-			name: /Металл заказчика|Материал заказчика/
-		});
+		// Get initial total price
+		const priceEl = page.locator('[data-testid="total-price"]');
+		await expect(priceEl).toBeVisible();
+		const initialPriceText = await priceEl.innerText();
 
-		// Check default state is unchecked
-		await expect(ownMatCheckbox).not.toBeChecked();
+		// Toggle "Материал заказчика" switch
+		const ownMaterialSwitch = page.locator('[data-testid="own-material-checkbox"]');
+		await ownMaterialSwitch.click();
 
-		// Toggle checkbox
-		await ownMatCheckbox.check();
-		await expect(ownMatCheckbox).toBeChecked();
+		// Price should update and decrease because material is provided by customer
+		await expect(priceEl).not.toHaveText(initialPriceText);
 
 		// Check breakdown shows "Давальческий (0 ₽)"
 		await expect(page.getByText('Давальческий (0 ₽)')).toBeVisible();
@@ -117,14 +123,14 @@ test.describe('CNC Cost Calculator Interactive Component', () => {
 	test('parses uploaded binary STL and synchronizes dimensions with turning operation', async ({
 		page
 	}) => {
-		// Generate synthetic cylindrical shaft (40x40x180 mm)
-		const stlBuffer = createSyntheticBinaryStlBuffer(40, 40, 180);
+		// Generate synthetic cylinder-like STL: length 180mm, width 40mm, height 40mm
+		const binaryBuffer = createSyntheticBinaryStlBuffer(180, 40, 40);
 
 		const fileInput = page.locator('input[data-testid="cad-file-input"]');
 		await fileInput.setInputFiles({
 			name: 'turning_shaft_d40_l180.stl',
 			mimeType: 'model/stl',
-			buffer: stlBuffer
+			buffer: binaryBuffer
 		});
 
 		// Info card should appear with model details

@@ -17,6 +17,8 @@ const coreRoutes = [
 	{ path: `${BASE}/stati/optimizaciya-stoimosti-detaley-chpu/`, titlePart: 'DFM-оптимизация' },
 	{ path: `${BASE}/stati/obrabotka-nerzhaveyushchey-stali-12x18n10t/`, titlePart: 'нержавейк' },
 	{ path: `${BASE}/stati/izgotovlenie-zubchatykh-koles-gost/`, titlePart: 'зубчат' },
+	{ path: `${BASE}/oferta/`, titlePart: 'оферта' },
+	{ path: `${BASE}/politika-cookie/`, titlePart: 'cookie' },
 	{ path: `${BASE}/politika-konfidentsialnosti/`, titlePart: 'Политика конфиденциальности' },
 	{ path: `${BASE}/sitemap/`, titlePart: 'Карта сайта' }
 ];

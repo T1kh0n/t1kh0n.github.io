@@ -18,6 +18,8 @@ const RAW_ROUTES = [
 	'/stati/optimizaciya-stoimosti-detaley-chpu/',
 	'/stati/obrabotka-nerzhaveyushchey-stali-12x18n10t/',
 	'/stati/izgotovlenie-zubchatykh-koles-gost/',
+	'/oferta/',
+	'/politika-cookie/',
 	'/politika-konfidentsialnosti/',
 	'/sitemap/'
 ];

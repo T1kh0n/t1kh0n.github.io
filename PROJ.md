@@ -22,6 +22,7 @@ This document is the living reference manual and development log for `metal-prom
 |  **Stage 11** | Google Search Console OAuth Token Stored & Indexation Lifecycle Verification  | **COMPLETED** |   2026-11-12    |    `5a71fb4`    | Successfully captured and stored OAuth 2.0 token at `~/.config/mcp-gsc/token.json`. Verified Search Console API requirements (Project 494031056050). Documented standard 3-14 day indexing lifecycle for newly verified domains across Google and Yandex search engines. |
 |  **Stage 12** | Hallmark UX Polish, KaTeX Math Symbols & Security Policy Integration         | **COMPLETED** |   2026-11-13    |    `ad756bb`    | Fixed kontakty card button layout container clipping with responsive flex sizing. Integrated KaTeX LaTeX rendering in markdown engine (`src/lib/content/markdown-parser.ts`), fully converting engineering formulas ($F_r$, $f_f$, $f_{pt}$, $\sigma_{H\lim}$, $\alpha$, $\beta$) into typography-accurate HTML with styles. Enabled text-align justify on all article paragraphs (`.article-prose p`). Expanded privacy policy with Section 5 Information Security & 149-FZ. Verified 150/150 Playwright E2E and 50/50 Vitest passing. |
 |  **Stage 13** | GEO Optimization to 99/100, Yandex Wordstat Semantics & Engineering Knowledge Base Expansion | **COMPLETED** |   2026-11-14    |    `6c212db`    | Achieved 99/100 GEO audit score (Google AI 20/20, robots 14/14, schema 14/14, content 14/14, brand entity 12/12, meta 11/11, llms 6/6, signals 6/6). Added explicit citation bot rules in `robots.txt` (Googlebot, OAI-SearchBot, Claude-SearchBot, PerplexityBot, Applebot), brand entity coherence, author and dateModified signals. Researched regional Yandex Wordstat core and competitor footprints for CNC machining in Kaliningrad. Authored 2 high-impact technical articles (`/stati/izgotovlenie-valov-i-vtulok-chpu-po-chertezham`, `/stati/frezernaya-obrabotka-alyuminiya-d16t-chpu`) with direct answer blocks, KaTeX engineering formulas, internal calculator/service cross-links, and authoritative external GOST/ISO/Sandvik citations. Updated sitemap registry, passing all 50/50 unit tests and static prerendering build. |
+|  **Stage 14** | 152-FZ / 149-FZ Legal Audit Compliance, Zero-CLS Local Font Self-Hosting, Granular Cookie Consent & Public Offer Integration | **COMPLETED** |   2026-11-14    |    `in-progress` | Resolved all 4 legal/UX audit infractions preventing fines up to 7.7M RUB under Art. 13.11 KoAP RF. Eliminated external Google Fonts CDN requests by self-hosting Geologica woff2 locally with `<link rel="preload">` (preventing IP transfers to US and eliminating page jump / layout shifts). Implemented granular cookie consent banner with explicit right to decline ("Только необходимые / отказаться") and consent-gated dynamic Yandex Metrika loading. Published comprehensive Public Offer (`/oferta/`) under Arts. 435, 437, 702–729 GK RF, dedicated Cookie Policy (`/politika-cookie/`), and updated Privacy Policy with 156-FZ separate consent rules. 166/166 Playwright E2E and 50/50 Vitest passing. |
 
 ---
 
@@ -93,7 +94,17 @@ To eliminate regulatory overhead, liability, and the requirement to register as 
 - **Automated Confirmation Message:**
   _«Спецификация принята в аналитический реестр цеха. Предварительный расчет зафиксирован. Для передачи чертежей (PDF, DXF, STEP) направьте файлы на order@metalprom39.com»_.
 
-### 2.3. Yandex Metrika IP Masking & Telemetry
+### 2.3. Granular Cookie Consent, Opt-Out Rights & Dynamic Telemetry
+
+- **Strict Regulatory Compliance (152-FZ, 149-FZ, 156-FZ & Art. 13.11 KoAP RF):**
+  - **Zero Cross-Border Transfer (ч. 8 ст. 13.11 KoAP RF, up to 6M RUB fine):** Removed all external Google Fonts requests (`fonts.googleapis.com` / `fonts.gstatic.com`). All font files (`.woff2`) are self-hosted locally in `/static/fonts/` with `<link rel="preload">`, guaranteeing zero CLS layout shifts and zero transmission of Russian visitor IPs to US servers.
+  - **Explicit Consent & Right to Decline (ч. 2 ст. 13.11 KoAP RF, up to 700k RUB fine):** Replaced passive notification with a two-button banner: «Принять все» (Accept all) and «Только необходимые (отказаться)» (Decline optional analytics cookies). Yandex Metrika is NOT initialized until explicit consent is granted.
+  - **Revocation & Preferences Reopening (ч. 5 ст. 13.11 KoAP RF):** Added «Настройки cookie» trigger in the footer, allowing visitors to reopen consent options and revoke permissions anytime.
+  - **Separate Consents Mandate (156-FZ from 01.09.2025):** Prohibited bundled checkmarks combining public offer acceptance with data processing consent.
+  - **Public Offer Under Art. 437 GK RF:** Published official contract terms at `/oferta/` for contract CNC manufacturing and parts machining with workshop requisites, OTK warranty (12 months), and NDA protections.
+  - **Dedicated Cookie Policy:** Published exhaustive taxonomy and retention terms at `/politika-cookie/`.
+
+### 2.4. Yandex Metrika IP Masking & Telemetry
 
 - **Yandex Metrika Initialization Parameters (`src/routes/+layout.svelte`):**
   - Counter ID: `114070369`.

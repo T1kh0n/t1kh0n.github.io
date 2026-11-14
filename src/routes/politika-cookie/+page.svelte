@@ -1,0 +1,137 @@
+<script lang="ts">
+	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
+	import { siteConfig } from '#lib/config/site';
+	import { createBreadcrumbSchema, serializeSchema } from '#lib/seo/schema';
+
+	const breadcrumbs = [
+		{ name: 'Главная', path: '/' },
+		{ name: 'Политика cookie', path: '/politika-cookie/' }
+	];
+	const breadcrumbSchema = createBreadcrumbSchema(breadcrumbs);
+
+	function openSettings() {
+		if (typeof window !== 'undefined') {
+			window.dispatchEvent(new CustomEvent('open-cookie-settings'));
+		}
+	}
+</script>
+
+<svelte:head>
+	<title>Политика использования файлов cookie и веб-аналитики | {siteConfig.brandName}</title>
+	<meta
+		name="description"
+		content="Политика использования файлов cookie цеха MetalProm39: классификация cookie, право на отказ, отсутствие сбора персональных данных в соответствии с 152-ФЗ РФ."
+	/>
+	<link rel="canonical" href="{siteConfig.siteDomain}/politika-cookie/" />
+
+	<!-- OpenGraph & Social Cards -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Политика использования файлов cookie | {siteConfig.brandName}" />
+	<meta
+		property="og:description"
+		content="Регламент использования строго необходимых и аналитических файлов cookie на сайте MetalProm39. Право на отказ (152-ФЗ РФ)."
+	/>
+	<meta property="og:url" content="{siteConfig.siteDomain}/politika-cookie/" />
+
+	{@html serializeSchema(breadcrumbSchema)}
+</svelte:head>
+
+<main class="py-10">
+	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+		<Breadcrumbs items={breadcrumbs} />
+
+		<article>
+			<header class="border-b border-[var(--color-rule)] pb-8">
+				<h1 class="mt-4 text-3xl text-[var(--color-ink)] sm:text-4xl">
+					Политика использования файлов cookie
+				</h1>
+				<p class="lead mt-4 max-w-2xl text-sm leading-relaxed sm:text-base">
+					Регламент применения строго необходимых технических файлов cookie и обезличенной веб-аналитики с безусловным правом пользователя на отказ в соответствии с 152-ФЗ и 149-ФЗ РФ.
+				</p>
+				<p class="num mt-2 text-xs text-[var(--color-muted)]">
+					Редакция от 14 ноября 2026 года · Механический цех {siteConfig.brandLegalName}
+				</p>
+			</header>
+
+			<div class="mt-8 grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
+				<div class="space-y-6 text-xs leading-relaxed text-[var(--color-muted)] lg:col-span-8">
+					<div class="well text-xs leading-relaxed text-[var(--color-ink-2)]">
+						<div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+							<div>
+								<div class="font-normal text-[var(--color-ink)]">
+									Управление вашим выбором файлов cookie:
+								</div>
+								<p class="mt-1 text-xs text-[var(--color-muted)]">
+									Вы можете изменить свое решение или отозвать согласие на использование аналитических файлов cookie в один клик.
+								</p>
+							</div>
+							<button
+								type="button"
+								onclick={openSettings}
+								class="btn btn--sm btn--line shrink-0 text-xs"
+							>
+								<span>Настроить cookie</span>
+							</button>
+						</div>
+					</div>
+
+					<div class="space-y-6">
+						<div>
+							<h2 class="text-base text-[var(--color-ink)]">1. Назначение файлов cookie</h2>
+							<p class="mt-2 max-w-2xl">
+								1.1. Файлы cookie представляют собой служебные текстовые записи, сохраняемые браузером для обеспечения корректной работы функций сайта, запоминания технических настроек и обеспечения информационной безопасности.
+							</p>
+						</div>
+
+						<div>
+							<h2 class="text-base text-[var(--color-ink)]">2. Классификация используемых cookie</h2>
+							<div class="mt-3 space-y-4">
+								<div class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-4">
+									<strong class="font-normal text-[var(--color-ink)]">Строго необходимые (технические) cookie:</strong>
+									<p class="mt-1">
+										Необходимы для работы сессии, запоминания статуса согласия с куки (`mp39_cookie_consent_v1`) и настроек версии для слабовидящих. Не содержат персональных данных и не используются для профилирования.
+									</p>
+								</div>
+								<div class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-4">
+									<strong class="font-normal text-[var(--color-ink)]">Аналитические cookie (Яндекс.Метрика):</strong>
+									<p class="mt-1">
+										Используются исключительно для обезличенной оценки посещаемости и оптимизации калькулятора стоимости ЧПУ. Активируются **только после явного согласия** пользователя.
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<h2 class="text-base text-[var(--color-ink)]">3. Право на отказ от файлов cookie</h2>
+							<p class="mt-2 max-w-2xl">
+								3.1. В соответствии со ст. 9 и ст. 14 Федерального закона № 152-ФЗ РФ пользователю гарантировано право отказаться от сбора аналитических cookie. При выборе опции «Только необходимые (отказаться)» счетчик аналитики отключается, а доступ ко всем страницам сайта и расчетному калькулятору сохраняется в полном объеме.
+							</p>
+						</div>
+
+						<div>
+							<h2 class="text-base text-[var(--color-ink)]">4. Локализация данных на территории РФ</h2>
+							<p class="mt-2 max-w-2xl">
+								4.1. В строгом соответствии с требованиями ч. 5 ст. 18 152-ФЗ все сетевые ресурсы, шрифты и системы аналитики локализованы на серверах в Российской Федерации. Трансграничная передача пользовательских данных не осуществляется.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Sidebar / Requisites (lg:col-span-4) -->
+				<aside class="space-y-6 lg:col-span-4">
+					<div class="well font-mono text-xs text-[var(--color-muted)]">
+						<div class="font-sans font-normal text-[var(--color-ink)]">
+							Правовой оператор сайта:
+						</div>
+						<div class="mt-2 font-sans text-[var(--color-ink-2)]">{siteConfig.brandLegalName}</div>
+						<div class="num mt-2">ИНН: 3906999990 · КПП: 390601001</div>
+						<div class="num">ОГРН: 1233900000000</div>
+						<div class="mt-2 font-sans">
+							{siteConfig.addressRegion}, {siteConfig.addressLocality}
+						</div>
+					</div>
+				</aside>
+			</div>
+		</article>
+	</div>
+</main>

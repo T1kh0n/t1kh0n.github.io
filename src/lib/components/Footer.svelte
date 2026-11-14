@@ -4,6 +4,12 @@
 	import BrandLogo from '#lib/components/BrandLogo.svelte';
 
 	const currentYear = new Date().getFullYear();
+
+	function openCookieSettings() {
+		if (typeof window !== 'undefined') {
+			window.dispatchEvent(new CustomEvent('open-cookie-settings'));
+		}
+	}
 </script>
 
 <footer
@@ -27,7 +33,7 @@
 				>
 					<div class="font-normal text-[var(--color-ink)]">Режим работы производства:</div>
 					<div class="mt-1 font-mono text-[var(--color-muted)]">Пн–Пт: 08:00 – 20:00 (2 смены)</div>
-					<div class="font-mono text-[var(--color-muted)]">
+					<div class="mt-1 font-mono text-[var(--color-muted)]">
 						Сб: 09:00 – 16:00 (дежурный технолог)
 					</div>
 				</div>
@@ -152,10 +158,13 @@
 		<div
 			class="mt-10 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-4 text-xs leading-relaxed text-[var(--color-muted)]"
 		>
-			<strong class="font-normal text-[var(--color-ink-2)]">Правовое уведомление (152-ФЗ и 149-ФЗ):</strong>
+			<strong class="font-normal text-[var(--color-ink-2)]">Правовое уведомление (152-ФЗ, 149-ФЗ и ст. 437 ГК РФ):</strong>
 			Веб-сайт {siteConfig.brandName} носит информационно-расчетный характер и не осуществляет сбор, систематизацию
-			или хранение персональных данных пользователей. Расчеты онлайн-калькулятора носят предварительный технический характер.
-			Статистика посещаемости собирается обезличенно с использованием файлов cookie сервиса Яндекс.Метрика.
+			или хранение персональных данных пользователей в общедоступных формах. Расчеты онлайн-калькулятора носят предварительный характер.
+			Условия оказания производственных услуг регламентируются
+			<a href="{base}/oferta/" class="text-[var(--color-ink)] underline hover:text-[var(--color-accent)]">Публичной офертой</a>.
+			Обезличенная статистика посещаемости собирается сервисом Яндекс.Метрика исключительно с согласия пользователя в соответствии с
+			<a href="{base}/politika-cookie/" class="text-[var(--color-ink)] underline hover:text-[var(--color-accent)]">Политикой cookie</a>.
 		</div>
 
 		<!-- Bottom Copyright Bar -->
@@ -166,19 +175,32 @@
 				© {currentYear}
 				{siteConfig.brandName}. 2 обрабатывающих центра с ЧПУ в Калининграде. Доставка по всей области.
 			</div>
-			<div class="mt-3 flex items-center gap-6 text-xs sm:mt-0">
+			<div class="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs sm:mt-0">
 				<a
-					href="{base}/#about"
+					href="{base}/oferta/"
 					class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 				>
-					О производстве
+					Публичная оферта
 				</a>
 				<a
 					href="{base}/politika-konfidentsialnosti/"
 					class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 				>
-					Политика конфиденциальности и безопасности
+					Политика конфиденциальности
 				</a>
+				<a
+					href="{base}/politika-cookie/"
+					class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+				>
+					Политика cookie
+				</a>
+				<button
+					type="button"
+					onclick={openCookieSettings}
+					class="cursor-pointer text-[var(--color-muted)] underline transition-colors hover:text-[var(--color-ink)]"
+				>
+					Настройки cookie
+				</button>
 				<a
 					href="{base}/sitemap/"
 					class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"

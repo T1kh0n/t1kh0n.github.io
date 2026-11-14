@@ -1,26 +1,50 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { base } from '$lib/paths';
-	import { siteConfig } from '#lib/config/site';
+	import {
+		COOKIE_STORAGE_KEY,
+		initMetrikaIfConsented,
+		disableMetrika
+	} from '#lib/analytics/metrika';
 
 	let isVisible = $state(false);
-
-	const COOKIE_STORAGE_KEY = 'mp39_cookie_consent_v1';
 
 	onMount(() => {
 		try {
 			const consented = localStorage.getItem(COOKIE_STORAGE_KEY);
 			if (!consented) {
 				isVisible = true;
+			} else if (consented === 'accepted') {
+				initMetrikaIfConsented();
 			}
 		} catch {
 			isVisible = false;
 		}
+
+		const handleOpenSettings = () => {
+			isVisible = true;
+		};
+
+		window.addEventListener('open-cookie-settings', handleOpenSettings);
+		return () => {
+			window.removeEventListener('open-cookie-settings', handleOpenSettings);
+		};
 	});
 
 	function acceptCookies() {
 		try {
 			localStorage.setItem(COOKIE_STORAGE_KEY, 'accepted');
+			initMetrikaIfConsented();
+		} catch {
+			// ignore local storage restrictions
+		}
+		isVisible = false;
+	}
+
+	function rejectCookies() {
+		try {
+			localStorage.setItem(COOKIE_STORAGE_KEY, 'rejected');
+			disableMetrika();
 		} catch {
 			// ignore local storage restrictions
 		}
@@ -35,7 +59,7 @@
 		aria-label="Уведомление об использовании cookie и веб-аналитики"
 	>
 		<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-			<div class="space-y-1 text-xs leading-relaxed text-[var(--color-muted)]">
+			<div class="space-y-1.5 text-xs leading-relaxed text-[var(--color-muted)]">
 				<div class="flex items-center gap-2">
 					<span class="live-dot" aria-hidden="true"></span>
 					<strong class="font-normal text-[var(--color-ink)]">
@@ -43,24 +67,39 @@
 					</strong>
 				</div>
 				<p>
-					Наш сайт использует файлы cookie и обезличенный сервис веб-аналитики Яндекс.Метрика для
-					оценки спроса и улучшения работы онлайн-калькулятора. Мы не собираем и не обрабатываем
-					персональные данные. Подробнее — в нашей
+					Наш сайт использует строго необходимые технические файлы cookie для стабильной работы интерфейса,
+					а также с вашего предварительного согласия — обезличенный сервис веб-аналитики Яндекс.Метрика для
+					оценки спроса и улучшения калькулятора. Мы гарантируем право на отказ от сбора аналитических данных.
+					Подробнее — в нашей
 					<a
 						href="{base}/politika-konfidentsialnosti/"
 						class="text-[var(--color-ink)] underline hover:text-[var(--color-accent)]"
 					>
 						Политике конфиденциальности
+					</a>
+					и
+					<a
+						href="{base}/politika-cookie/"
+						class="text-[var(--color-ink)] underline hover:text-[var(--color-accent)]"
+					>
+						Политике cookie
 					</a>.
 				</p>
 			</div>
-			<div class="flex shrink-0 items-center gap-3">
+			<div class="flex shrink-0 flex-wrap items-center gap-2.5 sm:flex-nowrap">
+				<button
+					type="button"
+					onclick={rejectCookies}
+					class="btn btn--sm btn--line whitespace-nowrap text-xs"
+				>
+					<span>Только необходимые (отказаться)</span>
+				</button>
 				<button
 					type="button"
 					onclick={acceptCookies}
 					class="btn btn--sm whitespace-nowrap text-xs"
 				>
-					<span>Понятно, согласен</span>
+					<span>Принять все</span>
 				</button>
 			</div>
 		</div>

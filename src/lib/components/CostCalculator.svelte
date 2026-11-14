@@ -426,6 +426,7 @@
 					<label class="flex cursor-pointer items-center gap-1.5 text-xs text-[var(--color-muted)]">
 						<input
 							type="checkbox"
+							data-testid="own-material-checkbox"
 							bind:checked={isCustomerMaterial}
 							class="rounded-sm border-[var(--color-rule-2)] bg-[var(--color-paper)] accent-[var(--color-accent)]"
 						/>
@@ -715,7 +716,7 @@
 
 				<!-- Highlight Pricing Block -->
 				<div class="py-6 text-center">
-					<div class="num text-4xl text-[var(--color-ink)] tracking-tight sm:text-5xl">
+					<div data-testid="total-price" class="num text-4xl text-[var(--color-ink)] tracking-tight sm:text-5xl">
 						{quote.finalTotal.toLocaleString('ru-RU')}&thinsp;₽
 					</div>
 					<div class="num mt-2 text-xs text-[var(--color-muted)]">
