@@ -154,17 +154,24 @@
 			</div>
 		</div>
 
-		<!-- 152-FZ Compliance Disclaimer Box -->
+		<!-- 152-FZ Compliance Disclaimer Box & Legal Requisites -->
 		<div
 			class="mt-10 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-4 text-xs leading-relaxed text-[var(--color-muted)]"
 		>
-			<strong class="font-normal text-[var(--color-ink-2)]">Правовое уведомление (152-ФЗ, 149-ФЗ и ст. 437 ГК РФ):</strong>
-			Веб-сайт {siteConfig.brandName} носит информационно-расчетный характер и не осуществляет сбор, систематизацию
-			или хранение персональных данных пользователей в общедоступных формах. Расчеты онлайн-калькулятора носят предварительный характер.
-			Условия оказания производственных услуг регламентируются
-			<a href="{base}/oferta/" class="text-[var(--color-ink)] underline hover:text-[var(--color-accent)]">Публичной офертой</a>.
-			Обезличенная статистика посещаемости собирается сервисом Яндекс.Метрика исключительно с согласия пользователя в соответствии с
-			<a href="{base}/politika-cookie/" class="text-[var(--color-ink)] underline hover:text-[var(--color-accent)]">Политикой cookie</a>.
+			<div class="mb-3 flex flex-wrap items-center justify-between gap-2 border-b border-[var(--color-rule)] pb-2 text-[11px]">
+				<span class="font-normal text-[var(--color-ink)]">{siteConfig.brandLegalName}</span>
+				<span class="num text-[var(--color-ink-2)]">ИНН: 3906999990 · КПП: 390601001 · ОГРН: 1233900000000</span>
+				<span>{siteConfig.addressRegion}, {siteConfig.addressLocality}</span>
+			</div>
+			<p>
+				<strong class="font-normal text-[var(--color-ink-2)]">Правовое уведомление (152-ФЗ, 149-ФЗ и ст. 437 ГК РФ):</strong>
+				Веб-сайт {siteConfig.brandName} носит информационно-расчетный характер и не осуществляет сбор, систематизацию
+				или хранение персональных данных пользователей в общедоступных формах. Расчеты онлайн-калькулятора носят предварительный характер.
+				Условия оказания производственных услуг регламентируются
+				<a href="{base}/oferta/" class="text-[var(--color-ink)] underline hover:text-[var(--color-accent)]">Публичной офертой</a>.
+				Обезличенная статистика посещаемости собирается сервисом Яндекс.Метрика исключительно с предварительного согласия пользователя в соответствии с
+				<a href="{base}/politika-cookie/" class="text-[var(--color-ink)] underline hover:text-[var(--color-accent)]">Политикой cookie</a>.
+			</p>
 		</div>
 
 		<!-- Bottom Copyright Bar -->

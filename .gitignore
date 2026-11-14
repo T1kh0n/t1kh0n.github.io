@@ -28,3 +28,6 @@ test-results
 hallmark/
 .hallmark/
 
+
+# Temporary test scripts
+scripts/
