@@ -1,7 +1,67 @@
 # robots.txt for MetalProm39 CNC Machining Workshop
-# Optimized for Yandex, Google, and AI Search Crawlers (AEO)
+# Optimized for Yandex, Google, and AI Search Crawlers (AEO & Citation Bots)
 
 User-agent: *
+Allow: /
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /cdn-cgi/
+
+User-agent: Googlebot
+Allow: /
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /cdn-cgi/
+
+User-agent: OAI-SearchBot
+Allow: /
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /cdn-cgi/
+
+User-agent: Claude-SearchBot
+Allow: /
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /cdn-cgi/
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /cdn-cgi/
+
+User-agent: Applebot
 Allow: /
 Allow: /*.css$
 Allow: /*.js$
@@ -26,18 +86,6 @@ Allow: /llms-full.txt
 Disallow: /cdn-cgi/
 Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term /
 Clean-param: yclid&gclid&_openstat /
-
-User-agent: Googlebot
-Allow: /
-Allow: /*.css$
-Allow: /*.js$
-Allow: /*.svg$
-Allow: /*.webp$
-Allow: /*.png$
-Allow: /*.jpg$
-Allow: /llms.txt
-Allow: /llms-full.txt
-Disallow: /cdn-cgi/
 
 # XML Sitemap
 Sitemap: https://t1kh0n.github.io/sitemap.xml
