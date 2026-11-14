@@ -111,7 +111,7 @@
 				{#if article.relatedServices && article.relatedServices.length > 0}
 					<div class="mt-12 rounded-[var(--radius-card)] border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] p-6 sm:p-8">
 						<div class="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[var(--color-accent)]">
-							<span>Производственные услуги MetalProm39</span>
+							<span>Производственные услуги МеталлПром39</span>
 						</div>
 						<h3 class="mt-2 text-lg font-normal text-[var(--color-ink)]">
 							Запуск в производство оптимизированных деталей

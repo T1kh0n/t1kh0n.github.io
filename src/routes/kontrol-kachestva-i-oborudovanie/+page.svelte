@@ -51,7 +51,7 @@
 	<title>Контроль качества (ОТК) и станочный парк ЧПУ | {siteConfig.brandName}</title>
 	<meta
 		name="description"
-		content="Лаборатория ОТК, поверенные средства измерений, протокол контроля. Станочный парк MetalProm39 в Калининграде: 2 обрабатывающих центра с ЧПУ (токарный и 3-осевой фрезерный)."
+		content="Лаборатория ОТК, поверенные средства измерений, протокол контроля. Станочный парк МеталлПром39 в Калининграде: 2 обрабатывающих центра с ЧПУ (токарный и 3-осевой фрезерный)."
 	/>
 	<link rel="canonical" href="{siteConfig.siteDomain}/kontrol-kachestva-i-oborudovanie/" />
 
@@ -60,7 +60,7 @@
 	<meta property="og:title" content="Контроль качества (ОТК) и станочный парк ЧПУ | {siteConfig.brandName}" />
 	<meta
 		property="og:description"
-		content="Лаборатория ОТК и станочный парк MetalProm39 в Калининграде: 2 обрабатывающих центра ЧПУ, допуск IT7, протокол FAI."
+		content="Лаборатория ОТК и станочный парк МеталлПром39 в Калининграде: 2 обрабатывающих центра ЧПУ, допуск IT7, протокол FAI."
 	/>
 	<meta property="og:url" content="{siteConfig.siteDomain}/kontrol-kachestva-i-oborudovanie/" />
 

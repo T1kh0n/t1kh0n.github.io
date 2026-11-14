@@ -20,7 +20,7 @@
 	<title>Политика использования файлов cookie и веб-аналитики | {siteConfig.brandName}</title>
 	<meta
 		name="description"
-		content="Политика использования файлов cookie цеха MetalProm39: классификация cookie, право на отказ, отсутствие сбора персональных данных в соответствии с 152-ФЗ РФ."
+		content="Политика использования файлов cookie цеха МеталлПром39: классификация cookie, право на отказ, отсутствие сбора персональных данных в соответствии с 152-ФЗ РФ."
 	/>
 	<link rel="canonical" href="{siteConfig.siteDomain}/politika-cookie/" />
 
@@ -29,7 +29,7 @@
 	<meta property="og:title" content="Политика использования файлов cookie | {siteConfig.brandName}" />
 	<meta
 		property="og:description"
-		content="Регламент использования строго необходимых и аналитических файлов cookie на сайте MetalProm39. Право на отказ (152-ФЗ РФ)."
+		content="Регламент использования строго необходимых и аналитических файлов cookie на сайте МеталлПром39. Право на отказ (152-ФЗ РФ)."
 	/>
 	<meta property="og:url" content="{siteConfig.siteDomain}/politika-cookie/" />
 

@@ -30,7 +30,7 @@
 	<title>Карта сайта и реестр спецификаций AEO | {siteConfig.brandName}</title>
 	<meta
 		name="description"
-		content="Карта сайта металлообрабатывающего цеха MetalProm39 в Калининграде: навигационный каталог страниц, реестр контента AEO и переиспользуемые параметры оборудования."
+		content="Карта сайта металлообрабатывающего цеха МеталлПром39 в Калининграде: навигационный каталог страниц, реестр контента AEO и переиспользуемые параметры оборудования."
 	/>
 </svelte:head>
 
@@ -45,7 +45,7 @@
 						Карта сайта и архитектура контента
 					</h1>
 					<p class="lead mt-4 max-w-3xl text-sm leading-relaxed sm:text-base">
-						Полный каталог производственных услуг, аналитических инструментов и реестр единого источника данных (Single Source of Truth) для поисковых систем и AI-агентов (AEO).
+						Полный каталог производственных услуг, аналитических инструментов и реестр единого источника данных (Единый источник достоверных данных) для поисковых систем и AI-агентов (AEO).
 					</p>
 				</div>
 				<div class="flex items-center gap-2">
@@ -82,7 +82,7 @@
 					role="tab"
 					aria-selected={activeView === 'agent_registry'}
 				>
-					Реестр для AI-агентов & AEO (Single Source of Truth)
+					Реестр для AI-агентов & AEO (Единый источник достоверных данных)
 				</button>
 			</div>
 		</header>
@@ -123,7 +123,7 @@
 				{/each}
 			</div>
 		{:else}
-			<!-- Agent & Developer Registry View (Single Source of Truth & AEO) -->
+			<!-- Agent & Developer Registry View (Единый реестр характеристик цеха) -->
 			<div class="mt-8 space-y-8">
 				<!-- Search Filter -->
 				<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -206,10 +206,10 @@
 									</div>
 								</div>
 
-								<!-- AEO Direct Answer & Audience -->
+								<!-- Краткий инженерный ответ & Audience -->
 								<div class="md:col-span-8 space-y-2">
 									<div>
-										<span class="text-[var(--color-muted)]">AEO Direct Answer (Ответ для AI-поисковиков):</span>
+										<span class="text-[var(--color-muted)]">Краткий инженерный ответ для поисковых систем:</span>
 										<p class="mt-1 text-xs leading-relaxed text-[var(--color-ink-2)] bg-[var(--color-paper)] p-2 rounded border border-[var(--color-rule)]">
 											{entry.aeo.directAnswer}
 										</p>
