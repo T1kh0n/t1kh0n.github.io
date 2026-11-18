@@ -11,6 +11,8 @@ Allow: /*.png$
 Allow: /*.jpg$
 Allow: /llms.txt
 Allow: /llms-full.txt
+Disallow: /stati/*?*
+Disallow: /stati?*
 Disallow: /cdn-cgi/
 
 User-agent: Googlebot
@@ -23,6 +25,8 @@ Allow: /*.png$
 Allow: /*.jpg$
 Allow: /llms.txt
 Allow: /llms-full.txt
+Disallow: /stati/*?*
+Disallow: /stati?*
 Disallow: /cdn-cgi/
 
 User-agent: OAI-SearchBot
@@ -35,6 +39,8 @@ Allow: /*.png$
 Allow: /*.jpg$
 Allow: /llms.txt
 Allow: /llms-full.txt
+Disallow: /stati/*?*
+Disallow: /stati?*
 Disallow: /cdn-cgi/
 
 User-agent: Claude-SearchBot
@@ -47,6 +53,8 @@ Allow: /*.png$
 Allow: /*.jpg$
 Allow: /llms.txt
 Allow: /llms-full.txt
+Disallow: /stati/*?*
+Disallow: /stati?*
 Disallow: /cdn-cgi/
 
 User-agent: PerplexityBot
@@ -59,6 +67,8 @@ Allow: /*.png$
 Allow: /*.jpg$
 Allow: /llms.txt
 Allow: /llms-full.txt
+Disallow: /stati/*?*
+Disallow: /stati?*
 Disallow: /cdn-cgi/
 
 User-agent: Applebot
@@ -71,6 +81,8 @@ Allow: /*.png$
 Allow: /*.jpg$
 Allow: /llms.txt
 Allow: /llms-full.txt
+Disallow: /stati/*?*
+Disallow: /stati?*
 Disallow: /cdn-cgi/
 
 User-agent: Yandex
@@ -83,6 +95,8 @@ Allow: /*.png$
 Allow: /*.jpg$
 Allow: /llms.txt
 Allow: /llms-full.txt
+Disallow: /stati/*?*
+Disallow: /stati?*
 Disallow: /cdn-cgi/
 Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term /
 Clean-param: yclid&gclid&_openstat /

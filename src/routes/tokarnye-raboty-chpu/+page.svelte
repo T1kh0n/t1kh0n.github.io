@@ -70,6 +70,10 @@
 			<p class="lead mt-4 max-w-2xl text-sm leading-relaxed sm:text-base">
 				Изготовление тел вращения на токарных центрах с ЧПУ: валы, штуцеры, втулки, фланцы. Предельный допуск до IT7, шероховатость поверхностей Ra 1.25 – 2.5 мкм.
 			</p>
+			<!-- Direct Answer Callout for AI Search & AEO -->
+			<div class="mt-4 rounded-[var(--radius-card)] border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] p-4 text-xs leading-relaxed text-[var(--color-ink-2)]">
+				<strong class="font-normal text-[var(--color-ink)]">Параметры выполнения токарных работ:</strong> Токарная обработка на станках с ЧПУ в Калининграде выполняется для деталей диаметром от ø 5 до 200 мм и длиной в центрах до 750 мм. Обеспечивается точность квалитета до IT7 (по ГОСТ 25346-2013) и шероховатость поверхностей до Ra 1.25 мкм. Минимальная партия — от 1 шт., базовый порог запуска заказа — от 5 000 ₽ с учетом НДС 22%. Срок запуска партии в производство — от 48 часов.
+			</div>
 			<dl class="readout ticks" aria-label="Параметры токарной обработки">
 				<div class="readout-item">
 					<dt class="readout-label">Базовый допуск</dt>

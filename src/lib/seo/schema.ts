@@ -79,7 +79,7 @@ export function createOrganizationSchema(config: SiteConfig = siteConfig) {
 		},
 		address: {
 			'@type': 'PostalAddress',
-			streetAddress: config.addressStreet,
+			streetAddress: config.addressStreet || undefined,
 			addressLocality: config.addressLocality,
 			addressRegion: config.addressRegion,
 			postalCode: config.postalCode,
@@ -146,7 +146,7 @@ export function createLocalBusinessSchema(config: SiteConfig = siteConfig) {
 		paymentAccepted: 'Безналичный расчет с НДС 22%',
 		address: {
 			'@type': 'PostalAddress',
-			streetAddress: config.addressStreet,
+			streetAddress: config.addressStreet || undefined,
 			addressLocality: config.addressLocality,
 			addressRegion: config.addressRegion,
 			postalCode: config.postalCode,
@@ -179,6 +179,17 @@ export function createLocalBusinessSchema(config: SiteConfig = siteConfig) {
 			itemListElement: [
 				{
 					'@type': 'Offer',
+					price: 2500,
+					priceCurrency: 'RUB',
+					unitText: 'нормо-час',
+					availability: 'https://schema.org/InStock',
+					priceSpecification: {
+						'@type': 'UnitPriceSpecification',
+						price: 2500,
+						priceCurrency: 'RUB',
+						minPrice: 5000,
+						unitText: 'нормо-час'
+					},
 					itemOffered: {
 						'@type': 'Service',
 						name: 'Токарные работы с ЧПУ',
@@ -187,10 +198,40 @@ export function createLocalBusinessSchema(config: SiteConfig = siteConfig) {
 				},
 				{
 					'@type': 'Offer',
+					price: 3000,
+					priceCurrency: 'RUB',
+					unitText: 'нормо-час',
+					availability: 'https://schema.org/InStock',
+					priceSpecification: {
+						'@type': 'UnitPriceSpecification',
+						price: 3000,
+						priceCurrency: 'RUB',
+						minPrice: 5000,
+						unitText: 'нормо-час'
+					},
 					itemOffered: {
 						'@type': 'Service',
 						name: 'Фрезерные работы с ЧПУ',
 						url: `${config.siteDomain}/frezernye-raboty-chpu/`
+					}
+				},
+				{
+					'@type': 'Offer',
+					price: 3500,
+					priceCurrency: 'RUB',
+					unitText: 'нормо-час',
+					availability: 'https://schema.org/InStock',
+					priceSpecification: {
+						'@type': 'UnitPriceSpecification',
+						price: 3500,
+						priceCurrency: 'RUB',
+						minPrice: 5000,
+						unitText: 'нормо-час'
+					},
+					itemOffered: {
+						'@type': 'Service',
+						name: 'Зуборезные и шлифовальные работы',
+						url: `${config.siteDomain}/zuboreznye-i-shlifovalnye-raboty/`
 					}
 				}
 			]
@@ -269,13 +310,15 @@ export function createServiceSchema(params: ServiceSchemaParams, config: SiteCon
 					'@type': 'Offer',
 					price: params.offers.price,
 					priceCurrency: params.offers.priceCurrency || 'RUB',
-					unitText: params.offers.unitText || 'час',
+					unitText: params.offers.unitText || 'нормо-час',
+					availability: 'https://schema.org/InStock',
 					priceSpecification: params.offers.minOrderPrice
 						? {
 								'@type': 'UnitPriceSpecification',
 								price: params.offers.minOrderPrice,
 								priceCurrency: params.offers.priceCurrency || 'RUB',
-								unitText: 'минимальный заказ'
+								minPrice: params.offers.minOrderPrice,
+								unitText: 'минимальный заказ от 5000 ₽'
 							}
 						: undefined
 				}

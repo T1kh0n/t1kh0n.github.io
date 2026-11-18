@@ -331,9 +331,11 @@
 							</span>
 						{/if}
 						<input
+							id="batch-qty-input"
 							type="number"
 							min="1"
 							max="5000"
+							aria-label="Количество деталей в партии"
 							bind:value={batchQuantity}
 							class="num w-24 rounded-[var(--radius-card)] border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] px-2.5 py-1 text-right text-sm text-[var(--color-ink)] focus:border-[var(--color-focus)] focus:outline-none"
 						/>
@@ -344,6 +346,7 @@
 					type="range"
 					min="1"
 					max="200"
+					aria-label="Ползунок тиража партии"
 					bind:value={batchQuantity}
 					class="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-[var(--color-paper-2)] accent-[var(--color-accent)]"
 				/>
@@ -426,7 +429,9 @@
 					<label class="flex cursor-pointer items-center gap-1.5 text-xs text-[var(--color-muted)]">
 						<input
 							type="checkbox"
+							id="own-material-checkbox"
 							data-testid="own-material-checkbox"
+							aria-label="Использовать металл заказчика"
 							bind:checked={isCustomerMaterial}
 							class="rounded-sm border-[var(--color-rule-2)] bg-[var(--color-paper)] accent-[var(--color-accent)]"
 						/>
@@ -463,6 +468,7 @@
 							type="file"
 							accept=".step,.stp,.iges,.igs,.pdf,.dwg,.dxf,.png,.jpg,.jpeg,.stl"
 							data-testid="cad-file-input"
+							aria-label="Прикрепить чертеж или STEP-модель"
 							class="hidden"
 							onchange={handleFileUpload}
 							disabled={isParsingCad}
@@ -649,6 +655,7 @@
 							>
 								<input
 									type="checkbox"
+									aria-label={coop.nameRu}
 									checked={cooperativeOpIds.includes(coop.id)}
 									onchange={() => toggleCooperativeOp(coop.id)}
 									class="mt-0.5 h-4 w-4 rounded-sm border-[var(--color-rule-2)] bg-[var(--color-paper)] accent-[var(--color-accent)]"

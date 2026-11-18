@@ -42,7 +42,7 @@
 </script>
 
 <svelte:head>
-	<title>МеталлПром39 — Металлообработка ЧПУ в Калининграде</title>
+	<title>Металлообработка ЧПУ в Калининграде | {siteConfig.brandName}</title>
 	<meta
 		name="description"
 		content="Обработка по чертежам и STEP-моделям от 1 шт. до серий. Допуск IT7, шероховатость Ra 1.25, расчет с НДС 22%. Токарные и фрезерные работы ЧПУ в Калининграде."
@@ -81,7 +81,7 @@
 				</h1>
 
 				<p class="lead mt-6 max-w-2xl text-lg sm:text-xl">
-					Изготовление серийных и единичных деталей на станках с ЧПУ. Квалитеты точности до IT7 по <a href="https://protect.gost.ru/" target="_blank" rel="noopener noreferrer" class="underline hover:text-[var(--color-accent)]">ГОСТ 25346-2013</a>, контроль ОТК, расчет с НДС 22%.
+					Изготовление серийных и единичных деталей на станках с ЧПУ. Квалитеты точности до IT7 по <a href="{base}/stati/kvalitety-tochnosti-i-sherohovatost-gost/" class="underline hover:text-[var(--color-accent)]">ГОСТ 25346-2013</a>, контроль ОТК, расчет с НДС 22%.
 				</p>
 
 				<div class="mt-8 flex flex-wrap items-center gap-3">
@@ -297,7 +297,7 @@
 			<div class="panel p-6">
 				<h3 class="text-base font-normal text-[var(--color-ink)]">Станочный парк и точность IT7</h3>
 				<p class="mt-2 text-xs leading-relaxed text-[var(--color-ink-2)]">
-					Цех эксплуатирует 2 современных обрабатывающих центра ЧПУ: токарный комплекс Fanuc 0i-TF и вертикально-фрезерный центр Siemens 828D. Изготовление серийных партий выполняется в строгом соответствии с <a href="https://protect.gost.ru/" target="_blank" rel="noopener noreferrer" class="underline hover:text-[var(--color-accent)]">ГОСТ 25346-2013</a> с допусками квалитета IT7 и шероховатостью Ra 1.25.
+					Цех эксплуатирует 2 современных обрабатывающих центра ЧПУ: токарный комплекс Fanuc 0i-TF и вертикально-фрезерный центр Siemens 828D. Изготовление серийных партий выполняется в строгом соответствии с <a href="{base}/stati/kvalitety-tochnosti-i-sherohovatost-gost/" class="underline hover:text-[var(--color-accent)]">ГОСТ 25346-2013</a> с допусками квалитета IT7 и шероховатостью Ra 1.25.
 				</p>
 			</div>
 

@@ -70,6 +70,10 @@
 			<p class="lead mt-4 max-w-2xl text-sm leading-relaxed sm:text-base">
 				Скоростная 3-осевая обработка корпусных деталей, кронштейнов, плит и оснастки на вертикально-фрезерных центрах с ЧПУ. Предельная точность до IT7, чистота поверхностей Ra 1.25 – 2.5 мкм.
 			</p>
+			<!-- Direct Answer Callout for AI Search & AEO -->
+			<div class="mt-4 rounded-[var(--radius-card)] border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] p-4 text-xs leading-relaxed text-[var(--color-ink-2)]">
+				<strong class="font-normal text-[var(--color-ink)]">Параметры выполнения фрезерных работ:</strong> Фрезерование на 3-осевых обрабатывающих центрах с ЧПУ в Калининграде выполняется в рабочей зоне до 800 × 500 × 500 мм. Точность позиционирования инструмента ±0.01 мм, допуск квалитета IT7, шероховатость Ra 1.25–2.5 мкм. Обрабатываемые материалы: конструкционные стали (Ст45, 40Х), нержавеющие стали (12Х18Н10Т), алюминиевые сплавы (Д16Т, АМг6), латунь и капролон. Минимальный заказ от 5 000 ₽ с НДС 22%.
+			</div>
 			<dl class="readout ticks" aria-label="Параметры фрезерной обработки">
 				<div class="readout-item">
 					<dt class="readout-label">Базовый допуск</dt>

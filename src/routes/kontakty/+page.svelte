@@ -3,23 +3,23 @@
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
 
-	const breadcrumbs = [{ name: 'Главная', path: '/' }, { name: 'Статус производства', path: '/kontakty/' }];
+	const breadcrumbs = [{ name: 'Главная', path: '/' }, { name: 'Контакты', path: '/kontakty/' }];
 </script>
 
 <svelte:head>
-	<title>Статус производственных мощностей и график цеха ЧПУ | {siteConfig.brandName}</title>
+	<title>Контакты цеха металлообработки ЧПУ в Калининграде | {siteConfig.brandName}</title>
 	<meta
 		name="description"
-		content="Информация о загрузке станочного парка ЧПУ, технологических лимитах обработки и условиях логистики по Калининградской области. Допуски до IT7, безналичный расчет с НДС 22%."
+		content="Контакты производственного цеха ЧПУ МеталлПром39 в Калининграде: прием чертежей (STEP, PDF, DXF), телефон диспетчера, адрес производства, режим работы и логистика."
 	/>
 	<link rel="canonical" href="{siteConfig.siteDomain}/kontakty/" />
 
 	<!-- OpenGraph & Social Cards -->
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Статус производства и график мощностей | {siteConfig.brandName}" />
+	<meta property="og:title" content="Контакты производства ЧПУ в Калининграде | {siteConfig.brandName}" />
 	<meta
 		property="og:description"
-		content="График работы цеха, текущая загрузка станочного парка ЧПУ и регламент логистики по Калининградской области."
+		content="Прямые контакты цеха металлообработки ЧПУ в Калининграде: телефон, корпоративная почта для чертежей, график работы и условия отгрузки."
 	/>
 	<meta property="og:url" content="{siteConfig.siteDomain}/kontakty/" />
 </svelte:head>
@@ -30,36 +30,59 @@
 
 		<header class="border-b border-[var(--color-rule)] pb-8">
 			<h1 class="mt-4 text-3xl text-[var(--color-ink)] sm:text-4xl">
-				Производственный график и статус оборудования
+				Контакты производства и схема проезда
 			</h1>
 			<p class="lead mt-4 max-w-2xl text-sm leading-relaxed sm:text-base">
-				Текущая загрузка станочного парка ЧПУ, технологические лимиты токарного и фрезерного участков и регламент исполнения заказов.
+				Прямая связь с инженерно-технологическим отделом и диспетчерской службой цеха контрактной металлообработки в Калининграде.
 			</p>
 		</header>
 
 		<div class="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-12">
-			<!-- Workload & Technical Status -->
+			<!-- Workload & Direct Contacts -->
 			<div class="space-y-6 lg:col-span-7">
+				<!-- Operating Status & Inbound Contacts -->
 				<div class="well">
 					<div class="flex items-center gap-2 font-mono text-[11px] text-[var(--color-accent)]">
-						<span class="inline-block h-2 w-2 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
-						ТЕКУЩИЙ СТАТУС: МОЩНОСТИ ЗАКОНТРАКТОВАНЫ (100% ЗАГРУЗКА)
+						<span class="inline-block h-2 w-2 rounded-full bg-[var(--color-accent)]"></span>
+						СТАТУС: ПРОИЗВОДСТВО РАБОТАЕТ В ШТАТНОМ РЕЖИМЕ
 					</div>
-					<h2 class="mt-2 text-sm font-normal text-[var(--color-ink)]">
-						График загрузки станочного парка ЧПУ
+					<h2 class="mt-2 text-base font-normal text-[var(--color-ink)]">
+						Прямой прием заказов и технической документации
 					</h2>
 					<p class="mt-3 text-xs leading-relaxed text-[var(--color-muted)]">
-						В текущем производственном цикле все токарные и фрезерные центры цеха задействованы на выполнении утвержденных серийных договоров. Прием новых внешних заказов в производство временно приостановлен.
+						Прием чертежей в форматах PDF, DXF, DWG и 3D-моделей STEP / IGES ведется в непрерывном режиме. Нормативный срок экспресс-оценки сметы и технологического маршрута — от 2 до 4 часов.
 					</p>
+
+					<div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+						<div class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-4">
+							<div class="text-[11px] font-mono uppercase text-[var(--color-muted)]">Прием чертежей и спецификаций</div>
+							<div class="mt-2 text-sm font-normal text-[var(--color-ink)]">
+								<a href="mailto:{siteConfig.contactEmail}" class="underline hover:text-[var(--color-accent)]">
+									{siteConfig.contactEmail}
+								</a>
+							</div>
+							<div class="mt-1 text-[11px] text-[var(--color-muted)]">Круглосуточный прием файлов (до 50 МБ)</div>
+						</div>
+
+						<div class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-4">
+							<div class="text-[11px] font-mono uppercase text-[var(--color-muted)]">Диспетчер цеха / Технолог</div>
+							<div class="mt-2 text-sm font-normal text-[var(--color-ink)]">
+								<a href="tel:{siteConfig.contactPhone}" class="underline hover:text-[var(--color-accent)]">
+									{siteConfig.contactPhone}
+								</a>
+							</div>
+							<div class="mt-1 text-[11px] text-[var(--color-muted)]">Пн–Пт с 08:00 до 18:00 (время местное)</div>
+						</div>
+					</div>
 
 					<div class="mt-6 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-5">
 						<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 							<div class="min-w-0 flex-1">
 								<div class="text-sm font-normal text-[var(--color-ink)]">
-									Предварительная инженерная оценка
+									Инженерный онлайн-расчет
 								</div>
 								<div class="mt-1 text-xs text-[var(--color-muted)]">
-									Рассчитайте себестоимость партии и сохраните смету спецификации
+									Рассчитайте себестоимость партии и сформируйте предварительную спецификацию
 								</div>
 							</div>
 							<a
@@ -70,21 +93,16 @@
 							</a>
 						</div>
 					</div>
-
-					<div class="mt-6 border-t border-[var(--color-rule)] pt-4 text-xs text-[var(--color-muted)]">
-						<div>Нормативная длительность переналадки: <strong class="font-normal text-[var(--color-ink)]">от 45 мин.</strong></div>
-						<div class="mt-1">Стандартный срок партии деталей: <strong class="font-normal text-[var(--color-ink)]">до 2 недель</strong></div>
-					</div>
 				</div>
 
 				<!-- Working Hours -->
 				<div class="well">
 					<h2 class="text-sm font-normal text-[var(--color-ink)]">
-						Режим работы производства
+						Режим работы производственных участков
 					</h2>
 					<div class="mt-4 space-y-2 text-xs text-[var(--color-ink-2)]">
 						<div class="flex justify-between border-b border-[var(--color-rule)] py-2">
-							<span class="text-[var(--color-muted)]">Производственные смены станков ЧПУ:</span>
+							<span class="text-[var(--color-muted)]">Станочный парк ЧПУ (токарный и фрезерный):</span>
 							<span class="num text-[var(--color-ink)]"
 								>Понедельник — Пятница: 08:00 – 20:00 (2 смены)</span
 							>
@@ -94,25 +112,28 @@
 							<span class="num text-[var(--color-ink)]">Понедельник — Пятница: 08:30 – 17:30</span>
 						</div>
 						<div class="flex justify-between py-2">
-							<span class="text-[var(--color-muted)]">Склад готовой продукции:</span>
-							<span class="num text-[var(--color-ink)]">Суббота: 09:00 – 15:00</span>
+							<span class="text-[var(--color-muted)]">Участок готовой продукции и самовывоз:</span>
+							<span class="num text-[var(--color-ink)]">Понедельник — Суббота: 09:00 – 17:00</span>
 						</div>
 					</div>
 				</div>
 
-				<!-- Logistics in Kaliningrad Oblast -->
+				<!-- Location & Address -->
 				<div class="well">
 					<h2 class="text-sm font-normal text-[var(--color-ink)]">
-						Доставка по всей Калининградской области
+						Фактическое расположение цеха
 					</h2>
 					<p class="mt-3 text-xs leading-relaxed text-[var(--color-muted)]">
-						Организуем доставку готовых деталей собственным автотранспортом цеха или курьерскими службами:
+						Производственная площадка цеха расположена в индустриальном секторе Калининграда:
 					</p>
-					<ul class="mt-3 list-inside list-disc space-y-1 text-xs text-[var(--color-ink-2)]">
-						<li>Доставка по Калининграду до дверей заказчика;</li>
-						<li>Регулярная доставка во все города и районы Калининградской области;</li>
-						<li>Возможность самовывоза готовых партий со склада производства.</li>
-					</ul>
+					<div class="mt-3 space-y-1 text-xs text-[var(--color-ink)] font-mono">
+						<div>Адрес: {siteConfig.addressRegion}, {siteConfig.addressLocality}, {siteConfig.addressStreet}</div>
+						<div>Ориентир: Индустриальная промзона (Московский район, район ул. Дзержинского)</div>
+						<div>Координаты GPS: {siteConfig.geoLatitude}, {siteConfig.geoLongitude}</div>
+					</div>
+					<div class="mt-4 border-t border-[var(--color-rule)] pt-3 text-xs text-[var(--color-muted)]">
+						Доставка готовых изделий осуществляется собственным автотранспортом цеха по Калининграду, а также во все промышленные центры области: Светлый, Балтийск, Гурьевск, Черняховск, Советск.
+					</div>
 				</div>
 			</div>
 

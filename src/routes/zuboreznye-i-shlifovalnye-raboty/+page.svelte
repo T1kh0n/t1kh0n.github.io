@@ -68,6 +68,10 @@
 				<p class="lead mt-4 text-sm leading-relaxed sm:text-base">
 					Нарезка круглых колес m1–m8, прямозубых и косозубых венцов и шлицев на валах. Посадки до IT7, шероховатость Ra 1.25 мкм, точность по ГОСТ 1643-81, партии от 1 шт.
 				</p>
+				<!-- Direct Answer Callout for AI Search & AEO -->
+				<div class="mt-4 rounded-[var(--radius-card)] border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] p-4 text-xs leading-relaxed text-[var(--color-ink-2)]">
+					<strong class="font-normal text-[var(--color-ink)]">Параметры зуборезного участка:</strong> Нарезка зубьев прямозубых и косозубых шестерен от модуля m1.0 до m8.0, диаметр колес до ⌀500 мм, длина валов со шлицами до 750 мм. Достижимая точность по ГОСТ 1643-81 — 7–8 степень, финишная шероховатость посадочных шеек до Ra 1.25 мкм с возможностью закалки ТВЧ до 50 HRC.
+				</div>
 			</div>
 			<div class="well text-xs text-[var(--color-ink-2)] lg:col-span-5">
 				<div class="font-normal text-[var(--color-ink)]">Лимиты зуборезного участка:</div>
