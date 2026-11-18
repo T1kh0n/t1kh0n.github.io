@@ -66,6 +66,21 @@ describe('Site Configuration & Dynamic Environment Resolution', () => {
 				'https://t1kh0n.github.io/frezernye-raboty-chpu/'
 			);
 		});
+
+		it('preserves bare paths without trailing slash for static asset files', () => {
+			expect(getCanonicalUrl('sitemap.xml', 'https://t1kh0n.github.io')).toBe(
+				'https://t1kh0n.github.io/sitemap.xml'
+			);
+			expect(getCanonicalUrl('/robots.txt', 'https://t1kh0n.github.io')).toBe(
+				'https://t1kh0n.github.io/robots.txt'
+			);
+			expect(getCanonicalUrl('/ai/summary.json', 'https://t1kh0n.github.io')).toBe(
+				'https://t1kh0n.github.io/ai/summary.json'
+			);
+			expect(getCanonicalUrl('/og/default.webp', 'https://t1kh0n.github.io')).toBe(
+				'https://t1kh0n.github.io/og/default.webp'
+			);
+		});
 	});
 
 	describe('getOgImageUrl', () => {

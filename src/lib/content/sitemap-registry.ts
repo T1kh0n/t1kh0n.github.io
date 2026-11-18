@@ -425,7 +425,7 @@ export const SITEMAP_REGISTRY: SitemapEntry[] = [
 	},
 	{
 		url: '/stati/izgotovlenie-valov-i-vtulok-chpu-po-chertezham/',
-		slug: 'izgotovlenie-valov-i-vtulok-chpu-po-chertezham/',
+		slug: 'izgotovlenie-valov-i-vtulok-chpu-po-chertezham',
 		category: 'articles',
 		categoryTitle: 'Инженерная база знаний',
 		title: 'Изготовление валов и втулок на станках с ЧПУ по чертежам',
@@ -449,7 +449,7 @@ export const SITEMAP_REGISTRY: SitemapEntry[] = [
 	},
 	{
 		url: '/stati/frezernaya-obrabotka-alyuminiya-d16t-chpu/',
-		slug: 'frezernaya-obrabotka-alyuminiya-d16t-chpu/',
+		slug: 'frezernaya-obrabotka-alyuminiya-d16t-chpu',
 		category: 'articles',
 		categoryTitle: 'Инженерная база знаний',
 		title: 'Фрезерная ЧПУ обработка деталей из алюминия Д16Т и АМг6',

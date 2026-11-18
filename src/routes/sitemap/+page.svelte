@@ -32,6 +32,13 @@
 		name="description"
 		content="Карта сайта металлообрабатывающего цеха МеталлПром39 в Калининграде: навигационный каталог страниц, реестр контента AEO и переиспользуемые параметры оборудования."
 	/>
+	<link rel="canonical" href="{siteConfig.siteDomain}/sitemap/" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Карта сайта и реестр спецификаций AEO | {siteConfig.brandName}" />
+	<meta
+		property="og:description"
+		content="Карта сайта металлообрабатывающего цеха МеталлПром39 в Калининграде: навигационный каталог страниц, реестр контента AEO и переиспользуемые параметры оборудования."
+	/>
 </svelte:head>
 
 <main class="py-10">

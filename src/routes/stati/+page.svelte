@@ -50,6 +50,7 @@
 		name="description"
 		content="Технические статьи и руководства по выбору сталей, допускам IT7-IT12 по ГОСТ и DFM-оптимизации стоимости деталей для конструкторов и технологов от цеха МеталлПром39 в Калининграде."
 	/>
+	<link rel="canonical" href="{siteConfig.siteDomain}/stati/" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Инженерная база знаний по металлообработке с ЧПУ | {siteConfig.brandName}" />
 	<meta

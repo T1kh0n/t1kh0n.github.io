@@ -142,7 +142,8 @@ export function resolveSiteConfig(
 export const siteConfig = resolveSiteConfig();
 
 /**
- * Returns a canonical URL for a given path, adhering to trailingSlash: 'always'.
+ * Returns a canonical URL for a given path, adhering to trailingSlash: 'always'
+ * for directories, while preserving bare paths for root and static asset files (.xml, .txt, .json, .webp).
  */
 export function getCanonicalUrl(
 	path: string = '/',
@@ -155,6 +156,10 @@ export function getCanonicalUrl(
 	}
 	if (cleanPath === '/') {
 		return `${cleanBase}/`;
+	}
+	// Preserve bare paths for static asset files (.xml, .txt, .json, .webp, etc.)
+	if (/\.[a-zA-Z0-9]+$/.test(cleanPath)) {
+		return `${cleanBase}${cleanPath}`;
 	}
 	const withTrailingSlash = cleanPath.replace(/\/+$/, '') + '/';
 	return `${cleanBase}${withTrailingSlash}`;

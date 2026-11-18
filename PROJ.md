@@ -23,6 +23,7 @@ This document is the living reference manual and development log for `metal-prom
 |  **Stage 12** | Hallmark UX Polish, KaTeX Math Symbols & Security Policy Integration         | **COMPLETED** |   2026-11-13    |    `ad756bb`    | Fixed kontakty card button layout container clipping with responsive flex sizing. Integrated KaTeX LaTeX rendering in markdown engine (`src/lib/content/markdown-parser.ts`), fully converting engineering formulas ($F_r$, $f_f$, $f_{pt}$, $\sigma_{H\lim}$, $\alpha$, $\beta$) into typography-accurate HTML with styles. Enabled text-align justify on all article paragraphs (`.article-prose p`). Expanded privacy policy with Section 5 Information Security & 149-FZ. Verified 150/150 Playwright E2E and 50/50 Vitest passing. |
 |  **Stage 13** | GEO Optimization to 99/100, Yandex Wordstat Semantics & Engineering Knowledge Base Expansion | **COMPLETED** |   2026-11-14    |    `6c212db`    | Achieved 99/100 GEO audit score (Google AI 20/20, robots 14/14, schema 14/14, content 14/14, brand entity 12/12, meta 11/11, llms 6/6, signals 6/6). Added explicit citation bot rules in `robots.txt` (Googlebot, OAI-SearchBot, Claude-SearchBot, PerplexityBot, Applebot), brand entity coherence, author and dateModified signals. Researched regional Yandex Wordstat core and competitor footprints for CNC machining in Kaliningrad. Authored 2 high-impact technical articles (`/stati/izgotovlenie-valov-i-vtulok-chpu-po-chertezham`, `/stati/frezernaya-obrabotka-alyuminiya-d16t-chpu`) with direct answer blocks, KaTeX engineering formulas, internal calculator/service cross-links, and authoritative external GOST/ISO/Sandvik citations. Updated sitemap registry, passing all 50/50 unit tests and static prerendering build. |
 |  **Stage 14** | 152-FZ / 149-FZ Legal Audit Compliance, Zero-CLS Local Font Self-Hosting, Granular Cookie Consent & Public Offer Integration | **COMPLETED** |   2026-11-14    |    `55cbb7d` (deploy `cdc43dc`) | Resolved all 4 legal/UX audit infractions preventing fines up to 7.7M RUB under Art. 13.11 KoAP RF. Eliminated external Google Fonts CDN requests by self-hosting Geologica woff2 locally with `<link rel="preload">` (preventing IP transfers to US and eliminating page jump / layout shifts). Implemented granular cookie consent banner with explicit right to decline ("Только необходимые / отказаться") and consent-gated dynamic Yandex Metrika loading. Published comprehensive Public Offer (`/oferta/`) under Arts. 435, 437, 702–729 GK RF, dedicated Cookie Policy (`/politika-cookie/`), and updated Privacy Policy with 156-FZ separate consent rules. 166/166 Playwright E2E and 50/50 Vitest passing. |
+|  **Stage 15** | SEO Recovery Phase 1 & 2: Trailing Slash Parity, Canonical Sync & GitHub Repo Cannibalization Mitigation | **COMPLETED** |   2026-11-18    |    `pending`    | Enforced strict trailingSlash: 'always' across SvelteKit, standardized getCanonicalUrl() with asset preservation, injected missing canonicals on /stati/ and /sitemap/, cleaned slugs in sitemap-registry, validated 20 static index.html routes and sitemap.xml. Neutralized README.md and PROJ.md of commercial query copy to stop GitHub repository search cannibalization. |
 
 ---
 
@@ -285,59 +286,7 @@ All branding, regional data, and contact endpoints are dynamic and decoupled fro
 
 ## 6. External Registration & Directory Submission Kits
 
-When ready to submit the workshop to external catalogs and search engine webmasters, use the verified Russian industrial texts below:
-
-### 6.1. Search Engine Webmasters (Verified & Live on Root Domain)
-
-- **Active Production Domain:** `https://t1kh0n.github.io/`
-- **Sitemap Index:** `https://t1kh0n.github.io/sitemap.xml` (HTTP 200 Verified)
-- **Robots Endpoint:** `https://t1kh0n.github.io/robots.txt` (HTTP 200 Verified)
-- **AI Agent Context:** `https://t1kh0n.github.io/llms.txt` (HTTP 200 Verified)
-
-#### Verification Files Deployed:
-1. **Google Search Console (`search.google.com/search-console`)**:
-   - Verification File: `googlebffb7acba9853275.html`
-   - Verification URL: `https://t1kh0n.github.io/googlebffb7acba9853275.html` (HTTP 200 Verified)
-   - Verification Body: `google-site-verification: googlebffb7acba9853275.html`
-   - Status: Ready for instant one-click ownership confirmation in Google Search Console.
-2. **Yandex.Webmaster (`webmaster.yandex.ru`)**:
-   - Verification File: `yandex_cbf1eb49dd9b13b2.html`
-   - Verification URL: `https://t1kh0n.github.io/yandex_cbf1eb49dd9b13b2.html` (HTTP 200 Verified)
-   - Verification Body: `<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body>Verification: cbf1eb49dd9b13b2</body></html>`
-   - Status: Ready for instant one-click verification (кнопка «Подтвердить») in Yandex.Webmaster.
-
-### 6.2. Yandex Business Directory (`Яндекс.Бизнес / Карты`)
-
-- **Company Name:** МеталлПром39 — Высокоточная металлообработка и ЧПУ
-- **Categories:** Металлообработка, Токарные работы, Фрезерные работы, Производственное предприятие
-- **Address:** г. Калининград, ул. Промышленная, д. 1
-- **Working Hours:** Пн–Пт с 08:00 до 18:00
-- **Short Description (200 chars):**
-  Высокоточная токарная и фрезерная обработка с ЧПУ в Калининграде. Серии от 5 до 1000 шт. за 3–5 дней. Безналичный расчет с НДС, паспорта ОТК (Mitutoyo), ГОСТ. Минимальный заказ 5 000 ₽.
-- **Full Description:**
-  Производственный цех «МеталлПром39» выполняет прецизионную механическую обработку металлов и инженерных пластиков на станках с ЧПУ в Калининградской области.
-  Специализация:
-  - Токарные работы с ЧПУ: валы, оси, штуцеры, фланцы, резьбовые переходники (допуски до IT7).
-  - Фрезерные работы с ЧПУ (3 и 4 оси): корпусные детали, приборные панели, матрицы, пресс-формы.
-  - Сопутствующие дефицитные операции: зубонарезка, шлифование (IT6–IT7, Ra 0.4–0.8), термообработка и ТВЧ закалка, расточка.
-    Преимущества для B2B-заказчиков:
-  - Официальный договор, безналичный расчет с НДС / УСН, электронный документооборот (ЭДО).
-  - Контроль ОТК поверенным инструментом Mitutoyo, выдача паспортов качества на партии и сертификатов на металл.
-  - Оперативный расчет стоимости по чертежам и 3D-моделям (STEP, IGES, DXF) за 2–4 часа.
-  - Минимальный порог заказа для юрлиц — 5 000 ₽.
-
-### 6.3. Google Business Profile (`Google Maps`)
-
-- **Business Name:** MetalProm39 Precision CNC Machining
-- **Categories:** Machine shop, Metal fabricator, Precision engineer
-- **Service Area:** Kaliningrad Oblast (Kaliningrad, Svetly, Baltiysk, Guryevsk, Chernyakhovsk)
-- **Phone:** +7 (4012) 00-00-00
-- **Website:** https://metalprom39.github.io
-
-### 6.4. Industrial B2B Catalogs (`Obrabotka.net`, `Pulscen`, `2GIS`, КТПП)
-
-- **Listing Title:** Токарно-фрезерная обработка на станках с ЧПУ в Калининграде — ООО/ИП МеталлПром39
-- **Tags / Keywords:** токарные работы ЧПУ Калининград, фрезеровка ЧПУ, шлифовка IT6 IT7, нарезка шестерен, изготовление валов по чертежам, механообработка с НДС.
+Commercial profile submission kits (Yandex Business, Google Maps, 2GIS, B2B catalogs) contain commercial search copy and have been moved outside the public git repository to prevent search engine cannibalization of the production domain.
 
 ---
 

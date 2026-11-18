@@ -8,8 +8,12 @@
 
 	let { items }: Props = $props();
 
-	// Full breadcrumb hierarchy including root with base path support
-	let fullItems = $derived([{ name: 'Главная', path: `${base || '/'}` }, ...items]);
+	// Full breadcrumb hierarchy ensuring 'Главная' is at the root exactly once without duplication
+	let fullItems = $derived(
+		items.length > 0 && items[0].name === 'Главная'
+			? items
+			: [{ name: 'Главная', path: `${base || '/'}` }, ...items]
+	);
 
 	let schemaObj = $derived(createBreadcrumbSchema(fullItems));
 </script>

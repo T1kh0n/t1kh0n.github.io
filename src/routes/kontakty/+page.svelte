@@ -2,10 +2,8 @@
 	import { base } from '$lib/paths';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
-	import { createBreadcrumbSchema, serializeSchema } from '#lib/seo/schema';
 
 	const breadcrumbs = [{ name: 'Главная', path: '/' }, { name: 'Статус производства', path: '/kontakty/' }];
-	const breadcrumbSchema = createBreadcrumbSchema(breadcrumbs);
 </script>
 
 <svelte:head>
@@ -24,8 +22,6 @@
 		content="График работы цеха, текущая загрузка станочного парка ЧПУ и регламент логистики по Калининградской области."
 	/>
 	<meta property="og:url" content="{siteConfig.siteDomain}/kontakty/" />
-
-	{@html serializeSchema(breadcrumbSchema)}
 </svelte:head>
 
 <main class="py-10">
@@ -57,7 +53,7 @@
 					</p>
 
 					<div class="mt-6 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-5">
-						<div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+						<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 							<div class="min-w-0 flex-1">
 								<div class="text-sm font-normal text-[var(--color-ink)]">
 									Предварительная инженерная оценка
@@ -68,7 +64,7 @@
 							</div>
 							<a
 								href="{base}/kalkulyator-stoimosti-chpu/"
-								class="btn btn--sm w-full md:w-auto shrink-0 text-center"
+								class="btn btn--sm shrink-0 text-center"
 							>
 								<span>Открыть калькулятор</span>
 							</a>

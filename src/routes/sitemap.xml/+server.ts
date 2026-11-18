@@ -6,7 +6,7 @@ import { base } from '$lib/paths';
 export const prerender = true;
 
 export const GET: RequestHandler = async () => {
-	const domain = (siteConfig.siteDomain || 'https://tikhomirovnikita.github.io').replace(/\/$/, '');
+	const domain = (siteConfig.siteDomain || 'https://t1kh0n.github.io').replace(/\/$/, '');
 
 	const urlsXml = SITEMAP_REGISTRY.map((entry) => {
 		const fullUrl = `${domain}${base}${entry.url === '/' ? '/' : entry.url}`;
