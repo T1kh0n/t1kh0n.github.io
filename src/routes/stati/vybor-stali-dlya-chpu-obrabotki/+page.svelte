@@ -92,7 +92,7 @@
 							<span class="text-xs text-[var(--color-muted)] self-center">Теги статьи:</span>
 							{#each article.tags as tag}
 								<a
-									href="{base}/stati/?tag={encodeURIComponent(tag)}"
+									rel="nofollow" href="{base}/stati/?tag={encodeURIComponent(tag)}"
 									class="rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper)] px-2 py-0.5 text-xs text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-ink)]"
 								>
 									#{tag}
