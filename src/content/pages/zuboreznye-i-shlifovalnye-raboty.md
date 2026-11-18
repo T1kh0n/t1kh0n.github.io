@@ -1,5 +1,5 @@
 ---
-slug: zuboreznye-raboty
+slug: zuboreznye-i-shlifovalnye-raboty
 urlPath: /zuboreznye-i-shlifovalnye-raboty/
 title: "Зуборезные работы ЧПУ в Калининграде: шестерни, венцы и шлицевые валы"
 h1: "Зуборезные работы с ЧПУ"

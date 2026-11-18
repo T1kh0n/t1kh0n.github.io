@@ -147,13 +147,13 @@ export const SITEMAP_REGISTRY: SitemapEntry[] = [
 	},
 	{
 		url: '/zuboreznye-i-shlifovalnye-raboty/',
-		slug: 'zuboreznye-raboty',
+		slug: 'zuboreznye-i-shlifovalnye-raboty',
 		category: 'services',
 		categoryTitle: 'Производственные услуги',
 		title: 'Зуборезные работы',
 		h1: 'Зуборезные работы с ЧПУ',
 		description: 'Нарезание круглых зубчатых колес m1–m8, прямозубых и косозубых шестерен, нарезка шлицев на валах.',
-		sourceFile: 'src/content/pages/zuboreznye-raboty.md',
+		sourceFile: 'src/content/pages/zuboreznye-i-shlifovalnye-raboty.md',
 		reusableSpecs: ['maxToleranceGrade', 'surfaceRoughnessRa', 'vatRatePercent', 'deliveryDescription'],
 		aeo: {
 			directAnswer: 'Зуборезные работы в Калининграде. Нарезание круглых зубчатых колес диаметром до 500 мм с модулями от m1.0 до m8.0. Прямозубые и косозубые зубчатые венцы, нарезание прямобочных и эвольвентных шлицев на валах длиной до 750 мм. 7-я и 8-я степень точности по ГОСТ 1643-81. Минимальный заказ 5 000 ₽ с НДС 22%.',

@@ -126,6 +126,11 @@ describe('Pages Loader', () => {
 		const tokarnye = getPageBySlug('tokarnye-raboty-chpu');
 		expect(tokarnye).toBeDefined();
 		expect(tokarnye?.h1).toBe('Токарные работы с ЧПУ');
+
+		const zuboreznye = getPageBySlug('zuboreznye-i-shlifovalnye-raboty');
+		expect(zuboreznye).toBeDefined();
+		expect(zuboreznye?.h1).toBe('Зуборезные работы с ЧПУ');
+		expect(zuboreznye?.urlPath).toBe('/zuboreznye-i-shlifovalnye-raboty/');
 	});
 });
 
