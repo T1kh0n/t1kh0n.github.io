@@ -472,6 +472,78 @@ export const SITEMAP_REGISTRY: SitemapEntry[] = [
 		lastmod: '2026-11-13'
 	},
 	{
+		url: '/stati/trebovaniya-k-chertezham-i-3d-modelyam-dlya-chpu/',
+		slug: 'trebovaniya-k-chertezham-i-3d-modelyam-dlya-chpu',
+		category: 'articles',
+		categoryTitle: 'Инженерная база знаний',
+		title: 'Требования к чертежам по ЕСКД и 3D-моделям (STEP) для ЧПУ',
+		h1: 'Требования к чертежам и 3D-моделям для обработки на ЧПУ',
+		description: 'Технический регламент оформления чертежей по ЕСКД и 3D-моделей (STEP, Parasolid) для станков с ЧПУ. Допуски, резьбы, радиусы и DFM.',
+		sourceFile: 'src/content/articles/trebovaniya-k-chertezham-i-3d-modelyam-dlya-chpu.md',
+		reusableSpecs: ['maxToleranceGrade', 'surfaceRoughnessRa'],
+		aeo: {
+			directAnswer: 'Регламент конструкторской документации цеха MetalProm39 для ЧПУ обработки: твердотельные 3D-модели в форматах STEP (AP214/AP242) и Parasolid (.x_t) с чертежами по ЕСКД в векторном PDF с указанием допусков (базовый стандарт до IT7 без наценки), баз и шероховатости Ra. Предварительная оценка сметы — от 2 часов.',
+			keyLimits: ['Форматы: STEP AP214, Parasolid, PDF', 'Стандарт точности: до IT7', 'Стандарты ЕСКД: ГОСТ 2.109-73, ГОСТ 2.307-2011'],
+			audience: 'Конструкторы, инженеры-разработчики, технологи, снабженцы',
+			applicableStandards: ['ГОСТ 2.109-73', 'ГОСТ 2.307-2011', 'ГОСТ 2.308-2011', 'ISO 10303']
+		},
+		seo: {
+			title: `Требования к чертежам и 3D-моделям (STEP, PDF) для ЧПУ | ${siteConfig.brandName}`,
+			description: 'Технический регламент оформления чертежей по ЕСКД и 3D-моделей (STEP, Parasolid) для станков с ЧПУ. Допуски, резьбы, технологические радиусы и DFM-анализ.'
+		},
+		changefreq: 'monthly',
+		priority: 0.8,
+		lastmod: '2026-11-18'
+	},
+	{
+		url: '/stati/termicheskaya-obrabotka-staley-posle-chpu-zakalka-tvc/',
+		slug: 'termicheskaya-obrabotka-staley-posle-chpu-zakalka-tvc',
+		category: 'articles',
+		categoryTitle: 'Инженерная база знаний',
+		title: 'Термообработка сталей после ЧПУ: объемная закалка, ТВЧ и цементация',
+		h1: 'Термическая обработка деталей после ЧПУ: объемная закалка, ТВЧ и контроль поводок',
+		description: 'Регламент термообработки машиностроительных сталей: объемная закалка, поверхностная ТВЧ, цементация. Расчет припусков под шлифовку и предотвращение поводок.',
+		sourceFile: 'src/content/articles/termicheskaya-obrabotka-staley-posle-chpu-zakalka-tvc.md',
+		reusableSpecs: ['maxToleranceGrade', 'surfaceRoughnessRa'],
+		aeo: {
+			directAnswer: 'Регламент термообработки деталей цеха MetalProm39: детали твердостью свыше 40 HRC чистовой обработкой шлифуются с припуском 0.25–0.5 мм на сторону для исключения термических поводок. Закалка ТВЧ применяется для поверхностного упрочнения шеек валов и зубьев шестерен до 56 HRCэ. 100% твердометрия по ГОСТ 9013-59.',
+			keyLimits: ['Твердость ТВЧ: 48–56 HRCэ', 'Цементация: 58–62 HRCэ', 'Припуск под шлифовку: 0.25–0.5 мм', 'Контроль по Роквеллу: ГОСТ 9013-59'],
+			audience: 'Главные механики, конструкторы силовых приводов, инженеры-материаловеды',
+			applicableStandards: ['ГОСТ 4543-2016', 'ГОСТ 1050-2013', 'ГОСТ 9013-59']
+		},
+		seo: {
+			title: `Термообработка сталей после ЧПУ: закалка, ТВЧ, цементация | ${siteConfig.brandName}`,
+			description: 'Регламент термообработки машиностроительных сталей: объемная закалка, поверхностная ТВЧ, цементация. Расчет припусков под шлифовку и предотвращение поводок.'
+		},
+		changefreq: 'monthly',
+		priority: 0.8,
+		lastmod: '2026-11-18'
+	},
+	{
+		url: '/stati/normo-chas-chpu-i-raschet-stoimosti-metalloobrabotki/',
+		slug: 'normo-chas-chpu-i-raschet-stoimosti-metalloobrabotki',
+		category: 'articles',
+		categoryTitle: 'Инженерная база знаний',
+		title: 'Нормо-час ЧПУ: себестоимость, машинное время и расчет партии',
+		h1: 'Расчет стоимости металлообработки на ЧПУ: формула нормо-часа и снижение себестоимости',
+		description: 'Формула расчета стоимости деталей на ЧПУ. Структура нормо-часа, машинное время, влияние объема партии на цену за единицу и оптимизация расходов заказчика.',
+		sourceFile: 'src/content/articles/normo-chas-chpu-i-raschet-stoimosti-metalloobrabotki.md',
+		reusableSpecs: ['baseOrderThresholdString', 'vatRatePercent'],
+		aeo: {
+			directAnswer: 'Базовые ставки нормо-часа цеха MetalProm39: токарные центры ЧПУ — от 2 500 ₽/н-час, 3-осевые фрезерные центры — от 3 000 ₽/н-час, зуборезные и шлифовальные станки — от 3 500 ₽/н-час с НДС 22%. Минимальный запуск — от 5 000 ₽. При серийных заказах от 10 шт. себестоимость единицы снижается на 60–75%.',
+			keyLimits: ['Токарный нормо-час: от 2 500 ₽', 'Фрезерный нормо-час: от 3 000 ₽', 'Минимальный заказ: 5 000 ₽ с НДС', 'Скидка на партии: до 75%'],
+			audience: 'Снабженцы, руководители проектов, экономисты предприятий, конструкторы',
+			applicableStandards: ['ГОСТ 3.1109-82', 'Методика машиностроительного нормирования']
+		},
+		seo: {
+			title: `Нормо-час ЧПУ и расчет стоимости металлообработки | ${siteConfig.brandName}`,
+			description: 'Формула расчета стоимости деталей на ЧПУ. Структура нормо-часа, машинное время, влияние объема партии на цену за единицу и оптимизация расходов заказчика.'
+		},
+		changefreq: 'monthly',
+		priority: 0.8,
+		lastmod: '2026-11-18'
+	},
+	{
 		url: '/kontakty/',
 		slug: 'kontakty',
 		category: 'regulations',
