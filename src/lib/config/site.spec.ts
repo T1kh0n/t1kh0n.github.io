@@ -8,7 +8,7 @@ describe('Site Configuration & Dynamic Environment Resolution', () => {
 		expect(config.siteHost).toBe(DEFAULT_SITE_CONFIG.siteHost);
 		expect(config.brandName).toBe('МеталлПром39');
 		expect(config.brandLegalName).toBe('ИП МеталлПром39');
-		expect(config.contactPhone).toBe('');
+		expect(config.contactPhone).toBe(DEFAULT_SITE_CONFIG.contactPhone);
 		expect(config.addressLocality).toBe('Калининград');
 		expect(config.addressRegion).toBe('Калининградская область');
 		expect(config.geoLatitude).toBe(54.7104);
