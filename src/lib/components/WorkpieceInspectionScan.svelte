@@ -651,7 +651,7 @@
 				</p>
 
 				<!-- Switchboard Ledger -->
-				<ul class="switches" role="group" aria-label="Слои цифрового двойника детали">
+				<ul class="switches" aria-label="Слои цифрового двойника детали">
 					<!-- Layer 1: Raw Stock Envelope -->
 					<li class="switch">
 						<div class="switch__name">

@@ -11,7 +11,7 @@
 		/* Foregrounds & Typography */
 		--color-ink: oklch(98% 0.005 235);
 		--color-ink-2: oklch(86% 0.01 235);
-		--color-muted: oklch(62% 0.02 235);
+		--color-muted: oklch(70% 0.015 235);
 
 		/* Vantage Signal Accent (Instrument Lime) */
 		--color-accent: oklch(89% 0.19 126);
