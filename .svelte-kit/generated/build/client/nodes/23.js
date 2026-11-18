@@ -1,0 +1,1 @@
+export { default as component } from "../../../../../src/routes/tokarnye-raboty-chpu/+page.svelte";
