@@ -1,0 +1,1 @@
+export { default as component } from "../../../../../src/routes/stati/frezernaya-obrabotka-alyuminiya-d16t-chpu/+page.svelte";

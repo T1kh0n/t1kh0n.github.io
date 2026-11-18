@@ -1,0 +1,1 @@
+export { default as component } from "../../../../../src/routes/stati/obrabotka-nerzhaveyushchey-stali-12x18n10t/+page.svelte";

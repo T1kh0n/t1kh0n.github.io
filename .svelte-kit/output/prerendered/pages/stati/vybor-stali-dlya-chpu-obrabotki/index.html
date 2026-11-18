@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="text-scale" content="scale" />
+		<link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+
+		<!-- Zero-CLS Local Font Preload & Declarations (152-FZ Compliant, No External CDN Requests) -->
+		<link
+			rel="preload"
+			href="../../fonts/geologica-cyrillic.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+		<link
+			rel="preload"
+			href="../../fonts/geologica-latin.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+
+		<style>
+			@font-face {
+				font-family: 'Geologica';
+				font-style: normal;
+				font-weight: 200 500;
+				font-display: swap;
+				src: url('../../fonts/geologica-cyrillic-ext.woff2') format('woff2');
+				unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+			}
+			@font-face {
+				font-family: 'Geologica';
+				font-style: normal;
+				font-weight: 200 500;
+				font-display: swap;
+				src: url('../../fonts/geologica-cyrillic.woff2') format('woff2');
+				unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+			}
+			@font-face {
+				font-family: 'Geologica';
+				font-style: normal;
+				font-weight: 200 500;
+				font-display: swap;
+				src: url('../../fonts/geologica-latin-ext.woff2') format('woff2');
+				unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+			}
+			@font-face {
+				font-family: 'Geologica';
+				font-style: normal;
+				font-weight: 200 500;
+				font-display: swap;
+				src: url('../../fonts/geologica-latin.woff2') format('woff2');
+				unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+			}
+		</style>
+
+		<link href="../../_app/immutable/entry/start.D-bccD2h.js" rel="modulepreload">
+		<link href="../../_app/immutable/entry/payload.DSmR2FwN.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/CRzLMJPS.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/geS2qMcl.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/B9S0au6J.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/Uzj_GMBJ.js" rel="modulepreload">
+		<link href="../../_app/immutable/entry/app.Dk79QlJN.js" rel="modulepreload">
+		<link href="../../_app/immutable/nodes/0.CIqL411S.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/CSkSXbQf.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/Cd98AFiJ.js" rel="modulepreload">
+		<link href="../../_app/immutable/nodes/19.BXpNZ2t8.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/tcVImH1l.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/CNAdnu2H.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/DqrtEIXV.js" rel="modulepreload">
+		<!--12qhfyh--><link rel="icon" href="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2036%2036'%20fill='none'%3e%3crect%20width='36'%20height='36'%20rx='6'%20fill='%230b0f14'/%3e%3c!--%20Dial%20Calibrated%20Outer%20Ring%20with%20Precision%20Ticks%20--%3e%3ccircle%20cx='18'%20cy='18'%20r='15.5'%20stroke='%23b5f542'%20stroke-width='1'%20stroke-dasharray='2%202'%20stroke-opacity='0.6'/%3e%3ccircle%20cx='18'%20cy='18'%20r='12'%20stroke='%23ffffff'%20stroke-width='0.75'%20stroke-opacity='0.4'/%3e%3c!--%20Cardinal%20Coordinate%20Center%20Crosshairs%20--%3e%3cline%20x1='18'%20y1='2'%20x2='18'%20y2='7'%20stroke='%23b5f542'%20stroke-width='1.5'%20stroke-linecap='round'/%3e%3cline%20x1='18'%20y1='29'%20x2='18'%20y2='34'%20stroke='%23b5f542'%20stroke-width='1.5'%20stroke-linecap='round'/%3e%3cline%20x1='2'%20y1='18'%20x2='7'%20y2='18'%20stroke='%23b5f542'%20stroke-width='1.5'%20stroke-linecap='round'/%3e%3cline%20x1='29'%20y1='18'%20x2='34'%20y2='18'%20stroke='%23b5f542'%20stroke-width='1.5'%20stroke-linecap='round'/%3e%3c!--%20Central%204-Flute%20CNC%20Endmill%20/%20Lathe%20Cutter%20Geometry%20--%3e%3cpath%20d='M18%209L21.5%2014.5L27%2018L21.5%2021.5L18%2027L14.5%2021.5L9%2018L14.5%2014.5L18%209Z'%20fill='%23b5f542'%20fill-opacity='0.25'%20stroke='%23b5f542'%20stroke-width='1.2'%20stroke-linejoin='round'%20/%3e%3c!--%20Center%20Spindle%20Center%20Point%20--%3e%3ccircle%20cx='18'%20cy='18'%20r='2.5'%20fill='%23ffffff'/%3e%3ccircle%20cx='18'%20cy='18'%20r='1'%20fill='%230b0f14'/%3e%3c/svg%3e"/> <link rel="alternate" type="application/rss+xml" title="МеталлПром39 — Контрактная металлообработка с ЧПУ" href="/feed.xml"/> <meta name="google-site-verification" content="googlebffb7acba9853275.html"/> <meta name="yandex-verification" content="cbf1eb49dd9b13b2"/> <meta name="geo.region" content="RU-KGD"/> <meta name="geo.placename" content="Калининград"/> <meta name="geo.position" content="54.710426;20.452214"/> <meta name="ICBM" content="54.710426, 20.452214"/> <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/> <meta name="author" content="Цех контрактной металлообработки ЧПУ МеталлПром39"/> <meta property="article:modified_time" content="2026-11-13T21:00:00+02:00"/> <meta name="revised" content="2026-11-13T21:00:00+02:00"/> <meta property="og:locale" content="ru_RU"/> <meta property="og:site_name" content="МеталлПром39"/> <meta property="og:image" content="https://t1kh0n.github.io/og/default.webp"/> <!----><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://t1kh0n.github.io/#organization",
+  "name": "МеталлПром39",
+  "legalName": "ИП МеталлПром39",
+  "url": "https://t1kh0n.github.io",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://t1kh0n.github.io/og/default-1x1.webp",
+    "width": 600,
+    "height": 600
+  },
+  "image": "https://t1kh0n.github.io/og/default.webp",
+  "email": "",
+  "telephone": "",
+  "author": {
+    "@type": "Organization",
+    "name": "МеталлПром39",
+    "url": "https://t1kh0n.github.io"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Калининград",
+    "addressRegion": "Калининградская область",
+    "postalCode": "236000",
+    "addressCountry": "RU"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "",
+      "contactType": "sales and technical support",
+      "areaServed": "RU",
+      "availableLanguage": [
+        "Russian"
+      ]
+    }
+  ],
+  "sameAs": [
+    "https://github.com/T1kh0n/t1kh0n.github.io",
+    "https://www.wikidata.org/wiki/Q11019",
+    "https://www.linkedin.com/company/metalprom39",
+    "https://www.crunchbase.com/organization/metalprom39"
+  ]
+}</script><!----> <!----><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "ManufacturingBusiness",
+  "@id": "https://t1kh0n.github.io/#localbusiness",
+  "name": "МеталлПром39",
+  "legalName": "ИП МеталлПром39",
+  "url": "https://t1kh0n.github.io",
+  "image": "https://t1kh0n.github.io/og/default.webp",
+  "logo": "https://t1kh0n.github.io/og/default-1x1.webp",
+  "telephone": "",
+  "email": "",
+  "priceRange": "₽₽",
+  "currenciesAccepted": "RUB",
+  "paymentAccepted": "Безналичный расчет с НДС 22%",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Калининград",
+    "addressRegion": "Калининградская область",
+    "postalCode": "236000",
+    "addressCountry": "RU"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 54.7104,
+    "longitude": 20.4522
+  },
+  "areaServed": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "Калининград"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Гурьевск"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Балтийск"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Светлый"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Черняховск"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Калининградская область"
+    }
+  ],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "08:00",
+      "closes": "18:00"
+    }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Услуги металлообработки с ЧПУ",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "price": 2500,
+        "priceCurrency": "RUB",
+        "unitText": "нормо-час",
+        "availability": "https://schema.org/InStock",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": 2500,
+          "priceCurrency": "RUB",
+          "minPrice": 5000,
+          "unitText": "нормо-час"
+        },
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Токарные работы с ЧПУ",
+          "url": "https://t1kh0n.github.io/tokarnye-raboty-chpu/"
+        }
+      },
+      {
+        "@type": "Offer",
+        "price": 3000,
+        "priceCurrency": "RUB",
+        "unitText": "нормо-час",
+        "availability": "https://schema.org/InStock",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": 3000,
+          "priceCurrency": "RUB",
+          "minPrice": 5000,
+          "unitText": "нормо-час"
+        },
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Фрезерные работы с ЧПУ",
+          "url": "https://t1kh0n.github.io/frezernye-raboty-chpu/"
+        }
+      },
+      {
+        "@type": "Offer",
+        "price": 3500,
+        "priceCurrency": "RUB",
+        "unitText": "нормо-час",
+        "availability": "https://schema.org/InStock",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": 3500,
+          "priceCurrency": "RUB",
+          "minPrice": 5000,
+          "unitText": "нормо-час"
+        },
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Зуборезные и шлифовальные работы",
+          "url": "https://t1kh0n.github.io/zuboreznye-i-shlifovalnye-raboty/"
+        }
+      }
+    ]
+  }
+}</script><!----> <!----><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://t1kh0n.github.io/#website",
+  "url": "https://t1kh0n.github.io",
+  "name": "МеталлПром39",
+  "alternateName": [
+    "MetalProm39",
+    "МеталлПром39 ЧПУ Калининград"
+  ],
+  "description": "Высокоточная контрактная металлообработка деталей на токарных и фрезерных станках с ЧПУ в Калининграде. Точность IT7, шероховатость до Ra 1.25. Безналичный расчет с НДС 22%.",
+  "inLanguage": "ru-RU",
+  "dateModified": "2026-11-13T21:00:00+02:00",
+  "publisher": {
+    "@id": "https://t1kh0n.github.io/#organization"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://t1kh0n.github.io/sitemap/?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+}</script><!----><!----><!--11bvdbd--><meta name="description" content="Сравнение обрабатываемости сталей Ст45, 40Х, 09Г2С, 12Х18Н10Т и алюминия Д16Т на станках с ЧПУ. Коэффициенты обрабатываемости, режимы резания и выбор сплава."/> <link rel="canonical" href="https://t1kh0n.github.io/stati/vybor-stali-dlya-chpu-obrabotki/"/> <meta property="og:type" content="article"/> <meta property="og:title" content="Выбор сталей и сплавов для ЧПУ обработки в Калининграде | МеталлПром39"/> <meta property="og:description" content="Сравнение обрабатываемости сталей Ст45, 40Х, 09Г2С, 12Х18Н10Т и алюминия Д16Т на станках с ЧПУ. Коэффициенты обрабатываемости, режимы резания и выбор сплава."/> <meta property="og:url" content="https://t1kh0n.github.io/stati/vybor-stali-dlya-chpu-obrabotki/"/> <meta property="article:published_time" content="2026-10-25"/> <meta property="article:section" content="Материаловедение"/> <!--[0--><!--[--><meta property="article:tag" content="Материаловедение"/><meta property="article:tag" content="Стали ГОСТ"/><meta property="article:tag" content="ЧПУ точение"/><meta property="article:tag" content="Фрезерование"/><meta property="article:tag" content="Режимы резания"/><!--]--><!--]--> <!----><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "База знаний",
+      "item": "https://t1kh0n.github.io/stati//"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Выбор сталей для ЧПУ",
+      "item": "https://t1kh0n.github.io/stati/vybor-stali-dlya-chpu-obrabotki//"
+    }
+  ]
+}</script><!----> <!--[0--><!----><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "@id": "https://t1kh0n.github.io/stati/vybor-stali-dlya-chpu-obrabotki/#article",
+  "headline": "Выбор конструкционных и нержавеющих сталей для ЧПУ обработки: Ст45, 40Х, 09Г2С, 12Х18Н10Т, Д16Т",
+  "description": "Сравнение обрабатываемости сталей Ст45, 40Х, 09Г2С, 12Х18Н10Т и алюминия Д16Т на станках с ЧПУ. Коэффициенты обрабатываемости, режимы резания и выбор сплава.",
+  "image": [
+    "https://t1kh0n.github.io/og/default.webp",
+    "https://t1kh0n.github.io/og/default-4x3.webp",
+    "https://t1kh0n.github.io/og/default-1x1.webp"
+  ],
+  "url": "https://t1kh0n.github.io/stati/vybor-stali-dlya-chpu-obrabotki/",
+  "inLanguage": "ru-RU",
+  "datePublished": "2026-10-25",
+  "dateModified": "2026-10-25",
+  "author": {
+    "@type": "Organization",
+    "name": "Инженерно-технологический отдел МеталлПром39",
+    "url": "https://t1kh0n.github.io"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "МеталлПром39",
+    "url": "https://t1kh0n.github.io",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://t1kh0n.github.io/og/default-1x1.webp",
+      "width": 600,
+      "height": 600
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://t1kh0n.github.io/stati/vybor-stali-dlya-chpu-obrabotki/"
+  },
+  "about": "Материаловедение",
+  "keywords": "Материаловедение, Стали ГОСТ, ЧПУ точение, Фрезерование, Режимы резания",
+  "dependencies": "ГОСТ 1050-2013, ГОСТ 4543-2016, ГОСТ 19281-2014, ГОСТ 5632-2014, ГОСТ 4784-2019",
+  "proficiencyLevel": "Expert"
+}</script><!----><!--]--><!----><!--1jovwxm--><!----><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Главная",
+      "item": "https://t1kh0n.github.io/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "База знаний",
+      "item": "https://t1kh0n.github.io/stati//"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Выбор сталей для ЧПУ",
+      "item": "https://t1kh0n.github.io/stati/vybor-stali-dlya-chpu-obrabotki//"
+    }
+  ]
+}</script><!----><!----><title>Выбор сталей и сплавов для ЧПУ обработки в Калининграде | МеталлПром39 | МеталлПром39</title>
+		<link href="../../_app/immutable/assets/0.CF2fTjPd.css" rel="stylesheet">
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents"><!--[--><!--[--><!--[0--><!--[--><div class="flex min-h-screen flex-col bg-[var(--color-paper)] text-[var(--color-ink)] antialiased selection:bg-[color-mix(in_oklab,var(--color-accent)_30%,transparent)]"><div class="hidden" aria-hidden="true"><time datetime="2026-11-13">13 ноября 2026</time> <span class="author">Инженерно-технологический отдел МеталлПром39</span></div> <!--[-1--><!--]--><!----> <header class="sticky top-0 z-40 border-b border-[var(--color-rule)] bg-[var(--color-paper)]/95 backdrop-blur-md"><div class="mx-auto flex max-w-7xl items-center justify-between gap-1.5 px-3 py-2 sm:gap-4 sm:px-6 sm:py-2.5 lg:px-8"><a href="/" class="group flex shrink-0 items-center"><span class="sm:hidden inline-flex"><div class="flex items-center gap-2.5 sm:gap-3 select-none"><div class="relative flex shrink-0 items-center justify-center rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] p-1 text-[var(--color-accent)] shadow-sm transition-transform hover:scale-105 h-8 w-8"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full w-full" aria-hidden="true"><circle cx="18" cy="18" r="15.5" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2" class="opacity-60"></circle><circle cx="18" cy="18" r="12" stroke="var(--color-ink)" stroke-width="0.75" class="opacity-40"></circle><line x1="18" y1="2" x2="18" y2="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line><line x1="18" y1="29" x2="18" y2="34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line><line x1="2" y1="18" x2="7" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line><line x1="29" y1="18" x2="34" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line><path d="M18 9L21.5 14.5L27 18L21.5 21.5L18 27L14.5 21.5L9 18L14.5 14.5L18 9Z" fill="currentColor" fill-opacity="0.15" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"></path><circle cx="18" cy="18" r="2.5" fill="var(--color-ink)"></circle><circle cx="18" cy="18" r="1" fill="var(--color-paper)"></circle></svg></div> <div class="min-w-0 flex flex-col justify-center"><div class="flex items-baseline gap-1.5 leading-none"><span class="font-light tracking-tight text-[var(--color-ink)] text-base">МеталлПром39</span> <span class="rounded bg-[var(--color-accent)]/15 px-1 py-0.2 font-mono text-[10px] text-[var(--color-accent)]">ЧПУ</span></div> <!--[-1--><!--]--></div></div><!----></span> <span class="hidden sm:inline-flex"><div class="flex items-center gap-2.5 sm:gap-3 select-none"><div class="relative flex shrink-0 items-center justify-center rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] p-1 text-[var(--color-accent)] shadow-sm transition-transform hover:scale-105 h-9 w-9"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full w-full" aria-hidden="true"><circle cx="18" cy="18" r="15.5" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2" class="opacity-60"></circle><circle cx="18" cy="18" r="12" stroke="var(--color-ink)" stroke-width="0.75" class="opacity-40"></circle><line x1="18" y1="2" x2="18" y2="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line><line x1="18" y1="29" x2="18" y2="34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line><line x1="2" y1="18" x2="7" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line><line x1="29" y1="18" x2="34" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line><path d="M18 9L21.5 14.5L27 18L21.5 21.5L18 27L14.5 21.5L9 18L14.5 14.5L18 9Z" fill="currentColor" fill-opacity="0.15" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"></path><circle cx="18" cy="18" r="2.5" fill="var(--color-ink)"></circle><circle cx="18" cy="18" r="1" fill="var(--color-paper)"></circle></svg></div> <div class="min-w-0 flex flex-col justify-center"><div class="flex items-baseline gap-1.5 leading-none"><span class="font-light tracking-tight text-[var(--color-ink)] text-lg">МеталлПром39</span> <span class="rounded bg-[var(--color-accent)]/15 px-1 py-0.2 font-mono text-[10px] text-[var(--color-accent)]">ЧПУ</span></div> <!--[0--><div class="mt-1 hidden sm:block font-mono text-[9.5px] uppercase tracking-wider text-[var(--color-muted)]">Металлообработка · Калининград</div><!--]--></div></div><!----></span></a> <div class="flex items-center gap-1.5 sm:gap-3 lg:gap-5"><nav class="hidden items-center gap-3.5 lg:flex xl:gap-4" aria-label="Основная навигация"><!--[--><a href="/tokarnye-raboty-chpu/" class="text-xs whitespace-nowrap text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]">Токарная</a><a href="/frezernye-raboty-chpu/" class="text-xs whitespace-nowrap text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]">Фрезерная</a><a href="/zuboreznye-i-shlifovalnye-raboty/" class="text-xs whitespace-nowrap text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]">Зуборезка</a><a href="/kalkulyator-stoimosti-chpu/" class="text-xs whitespace-nowrap text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]">Калькулятор</a><a href="/portfolio/" class="text-xs whitespace-nowrap text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]">Портфолио</a><a href="/kontrol-kachestva-i-oborudovanie/" class="text-xs whitespace-nowrap text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]">ОТК и станки</a><a href="/stati/" class="text-xs whitespace-nowrap text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]">Статьи</a><!--]--></nav>  <button type="button" data-nosnippet="" class="hidden sm:inline-flex items-center gap-1.5 rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] px-2.5 py-1.5 text-xs text-[var(--color-ink)] transition-colors hover:border-[var(--color-accent)] hover:text-white" aria-label="Включить версию для слабовидящих" title="Версия для слабовидящих (ГОСТ Р 52872-2019)"><svg class="h-4 w-4 text-[var(--color-accent)] a11y-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> <span class="hidden md:inline text-[11px] font-normal">Слабовидящим</span></button> <a href="/kalkulyator-stoimosti-chpu/" data-nosnippet="" class="btn btn--sm btn--line !hidden shrink-0 xl:!inline-flex"><span>Калькулятор ЧПУ</span></a> <button type="button" data-nosnippet="" class="flex sm:hidden h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-card)] border border-[var(--color-rule)] text-[var(--color-ink-2)] transition-colors hover:text-white" aria-label="Версия для слабовидящих" title="Версия для слабовидящих (ГОСТ Р 52872-2019)"><svg class="h-4.5 w-4.5 text-[var(--color-accent)] a11y-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button> <button type="button" data-nosnippet="" class="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-[var(--radius-card)] border border-[var(--color-rule)] text-[var(--color-ink-2)] transition-colors hover:text-white lg:hidden" aria-expanded="false" aria-label="Переключить меню"><!--[-1--><span class="text-base font-light">☰</span><!--]--></button></div></div> <!--[-1--><!--]--></header><!----> <div class="flex-1"><!--[--><!--[-1--><!--[--><main class="py-10"><div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><nav aria-label="Хлебные крошки" class="mb-6"><ol class="flex flex-wrap items-center gap-2 text-xs text-[var(--color-muted)]"><!--[--><!--[-1--><!--]--> <li><!--[-1--><a href="/" class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]">Главная</a><!--]--></li><!--[0--><li class="text-[var(--color-rule-2)] select-none" aria-hidden="true">→</li><!--]--> <li><!--[-1--><a href="/stati/" class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]">База знаний</a><!--]--></li><!--[0--><li class="text-[var(--color-rule-2)] select-none" aria-hidden="true">→</li><!--]--> <li><!--[0--><span class="font-normal text-[var(--color-ink)]" aria-current="page">Выбор сталей для ЧПУ</span><!--]--></li><!--]--></ol></nav><!----> <!--[0--><article class="mx-auto max-w-4xl"><header class="border-b border-[var(--color-rule)] pb-8"><div class="flex flex-wrap items-center gap-3 text-xs text-[var(--color-muted)]"><span class="rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] px-2 py-0.5 text-[var(--color-ink-2)]">Материаловедение</span> <span>Опубликовано: 2026-10-25</span> <span class="text-[var(--color-accent)] font-mono">Инженерно-технологический отдел МеталлПром39</span> <span class="rounded bg-[var(--color-paper-2)] px-2 py-0.5 font-mono text-[11px] text-[var(--color-ink-2)]">⏱ 7 мин чтения</span></div> <h1 class="mt-4 text-2xl text-[var(--color-ink)] sm:text-3xl lg:text-4xl">Выбор сталей для ЧПУ обработки</h1> <p class="lead mt-4 text-sm leading-relaxed sm:text-base">Сравнительный технологический анализ обрабатываемости ключевых марок сталей. Коэффициенты обрабатываемости Kmat, влияние легирования на стойкость инструмента и себестоимость нормо-часа.</p> <!--[0--><div class="mt-6 flex flex-wrap gap-2 pt-2 border-t border-[var(--color-rule)]"><span class="text-xs text-[var(--color-muted)] self-center">Теги статьи:</span> <!--[--><a href="/stati/?tag=%D0%9C%D0%B0%D1%82%D0%B5%D1%80%D0%B8%D0%B0%D0%BB%D0%BE%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5" class="rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper)] px-2 py-0.5 text-xs text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-ink)]">#Материаловедение</a><a href="/stati/?tag=%D0%A1%D1%82%D0%B0%D0%BB%D0%B8%20%D0%93%D0%9E%D0%A1%D0%A2" class="rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper)] px-2 py-0.5 text-xs text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-ink)]">#Стали ГОСТ</a><a href="/stati/?tag=%D0%A7%D0%9F%D0%A3%20%D1%82%D0%BE%D1%87%D0%B5%D0%BD%D0%B8%D0%B5" class="rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper)] px-2 py-0.5 text-xs text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-ink)]">#ЧПУ точение</a><a href="/stati/?tag=%D0%A4%D1%80%D0%B5%D0%B7%D0%B5%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" class="rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper)] px-2 py-0.5 text-xs text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-ink)]">#Фрезерование</a><a href="/stati/?tag=%D0%A0%D0%B5%D0%B6%D0%B8%D0%BC%D1%8B%20%D1%80%D0%B5%D0%B7%D0%B0%D0%BD%D0%B8%D1%8F" class="rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper)] px-2 py-0.5 text-xs text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-ink)]">#Режимы резания</a><!--]--></div><!--]--></header> <div class="mt-8 article-prose"><!----><p>Выбор конструкционного материала определяет до 60% технологической себестоимости детали при механической обработке на станках с числовым программным управлением (ЧПУ). Необоснованное назначение труднообрабатываемой или высоколегированной марки приводит к лавинообразному росту машинного времени, повышенному расходу дорогостоящих твердосплавных пластин и риску возникновения вибраций при снятии стружки.</p>
+<p>В данном руководстве технологи цеха приводят сравнительный анализ пяти наиболее востребованных сплавов в машиностроении и приборостроении Калининградской области: качественной углеродистой стали Ст45, легированной конструкционной стали 40Х, низколегированной кремнемарганцевой стали 09Г2С, аустенитной нержавеющей стали 12Х18Н10Т (AISI 321) и термоупрочненного дюралюминия Д16Т.</p>
+<hr>
+<h2>1. Сравнительная таблица технологических и физико-механических параметров</h2>
+<p>Коэффициент обрабатываемости <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mrow><mi>m</mi><mi>a</mi><mi>t</mi></mrow></msub></mrow><annotation encoding="application/x-tex">K_{mat}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ma</span><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> показывает относительное изменение трудоемкости обработки по сравнению с эталонной сталью Ст45 в нормализованном состоянии (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mrow><mi>m</mi><mi>a</mi><mi>t</mi></mrow></msub><mo>=</mo><mn>1.00</mn></mrow><annotation encoding="application/x-tex">K_{mat} = 1.00</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ma</span><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1.00</span></span></span></span>). Значения выше единицы означают пропорциональное снижение скорости резания <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">V_c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.2222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> и увеличение машинного времени на станках с ЧПУ.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Марка сплава</th>
+<th align="left">Стандарт (ГОСТ / ISO)</th>
+<th align="left">Плотность <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ρ</mi></mrow><annotation encoding="application/x-tex">\rho</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">ρ</span></span></span></span>, г/см³</th>
+<th align="left">Твердость в состоянии поставки</th>
+<th align="left">Коэффициент <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mrow><mi>m</mi><mi>a</mi><mi>t</mi></mrow></msub></mrow><annotation encoding="application/x-tex">K_{mat}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ma</span><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></th>
+<th align="left">Скорость резания <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">V_c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.2222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, м/мин</th>
+<th align="left">Рекомендуемое назначение в изделиях</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Сталь 45</strong></td>
+<td align="left">ГОСТ 1050-2013</td>
+<td align="left">7.85</td>
+<td align="left">170 – 210 HB</td>
+<td align="left"><strong>1.00</strong> (база)</td>
+<td align="left">180 – 240</td>
+<td align="left">Валы, оси, фланцы, ступицы, зубчатые венцы</td>
+</tr>
+<tr>
+<td align="left"><strong>Сталь 40Х</strong></td>
+<td align="left">ГОСТ 4543-2016</td>
+<td align="left">7.85</td>
+<td align="left">187 – 229 HB</td>
+<td align="left"><strong>1.15</strong></td>
+<td align="left">140 – 190</td>
+<td align="left">Нагруженные вал-шестерни, штоки гидроцилиндров, шлицевые валы</td>
+</tr>
+<tr>
+<td align="left"><strong>09Г2С</strong></td>
+<td align="left">ГОСТ 19281-2014</td>
+<td align="left">7.85</td>
+<td align="left">140 – 170 HB</td>
+<td align="left"><strong>1.10</strong></td>
+<td align="left">160 – 210</td>
+<td align="left">Сварные фланцы, переходники, фитинги, детали криогенной и климатической техники</td>
+</tr>
+<tr>
+<td align="left"><strong>12Х18Н10Т</strong></td>
+<td align="left">ГОСТ 5632-2014</td>
+<td align="left">7.90</td>
+<td align="left">160 – 200 HB</td>
+<td align="left"><strong>1.45</strong></td>
+<td align="left">70 – 120</td>
+<td align="left">Промышленная арматура, детали химических и пищевых производств, штуцеры</td>
+</tr>
+<tr>
+<td align="left"><strong>Д16Т</strong></td>
+<td align="left">ГОСТ 4784-2019</td>
+<td align="left">2.78</td>
+<td align="left">105 – 120 HB</td>
+<td align="left"><strong>0.85</strong></td>
+<td align="left">350 – 700</td>
+<td align="left">Облегченные корпусные детали, кронштейны, приборные панели, рычаги</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>2. Углеродистая качественная сталь 45: базовый эталон цеховой эффективности</h2>
+<p>Сталь 45 относится к группе среднеуглеродистых сталей (содержание углерода 0.42–0.50%). В силу оптимального баланса прочности (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>σ</mi><mi>B</mi></msub><mo>≥</mo><mn>600</mn></mrow><annotation encoding="application/x-tex">\sigma_B \ge 600</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.786em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0502em;">B</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">600</span></span></span></span> МПа) и вязкости она является наиболее распространенным материалом для <a href="/tokarnye-raboty-chpu/">токарной и фрезерной обработки</a>.</p>
+<h3>Технологические особенности резания:</h3>
+<ol>
+<li><strong>Формирование стружки:</strong> При скоростях резания свыше 180 м/мин образуется устойчивая суставчатая стружка, легко фрагментируемая стружколомами современных твердосплавных пластин геометрий PM и MP.</li>
+<li><strong>Стойкость инструмента:</strong> Достигает 45–60 минут непрерывного резания без признаков пластической деформации режущей кромки.</li>
+<li><strong>Финишная чистота:</strong> На чистовых проходах пластинами с радиусом скругления <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mi>ϵ</mi></msub><mo>=</mo><mn>0.4</mn></mrow><annotation encoding="application/x-tex">r_\epsilon = 0.4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">ϵ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0.4</span></span></span></span> мм при подаче <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>n</mi></msub><mo>=</mo><mn>0.08</mn></mrow><annotation encoding="application/x-tex">f_n = 0.08</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1076em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0.08</span></span></span></span> мм/об стабильно обеспечивается шероховатость <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mi>a</mi><mo>=</mo><mn>1.25</mn></mrow><annotation encoding="application/x-tex">Ra = 1.25</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1.25</span></span></span></span>–<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2.5</mn></mrow><annotation encoding="application/x-tex">2.5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">2.5</span></span></span></span> мкм, что в связке с оптическими линейками позволяет выдерживать <a href="/stati/kvalitety-tochnosti-i-sherohovatost-gost/">квалитет точности IT7</a>.</li>
+</ol>
+<hr>
+<h2>3. Конструкционная легированная сталь 40Х: высокая нагрузочная способность</h2>
+<p>Легирование хромом (0.8–1.1%) повышает прокаливаемость стали и ее сопротивление контактно-усталостным нагрузкам. Это ключевой материал для изготовления цилиндрических шестерен на <a href="/zuboreznye-i-shlifovalnye-raboty/">зуборезном участке</a>, шлицевых соединений и тяжелонагруженных валов оборудования.</p>
+<h3>Практика механической обработки:</h3>
+<ul>
+<li><strong>Состояние проката:</strong> Горячекатаный пруток без предварительного смягчающего отжига имеет локальные участки с повышенной микротвердостью, что может вызывать микровыкрашивание твердого сплава при первом черновом проходе по корке.</li>
+<li><strong>Зубонарезание:</strong> При нарезании зубьев модульными дисковыми или червячными фрезами сталь 40Х обеспечивает ровную геометрию боковых поверхностей зубьев без задиров и наплывов.</li>
+<li><strong>Точность размеров:</strong> Высокая жесткость и стабильность кристаллической решетки позволяют уверенно удерживать квалитет точности <strong>IT7</strong> при чистовом точении и расточке. Подробнее об особенностях назначения допусков читайте в руководстве по <a href="/stati/kvalitety-tochnosti-i-sherohovatost-gost/">квалитетам точности IT7–IT12</a>.</li>
+</ul>
+<hr>
+<h2>4. Конструкционная низколегированная сталь 09Г2С: пластичность и хладостойкость</h2>
+<p>Марганцево-кремнистая сталь 09Г2С применяется для ответственных деталей, эксплуатируемых при температурах от -70 °С до +425 °С, а также для узлов с последующей приваркой фланцев и патрубков.</p>
+<h3>Нюансы стружкообразования:</h3>
+<p>Из-за высокой вязкости сталь склонна к образованию длинной сливной стружки, которая при недостаточной подаче СОЖ может наматываться на вращающуюся заготовку или револьверную головку токарного центра. Для стабильного дробления стружки технологи программируют ступенчатое врезание и используют инструмент с агрессивной геометрией стружколомов для низкоуглеродистых сталей. Правильное назначение баз для 09Г2С описано в <a href="/stati/optimizaciya-stoimosti-detaley-chpu/">руководстве по DFM-оптимизации</a>.</p>
+<hr>
+<h2>5. Аустенитная коррозионно-стойкая сталь 12Х18Н10Т: победа над деформационным упрочнением</h2>
+<p>Нержавеющая титансодержащая сталь 12Х18Н10Т обладает исключительной стойкостью к агрессивным средам, однако в механической обработке она относится к категории материалов повышенной сложности (группа ISO M).</p>
+<h3>Главные технологические риски и пути их устранения:</h3>
+<ol>
+<li><strong>Деформационный наклеп:</strong> При малейшем трении затупленной кромки инструмента без съема металла твердость поверхностного слоя мгновенно возрастает до 380–420 HB. Повторный проход по наклепанному слою приводит к катастрофическому износу резца. Решение: глубина резания <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>p</mi></msub></mrow><annotation encoding="application/x-tex">a_p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7167em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span> на всех переходах должна превышать толщину наклепанного слоя (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>p</mi></msub><mo>≥</mo><mn>0.5</mn></mrow><annotation encoding="application/x-tex">a_p \ge 0.5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.9221em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0.5</span></span></span></span> мм), а подача на зуб <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>z</mi></msub></mrow><annotation encoding="application/x-tex">f_z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1076em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.044em;">z</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> не должна опускаться ниже 0.06 мм.</li>
+<li><strong>Низкая теплопроводность:</strong> Теплопроводность стали 12Х18Н10Т в три раза ниже, чем у стали 45. До 80% тепла концентрируется в зоне резания. В цехе МеталлПром39 обработка нержавеющих сплавов ведется исключительно с непрерывной подачей синтетической водосмешиваемой СОЖ под давлением через шпиндель.</li>
+</ol>
+<hr>
+<h2>6. Дюралюминий Д16Т: высокоскоростное фрезерование</h2>
+<p>Сплав Д16Т в закаленном и естественно состаренном состоянии демонстрирует идеальную обрабатываемость на <a href="/frezernye-raboty-chpu/">вертикальных фрезерных центрах с ЧПУ</a>. </p>
+<h3>Преимущества технологии:</h3>
+<ul>
+<li>Скорость резания <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">V_c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.2222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> достигает 500–800 м/мин при подачах до 2500 мм/мин.</li>
+<li>Минимальное усилие резания снижает упругий отжим тонких стенок и перемычек при обработке радиоэлектронных корпусов и кронштейнов.</li>
+<li>Для предотвращения адгезионного схватывания и налипания стружки используются полированные фрезы со специальным алмазоподобным покрытием (DLC) или микрозернистый твердый сплав без покрытия с углом подъема стружечной канавки 45°.</li>
+</ul>
+<hr>
+<h2>7. Резюме для инженера-конструктора</h2>
+<ol>
+<li>Если к детали не предъявляются специальные требования по агрессивным средам или закалке в масле — закладывайте <strong>Сталь 45</strong>. Это минимизирует расчетную стоимость нормо-часа.</li>
+<li>Для тяжелонагруженных шестерен и валов выбирайте <strong>40Х</strong>.</li>
+<li>Для сварных узлов и металлоконструкций наружного размещения приоритет отдавайте <strong>09Г2С</strong>.</li>
+<li>Применение нержавеющей стали <strong>12Х18Н10Т</strong> обосновано исключительно химической или биологической стойкостью среды.</li>
+<li>Для корпусных деталей сложной выборки с карманами и тонкими стенками оптимален <strong>Д16Т</strong>.</li>
+<li>Точную стоимость детали из выбранного материала с учетом нормо-часа и серийной скидки вы можете рассчитать прямо сейчас в нашем <a href="/kalkulyator-stoimosti-chpu/">онлайн-калькуляторе стоимости ЧПУ</a>.</li>
+</ol>
+<!----></div> <!--[0--><div class="mt-12 rounded-[var(--radius-card)] border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] p-6 sm:p-8"><div class="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[var(--color-accent)]"><span>Производственные услуги МеталлПром39</span></div> <h3 class="mt-2 text-lg font-normal text-[var(--color-ink)]">Изготовление деталей из рассмотренных сталей и сплавов</h3> <p class="mt-1 text-xs text-[var(--color-muted)]">Собственный станочный парк из 2 обрабатывающих центров ЧПУ. Минимальный заказ от 5 000 ₽ с НДС 22%.</p> <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3"><!--[--><a href="/tokarnye-raboty-chpu/" class="flex flex-col justify-between rounded border border-[var(--color-rule)] bg-[var(--color-paper)] p-3 text-xs transition-colors hover:border-[var(--color-accent)]"><span class="font-medium text-[var(--color-ink)]">Токарные работы с ЧПУ в Калининграде</span> <span class="mt-2 text-[11px] text-[var(--color-accent)]">→ Подробнее</span></a><a href="/frezernye-raboty-chpu/" class="flex flex-col justify-between rounded border border-[var(--color-rule)] bg-[var(--color-paper)] p-3 text-xs transition-colors hover:border-[var(--color-accent)]"><span class="font-medium text-[var(--color-ink)]">Фрезерная 3-осевая ЧПУ обработка</span> <span class="mt-2 text-[11px] text-[var(--color-accent)]">→ Подробнее</span></a><a href="/kalkulyator-stoimosti-chpu/" class="flex flex-col justify-between rounded border border-[var(--color-rule)] bg-[var(--color-paper)] p-3 text-xs transition-colors hover:border-[var(--color-accent)]"><span class="font-medium text-[var(--color-ink)]">Инженерный онлайн-калькулятор стоимости партии</span> <span class="mt-2 text-[11px] text-[var(--color-accent)]">→ Подробнее</span></a><!--]--></div></div><!--]--> <!--[0--><div class="mt-8 border-t border-[var(--color-rule)] pt-8"><h3 class="text-lg font-normal text-[var(--color-ink)]">Связанные технологические статьи</h3> <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2"><!--[--><div class="well flex flex-col justify-between p-4"><div><span class="text-[10px] uppercase font-mono text-[var(--color-accent)]">Метрология и стандарты</span> <h4 class="mt-1 text-sm font-normal text-[var(--color-ink)]"><a href="/stati/kvalitety-tochnosti-i-sherohovatost-gost/" class="hover:underline">Квалитеты точности IT7–IT12 и шероховатость поверхности Ra по ГОСТ в контрактном производстве ЧПУ</a></h4> <p class="mt-2 text-xs text-[var(--color-muted)] line-clamp-2">Инженерное руководство по допускам ГОСТ 25346 и шероховатости. Расчет допуска и получение квалитета IT7 на станках с ЧПУ без наценок.</p></div> <div class="mt-4 flex items-center justify-between text-xs border-t border-[var(--color-rule)] pt-2"><a href="/stati/kvalitety-tochnosti-i-sherohovatost-gost/" class="text-[var(--color-ink-2)] hover:text-white">Читать разбор →</a> <span class="text-[10px] text-[var(--color-muted)]">6 мин</span></div></div><div class="well flex flex-col justify-between p-4"><div><span class="text-[10px] uppercase font-mono text-[var(--color-accent)]">DFM и проектирование</span> <h4 class="mt-1 text-sm font-normal text-[var(--color-ink)]"><a href="/stati/optimizaciya-stoimosti-detaley-chpu/" class="hover:underline">DFM-оптимизация: как снизить себестоимость фрезерованных и токарных деталей ЧПУ на 25–40%</a></h4> <p class="mt-2 text-xs text-[var(--color-muted)] line-clamp-2">Практические правила технологичности (DFM) для конструкторов: радиусы углов, глубина резьб, стенки и базы для снижения цены деталей на 25–40%.</p></div> <div class="mt-4 flex items-center justify-between text-xs border-t border-[var(--color-rule)] pt-2"><a href="/stati/optimizaciya-stoimosti-detaley-chpu/" class="text-[var(--color-ink-2)] hover:text-white">Читать разбор →</a> <span class="text-[10px] text-[var(--color-muted)]">8 мин</span></div></div><!--]--></div></div><!--]--> <div class="mt-12 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-6 text-center sm:p-8"><h2 class="text-lg font-normal text-[var(--color-ink)] sm:text-xl">Нужен расчет стоимости партии из выбранной стали?</h2> <p class="mt-2 text-xs text-[var(--color-muted)]">Используйте наш онлайн-калькулятор с учетом точных коэффициентов обрабатываемости материалов.</p> <div class="mt-6 flex flex-wrap justify-center gap-4"><a href="/kalkulyator-stoimosti-chpu/" class="btn btn--sm">Перейти в калькулятор ЧПУ</a> <a href="/stati/" class="btn btn--sm btn--line">Все статьи базы знаний</a></div></div></article><!--]--></div></main><!--]--><!--]--><!--]--><!----></div> <footer class="border-t border-[var(--color-rule)] bg-[var(--color-paper)] text-[var(--color-ink-2)]"><div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8"><div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4"><div class="space-y-4"><a href="/" class="inline-block"><div class="flex items-center gap-2.5 sm:gap-3 select-none"><div class="relative flex shrink-0 items-center justify-center rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] p-1 text-[var(--color-accent)] shadow-sm transition-transform hover:scale-105 h-8 w-8"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full w-full" aria-hidden="true"><circle cx="18" cy="18" r="15.5" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2" class="opacity-60"></circle><circle cx="18" cy="18" r="12" stroke="var(--color-ink)" stroke-width="0.75" class="opacity-40"></circle><line x1="18" y1="2" x2="18" y2="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line><line x1="18" y1="29" x2="18" y2="34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line><line x1="2" y1="18" x2="7" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line><line x1="29" y1="18" x2="34" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line><path d="M18 9L21.5 14.5L27 18L21.5 21.5L18 27L14.5 21.5L9 18L14.5 14.5L18 9Z" fill="currentColor" fill-opacity="0.15" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"></path><circle cx="18" cy="18" r="2.5" fill="var(--color-ink)"></circle><circle cx="18" cy="18" r="1" fill="var(--color-paper)"></circle></svg></div> <div class="min-w-0 flex flex-col justify-center"><div class="flex items-baseline gap-1.5 leading-none"><span class="font-light tracking-tight text-[var(--color-ink)] text-base">МеталлПром39</span> <span class="rounded bg-[var(--color-accent)]/15 px-1 py-0.2 font-mono text-[10px] text-[var(--color-accent)]">ЧПУ</span></div> <!--[-1--><!--]--></div></div><!----></a> <p class="text-xs leading-relaxed text-[var(--color-muted)]">Специализированный участок механообработки: 2 обрабатывающих центра с ЧПУ в Калининградской
+					области. Изготовление деталей по чертежам заказчика для
+					машиностроения, приборостроения и промышленного оборудования. Доставка готовых изделий по всей Калининградской области.</p> <div class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-3 text-xs"><div class="font-normal text-[var(--color-ink)]">Режим работы производства:</div> <div class="mt-1 font-mono text-[var(--color-muted)]">Пн–Пт: 08:00 – 20:00 (2 смены)</div> <div class="mt-1 font-mono text-[var(--color-muted)]">Сб: 09:00 – 16:00 (дежурный технолог)</div></div></div> <div><h3 class="text-xs font-normal text-[var(--color-ink)]">Услуги механообработки</h3> <ul class="mt-4 space-y-2.5 text-xs"><li><a href="/tokarnye-raboty-chpu/" class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]">Токарные работы с ЧПУ (до ⌀200 мм)</a></li> <li><a href="/frezernye-raboty-chpu/" class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]">Фрезерная ЧПУ обработка (3 оси)</a></li> <li><a href="/zuboreznye-i-shlifovalnye-raboty/" class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]">Зубонарезные работы</a></li> <li><a href="/kalkulyator-stoimosti-chpu/" class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]">Онлайн-калькулятор стоимости</a></li></ul></div> <div><h3 class="text-xs font-normal text-[var(--color-ink)]">Инженерия и стандарты</h3> <ul class="mt-4 space-y-2.5 text-xs"><li><a href="/kontrol-kachestva-i-oborudovanie/" class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]">Контроль ОТК и станочный парк (2 центра)</a></li> <li><a href="/portfolio/" class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]">Портфолио изготовленных деталей</a></li> <li><a href="/stati/" class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]">Инженерная база знаний и статьи</a></li> <li><a href="/stati/vybor-stali-dlya-chpu-obrabotki/" class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]">Справочник сталей (Ст45, 40Х, Д16Т)</a></li> <li><a href="/stati/kvalitety-tochnosti-i-sherohovatost-gost/" class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]">Таблицы допусков IT7–IT12 и Ra</a></li> <li><a href="/stati/optimizaciya-stoimosti-detaley-chpu/" class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]">Правила снижения цены ЧПУ (DFM)</a></li></ul></div> <div><h3 class="text-xs font-normal text-[var(--color-ink)]">Расчет стоимости</h3> <div class="mt-4 space-y-3 text-xs"><p class="leading-relaxed text-[var(--color-muted)]">Используйте интерактивный калькулятор для оценки себестоимости и времени обработки по чертежам и 3D-моделям (STEP).</p> <a href="/kalkulyator-stoimosti-chpu/" class="btn btn--sm btn--wide"><span>Открыть калькулятор</span></a> <div class="border-t border-[var(--color-rule)] pt-3 text-xs text-[var(--color-muted)]"><div>Безналичный расчет с НДС 22% / УСН</div> <div>Оплата для физических лиц</div></div></div></div></div> <div class="mt-10 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-4 text-xs leading-relaxed text-[var(--color-muted)]"><div class="mb-3 flex flex-wrap items-center justify-between gap-2 border-b border-[var(--color-rule)] pb-2 text-[11px]"><span class="font-normal text-[var(--color-ink)]">ИП МеталлПром39</span> <span class="num text-[var(--color-ink-2)]">ИНН: 3906999990 · КПП: 390601001 · ОГРН: 1233900000000</span> <span>Калининградская область, Калининград</span></div> <p><strong class="font-normal text-[var(--color-ink-2)]">Правовое уведомление (152-ФЗ, 149-ФЗ и ст. 437 ГК РФ):</strong> Веб-сайт МеталлПром39 носит информационно-расчетный характер и не осуществляет сбор, систематизацию
+				или хранение персональных данных пользователей в общедоступных формах. Расчеты онлайн-калькулятора носят предварительный характер.
+				Условия оказания производственных услуг регламентируются <a href="/oferta/" class="text-[var(--color-ink)] underline hover:text-[var(--color-accent)]">Публичной офертой</a>. <!--[-1-->Обработка технических идентификаторов регламентируется<!--]--> <a href="/politika-cookie/" class="text-[var(--color-ink)] underline hover:text-[var(--color-accent)]">Политикой cookie</a>.</p></div> <div class="mt-8 flex flex-col items-center justify-between border-t border-[var(--color-rule)] pt-6 text-xs text-[var(--color-muted)] sm:flex-row"><div>© 2026
+				МеталлПром39. 2 обрабатывающих центра с ЧПУ в Калининграде. Доставка по всей области.</div> <div class="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs sm:mt-0"><a href="/oferta/" class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]">Публичная оферта</a> <a href="/politika-konfidentsialnosti/" class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]">Политика конфиденциальности</a> <a href="/politika-cookie/" class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]">Политика cookie</a> <button type="button" class="cursor-pointer text-[var(--color-muted)] underline transition-colors hover:text-[var(--color-ink)]">Настройки cookie</button> <a href="/sitemap/" class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]">Карта сайта</a></div></div></div></footer><!----> <!--[-1--><!--]--><!----></div><!--]--><!--]--><!--]--><!----> <!--[-1--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_kjf8vv = {
+						base: new URL("../..", location).pathname.slice(0, -1),
+						version: "1795028624394"
+					};
+
+					const element = document.currentScript.parentElement;
+
+					import("../../_app/immutable/entry/start.D-bccD2h.js").then(async (kit) => {
+						kit.init(__sveltekit_kjf8vv);
+						const app = await import("../../_app/immutable/entry/app.Dk79QlJN.js");
+						kit.start(app, element, {
+							node_ids: [0, 19],
+							data: [null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>

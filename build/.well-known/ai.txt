@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /ai/summary.json
+Allow: /ai/faq.json
+Allow: /ai/service.json
+
+Summary: https://t1kh0n.github.io/ai/summary.json
+FAQ: https://t1kh0n.github.io/ai/faq.json
+Services: https://t1kh0n.github.io/ai/service.json
+Context: https://t1kh0n.github.io/llms.txt

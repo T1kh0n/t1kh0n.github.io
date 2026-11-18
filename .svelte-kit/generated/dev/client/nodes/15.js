@@ -1,0 +1,1 @@
+export { default as component } from "../../../../../src/routes/stati/izgotovlenie-zubchatykh-koles-gost/+page.svelte";
