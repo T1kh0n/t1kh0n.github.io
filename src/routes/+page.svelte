@@ -322,6 +322,109 @@
 		<CostCalculator />
 	</section>
 
+	<!-- Knowledge Base Showcase Section (Direct Links for Fast Crawling) -->
+	<section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Инженерная база знаний">
+		<div class="flex items-end justify-between border-b border-[var(--color-rule)] pb-4">
+			<div>
+				<div class="font-mono text-xs tracking-wider uppercase text-[var(--color-muted)]">
+					Инженерная база знаний
+				</div>
+				<h2 class="mt-2 text-2xl text-[var(--color-ink)] sm:text-3xl">
+					Регламенты механообработки, стандарты ГОСТ и DFM
+				</h2>
+			</div>
+			<a href="{base}/stati/" class="hidden sm:inline-flex items-center gap-1 font-mono text-xs text-[var(--color-accent)] hover:underline">
+				Все статьи →
+			</a>
+		</div>
+
+		<div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+			<a
+				href="{base}/stati/trebovaniya-k-chertezham-i-3d-modelyam-dlya-chpu/"
+				class="panel group p-5 transition-colors hover:border-[var(--color-rule-2)]"
+			>
+				<span class="font-mono text-[10px] uppercase text-[var(--color-accent)]">ЕСКД и 3D-модели</span>
+				<h3 class="mt-2 text-base text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors">
+					Требования к чертежам и STEP-моделям для ЧПУ
+				</h3>
+				<p class="mt-2 text-xs text-[var(--color-muted)] line-clamp-3">
+					Форматы STEP AP214 и Parasolid, базы базирования по ГОСТ 2.307, сбеги резьбы и устранение ошибок R0.
+				</p>
+			</a>
+
+			<a
+				href="{base}/stati/normo-chas-chpu-i-raschet-stoimosti-metalloobrabotki/"
+				class="panel group p-5 transition-colors hover:border-[var(--color-rule-2)]"
+			>
+				<span class="font-mono text-[10px] uppercase text-[var(--color-accent)]">Экономика ЧПУ</span>
+				<h3 class="mt-2 text-base text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors">
+					Нормо-час ЧПУ: себестоимость и расчет сметы
+				</h3>
+				<p class="mt-2 text-xs text-[var(--color-muted)] line-clamp-3">
+					Формула машиностроительной сметы, влияние серийности на цену за 1 шт. и способы экономии бюджета.
+				</p>
+			</a>
+
+			<a
+				href="{base}/stati/termicheskaya-obrabotka-staley-posle-chpu-zakalka-tvc/"
+				class="panel group p-5 transition-colors hover:border-[var(--color-rule-2)]"
+			>
+				<span class="font-mono text-[10px] uppercase text-[var(--color-accent)]">Материаловедение</span>
+				<h3 class="mt-2 text-base text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors">
+					Термообработка сталей: закалка, ТВЧ и поводки
+				</h3>
+				<p class="mt-2 text-xs text-[var(--color-muted)] line-clamp-3">
+					Сравнение объемной закалки, ТВЧ и цементации. Расчет припусков под шлифование деталей до 56 HRC.
+				</p>
+			</a>
+
+			<a
+				href="{base}/stati/kvalitety-tochnosti-i-sherohovatost-gost/"
+				class="panel group p-5 transition-colors hover:border-[var(--color-rule-2)]"
+			>
+				<span class="font-mono text-[10px] uppercase text-[var(--color-accent)]">Метрология</span>
+				<h3 class="mt-2 text-base text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors">
+					Квалитеты точности IT7–IT12 и шероховатость Ra
+				</h3>
+				<p class="mt-2 text-xs text-[var(--color-muted)] line-clamp-3">
+					Таблица допусков по ГОСТ 25346-2013, допуск IT7 без наценки и шероховатость Ra 1.25 на станках с ЧПУ.
+				</p>
+			</a>
+
+			<a
+				href="{base}/stati/vybor-stali-dlya-chpu-obrabotki/"
+				class="panel group p-5 transition-colors hover:border-[var(--color-rule-2)]"
+			>
+				<span class="font-mono text-[10px] uppercase text-[var(--color-accent)]">Справочник металлов</span>
+				<h3 class="mt-2 text-base text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors">
+					Выбор конструкционных сталей для ЧПУ
+				</h3>
+				<p class="mt-2 text-xs text-[var(--color-muted)] line-clamp-3">
+					Обрабатываемость резанием Стали 45, 40Х, 09Г2С, нержавеющей стали 12Х18Н10Т и сплава Д16Т.
+				</p>
+			</a>
+
+			<a
+				href="{base}/stati/optimizaciya-stoimosti-detaley-chpu/"
+				class="panel group p-5 transition-colors hover:border-[var(--color-rule-2)]"
+			>
+				<span class="font-mono text-[10px] uppercase text-[var(--color-accent)]">DFM Оптимизация</span>
+				<h3 class="mt-2 text-base text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors">
+					DFM-правила снижения себестоимости деталей
+				</h3>
+				<p class="mt-2 text-xs text-[var(--color-muted)] line-clamp-3">
+					10 практических рекомендаций для инженеров-конструкторов по снижению трудоемкости механообработки.
+				</p>
+			</a>
+		</div>
+
+		<div class="mt-6 text-center sm:hidden">
+			<a href="{base}/stati/" class="btn btn--wide text-xs">
+				Открыть базу знаний (все статьи)
+			</a>
+		</div>
+	</section>
+
 	<!-- FAQ Section with Schema.org Accordion -->
 	<section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Часто задаваемые вопросы">
 		<div class="border-b border-[var(--color-rule)] pb-4">

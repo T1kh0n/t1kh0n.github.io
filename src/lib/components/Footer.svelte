@@ -130,6 +130,30 @@
 							Правила снижения цены ЧПУ (DFM)
 						</a>
 					</li>
+					<li>
+						<a
+							href="{base}/stati/trebovaniya-k-chertezham-i-3d-modelyam-dlya-chpu/"
+							class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+						>
+							Требования к чертежам и STEP
+						</a>
+					</li>
+					<li>
+						<a
+							href="{base}/stati/normo-chas-chpu-i-raschet-stoimosti-metalloobrabotki/"
+							class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+						>
+							Нормо-час и расчет сметы ЧПУ
+						</a>
+					</li>
+					<li>
+						<a
+							href="{base}/stati/termicheskaya-obrabotka-staley-posle-chpu-zakalka-tvc/"
+							class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+						>
+							Термообработка: ТВЧ и закалка
+						</a>
+					</li>
 				</ul>
 			</div>
 
