@@ -57,8 +57,8 @@
 						<div class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-4">
 							<div class="text-[11px] font-mono uppercase text-[var(--color-muted)]">Прием чертежей и спецификаций</div>
 							<div class="mt-2 text-sm font-normal text-[var(--color-ink)]">
-								<a href="mailto:{siteConfig.contactEmail}" class="underline hover:text-[var(--color-accent)]">
-									{siteConfig.contactEmail}
+								<a href="mailto:{siteConfig.contactEmail || 'order@metalprom39.com'}" class="underline hover:text-[var(--color-accent)]">
+									{siteConfig.contactEmail || "order@metalprom39.com"}
 								</a>
 							</div>
 							<div class="mt-1 text-[11px] text-[var(--color-muted)]">Круглосуточный прием файлов (до 50 МБ)</div>
@@ -67,8 +67,8 @@
 						<div class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-4">
 							<div class="text-[11px] font-mono uppercase text-[var(--color-muted)]">Диспетчер цеха / Технолог</div>
 							<div class="mt-2 text-sm font-normal text-[var(--color-ink)]">
-								<a href="tel:{siteConfig.contactPhone}" class="underline hover:text-[var(--color-accent)]">
-									{siteConfig.contactPhone}
+								<a href="tel:{siteConfig.contactPhone || '+7 (4012) 00-00-00'}" class="underline hover:text-[var(--color-accent)]">
+									{siteConfig.contactPhone || "+7 (4012) 00-00-00"}
 								</a>
 							</div>
 							<div class="mt-1 text-[11px] text-[var(--color-muted)]">Пн–Пт с 08:00 до 18:00 (время местное)</div>
