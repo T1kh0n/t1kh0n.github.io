@@ -72,11 +72,6 @@ export function createOrganizationSchema(config: SiteConfig = siteConfig) {
 		image: `${config.siteDomain}/og/default.webp`,
 		email: config.contactEmail,
 		telephone: config.contactPhone,
-		author: {
-			'@type': 'Organization',
-			name: config.brandName,
-			url: config.siteDomain
-		},
 		address: {
 			'@type': 'PostalAddress',
 			streetAddress: config.addressStreet || undefined,
@@ -114,14 +109,6 @@ export function createWebSiteSchema(config: SiteConfig = siteConfig) {
 		dateModified: '2026-11-13T21:00:00+02:00',
 		publisher: {
 			'@id': `${config.siteDomain}/#organization`
-		},
-		potentialAction: {
-			'@type': 'SearchAction',
-			target: {
-				'@type': 'EntryPoint',
-				urlTemplate: `${config.siteDomain}/sitemap/?q={search_term_string}`
-			},
-			'query-input': 'required name=search_term_string'
 		}
 	};
 }
@@ -132,7 +119,7 @@ export function createWebSiteSchema(config: SiteConfig = siteConfig) {
 export function createLocalBusinessSchema(config: SiteConfig = siteConfig) {
 	return {
 		'@context': 'https://schema.org',
-		'@type': 'ManufacturingBusiness',
+		'@type': 'LocalBusiness',
 		'@id': `${config.siteDomain}/#localbusiness`,
 		name: config.brandName,
 		legalName: config.brandLegalName,

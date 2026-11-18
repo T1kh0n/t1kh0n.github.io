@@ -25,7 +25,7 @@ describe('Schema.org JSON-LD Generators', () => {
 	it('generates valid LocalBusiness / ManufacturingBusiness schema', () => {
 		const biz = createLocalBusinessSchema(DEFAULT_SITE_CONFIG);
 		expect(biz['@context']).toBe('https://schema.org');
-		expect(biz['@type']).toBe('ManufacturingBusiness');
+		expect(biz['@type']).toBe('LocalBusiness');
 		expect(biz.geo.latitude).toBe(54.7104);
 		expect(biz.geo.longitude).toBe(20.4522);
 		expect(biz.address.addressLocality).toBe('Калининград');

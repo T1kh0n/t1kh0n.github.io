@@ -38,7 +38,6 @@
 	<!-- Technical SEO & Crawling Directives -->
 	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 	<meta name="author" content="Цех контрактной металлообработки ЧПУ МеталлПром39" />
-	<meta property="article:modified_time" content="2026-11-13T21:00:00+02:00" />
 	<meta name="revised" content="2026-11-13T21:00:00+02:00" />
 	<meta property="og:locale" content="ru_RU" />
 	<meta property="og:site_name" content="МеталлПром39" />
