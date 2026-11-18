@@ -10,10 +10,10 @@
 </script>
 
 <svelte:head>
-	<title>Инженерный калькулятор стоимости ЧПУ онлайн | {siteConfig.brandName}</title>
+	<title>Калькулятор стоимости ЧПУ онлайн | {siteConfig.brandName}</title>
 	<meta
 		name="description"
-		content="Мгновенный расчет себестоимости токарной и фрезерной ЧПУ обработки в Калининграде. Загрузка 3D-моделей STEP/CAD, выбор сталей и цветмета, расчет партий от 1 шт. НДС 22%."
+		content="Расчет стоимости ЧПУ обработки онлайн: допуск IT7, скидки за серию до 40%, расчет с НДС 22%. Загрузка STEP/PDF и оценка точения и фрезерования в Калининграде."
 	/>
 	<link rel="canonical" href="{siteConfig.siteDomain}/kalkulyator-stoimosti-chpu/" />
 

@@ -54,7 +54,9 @@
 </script>
 
 {#if isVisible}
+	<!--noindex-->
 	<aside
+		data-nosnippet
 		class="fixed bottom-3 left-3 right-3 z-50 mx-auto max-w-4xl rounded-[var(--radius-card)] border border-[var(--color-rule-2)] bg-[var(--color-paper-2)]/98 p-4 shadow-2xl backdrop-blur-md sm:bottom-4 sm:left-4 sm:right-4 sm:p-5"
 		role="region"
 		aria-label="Уведомление об использовании cookie и веб-аналитики"
@@ -115,4 +117,5 @@
 			</div>
 		</div>
 	</aside>
+	<!--/noindex-->
 {/if}

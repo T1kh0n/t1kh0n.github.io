@@ -42,10 +42,10 @@
 </script>
 
 <svelte:head>
-	<title>МеталлПром39 — Металлообработка с ЧПУ в Калининграде: токарные и фрезерные работы</title>
+	<title>МеталлПром39 — Металлообработка ЧПУ в Калининграде</title>
 	<meta
 		name="description"
-		content="Металлообработка деталей на токарных и фрезерных станках с ЧПУ в Калининграде. Точность IT7, шероховатость до Ra 1.25. Доставка по всей Калининградской области. Безналичный расчет с НДС 22%."
+		content="Обработка по чертежам и STEP-моделям от 1 шт. до серий. Допуск IT7, шероховатость Ra 1.25, расчет с НДС 22%. Токарные и фрезерные работы ЧПУ в Калининграде."
 	/>
 	<link rel="canonical" href="{siteConfig.siteDomain}/" />
 
@@ -338,10 +338,10 @@
 				<details class="group py-4 select-none">
 					<summary class="flex cursor-pointer items-center justify-between gap-4 text-base font-normal text-[var(--color-ink)] transition-colors hover:text-[var(--color-accent)]">
 						<span class="flex items-center gap-3">
-							<span class="font-mono text-xs text-[var(--color-muted)]">0{i + 1}</span>
+							<span class="font-mono text-xs text-[var(--color-muted)]" aria-hidden="true">0{i + 1}</span>
 							<span>{faq.question}</span>
 						</span>
-						<span class="font-mono text-sm text-[var(--color-muted)] transition-transform group-open:rotate-45">
+						<span class="font-mono text-sm text-[var(--color-muted)] transition-transform group-open:rotate-45" aria-hidden="true">
 							+
 						</span>
 					</summary>

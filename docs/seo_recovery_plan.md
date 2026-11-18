@@ -49,20 +49,20 @@ This plan is structured into sequentially executable phases, tasks, and granular
 *Objective: Prevent search engines from compiling noisy snippets from accessibility buttons, hamburger icons, and UI widgets, while calibrating titles to display without truncation.*
 
 ### Task 3.1: DOM Snippet Isolation (`data-nosnippet` & `<!--noindex-->`)
-- [ ] **Subtask 3.1.1:** Add `data-nosnippet` and `<!--noindex-->` wrappers to `src/lib/components/Header.svelte` around the mobile drawer trigger, navigation links, and utility buttons.
-- [ ] **Subtask 3.1.2:** Wrap `src/lib/components/AccessibilityPanel.svelte` (the GOST R 52872-2019 visually-impaired panel) in `data-nosnippet` and `<!--noindex-->` so Google and Yandex exclude words like *"Слабовидящим"*, *"Размер шрифта"*, and *"Черно-белая версия"* from the organic snippet.
-- [ ] **Subtask 3.1.3:** Apply `data-nosnippet` to `src/lib/components/CookieNotice.svelte` and interactive stepper headers in `CostCalculator.svelte`.
+- [x] **Subtask 3.1.1:** (Completed 2026-11-18) Add `data-nosnippet` and `<!--noindex-->` wrappers to `src/lib/components/Header.svelte` around the mobile drawer trigger, navigation links, and utility buttons.
+- [x] **Subtask 3.1.2:** (Completed 2026-11-18) Wrap `src/lib/components/AccessibilityPanel.svelte` (the GOST R 52872-2019 visually-impaired panel) in `data-nosnippet` and `<!--noindex-->` so Google and Yandex exclude words like *"Слабовидящим"*, *"Размер шрифта"*, and *"Черно-белая версия"* from the organic snippet.
+- [x] **Subtask 3.1.3:** (Completed 2026-11-18) Apply `data-nosnippet` to `src/lib/components/CookieNotice.svelte` and interactive stepper headers in `CostCalculator.svelte`.
 
 ### Task 3.2: `<title>` and Meta Description Length Optimization
-- [ ] **Subtask 3.2.1:** Condense the homepage `<title>` to fit within the 580px (~55-60 characters) desktop/mobile rendering limit:
+- [x] **Subtask 3.2.1:** (Completed 2026-11-18) Condense the homepage `<title>` to fit within the 580px (~55-60 characters) desktop/mobile rendering limit:
   * *Current (Truncated):* `МеталлПром39 — Металлообработка с ЧПУ в Калининграде: токарные и фрезерные работы` (78 chars)
   * *Target:* `МеталлПром39 — Металлообработка ЧПУ в Калининграде` (48 chars).
-- [ ] **Subtask 3.2.2:** Optimize primary landing page titles (`/tokarnye-raboty-chpu/`, `/frezernye-raboty-chpu/`, `/kalkulyator-stoimosti-chpu/`) to lead with high-intent keywords + brand suffix.
-- [ ] **Subtask 3.2.3:** Frontload commercial purchase triggers in `meta description` within the first 120 characters: *"Обработка по чертежам и STEP-моделям от 1 шт. до серий. Допуск IT7, шероховатость Ra 1.25, расчет с НДС 22%."*
+- [x] **Subtask 3.2.2:** (Completed 2026-11-18) Optimize primary landing page titles (`/tokarnye-raboty-chpu/`, `/frezernye-raboty-chpu/`, `/kalkulyator-stoimosti-chpu/`) to lead with high-intent keywords + brand suffix.
+- [x] **Subtask 3.2.3:** (Completed 2026-11-18) Frontload commercial purchase triggers in `meta description` within the first 120 characters: *"Обработка по чертежам и STEP-моделям от 1 шт. до серий. Допуск IT7, шероховатость Ra 1.25, расчет с НДС 22%."*
 
 ### Task 3.3: Heading Hygiene & FAQ Parsing Clean-up
-- [ ] **Subtask 3.3.1:** In FAQ sections across `+page.svelte` and service templates, extract numerical indices (`01`, `02`) and toggle glyphs (`+`, `−`) out of the `<h3>` and `<summary>` text nodes into `<span aria-hidden="true">` elements.
-- [ ] **Subtask 3.3.2:** Verify that Schema.org `FAQPage` `name` properties contain clean question strings identical to the DOM text.
+- [x] **Subtask 3.3.1:** (Completed 2026-11-18) In FAQ sections across `+page.svelte` and service templates, extract numerical indices (`01`, `02`) and toggle glyphs (`+`, `−`) out of the `<h3>` and `<summary>` text nodes into `<span aria-hidden="true">` elements.
+- [x] **Subtask 3.3.2:** (Completed 2026-11-18) Verify that Schema.org `FAQPage` `name` properties contain clean question strings identical to the DOM text.
 
 ---
 

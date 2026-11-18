@@ -283,7 +283,7 @@
 
 	<div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
 		<!-- Left / Interactive Controls Column -->
-		<div class="space-y-6 lg:col-span-7">
+		<div data-nosnippet class="space-y-6 lg:col-span-7">
 			<!-- 1. Operation Selection -->
 			<div>
 				<label

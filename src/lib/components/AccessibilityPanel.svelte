@@ -3,7 +3,9 @@
 </script>
 
 {#if a11y.settings.isEnabled}
+	<!--noindex-->
 	<aside
+		data-nosnippet
 		class="sticky top-0 z-50 border-b-2 border-black bg-white text-black p-2 sm:p-3 text-xs shadow-md a11y-toolbar select-none"
 		role="region"
 		aria-label="Панель настройки доступности по ГОСТ Р 52872-2019"
@@ -169,4 +171,5 @@
 			</div>
 		</div>
 	</aside>
+	<!--/noindex-->
 {/if}
