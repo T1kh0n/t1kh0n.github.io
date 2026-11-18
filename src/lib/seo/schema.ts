@@ -63,7 +63,13 @@ export function createOrganizationSchema(config: SiteConfig = siteConfig) {
 		name: config.brandName,
 		legalName: config.brandLegalName,
 		url: config.siteDomain,
-		logo: `${config.siteDomain}/logo.svg`,
+		logo: {
+			'@type': 'ImageObject',
+			url: `${config.siteDomain}/og/default-1x1.webp`,
+			width: 600,
+			height: 600
+		},
+		image: `${config.siteDomain}/og/default.webp`,
 		email: config.contactEmail,
 		telephone: config.contactPhone,
 		author: {
@@ -132,6 +138,7 @@ export function createLocalBusinessSchema(config: SiteConfig = siteConfig) {
 		legalName: config.brandLegalName,
 		url: config.siteDomain,
 		image: `${config.siteDomain}/og/default.webp`,
+		logo: `${config.siteDomain}/og/default-1x1.webp`,
 		telephone: config.contactPhone,
 		email: config.contactEmail,
 		priceRange: '₽₽',
@@ -201,6 +208,11 @@ export function createHomepageTechArticleSchema(config: SiteConfig = siteConfig)
 		'@id': `${config.siteDomain}/#article`,
 		headline: `${config.brandName} — Регламент и производственные возможности контрактной металлообработки ЧПУ в Калининграде`,
 		description: 'Высокоточная контрактная металлообработка деталей на 2 обрабатывающих центрах ЧПУ с квалитетом точности IT7 и шероховатостью Ra 1.25. Расчет с НДС 22%.',
+		image: [
+			`${config.siteDomain}/og/default.webp`,
+			`${config.siteDomain}/og/default-4x3.webp`,
+			`${config.siteDomain}/og/default-1x1.webp`
+		],
 		url: `${config.siteDomain}/`,
 		inLanguage: 'ru-RU',
 		datePublished: '2026-11-04',
@@ -216,7 +228,9 @@ export function createHomepageTechArticleSchema(config: SiteConfig = siteConfig)
 			url: config.siteDomain,
 			logo: {
 				'@type': 'ImageObject',
-				url: `${config.siteDomain}/logo.svg`
+				url: `${config.siteDomain}/og/default-1x1.webp`,
+				width: 600,
+				height: 600
 			}
 		},
 		mainEntityOfPage: {
@@ -277,12 +291,13 @@ export function createBreadcrumbSchema(items: BreadcrumbItem[], config: SiteConf
 		'@context': 'https://schema.org',
 		'@type': 'BreadcrumbList',
 		itemListElement: items.map((item, index) => {
-			const cleanPath = item.path.startsWith('/') ? item.path : `/${item.path}`;
+			const cleanPath = item.path.startsWith('/') ? item.path : `/${item.path}`
+				.replace(/\/+$/, '');
 			return {
 				'@type': 'ListItem',
 				position: index + 1,
 				name: item.name,
-				item: cleanPath === '/' ? `${config.siteDomain}/` : `${config.siteDomain}${cleanPath}/`
+				item: cleanPath === '' || cleanPath === '/' ? `${config.siteDomain}/` : `${config.siteDomain}${cleanPath}/`
 			};
 		})
 	};
@@ -323,6 +338,11 @@ export function createTechArticleSchema(
 		'@id': `${articleUrl}#article`,
 		headline: params.title,
 		description: params.description,
+		image: [
+			`${config.siteDomain}/og/default.webp`,
+			`${config.siteDomain}/og/default-4x3.webp`,
+			`${config.siteDomain}/og/default-1x1.webp`
+		],
 		url: articleUrl,
 		inLanguage: 'ru-RU',
 		datePublished: params.datePublished,
@@ -338,7 +358,9 @@ export function createTechArticleSchema(
 			url: config.siteDomain,
 			logo: {
 				'@type': 'ImageObject',
-				url: `${config.siteDomain}/logo.svg`
+				url: `${config.siteDomain}/og/default-1x1.webp`,
+				width: 600,
+				height: 600
 			}
 		},
 		mainEntityOfPage: {

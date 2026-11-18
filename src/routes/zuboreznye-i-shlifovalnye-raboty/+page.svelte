@@ -162,6 +162,22 @@
 					</table>
 				</div>
 			</div>
+
+			<figure class="mt-6 overflow-hidden rounded border border-[var(--color-rule)] bg-[var(--color-paper-2)]">
+				<img
+					src="{base}/images/parts/shesterni-gost.webp"
+					alt="Зуборезные работы и нарезание прямозубых и косозубых шестерен по ГОСТ 1643-81 в Калининграде"
+					width="800"
+					height="600"
+					loading="lazy"
+					decoding="async"
+					class="h-auto w-full max-h-96 object-cover"
+				/>
+				<figcaption class="flex flex-wrap items-center justify-between gap-2 border-t border-[var(--color-rule)] px-4 py-2 font-mono text-[11px] text-[var(--color-muted)]">
+					<span>Параметры зацепления: модуль m = 1.0 – 8.0, диаметр колес до ⌀500 мм</span>
+					<span class="text-[var(--color-accent)]">ГОСТ 1643-81 · Шлифование шеек Ra 1.25</span>
+				</figcaption>
+			</figure>
 		</section>
 
 		<!-- Regional Applications in Kaliningrad -->

@@ -181,6 +181,22 @@
 					</div>
 				</div>
 			</div>
+
+			<figure class="mt-6 overflow-hidden rounded border border-[var(--color-rule)] bg-[var(--color-paper-2)]">
+				<img
+					src="{base}/images/parts/valy-vtulki.webp"
+					alt="Токарная обработка тел вращения с ЧПУ в Калининграде: ступенчатые валы, втулки и посадочные шейки IT7 по ГОСТ"
+					width="800"
+					height="600"
+					loading="lazy"
+					decoding="async"
+					class="h-auto w-full max-h-96 object-cover"
+				/>
+				<figcaption class="flex flex-wrap items-center justify-between gap-2 border-t border-[var(--color-rule)] px-4 py-2 font-mono text-[11px] text-[var(--color-muted)]">
+					<span>Чертеж и параметры: обработка тел вращения ø до 200 мм, L до 750 мм</span>
+					<span class="text-[var(--color-accent)]">Допуск IT7 · Шероховатость Ra 1.25 мкм</span>
+				</figcaption>
+			</figure>
 		</section>
 
 		<!-- Materials Processing Guide -->

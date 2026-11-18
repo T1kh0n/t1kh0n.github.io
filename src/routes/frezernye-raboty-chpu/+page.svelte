@@ -181,6 +181,22 @@
 					</div>
 				</div>
 			</div>
+
+			<figure class="mt-6 overflow-hidden rounded border border-[var(--color-rule)] bg-[var(--color-paper-2)]">
+				<img
+					src="{base}/images/parts/korpus-d16t.webp"
+					alt="Фрезерование тонкостенных корпусов и кронштейнов из алюминиевого сплава Д16Т на станках с ЧПУ в Калининграде"
+					width="800"
+					height="600"
+					loading="lazy"
+					decoding="async"
+					class="h-auto w-full max-h-96 object-cover"
+				/>
+				<figcaption class="flex flex-wrap items-center justify-between gap-2 border-t border-[var(--color-rule)] px-4 py-2 font-mono text-[11px] text-[var(--color-muted)]">
+					<span>Чертеж и параметры: корпусные детали и монтажные плиты до 800×500×400 мм</span>
+					<span class="text-[var(--color-accent)]">Д16Т / АМг6 · Точность IT7</span>
+				</figcaption>
+			</figure>
 		</section>
 
 		<!-- Materials Processing Guide -->
