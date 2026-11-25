@@ -1,11 +1,7 @@
 <script lang="ts">
 	import { base } from '$lib/paths';
 	import { siteConfig } from '#lib/config/site';
-	import {
-		createFaqSchema,
-		createHomepageTechArticleSchema,
-		serializeSchema
-	} from '#lib/seo/schema';
+	import { createFaqSchema, serializeSchema } from '#lib/seo/schema';
 	import CostCalculator from '#lib/components/CostCalculator.svelte';
 	import WorkpieceInspectionScan from '#lib/components/WorkpieceInspectionScan.svelte';
 
@@ -38,20 +34,19 @@
 	];
 
 	const faqSchema = createFaqSchema(faqs);
-	const homepageArticleSchema = createHomepageTechArticleSchema();
 </script>
 
 <svelte:head>
-	<title>Металлообработка ЧПУ в Калининграде | {siteConfig.brandName}</title>
+	<title>Металлообработка с ЧПУ в Калининграде: токарные и фрезерные работы | {siteConfig.brandName}</title>
 	<meta
 		name="description"
-		content="Обработка по чертежам и STEP-моделям от 1 шт. до серий. Допуск IT7, шероховатость Ra 1.25, расчет с НДС 22%. Токарные и фрезерные работы ЧПУ в Калининграде."
+		content="Металлообработка деталей на токарных и фрезерных станках с ЧПУ в Калининграде. Точность IT7, шероховатость до Ra 1.25. Доставка по всей Калининградской области. Безналичный расчет с НДС 22%."
 	/>
 	<link rel="canonical" href="{siteConfig.siteDomain}/" />
 
 	<!-- OpenGraph & Social Cards -->
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content="МеталлПром39 — Металлообработка с ЧПУ в Калининграде: токарные и фрезерные работы" />
+	<meta property="og:title" content="Металлообработка с ЧПУ в Калининграде: токарные и фрезерные работы | {siteConfig.brandName}" />
 	<meta
 		property="og:description"
 		content="Металлообработка деталей на токарных и фрезерных станках с ЧПУ в Калининграде. Точность IT7, шероховатость до Ra 1.25. Доставка по всей Калининградской области. Безналичный расчет с НДС 22%."
@@ -59,11 +54,10 @@
 	<meta property="og:url" content="{siteConfig.siteDomain}/" />
 	<meta property="og:site_name" content="МеталлПром39" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="МеталлПром39 — Металлообработка с ЧПУ в Калининграде" />
+	<meta name="twitter:title" content="Металлообработка с ЧПУ в Калининграде | {siteConfig.brandName}" />
 	<meta name="twitter:description" content="Контрактная токарная и фрезерная обработка ЧПУ с точностью IT7 и НДС 22%." />
 
 	{@html serializeSchema(faqSchema)}
-	{@html serializeSchema(homepageArticleSchema)}
 </svelte:head>
 
 <main class="space-y-20 pb-20">
@@ -77,11 +71,11 @@
 				</div>
 
 				<h1 class="mt-4 text-3xl tracking-tight text-[var(--color-ink)] sm:text-5xl lg:text-6xl">
-					МеталлПром39 — Металлообработка с ЧПУ в Калининграде
+					Металлообработка с ЧПУ в Калининграде
 				</h1>
 
 				<p class="lead mt-6 max-w-2xl text-lg sm:text-xl">
-					Изготовление серийных и единичных деталей на станках с ЧПУ. Квалитеты точности до IT7 по <a href="{base}/stati/kvalitety-tochnosti-i-sherohovatost-gost/" class="underline hover:text-[var(--color-accent)]">ГОСТ 25346-2013</a>, контроль ОТК, расчет с НДС 22%.
+					Изготовление серийных и единичных деталей на станках с ЧПУ. Квалитеты точности до IT7, контроль ОТК, расчет с НДС 22%.
 				</p>
 
 				<div class="mt-8 flex flex-wrap items-center gap-3">
@@ -224,7 +218,7 @@
 				</div>
 				<h3 class="mt-4 text-xl text-[var(--color-ink)]">Токарная обработка с ЧПУ</h3>
 				<p class="mt-2 text-xs text-[var(--color-ink-2)]">
-					Обработка тел вращения: фланцы, валы, штуцеры, пальцы, втулки. Нарезание метрических, дюймовых и трапецеидальных резьб инструментом <a href="https://www.sandvik.coromant.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-[var(--color-accent)]">Sandvik Coromant</a>.
+					Обработка тел вращения: фланцы, валы, штуцеры, пальцы, втулки. Нарезание метрических, дюймовых и трапецеидальных резьб.
 				</p>
 				<ul class="mt-4 space-y-1.5 text-xs text-[var(--color-muted)]">
 					<li class="flex items-center gap-2">
@@ -244,7 +238,6 @@
 					<a href="{base}/tokarnye-raboty-chpu/" class="btn btn--sm">
 						Подробнее о токарных работах
 					</a>
-					<span class="font-mono text-xs text-[var(--color-muted)]">от 2 500 ₽/ч</span>
 				</div>
 			</div>
 
@@ -272,47 +265,11 @@
 						Фрезерование пазов, посадочных карманов, резьбофрезерование
 					</li>
 				</ul>
-				<div class="mt-6 flex items-center justify-between pt-4 border-t border-[var(--color-rule)]">
+				<div class="mt-6 flex items-center justify-between gap-2 pt-4 border-t border-[var(--color-rule)]">
 					<a href="{base}/frezernye-raboty-chpu/" class="btn btn--sm">
 						Подробнее о фрезерных работах
 					</a>
-					<span class="font-mono text-xs text-[var(--color-muted)]">от 3 000 ₽/ч</span>
 				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- About the CNC Workshop Section (#about for AI brand & trust signals) -->
-	<section id="about" class="scroll-mt-8 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="О цехе МеталлПром39">
-		<div class="border-b border-[var(--color-rule)] pb-4">
-			<div class="font-mono text-xs tracking-wider uppercase text-[var(--color-muted)]">
-				О предприятии
-			</div>
-			<h2 class="mt-2 text-2xl text-[var(--color-ink)] sm:text-3xl">
-				МеталлПром39 — Производственный цех контрактной металлообработки ЧПУ
-			</h2>
-		</div>
-
-		<div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
-			<div class="panel p-6">
-				<h3 class="text-base font-normal text-[var(--color-ink)]">Станочный парк и точность IT7</h3>
-				<p class="mt-2 text-xs leading-relaxed text-[var(--color-ink-2)]">
-					Цех эксплуатирует 2 современных обрабатывающих центра ЧПУ: токарный комплекс Fanuc 0i-TF и вертикально-фрезерный центр Siemens 828D. Изготовление серийных партий выполняется в строгом соответствии с <a href="{base}/stati/kvalitety-tochnosti-i-sherohovatost-gost/" class="underline hover:text-[var(--color-accent)]">ГОСТ 25346-2013</a> с допусками квалитета IT7 и шероховатостью Ra 1.25.
-				</p>
-			</div>
-
-			<div class="panel p-6">
-				<h3 class="text-base font-normal text-[var(--color-ink)]">Профессиональный инструмент</h3>
-				<p class="mt-2 text-xs leading-relaxed text-[var(--color-ink-2)]">
-					Для скоростного фрезерования и прецизионного точения используются твердосплавные пластины и концевые фрезы мировых лидеров <a href="https://www.sandvik.coromant.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-[var(--color-accent)]">Sandvik Coromant</a> и Kennametal, что обеспечивает безупречное качество резьбы и посадочных шеек.
-				</p>
-			</div>
-
-			<div class="panel p-6">
-				<h3 class="text-base font-normal text-[var(--color-ink)]">Контроль ОТК и расчет с НДС 22%</h3>
-				<p class="mt-2 text-xs leading-relaxed text-[var(--color-ink-2)]">
-					100% партий проходят входной спектральный контроль сплава и финишную приемку калиброванными нутромерами и микрометрами. Прозрачное ценообразование, официальные договоры B2B, система ЭДО Диадок и СБИС, минимальный порог от 5 000 ₽ с учетом НДС 22%.
-				</p>
 			</div>
 		</div>
 	</section>
@@ -320,109 +277,6 @@
 	<!-- Online Engineering Calculator Section -->
 	<section id="calculator-section" class="scroll-mt-8 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<CostCalculator />
-	</section>
-
-	<!-- Knowledge Base Showcase Section (Direct Links for Fast Crawling) -->
-	<section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Инженерная база знаний">
-		<div class="flex items-end justify-between border-b border-[var(--color-rule)] pb-4">
-			<div>
-				<div class="font-mono text-xs tracking-wider uppercase text-[var(--color-muted)]">
-					Инженерная база знаний
-				</div>
-				<h2 class="mt-2 text-2xl text-[var(--color-ink)] sm:text-3xl">
-					Регламенты механообработки, стандарты ГОСТ и DFM
-				</h2>
-			</div>
-			<a href="{base}/stati/" class="hidden sm:inline-flex items-center gap-1 font-mono text-xs text-[var(--color-accent)] hover:underline">
-				Все статьи →
-			</a>
-		</div>
-
-		<div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-			<a
-				href="{base}/stati/trebovaniya-k-chertezham-i-3d-modelyam-dlya-chpu/"
-				class="panel group p-5 transition-colors hover:border-[var(--color-rule-2)]"
-			>
-				<span class="font-mono text-[10px] uppercase text-[var(--color-accent)]">ЕСКД и 3D-модели</span>
-				<h3 class="mt-2 text-base text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors">
-					Требования к чертежам и STEP-моделям для ЧПУ
-				</h3>
-				<p class="mt-2 text-xs text-[var(--color-muted)] line-clamp-3">
-					Форматы STEP AP214 и Parasolid, базы базирования по ГОСТ 2.307, сбеги резьбы и устранение ошибок R0.
-				</p>
-			</a>
-
-			<a
-				href="{base}/stati/normo-chas-chpu-i-raschet-stoimosti-metalloobrabotki/"
-				class="panel group p-5 transition-colors hover:border-[var(--color-rule-2)]"
-			>
-				<span class="font-mono text-[10px] uppercase text-[var(--color-accent)]">Экономика ЧПУ</span>
-				<h3 class="mt-2 text-base text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors">
-					Нормо-час ЧПУ: себестоимость и расчет сметы
-				</h3>
-				<p class="mt-2 text-xs text-[var(--color-muted)] line-clamp-3">
-					Формула машиностроительной сметы, влияние серийности на цену за 1 шт. и способы экономии бюджета.
-				</p>
-			</a>
-
-			<a
-				href="{base}/stati/termicheskaya-obrabotka-staley-posle-chpu-zakalka-tvc/"
-				class="panel group p-5 transition-colors hover:border-[var(--color-rule-2)]"
-			>
-				<span class="font-mono text-[10px] uppercase text-[var(--color-accent)]">Материаловедение</span>
-				<h3 class="mt-2 text-base text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors">
-					Термообработка сталей: закалка, ТВЧ и поводки
-				</h3>
-				<p class="mt-2 text-xs text-[var(--color-muted)] line-clamp-3">
-					Сравнение объемной закалки, ТВЧ и цементации. Расчет припусков под шлифование деталей до 56 HRC.
-				</p>
-			</a>
-
-			<a
-				href="{base}/stati/kvalitety-tochnosti-i-sherohovatost-gost/"
-				class="panel group p-5 transition-colors hover:border-[var(--color-rule-2)]"
-			>
-				<span class="font-mono text-[10px] uppercase text-[var(--color-accent)]">Метрология</span>
-				<h3 class="mt-2 text-base text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors">
-					Квалитеты точности IT7–IT12 и шероховатость Ra
-				</h3>
-				<p class="mt-2 text-xs text-[var(--color-muted)] line-clamp-3">
-					Таблица допусков по ГОСТ 25346-2013, допуск IT7 без наценки и шероховатость Ra 1.25 на станках с ЧПУ.
-				</p>
-			</a>
-
-			<a
-				href="{base}/stati/vybor-stali-dlya-chpu-obrabotki/"
-				class="panel group p-5 transition-colors hover:border-[var(--color-rule-2)]"
-			>
-				<span class="font-mono text-[10px] uppercase text-[var(--color-accent)]">Справочник металлов</span>
-				<h3 class="mt-2 text-base text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors">
-					Выбор конструкционных сталей для ЧПУ
-				</h3>
-				<p class="mt-2 text-xs text-[var(--color-muted)] line-clamp-3">
-					Обрабатываемость резанием Стали 45, 40Х, 09Г2С, нержавеющей стали 12Х18Н10Т и сплава Д16Т.
-				</p>
-			</a>
-
-			<a
-				href="{base}/stati/optimizaciya-stoimosti-detaley-chpu/"
-				class="panel group p-5 transition-colors hover:border-[var(--color-rule-2)]"
-			>
-				<span class="font-mono text-[10px] uppercase text-[var(--color-accent)]">DFM Оптимизация</span>
-				<h3 class="mt-2 text-base text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors">
-					DFM-правила снижения себестоимости деталей
-				</h3>
-				<p class="mt-2 text-xs text-[var(--color-muted)] line-clamp-3">
-					10 практических рекомендаций для инженеров-конструкторов по снижению трудоемкости механообработки.
-				</p>
-			</a>
-		</div>
-
-		<div class="mt-6 text-center sm:hidden">
-			<a href="{base}/stati/" class="btn btn--wide text-xs">
-				Открыть базу знаний (все статьи)
-			</a>
-		</div>
 	</section>
 
 	<!-- FAQ Section with Schema.org Accordion -->
@@ -441,10 +295,10 @@
 				<details class="group py-4 select-none">
 					<summary class="flex cursor-pointer items-center justify-between gap-4 text-base font-normal text-[var(--color-ink)] transition-colors hover:text-[var(--color-accent)]">
 						<span class="flex items-center gap-3">
-							<span class="font-mono text-xs text-[var(--color-muted)]" aria-hidden="true">0{i + 1}</span>
+							<span class="font-mono text-xs text-[var(--color-muted)]">0{i + 1}</span>
 							<span>{faq.question}</span>
 						</span>
-						<span class="font-mono text-sm text-[var(--color-muted)] transition-transform group-open:rotate-45" aria-hidden="true">
+						<span class="font-mono text-sm text-[var(--color-muted)] transition-transform group-open:rotate-45">
 							+
 						</span>
 					</summary>
