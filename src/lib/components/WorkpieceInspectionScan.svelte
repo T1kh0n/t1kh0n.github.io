@@ -393,6 +393,9 @@
 			animId = requestAnimationFrame(render);
 			if ((!isVisible && !isDragging) || !ctx || !canvasEl || width === 0) return;
 
+			// Throttle idle auto-rotation to ~30 FPS to minimize mobile CPU drain and guarantee instant INP latency
+			if (!isDragging && now - lastTime < 32) return;
+
 			const delta = Math.min(now - lastTime, 100);
 			lastTime = now;
 
@@ -729,12 +732,12 @@
 						onmouseleave={() => (isHovered = false)}
 						role="region"
 						aria-label="3D интерактивная область инспекции детали"
-						style="touch-action: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none;"
+						style="touch-action: pan-y; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none;"
 					>
 						<canvas
 							bind:this={canvasEl}
-							class="block h-full w-full cursor-grab active:cursor-grabbing touch-none select-none"
-							style="touch-action: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; -webkit-mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, var(--color-ink) 85%, transparent); mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, var(--color-ink) 85%, transparent);"
+							class="block h-full w-full cursor-grab active:cursor-grabbing select-none"
+							style="touch-action: pan-y; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; -webkit-mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, var(--color-ink) 85%, transparent); mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, var(--color-ink) 85%, transparent);"
 						></canvas>
 
 						<!-- Measurement Callout A: Bearing Seat IT7 (Extends UP into upper clearance zone) -->
@@ -772,7 +775,7 @@
 
 					<!-- Technical Viewport Caption & Quick Turntable Controls -->
 					<figcaption
-						class="flex flex-wrap items-center justify-between gap-2 border-t border-[var(--color-rule)] px-2 pt-3 text-[11px] text-[var(--color-muted)]"
+						class="flex flex-wrap items-center justify-between gap-2 border-t border-[var(--color-rule)] px-2 pt-3 text-xs text-[var(--color-muted)]"
 					>
 						<span class="flex items-center gap-1.5">
 							<span>Вращение 360° · потяните мышью или пальцем</span>
@@ -780,7 +783,7 @@
 						<div class="flex items-center gap-1.5">
 							<button
 								type="button"
-								class="inline-flex cursor-pointer items-center justify-center rounded border border-[var(--color-rule-2)] bg-[var(--color-paper-2)]/60 px-2 py-0.5 font-mono text-[11px] text-[var(--color-ink-2)] transition-colors hover:bg-[var(--color-paper-3)] hover:text-[var(--color-ink)]"
+								class="touch-target inline-flex min-h-[36px] cursor-pointer items-center justify-center rounded border border-[var(--color-rule-2)] bg-[var(--color-paper-2)]/60 px-3 py-1 font-mono text-xs text-[var(--color-ink-2)] transition-colors hover:bg-[var(--color-paper-3)] hover:text-[var(--color-ink)]"
 								onclick={() => rotateBy(-Math.PI / 4)}
 								aria-label="Повернуть деталь влево на 45 градусов"
 								title="Повернуть влево (-45°)"
@@ -789,7 +792,7 @@
 							</button>
 							<button
 								type="button"
-								class="inline-flex cursor-pointer items-center justify-center rounded border border-[var(--color-rule-2)] bg-[var(--color-paper-2)]/60 px-2 py-0.5 font-mono text-[11px] text-[var(--color-ink-2)] transition-colors hover:bg-[var(--color-paper-3)] hover:text-[var(--color-ink)]"
+								class="touch-target inline-flex min-h-[36px] cursor-pointer items-center justify-center rounded border border-[var(--color-rule-2)] bg-[var(--color-paper-2)]/60 px-3 py-1 font-mono text-xs text-[var(--color-ink-2)] transition-colors hover:bg-[var(--color-paper-3)] hover:text-[var(--color-ink)]"
 								onclick={() => rotateBy(Math.PI / 4)}
 								aria-label="Повернуть деталь вправо на 45 градусов"
 								title="Повернуть вправо (+45°)"
@@ -798,7 +801,7 @@
 							</button>
 							<button
 								type="button"
-								class="inline-flex cursor-pointer items-center justify-center rounded border border-[var(--color-rule)] bg-[var(--color-paper-2)]/30 px-2 py-0.5 font-mono text-[11px] text-[var(--color-muted)] transition-colors hover:bg-[var(--color-paper-2)] hover:text-[var(--color-ink)]"
+								class="touch-target inline-flex min-h-[36px] cursor-pointer items-center justify-center rounded border border-[var(--color-rule)] bg-[var(--color-paper-2)]/30 px-3 py-1 font-mono text-xs text-[var(--color-muted)] transition-colors hover:bg-[var(--color-paper-2)] hover:text-[var(--color-ink)]"
 								onclick={resetOrientation}
 								aria-label="Сбросить ракурс детали"
 								title="Исходный ракурс"

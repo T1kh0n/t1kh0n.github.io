@@ -157,7 +157,7 @@
 						<div class="mt-2 flex flex-wrap gap-2">
 							{#each item.operations as op}
 								<span
-									class="rounded-sm border border-[var(--color-rule)] bg-[var(--color-paper-2)] px-2.5 py-1 text-[11px] text-[var(--color-ink-2)]"
+									class="rounded-sm border border-[var(--color-rule)] bg-[var(--color-paper-2)] px-2.5 py-1 text-xs text-[var(--color-ink-2)]"
 								>
 									{op}
 								</span>

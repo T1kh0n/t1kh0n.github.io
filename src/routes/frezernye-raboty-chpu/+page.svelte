@@ -154,7 +154,7 @@
 					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
 						Тонкостенные корпуса из алюминиевых сплавов (Д16Т, АМг6) с глубокими карманами, ребрами жесткости и резьбовыми отверстиями М2–М16.
 					</p>
-					<div class="num mt-4 font-mono text-[11px] text-[var(--color-ink-2)]">
+					<div class="num mt-4 font-mono text-xs text-[var(--color-ink-2)]">
 						Габариты до 800×500 мм
 					</div>
 				</div>
@@ -167,7 +167,7 @@
 					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
 						Силовые кронштейны сложной формы, базовые монтажные плиты оборудования с координатной сеткой резьбовых и штифтовых отверстий.
 					</p>
-					<div class="num mt-4 font-mono text-[11px] text-[var(--color-ink-2)]">
+					<div class="num mt-4 font-mono text-xs text-[var(--color-ink-2)]">
 						Межосевые расстояния до IT7
 					</div>
 				</div>
@@ -180,7 +180,7 @@
 					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
 						Матрицы, пуансоны, вставки пресс-форм из легированных инструментальных сталей (Х12МФ, 40Х13) с чистовым 3D-фрезерованием.
 					</p>
-					<div class="num mt-4 font-mono text-[11px] text-[var(--color-ink-2)]">
+					<div class="num mt-4 font-mono text-xs text-[var(--color-ink-2)]">
 						Чистота поверхности Ra 1.25
 					</div>
 				</div>
@@ -196,7 +196,7 @@
 					decoding="async"
 					class="h-auto w-full max-h-96 object-cover"
 				/>
-				<figcaption class="flex flex-wrap items-center justify-between gap-2 border-t border-[var(--color-rule)] px-4 py-2 font-mono text-[11px] text-[var(--color-muted)]">
+				<figcaption class="flex flex-wrap items-center justify-between gap-2 border-t border-[var(--color-rule)] px-4 py-2 font-mono text-xs text-[var(--color-muted)]">
 					<span>Чертеж и параметры: корпусные детали и монтажные плиты до 800×500×400 мм</span>
 					<span class="text-[var(--color-accent)]">Д16Т / АМг6 · Точность IT7</span>
 				</figcaption>

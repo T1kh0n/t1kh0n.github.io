@@ -114,7 +114,7 @@
 	<section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Лимиты оборудования">
 		<div class="mb-6 flex flex-col justify-between gap-4 border-b border-[var(--color-rule)] pb-4 sm:flex-row sm:items-end">
 			<div>
-				<div class="font-mono text-[10px] tracking-wider uppercase text-[var(--color-muted)]">
+				<div class="font-mono text-xs tracking-wider uppercase text-[var(--color-muted)]">
 					Технологический паспорт
 				</div>
 				<h2 class="text-xl text-[var(--color-ink)] sm:text-2xl">
@@ -192,7 +192,7 @@
 		</div>
 
 		<!-- Single Footnote Row -->
-		<div class="mt-3 flex flex-col justify-between gap-1 text-[11px] text-[var(--color-muted)] sm:flex-row">
+		<div class="mt-3 flex flex-col justify-between gap-1 text-xs text-[var(--color-muted)] sm:flex-row">
 			<span>Партии от 1 шт. Базовый порог заказа: <strong>5 000 ₽ (с НДС 22%)</strong>.</span>
 			<span>Доставка по всей Калининградской области</span>
 		</div>

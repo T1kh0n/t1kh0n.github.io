@@ -170,7 +170,7 @@
 					<div class="well">
 						<div class="flex items-center justify-between border-b border-[var(--color-rule)] pb-2">
 							<span class="text-xs text-[var(--color-muted)]">{machine.cncSystem}</span>
-							<span class="num text-[11px] text-[var(--color-accent)]">{machine.precision}</span>
+							<span class="num text-xs text-[var(--color-accent)]">{machine.precision}</span>
 						</div>
 						<h3 class="mt-2 text-sm font-normal text-[var(--color-ink)]">{machine.name}</h3>
 						<p class="num mt-2 text-xs text-[var(--color-ink-2)]">{machine.workingZone}</p>

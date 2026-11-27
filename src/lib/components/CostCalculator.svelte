@@ -351,7 +351,7 @@
 					class="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-[var(--color-paper-2)] accent-[var(--color-accent)]"
 				/>
 				<!-- Discount Tier Badges -->
-				<div class="mt-2 grid grid-cols-5 gap-1 text-center text-[10px]">
+				<div class="mt-2 grid grid-cols-5 gap-1 text-center text-xs">
 					<div
 						class="rounded border px-1 py-1 transition-colors {batchQuantity >= 1 && batchQuantity <= 4
 							? 'border-[var(--color-accent)] bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-medium'
@@ -410,9 +410,9 @@
 						>
 							<div class="flex items-center justify-between text-xs font-normal text-[var(--color-ink)]">
 								<span>{comp.nameRu}</span>
-								<span class="rounded bg-[var(--color-accent)]/15 px-1.5 py-0.5 font-mono text-[10px] text-[var(--color-accent)]">+{comp.percent}%</span>
+								<span class="rounded bg-[var(--color-accent)]/15 px-1.5 py-0.5 font-mono text-xs text-[var(--color-accent)]">+{comp.percent}%</span>
 							</div>
-							<div class="mt-1 line-clamp-2 text-[11px] text-[var(--color-muted)]">
+							<div class="mt-1 line-clamp-2 text-xs text-[var(--color-muted)]">
 								{comp.descriptionRu}
 							</div>
 						</button>
@@ -494,7 +494,7 @@
 						<div class="flex items-center justify-between border-b border-[var(--color-rule)] pb-2">
 							<div class="flex items-center gap-2">
 								<span
-									class="rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--color-accent)]"
+									class="rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] px-1.5 py-0.5 font-mono text-xs text-[var(--color-accent)]"
 								>
 									{parsedCadInfo.is2dDrawing ? 'ЧЕРТЕЖ' : parsedCadInfo.fileType === 'stl_binary' ? 'STL BINARY' : parsedCadInfo.fileType === 'stl_ascii' ? 'STL ASCII' : '3D STEP'}
 								</span>
@@ -557,7 +557,7 @@
 
 				<div class="grid grid-cols-3 gap-3">
 					<div>
-						<label for="dim-length" class="block text-[11px] text-[var(--color-muted)]">
+						<label for="dim-length" class="block text-xs text-[var(--color-muted)]">
 							Длина L (мм):
 						</label>
 						<input
@@ -570,7 +570,7 @@
 						/>
 					</div>
 					<div>
-						<label for="dim-width" class="block text-[11px] text-[var(--color-muted)]">
+						<label for="dim-width" class="block text-xs text-[var(--color-muted)]">
 							{isLathe ? 'Диаметр ⌀ (мм):' : 'Ширина W (мм):'}
 						</label>
 						<input
@@ -583,7 +583,7 @@
 						/>
 					</div>
 					<div>
-						<label for="dim-height" class="block text-[11px] text-[var(--color-muted)]">
+						<label for="dim-height" class="block text-xs text-[var(--color-muted)]">
 							{isLathe ? 'Толщ. стенки / H (мм):' : 'Высота H (мм):'}
 						</label>
 						<input
@@ -623,7 +623,7 @@
 					>
 						6. Квалитет точности (без наценки):
 					</label>
-					<span class="text-[11px] text-[var(--color-accent)]">0% наценка за точность IT7</span>
+					<span class="text-xs text-[var(--color-accent)]">0% наценка за точность IT7</span>
 				</div>
 				<div class="grid grid-cols-1 gap-2 sm:grid-cols-3">
 					{#each TOLERANCES_LIST as tol}
@@ -667,7 +667,7 @@
 											>+{coop.pricePerPiece}<span class="u">&thinsp;₽/шт</span></span
 										>
 									</div>
-									<p class="mt-0.5 text-[11px] text-[var(--color-muted)]">{coop.descriptionRu}</p>
+									<p class="mt-0.5 text-xs text-[var(--color-muted)]">{coop.descriptionRu}</p>
 								</div>
 							</label>
 						{/each}
@@ -693,7 +693,7 @@
 							<div class="flex items-center justify-between text-xs font-normal text-[var(--color-ink)]">
 								<span>{urg.nameRu}</span>
 								{#if urg.multiplier > 1.0}
-									<span class="rounded bg-[var(--color-accent)]/15 px-1.5 py-0.5 font-mono text-[10px] text-[var(--color-accent)]"
+									<span class="rounded bg-[var(--color-accent)]/15 px-1.5 py-0.5 font-mono text-xs text-[var(--color-accent)]"
 										>+{Math.round((urg.multiplier - 1) * 100)}%</span
 									>
 								{/if}
@@ -743,7 +743,7 @@
 							<span>Базовый порог заказа</span>
 							<span class="num">5&thinsp;000&thinsp;₽</span>
 						</div>
-						<p class="mt-1 text-[11px] leading-relaxed text-[var(--color-ink-2)]">
+						<p class="mt-1 text-xs leading-relaxed text-[var(--color-ink-2)]">
 							В расчет включена стоимость переналадки станка ЧПУ. При тираже
 							<strong class="font-normal text-[var(--color-ink)]"
 								>{quote.recommendedBatchForMov} шт.</strong
@@ -755,7 +755,7 @@
 						</p>
 						<button
 							type="button"
-							class="mt-2 text-[11px] text-[var(--color-accent)] underline hover:no-underline"
+							class="mt-2 inline-flex min-h-[44px] items-center text-xs text-[var(--color-accent)] underline hover:no-underline font-medium"
 							onclick={applySuggestedBatch}
 						>
 							Увеличить партию до {quote.recommendedBatchForMov} шт. →
@@ -822,7 +822,7 @@
 
 				<!-- Trust Guarantee Callout -->
 				<div
-					class="mt-5 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper)] p-3 text-[11px] text-[var(--color-muted)]"
+					class="mt-5 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper)] p-3 text-xs text-[var(--color-muted)]"
 				>
 					<div class="font-normal text-[var(--color-ink)]">Гарантии цеха MetalProm39:</div>
 					<ul class="mt-1 list-inside list-disc space-y-1 text-[var(--color-muted)]">
@@ -851,7 +851,7 @@
 		>
 			<div class="flex items-start justify-between border-b border-[var(--color-rule)] pb-4">
 				<div>
-					<div class="font-mono text-[10px] tracking-wider uppercase text-[var(--color-accent)]">
+					<div class="font-mono text-xs tracking-wider uppercase text-[var(--color-accent)]">
 						Очередь производства · Калининград
 					</div>
 					<h3 id="modal-title" class="mt-1 text-lg font-normal text-[var(--color-ink)]">
@@ -877,12 +877,12 @@
 					<p class="mt-2 text-[12px] leading-relaxed text-[var(--color-ink-2)]">
 						Параметры вашей детали ({quote.selectedOperationName}, материал: {quote.selectedMaterialName}, тираж: {batchQuantity} шт., расчетная сумма: {quote.finalTotal.toLocaleString('ru-RU')} ₽ с НДС 22%) успешно зафиксированы в аналитике производственного спроса цеха.
 					</p>
-				<p class="mt-2 text-[11px] text-[var(--color-muted)]">
+				<p class="mt-2 text-xs text-[var(--color-muted)]">
 						В настоящий момент оба обрабатывающих центра с ЧПУ работают с максимальной загрузкой по долгосрочным контрактам. Новые коммерческие заявки регистрируются в резервный лист ожидания.
 					</p>
 				</div>
 
-				<div class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper)] p-3 space-y-1.5 font-mono text-[11px]">
+				<div class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper)] p-3 space-y-1.5 font-mono text-xs">
 					<div class="flex justify-between">
 						<span class="text-[var(--color-muted)]">Операция:</span>
 						<span class="text-[var(--color-ink)]">{quote.selectedOperationName}</span>
@@ -915,7 +915,7 @@
 					</div>
 				</div>
 
-				<p class="text-[11px] text-[var(--color-muted)]">
+				<p class="text-xs text-[var(--color-muted)]">
 					Вы можете скачать официальную инженерную смету в текстовом формате (.TXT) с детальной раскладкой норма-часов, затрат на металл и серийных скидок для согласования с вашим отделом снабжения.
 				</p>
 			</div>

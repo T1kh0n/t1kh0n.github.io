@@ -73,7 +73,7 @@
 						</span>
 						<span>Опубликовано: {article.publishedDate}</span>
 						<span class="text-[var(--color-accent)] font-mono">{article.author}</span>
-						<span class="rounded bg-[var(--color-paper-2)] px-2 py-0.5 font-mono text-[11px] text-[var(--color-ink-2)]">
+						<span class="rounded bg-[var(--color-paper-2)] px-2 py-0.5 font-mono text-xs text-[var(--color-ink-2)]">
 							⏱ {article.readingTime || '8 мин'} чтения
 						</span>
 					</div>
@@ -126,7 +126,7 @@
 									class="flex flex-col justify-between rounded border border-[var(--color-rule)] bg-[var(--color-paper)] p-3 text-xs transition-colors hover:border-[var(--color-accent)]"
 								>
 									<span class="font-medium text-[var(--color-ink)]">{service.title}</span>
-									<span class="mt-2 text-[11px] text-[var(--color-accent)]">&rarr; Подробнее</span>
+									<span class="mt-2 text-xs text-[var(--color-accent)]">&rarr; Подробнее</span>
 								</a>
 							{/each}
 						</div>
@@ -143,7 +143,7 @@
 							{#each relatedArticles as related}
 								<div class="well flex flex-col justify-between p-4">
 									<div>
-										<span class="text-[10px] uppercase font-mono text-[var(--color-accent)]">
+										<span class="text-xs uppercase font-mono text-[var(--color-accent)]">
 											{related.category}
 										</span>
 										<h4 class="mt-1 text-sm font-normal text-[var(--color-ink)]">
@@ -159,7 +159,7 @@
 										<a href="{base}/stati/{related.slug}/" class="text-[var(--color-ink-2)] hover:text-white">
 											Читать разбор &rarr;
 										</a>
-										<span class="text-[10px] text-[var(--color-muted)]">{related.readingTime || '5 мин'}</span>
+										<span class="text-xs text-[var(--color-muted)]">{related.readingTime || '5 мин'}</span>
 									</div>
 								</div>
 							{/each}

@@ -44,9 +44,9 @@
 		--text-section: clamp(26px, 3.2vw, 44px);
 		--text-title: clamp(18px, 1.8vw, 22px);
 		--text-lead: clamp(16px, 1.3vw, 19px);
-		--text-md: 15px;
-		--text-sm: 13px;
-		--text-xs: 11.5px;
+		--text-md: 16px;
+		--text-sm: 14px;
+		--text-xs: 12px;
 
 		/* Rhythm Spacing Tokens */
 		--space-2xs: 4px;
@@ -787,4 +787,21 @@ html.a11y-active main button:not(.a11y-toolbar button) {
 	font-family: var(--font-mono);
 	font-size: 0.9em;
 	color: var(--color-accent);
+}
+
+
+/* Touch Target Accessibility (Min 48x48px hit area for mobile compliance) */
+.touch-target {
+	position: relative;
+}
+.touch-target::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	min-width: 48px;
+	min-height: 48px;
+	width: 100%;
+	height: 100%;
 }

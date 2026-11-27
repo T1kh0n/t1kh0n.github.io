@@ -119,7 +119,7 @@
 											{item.description}
 										</p>
 									</div>
-									<div class="mt-4 flex items-center justify-between border-t border-[var(--color-rule)] pt-2 text-[11px] text-[var(--color-muted)]">
+									<div class="mt-4 flex items-center justify-between border-t border-[var(--color-rule)] pt-2 text-xs text-[var(--color-muted)]">
 										<span class="num text-[var(--color-ink-2)]">{item.url}</span>
 										<span class="text-[var(--color-accent)]">&rarr;</span>
 									</div>
@@ -180,13 +180,13 @@
 								<div>
 									<div class="flex items-center gap-2">
 										<span class="font-mono text-xs font-bold text-[var(--color-accent)]">{entry.url}</span>
-										<span class="rounded bg-[var(--color-paper)] px-1.5 py-0.5 text-[10px] text-[var(--color-muted)]">{entry.categoryTitle}</span>
+										<span class="rounded bg-[var(--color-paper)] px-1.5 py-0.5 text-xs text-[var(--color-muted)]">{entry.categoryTitle}</span>
 									</div>
 									<h3 class="mt-1 text-base font-normal text-[var(--color-ink)]">
 										<a href="{base}{entry.url}" class="hover:text-[var(--color-accent)]">{entry.title}</a>
 									</h3>
 								</div>
-								<div class="text-right font-mono text-[11px] text-[var(--color-muted)]">
+								<div class="text-right font-mono text-xs text-[var(--color-muted)]">
 									<div>Приоритет: <span class="num text-[var(--color-ink)]">{entry.priority}</span></div>
 									<div>Обновлено: <span class="num text-[var(--color-ink)]">{entry.lastmod}</span></div>
 								</div>
@@ -197,7 +197,7 @@
 								<div class="md:col-span-4 space-y-2">
 									<div>
 										<span class="text-[var(--color-muted)]">Файл источника контента:</span>
-										<code class="block font-mono text-[11px] text-[var(--color-ink)] bg-[var(--color-paper)] p-1 rounded border border-[var(--color-rule)] mt-0.5">
+										<code class="block font-mono text-xs text-[var(--color-ink)] bg-[var(--color-paper)] p-1 rounded border border-[var(--color-rule)] mt-0.5">
 											{entry.sourceFile}
 										</code>
 									</div>
@@ -205,7 +205,7 @@
 										<span class="text-[var(--color-muted)]">Используемые переменные WORKSHOP_SPECS:</span>
 										<div class="mt-1 flex flex-wrap gap-1">
 											{#each entry.reusableSpecs as spec}
-												<span class="rounded border border-[var(--color-rule-2)] bg-[var(--color-paper)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--color-accent)]">
+												<span class="rounded border border-[var(--color-rule-2)] bg-[var(--color-paper)] px-1.5 py-0.5 font-mono text-xs text-[var(--color-accent)]">
 													{spec}
 												</span>
 											{/each}
@@ -221,7 +221,7 @@
 											{entry.aeo.directAnswer}
 										</p>
 									</div>
-									<div class="flex flex-wrap gap-4 text-[11px] text-[var(--color-muted)]">
+									<div class="flex flex-wrap gap-4 text-xs text-[var(--color-muted)]">
 										<div>Целевая аудитория: <strong class="font-normal text-[var(--color-ink)]">{entry.aeo.audience}</strong></div>
 										<div>Стандарты: <strong class="font-normal text-[var(--color-ink)]">{entry.aeo.applicableStandards.join(', ')}</strong></div>
 									</div>

@@ -177,7 +177,7 @@
 					decoding="async"
 					class="h-auto w-full max-h-96 object-cover"
 				/>
-				<figcaption class="flex flex-wrap items-center justify-between gap-2 border-t border-[var(--color-rule)] px-4 py-2 font-mono text-[11px] text-[var(--color-muted)]">
+				<figcaption class="flex flex-wrap items-center justify-between gap-2 border-t border-[var(--color-rule)] px-4 py-2 font-mono text-xs text-[var(--color-muted)]">
 					<span>Параметры зацепления: модуль m = 1.0 – 8.0, диаметр колес до ⌀500 мм</span>
 					<span class="text-[var(--color-accent)]">ГОСТ 1643-81 · Шлифование шеек Ra 1.25</span>
 				</figcaption>

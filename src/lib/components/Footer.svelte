@@ -41,12 +41,12 @@
 
 			<!-- Col 2: Core Machining Services -->
 			<div>
-				<h3 class="text-xs font-normal text-[var(--color-ink)]">Услуги механообработки</h3>
+				<h3 class="text-sm font-medium text-[var(--color-ink)]">Услуги механообработки</h3>
 				<ul class="mt-4 space-y-2.5 text-xs">
 					<li>
 						<a
 							href="{base}/tokarnye-raboty-chpu/"
-							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
+							class="inline-block py-1 text-sm text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Токарные работы с ЧПУ (до ⌀200 мм)
 						</a>
@@ -54,7 +54,7 @@
 					<li>
 						<a
 							href="{base}/frezernye-raboty-chpu/"
-							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
+							class="inline-block py-1 text-sm text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Фрезерная ЧПУ обработка (3 оси)
 						</a>
@@ -62,7 +62,7 @@
 					<li>
 						<a
 							href="{base}/zuboreznye-i-shlifovalnye-raboty/"
-							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
+							class="inline-block py-1 text-sm text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Зубонарезные работы
 						</a>
@@ -70,7 +70,7 @@
 					<li>
 						<a
 							href="{base}/kalkulyator-stoimosti-chpu/"
-							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
+							class="inline-block py-1 text-sm text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Онлайн-калькулятор стоимости
 						</a>
@@ -80,12 +80,12 @@
 
 			<!-- Col 3: Quality, Park & Knowledge Base -->
 			<div>
-				<h3 class="text-xs font-normal text-[var(--color-ink)]">Инженерия и стандарты</h3>
+				<h3 class="text-sm font-medium text-[var(--color-ink)]">Инженерия и стандарты</h3>
 				<ul class="mt-4 space-y-2.5 text-xs">
 					<li>
 						<a
 							href="{base}/kontrol-kachestva-i-oborudovanie/"
-							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
+							class="inline-block py-1 text-sm text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Контроль ОТК и станочный парк (2 центра)
 						</a>
@@ -93,7 +93,7 @@
 					<li>
 						<a
 							href="{base}/portfolio/"
-							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
+							class="inline-block py-1 text-sm text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Портфолио изготовленных деталей
 						</a>
@@ -101,7 +101,7 @@
 					<li>
 						<a
 							href="{base}/stati/"
-							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
+							class="inline-block py-1 text-sm text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Инженерная база знаний и статьи
 						</a>
@@ -109,7 +109,7 @@
 					<li>
 						<a
 							href="{base}/stati/vybor-stali-dlya-chpu-obrabotki/"
-							class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+							class="inline-block py-1 text-sm text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Справочник сталей (Ст45, 40Х, Д16Т)
 						</a>
@@ -117,7 +117,7 @@
 					<li>
 						<a
 							href="{base}/stati/kvalitety-tochnosti-i-sherohovatost-gost/"
-							class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+							class="inline-block py-1 text-sm text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Таблицы допусков IT7–IT12 и Ra
 						</a>
@@ -125,7 +125,7 @@
 					<li>
 						<a
 							href="{base}/stati/optimizaciya-stoimosti-detaley-chpu/"
-							class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+							class="inline-block py-1 text-sm text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Правила снижения цены ЧПУ (DFM)
 						</a>
@@ -133,7 +133,7 @@
 					<li>
 						<a
 							href="{base}/stati/trebovaniya-k-chertezham-i-3d-modelyam-dlya-chpu/"
-							class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+							class="inline-block py-1 text-sm text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Требования к чертежам и STEP
 						</a>
@@ -141,7 +141,7 @@
 					<li>
 						<a
 							href="{base}/stati/normo-chas-chpu-i-raschet-stoimosti-metalloobrabotki/"
-							class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+							class="inline-block py-1 text-sm text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Нормо-час и расчет сметы ЧПУ
 						</a>
@@ -149,7 +149,7 @@
 					<li>
 						<a
 							href="{base}/stati/termicheskaya-obrabotka-staley-posle-chpu-zakalka-tvc/"
-							class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+							class="inline-block py-1 text-sm text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Термообработка: ТВЧ и закалка
 						</a>
@@ -159,7 +159,7 @@
 
 			<!-- Col 4: Order Calculation & Status -->
 			<div>
-				<h3 class="text-xs font-normal text-[var(--color-ink)]">Расчет стоимости</h3>
+				<h3 class="text-sm font-medium text-[var(--color-ink)]">Расчет стоимости</h3>
 				<div class="mt-4 space-y-3 text-xs">
 					<p class="leading-relaxed text-[var(--color-muted)]">
 						Используйте интерактивный калькулятор для оценки себестоимости и времени обработки по чертежам и 3D-моделям (STEP).
@@ -182,7 +182,7 @@
 		<div
 			class="mt-10 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-4 text-xs leading-relaxed text-[var(--color-muted)]"
 		>
-			<div class="mb-3 flex flex-wrap items-center justify-between gap-2 border-b border-[var(--color-rule)] pb-2 text-[11px]">
+			<div class="mb-3 flex flex-wrap items-center justify-between gap-2 border-b border-[var(--color-rule)] pb-2 text-xs">
 				<span class="font-normal text-[var(--color-ink)]">{siteConfig.brandLegalName}</span>
 				<span class="num text-[var(--color-ink-2)]">ИНН: 3906999990 · КПП: 390601001 · ОГРН: 1233900000000</span>
 				<span>{siteConfig.addressRegion}, {siteConfig.addressLocality}</span>
@@ -204,7 +204,7 @@
 
 		<!-- Bottom Copyright Bar -->
 		<div
-			class="mt-8 flex flex-col items-center justify-between border-t border-[var(--color-rule)] pt-6 text-xs text-[var(--color-muted)] sm:flex-row"
+			class="mt-8 flex flex-col items-center justify-between border-t border-[var(--color-rule)] pt-6 text-sm text-[var(--color-muted)] sm:flex-row"
 		>
 			<div>
 				© {currentYear}
@@ -213,19 +213,19 @@
 			<div class="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs sm:mt-0">
 				<a
 					href="{base}/oferta/"
-					class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+					class="inline-block py-1 text-sm text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 				>
 					Публичная оферта
 				</a>
 				<a
 					href="{base}/politika-konfidentsialnosti/"
-					class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+					class="inline-block py-1 text-sm text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 				>
 					Политика конфиденциальности
 				</a>
 				<a
 					href="{base}/politika-cookie/"
-					class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+					class="inline-block py-1 text-sm text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 				>
 					Политика cookie
 				</a>
@@ -238,7 +238,7 @@
 				</button>
 				<a
 					href="{base}/sitemap/"
-					class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+					class="inline-block py-1 text-sm text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 				>
 					Карта сайта
 				</a>

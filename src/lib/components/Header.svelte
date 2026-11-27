@@ -67,7 +67,7 @@
 					<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
 					<circle cx="12" cy="12" r="3"></circle>
 				</svg>
-				<span class="hidden md:inline text-[11px] font-normal">Слабовидящим</span>
+				<span class="hidden md:inline text-xs font-normal">Слабовидящим</span>
 			</button>
 
 			<!-- Quick CTA (Vantage hairline secondary pill button, hidden on mobile/tablet) -->
@@ -83,7 +83,7 @@
 			<button
 				type="button"
 				data-nosnippet
-				class="flex sm:hidden h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-card)] border border-[var(--color-rule)] text-[var(--color-ink-2)] transition-colors hover:text-white"
+				class="flex sm:hidden touch-target h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-card)] border border-[var(--color-rule)] text-[var(--color-ink-2)] transition-colors hover:text-white"
 				onclick={() => a11y.toggleEnabled()}
 				aria-label="Версия для слабовидящих"
 				title="Версия для слабовидящих (ГОСТ Р 52872-2019)"
@@ -105,7 +105,7 @@
 			<button
 				type="button"
 				data-nosnippet
-				class="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-[var(--radius-card)] border border-[var(--color-rule)] text-[var(--color-ink-2)] transition-colors hover:text-white lg:hidden"
+				class="flex touch-target h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-[var(--radius-card)] border border-[var(--color-rule)] text-[var(--color-ink-2)] transition-colors hover:text-white lg:hidden"
 				onclick={() => (isMobileMenuOpen = !isMobileMenuOpen)}
 				aria-expanded={isMobileMenuOpen}
 				aria-label="Переключить меню"
@@ -128,7 +128,7 @@
 				{#each navLinks as link}
 					<a
 						href={link.href}
-						class="border-b border-[var(--color-rule)] py-2.5 text-sm text-[var(--color-ink-2)] transition-colors hover:text-white"
+						class="flex min-h-[48px] items-center border-b border-[var(--color-rule)] py-3 text-base text-[var(--color-ink-2)] transition-colors hover:text-white"
 						onclick={() => (isMobileMenuOpen = false)}
 					>
 						{link.name}
@@ -138,7 +138,7 @@
 				<!-- Accessibility Option inside Mobile Menu -->
 				<button
 					type="button"
-					class="flex items-center gap-2 border-b border-[var(--color-rule)] py-2.5 text-sm text-[var(--color-ink)] transition-colors hover:text-white text-left"
+					class="flex min-h-[48px] items-center gap-2 border-b border-[var(--color-rule)] py-3 text-base text-[var(--color-ink)] transition-colors hover:text-white text-left"
 					onclick={() => {
 						a11y.toggleEnabled();
 						isMobileMenuOpen = false;
@@ -161,7 +161,7 @@
 				<div class="mt-4 pt-2">
 					<a
 						href="{base}/kalkulyator-stoimosti-chpu/"
-						class="btn btn--wide text-xs"
+						class="btn btn--wide text-sm min-h-[48px]"
 						onclick={() => (isMobileMenuOpen = false)}
 					>
 						<span>Калькулятор стоимости ЧПУ</span>

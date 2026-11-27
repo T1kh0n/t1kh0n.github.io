@@ -137,7 +137,7 @@
 						<div class="mt-2 font-sans">
 							{siteConfig.addressRegion}, {siteConfig.addressLocality}
 						</div>
-						<div class="mt-3 border-t border-[var(--color-rule)] pt-3 text-[11px] leading-relaxed">
+						<div class="mt-3 border-t border-[var(--color-rule)] pt-3 text-xs leading-relaxed">
 							<div>Банк: Калининградское отделение ПАО Сбербанк</div>
 							<div class="num">БИК: 042748634</div>
 							<div class="num">Р/с: 40702810000000000000</div>

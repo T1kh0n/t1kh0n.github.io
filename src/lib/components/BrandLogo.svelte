@@ -64,7 +64,7 @@
 			>
 				{siteConfig.brandName}
 			</span>
-			<span class="rounded bg-[var(--color-accent)]/15 px-1 py-0.2 font-mono text-[10px] text-[var(--color-accent)]">
+			<span class="rounded bg-[var(--color-accent)]/15 px-1 py-0.2 font-mono text-xs text-[var(--color-accent)]">
 				ЧПУ
 			</span>
 		</div>

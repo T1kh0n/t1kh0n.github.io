@@ -139,7 +139,7 @@
 								href="{base}/stati/{related.slug}/"
 								class="group rounded border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-4 transition-colors hover:border-[var(--color-rule-2)]"
 							>
-								<span class="text-[10px] font-mono uppercase text-[var(--color-accent)]">
+								<span class="text-xs font-mono uppercase text-[var(--color-accent)]">
 									{related.category}
 								</span>
 								<h4 class="mt-1 text-sm font-medium text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors">

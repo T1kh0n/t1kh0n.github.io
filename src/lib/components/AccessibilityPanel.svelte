@@ -13,7 +13,7 @@
 		<div class="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-2 sm:gap-4">
 			<!-- Group 1: Font Size -->
 			<div class="flex items-center gap-1.5 sm:gap-2">
-				<span class="font-bold text-[11px] sm:text-xs">Шрифт:</span>
+				<span class="font-bold text-xs sm:text-xs">Шрифт:</span>
 				<div class="flex items-center gap-0.5 sm:gap-1 border border-black p-0.5 rounded-xs">
 					<button
 						type="button"
@@ -47,7 +47,7 @@
 
 			<!-- Group 2: Color Schemes -->
 			<div class="flex items-center gap-1.5 sm:gap-2">
-				<span class="font-bold text-[11px] sm:text-xs">Цвет:</span>
+				<span class="font-bold text-xs sm:text-xs">Цвет:</span>
 				<div class="flex items-center gap-1">
 					<button
 						type="button"
@@ -78,7 +78,7 @@
 
 			<!-- Group 3: Kerning (Inter-letter spacing) -->
 			<div class="flex items-center gap-1.5 sm:gap-2">
-				<span class="font-bold text-[11px] sm:text-xs">Кернинг:</span>
+				<span class="font-bold text-xs sm:text-xs">Кернинг:</span>
 				<div class="flex items-center gap-0.5 sm:gap-1 border border-black p-0.5 rounded-xs">
 					<button
 						type="button"
@@ -109,7 +109,7 @@
 
 			<!-- Group 4: Line Height -->
 			<div class="flex items-center gap-1.5 sm:gap-2">
-				<span class="font-bold text-[11px] sm:text-xs">Интервал:</span>
+				<span class="font-bold text-xs sm:text-xs">Интервал:</span>
 				<div class="flex items-center gap-0.5 sm:gap-1 border border-black p-0.5 rounded-xs">
 					<button
 						type="button"

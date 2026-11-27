@@ -99,7 +99,7 @@
 								? 'border-[var(--color-accent)] bg-[var(--color-accent)] font-medium text-black'
 								: 'border-[var(--color-rule-2)] bg-[var(--color-paper-2)] text-[var(--color-ink-2)] hover:border-[var(--color-ink)]'}"
 						>
-							#{item.tag} <span class="opacity-60 text-[10px]">({item.count})</span>
+							#{item.tag} <span class="opacity-60 text-xs">({item.count})</span>
 						</button>
 					{/each}
 				</div>
@@ -132,7 +132,7 @@
 						{#if article.tags && article.tags.length > 0}
 							<div class="mt-4 flex flex-wrap gap-1.5">
 								{#each article.tags.slice(0, 3) as tag}
-									<span class="text-[11px] text-[var(--color-muted)] font-mono">
+									<span class="text-xs text-[var(--color-muted)] font-mono">
 										#{tag}
 									</span>
 								{/each}
@@ -148,7 +148,7 @@
 							<span>Читать разбор</span>
 							<span>&rarr;</span>
 						</a>
-						<span class="text-[11px] text-[var(--color-accent)] font-mono">
+						<span class="text-xs text-[var(--color-accent)] font-mono">
 							{article.readingTime || '5 мин'}
 						</span>
 					</div>

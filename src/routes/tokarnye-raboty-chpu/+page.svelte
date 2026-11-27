@@ -154,7 +154,7 @@
 					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
 						Шпоночные, шлицевые и посадочные валы под подшипники (допуск IT7). Центровочные отверстия, канавки под стопорные кольца по ГОСТ.
 					</p>
-					<div class="num mt-4 font-mono text-[11px] text-[var(--color-ink-2)]">
+					<div class="num mt-4 font-mono text-xs text-[var(--color-ink-2)]">
 						L до 750 мм · ø до 200 мм
 					</div>
 				</div>
@@ -167,7 +167,7 @@
 					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
 						Переходные фланцы, ступицы, прижимные кольца. Расточка внутренних посадочных диаметров и проточка уплотнительных канавок.
 					</p>
-					<div class="num mt-4 font-mono text-[11px] text-[var(--color-ink-2)]">
+					<div class="num mt-4 font-mono text-xs text-[var(--color-ink-2)]">
 						ø до 200 мм · торец Ra 1.25
 					</div>
 				</div>
@@ -180,7 +180,7 @@
 					<p class="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
 						Гидравлические и пневматические фитинги из коррозионно-стойких сталей и латуни. Прецизионное нарезание резьб без заусенцев.
 					</p>
-					<div class="num mt-4 font-mono text-[11px] text-[var(--color-ink-2)]">
+					<div class="num mt-4 font-mono text-xs text-[var(--color-ink-2)]">
 						Метрические / дюймовые резьбы
 					</div>
 				</div>
@@ -196,7 +196,7 @@
 					decoding="async"
 					class="h-auto w-full max-h-96 object-cover"
 				/>
-				<figcaption class="flex flex-wrap items-center justify-between gap-2 border-t border-[var(--color-rule)] px-4 py-2 font-mono text-[11px] text-[var(--color-muted)]">
+				<figcaption class="flex flex-wrap items-center justify-between gap-2 border-t border-[var(--color-rule)] px-4 py-2 font-mono text-xs text-[var(--color-muted)]">
 					<span>Чертеж и параметры: обработка тел вращения ø до 200 мм, L до 750 мм</span>
 					<span class="text-[var(--color-accent)]">Допуск IT7 · Шероховатость Ra 1.25 мкм</span>
 				</figcaption>
