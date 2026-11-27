@@ -2,6 +2,7 @@
 	import './layout.css';
 	import 'katex/dist/katex.min.css';
 	import favicon from '#lib/assets/favicon.svg';
+	import { siteConfig } from '#lib/config/site';
 	import Header from '#lib/components/Header.svelte';
 	import Footer from '#lib/components/Footer.svelte';
 	import CookieNotice from '#lib/components/CookieNotice.svelte';
@@ -29,6 +30,11 @@
 	<meta name="google-site-verification" content="googlebffb7acba9853275.html" />
 	<meta name="yandex-verification" content="cbf1eb49dd9b13b2" />
 	
+	<!-- Regional & Language Targeting (Hreflang) -->
+	<link rel="alternate" hreflang="ru" href="{siteConfig.siteDomain}/" />
+	<link rel="alternate" hreflang="ru-RU" href="{siteConfig.siteDomain}/" />
+	<link rel="alternate" hreflang="x-default" href="{siteConfig.siteDomain}/" />
+
 	<!-- GEO Targeting: Kaliningrad, Russia -->
 	<meta name="geo.region" content="RU-KGD" />
 	<meta name="geo.placename" content="Калининград" />
