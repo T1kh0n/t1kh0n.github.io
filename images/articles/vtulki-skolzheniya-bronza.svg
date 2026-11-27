@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a1b18" />
+      <stop offset="100%" stop-color="#0a0f1d" />
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)" />
+  <rect width="1200" height="675" fill="url(#grid)" />
+  <g transform="translate(100, 120)">
+    <rect x="0" y="0" width="160" height="32" rx="4" fill="rgba(255,255,255,0.1)" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="80" y="21" font-family="monospace" font-size="13" font-weight="bold" fill="#f59e0b" text-anchor="middle" letter-spacing="1.5">BRONZE BUSHINGS</text>
+    <text x="0" y="110" font-family="system-ui, -apple-system, sans-serif" font-size="44" font-weight="700" fill="#ffffff" width="1000">
+      Бронзовые и латунные
+    </text>
+    <text x="0" y="170" font-family="system-ui, -apple-system, sans-serif" font-size="44" font-weight="700" fill="#ffffff" width="1000">
+      втулки скольжения БрАЖ9-4, БрОЦС5-5-5
+    </text>
+    <line x1="0" y1="240" x2="1000" y2="240" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+    <text x="0" y="290" font-family="system-ui, -apple-system, sans-serif" font-size="20" fill="rgba(255,255,255,0.7)">
+      МеталлПром39 · Металлообработка ЧПУ в Калининграде · ГОСТ и ЕСКД
+    </text>
+    <circle cx="950" cy="380" r="140" fill="none" stroke="#f59e0b" stroke-width="1" stroke-dasharray="8 8" opacity="0.4"/>
+    <circle cx="950" cy="380" r="90" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+    <circle cx="950" cy="380" r="15" fill="#f59e0b"/>
+  </g>
+</svg>
